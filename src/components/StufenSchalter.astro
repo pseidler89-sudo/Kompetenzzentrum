@@ -1,0 +1,85 @@
+---
+/**
+ * Umschalter für die Informationstiefe. Steuert per data-Attribut, welche
+ * :::stufe-Blöcke im Artikel sichtbar sind. Die Auswahl wird in localStorage
+ * gespeichert und gilt projektweit.
+ *
+ * Progressive Enhancement: Ohne JavaScript sind alle Stufen sichtbar
+ * (jeweils mit Überschrift), sodass keine Information verloren geht.
+ */
+---
+
+<div class="stufen-schalter" role="group" aria-label="Informationstiefe wählen">
+  <span class="stufen-schalter__label">Aufbereitung für:</span>
+  <div class="stufen-schalter__buttons">
+    <button type="button" data-set-stufe="einstieg" aria-pressed="false">
+      <strong>Einstieg</strong><span>Kompakt, kein Vorwissen</span>
+    </button>
+    <button type="button" data-set-stufe="vertiefung" aria-pressed="false">
+      <strong>Vertiefung</strong><span>Zahlen &amp; Kontext</span>
+    </button>
+    <button type="button" data-set-stufe="wissenschaftlich" aria-pressed="false">
+      <strong>Wissenschaftlich</strong><span>Quellen &amp; Methodik</span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .stufen-schalter {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    margin: 1.5rem 0 2rem;
+    padding: 1rem;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+  }
+  .stufen-schalter__label { font-weight: 700; font-size: .9rem; color: var(--c-text-soft); }
+  .stufen-schalter__buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
+  .stufen-schalter button {
+    display: flex; flex-direction: column; gap: .15rem; text-align: left;
+    padding: .6rem .8rem; cursor: pointer;
+    border: 1px solid var(--c-border); border-radius: 8px;
+    background: var(--c-surface-2); color: var(--c-text);
+    font-family: inherit;
+  }
+  .stufen-schalter button span { font-size: .78rem; color: var(--c-text-soft); font-weight: 500; }
+  .stufen-schalter button:hover { border-color: var(--c-accent); }
+  .stufen-schalter button[aria-pressed="true"] {
+    background: var(--c-accent); border-color: var(--c-accent); color: #fff;
+  }
+  .stufen-schalter button[aria-pressed="true"] span { color: rgba(255,255,255,.85); }
+  @media (max-width: 560px) {
+    .stufen-schalter__buttons { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const KEY = "kompetenz-stufe";
+  const STUFEN = ["einstieg", "vertiefung", "wissenschaftlich"];
+
+  function anwenden(stufe: string) {
+    const ziel = document.querySelector<HTMLElement>("[data-faktencheck-body]");
+    if (ziel) ziel.setAttribute("data-stufe-aktiv", stufe);
+    document.querySelectorAll<HTMLButtonElement>("[data-set-stufe]").forEach((b) => {
+      b.setAttribute("aria-pressed", String(b.dataset.setStufe === stufe));
+    });
+  }
+
+  function init() {
+    const gespeichert = localStorage.getItem(KEY);
+    const stufe = STUFEN.includes(gespeichert ?? "") ? (gespeichert as string) : "einstieg";
+    anwenden(stufe);
+    document.querySelectorAll<HTMLButtonElement>("[data-set-stufe]").forEach((b) => {
+      b.addEventListener("click", () => {
+        const s = b.dataset.setStufe!;
+        localStorage.setItem(KEY, s);
+        anwenden(s);
+      });
+    });
+  }
+
+  init();
+  document.addEventListener("astro:page-load", init);
+</script>

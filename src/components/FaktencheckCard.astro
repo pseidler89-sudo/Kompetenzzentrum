@@ -1,0 +1,27 @@
+---
+import { THEMA_LABEL, pfad } from "../lib/labels";
+import UrteilBadge from "./UrteilBadge.astro";
+
+interface Props {
+  slug: string;
+  data: {
+    titel: string;
+    behauptung: string;
+    kurzantwort: string;
+    urteil: string;
+    themen: string[];
+    status: string;
+  };
+}
+const { slug, data } = Astro.props;
+---
+
+<a class="card" href={pfad(`/faktenchecks/${slug}`)}>
+  <div class="card__meta">
+    <UrteilBadge urteil={data.urteil} />
+    {data.themen.slice(0, 2).map((t) => <span class="badge">{THEMA_LABEL[t] ?? t}</span>)}
+  </div>
+  <h3>{data.titel}</h3>
+  <p class="muted" style="font-style:italic;">„{data.behauptung}“</p>
+  <p>{data.kurzantwort}</p>
+</a>

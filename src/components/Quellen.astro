@@ -1,0 +1,29 @@
+---
+interface Quelle {
+  titel: string;
+  herausgeber: string;
+  url?: string;
+  datum?: string;
+  art?: "primaer" | "sekundaer";
+}
+interface Props { quellen: Quelle[]; }
+const { quellen } = Astro.props;
+---
+
+<section class="quellen" id="quellen">
+  <h2>Quellen</h2>
+  <p class="muted">
+    Alle Aussagen sind belegt. <span class="q-tag">Primärquelle</span> kennzeichnet
+    amtliche bzw. originäre Daten (z.B. Statistisches Bundesamt, Fachstudien).
+  </p>
+  <ol>
+    {quellen.map((q) => (
+      <li class={q.art === "primaer" ? "q-primaer" : ""}>
+        {q.url ? <a href={q.url} rel="noopener">{q.titel}</a> : <span>{q.titel}</span>}
+        {q.art === "primaer" && <span class="q-tag">Primärquelle</span>}
+        <br />
+        <span class="muted">{q.herausgeber}{q.datum ? ` · ${q.datum}` : ""}</span>
+      </li>
+    ))}
+  </ol>
+</section>

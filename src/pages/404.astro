@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { pfad } from "../lib/labels";
+---
+<BaseLayout titel="Seite nicht gefunden">
+  <div class="center" style="padding:3rem 0;">
+    <h1>404 – Seite nicht gefunden</h1>
+    <p class="lead">Diese Seite gibt es (noch) nicht. Vielleicht hilft einer dieser Wege weiter:</p>
+    <div class="hero__cta" style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem;">
+      <a class="btn btn--primary" href={pfad("/")}>Zur Startseite</a>
+      <a class="btn btn--ghost" href={pfad("/faktenchecks")}>Zu den Faktenchecks</a>
+    </div>
+  </div>
+</BaseLayout>

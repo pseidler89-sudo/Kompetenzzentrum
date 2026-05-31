@@ -1,0 +1,91 @@
+---
+import "../styles/global.css";
+import { pfad } from "../lib/labels";
+
+interface Props {
+  titel: string;
+  beschreibung?: string;
+  breit?: boolean;
+}
+const { titel, beschreibung = "Falschbehauptungen prüfen lernen – faktenbasiert, transparent, je nach Vorwissen aufbereitet.", breit = false } = Astro.props;
+
+const nav = [
+  { href: "/faktenchecks", text: "Faktenchecks" },
+  { href: "/werkzeugkasten", text: "Werkzeugkasten" },
+  { href: "/methodik", text: "Methodik" },
+  { href: "/diskussionshelfer", text: "Diskussionshilfe" },
+  { href: "/mitmachen", text: "Mitmachen" },
+];
+const aktuell = Astro.url.pathname.replace(/\/$/, "");
+const vollerTitel = titel === "Kompetenzzentrum" ? titel : `${titel} · Kompetenzzentrum`;
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{vollerTitel}</title>
+    <meta name="description" content={beschreibung} />
+    <meta property="og:title" content={vollerTitel} />
+    <meta property="og:description" content={beschreibung} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#1f6feb" />
+    <link rel="icon" type="image/svg+xml" href={pfad("/favicon.svg")} />
+    <link rel="sitemap" href={pfad("/sitemap-index.xml")} />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Zum Inhalt springen</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href={pfad("/")}>
+          <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect width="32" height="32" rx="8" fill="#1f6feb" />
+            <path d="M9 16.5l4.5 4.5L23 11" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span>Kompetenzzentrum</span>
+        </a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+          {nav.map((n) => (
+            <a href={pfad(n.href)} aria-current={aktuell === pfad(n.href).replace(/\/$/, "") ? "page" : undefined}>{n.text}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class={breit ? "container-wide" : "container"} style="padding-top: 2rem;">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container-wide">
+        <div class="footer-grid">
+          <div>
+            <h4>Kompetenzzentrum</h4>
+            <p class="muted" style="margin:.2rem 0 0;">Falschbehauptungen prüfen lernen. Offen, faktenbasiert, gemeinschaftlich gepflegt.</p>
+          </div>
+          <div>
+            <h4>Inhalte</h4>
+            <ul>
+              <li><a href={pfad("/faktenchecks")}>Faktenchecks</a></li>
+              <li><a href={pfad("/werkzeugkasten")}>Werkzeugkasten</a></li>
+              <li><a href={pfad("/methodik")}>Methodik</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Projekt</h4>
+            <ul>
+              <li><a href={pfad("/mitmachen")}>Mitmachen</a></li>
+              <li><a href="https://github.com/pseidler89-sudo/kompetenzzentrum">Quellcode (GitHub)</a></li>
+              <li><a href="https://github.com/pseidler89-sudo/kompetenzzentrum/issues">Fehler melden</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Hinweis</h4>
+            <p class="muted" style="margin:.2rem 0 0;">Inhalte unter CC BY-SA 4.0. Jede Aussage ist mit Quellen belegt und öffentlich nachvollziehbar.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

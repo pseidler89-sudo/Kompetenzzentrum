@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const repo = "https://github.com/pseidler89-sudo/kompetenzzentrum";
+const wege = [
+  { icon: "✍️", titel: "Faktencheck schreiben", text: "Du kennst dich mit einem Thema aus? Schreib einen neuen Faktencheck nach unserer Vorlage – inklusive Quellen.", link: `${repo}/issues/new?template=neuer-faktencheck.yml`, linkText: "Faktencheck vorschlagen" },
+  { icon: "🔍", titel: "Quellen & Zahlen prüfen", text: "Sind alle Zahlen aktuell, alle Links gültig? Sorgfältiges Gegenlesen ist Gold wert.", link: `${repo}/issues`, linkText: "Offene Aufgaben ansehen" },
+  { icon: "🐛", titel: "Fehler melden", text: "Falsche Zahl, toter Link, missverständliche Formulierung? Sag uns Bescheid.", link: `${repo}/issues/new?template=fehler-melden.yml`, linkText: "Fehler melden" },
+  { icon: "💻", titel: "Technik & Design", text: "Astro, CSS, Barrierefreiheit, Übersetzung: Auch an der Plattform selbst kannst du mitbauen.", link: `${repo}`, linkText: "Repository öffnen" },
+];
+---
+
+<BaseLayout titel="Mitmachen" beschreibung="So trägst du zum Kompetenzzentrum bei – ob mit Fachwissen, Recherche, Code oder Design.">
+  <h1>Mitmachen</h1>
+  <p class="lead">
+    Dieses Projekt ist offen und gehört allen, die mitarbeiten. Du brauchst kein
+    Informatikstudium – die meisten Beiträge sind einfache Textdateien. Alles läuft
+    transparent über GitHub, jede Änderung wird vor Veröffentlichung geprüft.
+  </p>
+
+  <div class="grid grid--2" style="margin-top:2rem;">
+    {wege.map((w) => (
+      <div class="card">
+        <h3 style="margin:0;">{w.icon} {w.titel}</h3>
+        <p style="margin:0;flex:1;">{w.text}</p>
+        <a class="btn btn--ghost" href={w.link} rel="noopener">{w.linkText}</a>
+      </div>
+    ))}
+  </div>
+
+  <section>
+    <h2>So entsteht ein Faktencheck</h2>
+    <ol class="ablauf">
+      <li><strong>Thema wählen:</strong> Eine konkrete, verbreitete Behauptung. Am besten zuerst als Issue vorschlagen, damit nichts doppelt entsteht.</li>
+      <li><strong>Recherchieren:</strong> Belege sammeln, Primärquellen bevorzugen (amtliche Statistik, Studien).</li>
+      <li><strong>Schreiben:</strong> Nach der <a href={`${repo}/blob/main/docs/faktencheck-vorlage.md`}>Vorlage</a> – mit den drei Tiefen (Einstieg, Vertiefung, Wissenschaftlich).</li>
+      <li><strong>Einreichen:</strong> Als Pull Request. Eine zweite Person liest gegen und prüft die Quellen.</li>
+      <li><strong>Veröffentlichen:</strong> Nach Freigabe geht der Beitrag live – mit Nennung der Mitwirkenden.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Qualitätsanspruch</h2>
+    <p>
+      Damit die Plattform vertrauenswürdig bleibt, gelten klare Regeln: Belegpflicht,
+      faire Wiedergabe der Gegenseite, sachlicher Ton, offene Korrekturen. Details
+      stehen in den <a href={`${repo}/blob/main/docs/redaktionsstandards.md`}>Redaktionsstandards</a>
+      und im <a href={`${repo}/blob/main/CONTRIBUTING.md`}>Beitrags-Leitfaden</a>.
+    </p>
+  </section>
+
+  <section class="start-cta">
+    <h2 style="margin-top:0;">Bereit?</h2>
+    <p>Der einfachste erste Schritt: ein Issue eröffnen oder ein bestehendes übernehmen.</p>
+    <div class="hero__cta">
+      <a class="btn btn--primary" href={`${repo}/issues`}>Zu den Issues</a>
+      <a class="btn btn--ghost" href={`${repo}/blob/main/CONTRIBUTING.md`}>Beitrags-Leitfaden lesen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  section { margin-top: 3rem; }
+  .ablauf { display: grid; gap: .7rem; padding-left: 1.2rem; }
+  .start-cta { text-align: center; padding: 2.5rem 1.5rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
+  .start-cta .hero__cta { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem; }
+</style>

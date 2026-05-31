@@ -1,0 +1,77 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FaktencheckCard from "../../components/FaktencheckCard.astro";
+import { THEMA_LABEL, THEMA_REIHENFOLGE } from "../../lib/labels";
+
+const eintraege = (await getCollection("faktenchecks")).sort(
+  (a, b) => b.data.veroeffentlicht.valueOf() - a.data.veroeffentlicht.valueOf(),
+);
+
+// Nur Themen anzeigen, zu denen es Inhalte gibt.
+const vorhandeneThemen = THEMA_REIHENFOLGE.filter((t) =>
+  eintraege.some((e) => e.data.themen.includes(t as any)),
+);
+---
+
+<BaseLayout titel="Faktenchecks" beschreibung="Geprüfte Antworten auf verbreitete Falschbehauptungen – mit Zahlen, Quellen und Anleitung zum Selberprüfen.">
+  <h1>Faktenchecks</h1>
+  <p class="lead">
+    Verbreitete Behauptungen – Punkt für Punkt geprüft. Wähle pro Beitrag deine
+    Informationstiefe und lerne nebenbei, wie man so etwas selbst überprüft.
+  </p>
+
+  <div class="filter" role="group" aria-label="Nach Thema filtern">
+    <button type="button" class="filter-btn" data-thema="alle" aria-pressed="true">Alle ({eintraege.length})</button>
+    {vorhandeneThemen.map((t) => (
+      <button type="button" class="filter-btn" data-thema={t} aria-pressed="false">{THEMA_LABEL[t]}</button>
+    ))}
+  </div>
+
+  <div class="grid grid--2" id="fc-liste">
+    {eintraege.map((e) => (
+      <div class="fc-item" data-themen={e.data.themen.join(" ")}>
+        <FaktencheckCard slug={e.id} data={e.data} />
+      </div>
+    ))}
+  </div>
+
+  <p id="leer" class="muted center" hidden style="margin-top:2rem;">
+    Zu diesem Thema gibt es noch keinen Faktencheck. <a href="/mitmachen">Du kannst den ersten schreiben.</a>
+  </p>
+</BaseLayout>
+
+<style>
+  .filter { display: flex; gap: .5rem; flex-wrap: wrap; margin: 1.5rem 0 2rem; }
+  .filter-btn {
+    font-family: inherit; font-weight: 600; font-size: .9rem;
+    padding: .45rem .9rem; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--c-border); background: var(--c-surface); color: var(--c-text-soft);
+  }
+  .filter-btn:hover { border-color: var(--c-accent); }
+  .filter-btn[aria-pressed="true"] { background: var(--c-accent); border-color: var(--c-accent); color: #fff; }
+  .fc-item.versteckt { display: none; }
+</style>
+
+<script>
+  function init() {
+    const btns = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+    const items = document.querySelectorAll<HTMLElement>(".fc-item");
+    const leer = document.getElementById("leer");
+    btns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const thema = btn.dataset.thema!;
+        btns.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+        let sichtbar = 0;
+        items.forEach((it) => {
+          const treffer = thema === "alle" || (it.dataset.themen ?? "").split(" ").includes(thema);
+          it.classList.toggle("versteckt", !treffer);
+          if (treffer) sichtbar++;
+        });
+        if (leer) leer.hidden = sichtbar > 0;
+      });
+    });
+  }
+  init();
+  document.addEventListener("astro:page-load", init);
+</script>

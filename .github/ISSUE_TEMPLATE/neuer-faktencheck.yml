@@ -1,0 +1,52 @@
+name: "📋 Neuer Faktencheck"
+description: "Schlage eine Falschbehauptung vor, die geprüft und aufbereitet werden soll."
+title: "[Faktencheck] "
+labels: ["faktencheck", "inhalt"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke, dass du mithilfst! Je konkreter die Behauptung, desto besser lässt sie sich prüfen.
+  - type: input
+    id: behauptung
+    attributes:
+      label: "Die Behauptung"
+      description: "Möglichst im Wortlaut bzw. sinngemäß."
+      placeholder: "z.B. 'Deutschland hat die höchsten Strompreise wegen der Erneuerbaren'"
+    validations:
+      required: true
+  - type: dropdown
+    id: thema
+    attributes:
+      label: "Thema"
+      options:
+        - "Migration & Asyl"
+        - "Kriminalität & Sicherheit"
+        - "Klima & Energie"
+        - "Wirtschaft & Soziales"
+        - "Gesundheit"
+        - "Demokratie & Medien"
+        - "Sonstiges / unklar"
+    validations:
+      required: true
+  - type: textarea
+    id: fundort
+    attributes:
+      label: "Wo ist dir die Behauptung begegnet?"
+      description: "Link, Plattform, Screenshot-Beschreibung – hilft bei der Einordnung."
+    validations:
+      required: false
+  - type: textarea
+    id: quellen
+    attributes:
+      label: "Bekannte Quellen / Datenlage"
+      description: "Falls du schon Belege oder amtliche Statistiken kennst – gern hier."
+    validations:
+      required: false
+  - type: checkboxes
+    id: mitarbeit
+    attributes:
+      label: "Mitarbeit"
+      options:
+        - label: "Ich würde den Faktencheck selbst schreiben (nach der Vorlage)."
+        - label: "Ich schlage das Thema nur vor."

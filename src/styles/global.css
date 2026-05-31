@@ -1,0 +1,240 @@
+:root {
+  --max-width: 52rem;
+  --max-width-wide: 72rem;
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+
+  --c-bg: #fbfbfa;
+  --c-surface: #ffffff;
+  --c-surface-2: #f3f4f6;
+  --c-text: #1b1f23;
+  --c-text-soft: #545b63;
+  --c-border: #e3e6ea;
+  --c-accent: #1f6feb;
+  --c-accent-soft: #e7f0fe;
+  --c-link: #1257c4;
+
+  /* Urteilsfarben */
+  --c-falsch: #c1121f;
+  --c-falsch-bg: #fcebec;
+  --c-irrefuehrend: #b45309;
+  --c-irrefuehrend-bg: #fdf2e0;
+  --c-kontext: #7c5e10;
+  --c-kontext-bg: #fbf6e3;
+  --c-teils: #5b6470;
+  --c-teils-bg: #eef0f2;
+
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 4px 16px rgba(16, 24, 40, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-bg: #14161a;
+    --c-surface: #1b1e24;
+    --c-surface-2: #22262d;
+    --c-text: #e8eaed;
+    --c-text-soft: #a7afb9;
+    --c-border: #2c313a;
+    --c-accent: #5b9bff;
+    --c-accent-soft: #1c2a44;
+    --c-link: #82b1ff;
+    --c-falsch-bg: #3a1417;
+    --c-irrefuehrend-bg: #3a2a12;
+    --c-kontext-bg: #322c12;
+    --c-teils-bg: #262a30;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.25);
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--c-text);
+  background: var(--c-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.25rem; }
+.container-wide { max-width: var(--max-width-wide); margin: 0 auto; padding: 0 1.25rem; }
+
+a { color: var(--c-link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
+
+h1, h2, h3, h4 { line-height: 1.25; font-weight: 700; }
+h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); letter-spacing: -0.02em; }
+h2 { font-size: 1.6rem; margin-top: 2.5rem; }
+h3 { font-size: 1.25rem; margin-top: 1.75rem; }
+
+p, li { color: var(--c-text); }
+:is(h2, h3) + p { margin-top: .5rem; }
+
+code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background: var(--c-surface-2);
+  padding: 0.1em 0.35em;
+  border-radius: 5px;
+}
+
+hr { border: none; border-top: 1px solid var(--c-border); margin: 2.5rem 0; }
+
+blockquote {
+  margin: 1.5rem 0;
+  padding: 0.5rem 1.25rem;
+  border-left: 4px solid var(--c-accent);
+  color: var(--c-text-soft);
+  font-style: italic;
+}
+
+/* ---------- Header / Footer ---------- */
+.site-header {
+  border-bottom: 1px solid var(--c-border);
+  background: color-mix(in srgb, var(--c-surface) 85%, transparent);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.85rem 1.25rem;
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+}
+.brand { display: flex; align-items: center; gap: .6rem; font-weight: 800; letter-spacing: -0.02em; text-decoration: none; color: var(--c-text); font-size: 1.1rem; }
+.brand__mark { width: 1.7rem; height: 1.7rem; }
+.site-nav { display: flex; gap: 1.1rem; flex-wrap: wrap; margin-left: auto; align-items: center; }
+.site-nav a { color: var(--c-text-soft); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+.site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--c-text); }
+
+.site-footer {
+  border-top: 1px solid var(--c-border);
+  margin-top: 4rem;
+  padding: 2.5rem 0;
+  color: var(--c-text-soft);
+  font-size: 0.92rem;
+  background: var(--c-surface);
+}
+.site-footer a { color: var(--c-text-soft); }
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1.5rem; }
+.footer-grid h4 { margin: 0 0 .5rem; font-size: .95rem; color: var(--c-text); }
+.footer-grid ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .35rem; }
+
+/* ---------- Badges ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: var(--c-surface-2);
+  color: var(--c-text-soft);
+  text-decoration: none;
+}
+.urteil { font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.78rem; }
+.urteil--falsch, .urteil--groesstenteils-falsch { background: var(--c-falsch-bg); color: var(--c-falsch); }
+.urteil--irrefuehrend { background: var(--c-irrefuehrend-bg); color: var(--c-irrefuehrend); }
+.urteil--fehlender-kontext { background: var(--c-kontext-bg); color: var(--c-kontext); }
+.urteil--teils-richtig { background: var(--c-teils-bg); color: var(--c-teils); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-weight: 700; font-size: 0.98rem;
+  padding: 0.7rem 1.2rem; border-radius: 8px;
+  text-decoration: none; cursor: pointer; border: 1px solid transparent;
+  transition: transform .05s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn--primary { background: var(--c-accent); color: #fff; }
+.btn--ghost { background: transparent; border-color: var(--c-border); color: var(--c-text); }
+
+/* ---------- Cards ---------- */
+.card {
+  display: flex; flex-direction: column; gap: .65rem;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .15s ease, transform .15s ease;
+}
+a.card:hover { border-color: var(--c-accent); transform: translateY(-2px); }
+.card__meta { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+.card h3 { margin: 0; font-size: 1.15rem; }
+.card p { margin: 0; color: var(--c-text-soft); font-size: 0.95rem; }
+
+.grid { display: grid; gap: 1.1rem; }
+.grid--2 { grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); }
+.grid--3 { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+
+/* ---------- Content-Boxen (aus remark-stufen) ---------- */
+.box {
+  border: 1px solid var(--c-border);
+  border-left: 4px solid var(--c-accent);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  background: var(--c-surface-2);
+}
+.box .box-label { margin: 0 0 .4rem; color: var(--c-text); }
+.box > :last-child { margin-bottom: 0; }
+.box-pruefen { border-left-color: #2e7d32; background: color-mix(in srgb, #2e7d32 8%, var(--c-surface)); }
+.box-technik { border-left-color: #8338ec; background: color-mix(in srgb, #8338ec 8%, var(--c-surface)); }
+.box-warnung { border-left-color: var(--c-falsch); background: var(--c-falsch-bg); }
+.box-hinweis { border-left-color: var(--c-accent); }
+
+/* ---------- Stufen-Umschaltung ---------- */
+.stufe { margin: 1.25rem 0; }
+.stufe-heading {
+  font-size: .8rem; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--c-text-soft); font-weight: 800; margin: 0 0 .25rem;
+}
+/* Ohne JavaScript: alle Stufen sichtbar (mit Beschriftung). Mit JS gesteuert. */
+[data-stufe-aktiv] .stufe { display: none; }
+[data-stufe-aktiv] .stufe-heading { display: none; }
+[data-stufe-aktiv="einstieg"] .stufe-einstieg,
+[data-stufe-aktiv="vertiefung"] .stufe-einstieg,
+[data-stufe-aktiv="vertiefung"] .stufe-vertiefung,
+[data-stufe-aktiv="wissenschaftlich"] .stufe { display: block; }
+
+/* ---------- Tabellen ---------- */
+table { border-collapse: collapse; width: 100%; margin: 1.5rem 0; font-size: .95rem; }
+th, td { border: 1px solid var(--c-border); padding: .55rem .75rem; text-align: left; }
+th { background: var(--c-surface-2); font-weight: 700; }
+
+/* ---------- Quellenliste ---------- */
+.quellen ol { padding-left: 1.25rem; }
+.quellen li { margin-bottom: .6rem; }
+.quellen .q-primaer { font-weight: 600; }
+.q-tag { font-size: .72rem; font-weight: 700; padding: .1rem .4rem; border-radius: 4px; background: var(--c-accent-soft); color: var(--c-accent); margin-left: .35rem; }
+
+/* ---------- Diverses ---------- */
+.lead { font-size: 1.2rem; color: var(--c-text-soft); }
+.muted { color: var(--c-text-soft); }
+.center { text-align: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.tag-list { display: flex; gap: .4rem; flex-wrap: wrap; }
+.skip-link { position: absolute; left: -999px; }
+.skip-link:focus { left: 1rem; top: .5rem; background: var(--c-surface); padding: .5rem 1rem; border-radius: 6px; z-index: 100; }
+
+:focus-visible { outline: 3px solid var(--c-accent); outline-offset: 2px; border-radius: 4px; }
+
+@media (max-width: 640px) {
+  body { font-size: 1rem; }
+  .site-nav { gap: .8rem; }
+}

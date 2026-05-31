@@ -1,0 +1,26 @@
+name: "🐛 Fehler melden"
+description: "Falsche Zahl, toter Link, veraltete Angabe oder missverständliche Formulierung."
+title: "[Fehler] "
+labels: ["fehler", "korrektur"]
+body:
+  - type: input
+    id: seite
+    attributes:
+      label: "Betroffener Faktencheck / Seite"
+      placeholder: "z.B. /faktenchecks/strompreise-energiewende"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: "Was stimmt nicht?"
+      description: "Bitte so konkret wie möglich – idealerweise mit der korrekten Angabe und Quelle."
+    validations:
+      required: true
+  - type: input
+    id: quelle
+    attributes:
+      label: "Beleg für die Korrektur"
+      description: "Link zur Primär-/Originalquelle, wenn vorhanden."
+    validations:
+      required: false

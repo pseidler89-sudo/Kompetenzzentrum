@@ -1,0 +1,6 @@
+---
+import { URTEIL_LABEL } from "../lib/labels";
+interface Props { urteil: string; }
+const { urteil } = Astro.props;
+---
+<span class={`badge urteil urteil--${urteil}`}>{URTEIL_LABEL[urteil] ?? urteil}</span>

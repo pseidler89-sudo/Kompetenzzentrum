@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { pfad } from "../../lib/labels";
+
+const artikel = (await getCollection("methodik")).sort(
+  (a, b) => a.data.reihenfolge - b.data.reihenfolge,
+);
+---
+
+<BaseLayout titel="Methodik" beschreibung="Wie dieses Projekt arbeitet und wie man Statistik, Quellen und Studien richtig liest.">
+  <h1>Methodik</h1>
+  <p class="lead">
+    Vertrauen entsteht durch Nachvollziehbarkeit. Hier liegt offen, nach welchen
+    Regeln wir arbeiten – und wie du selbst sauber mit Zahlen und Quellen umgehst.
+  </p>
+
+  <div class="grid grid--2" style="margin-top:2rem;">
+    {artikel.map((a) => (
+      <a class="card" href={pfad(`/methodik/${a.id}`)}>
+        <h3 style="margin:0;">{a.data.titel}</h3>
+        <p style="margin:0;">{a.data.zusammenfassung}</p>
+      </a>
+    ))}
+  </div>
+
+  <section style="margin-top:3rem;">
+    <h2>Unsere Grundprinzipien</h2>
+    <ol class="prinzipien">
+      <li><strong>Fakt zuerst.</strong> Wir beginnen mit dem belegten Stand, nicht mit der Falschbehauptung („Truth Sandwich“).</li>
+      <li><strong>Belegpflicht.</strong> Jede Aussage hat mindestens eine Quelle; amtliche Primärquellen haben Vorrang.</li>
+      <li><strong>Transparenz.</strong> Jede Änderung ist öffentlich auf GitHub nachvollziehbar – inklusive Diskussion.</li>
+      <li><strong>Fairness.</strong> Wir zitieren Behauptungen korrekt und bauen keine Strohmänner.</li>
+      <li><strong>Korrigierbarkeit.</strong> Fehler werden offen korrigiert und gekennzeichnet, nicht versteckt.</li>
+      <li><strong>Sachlich statt empört.</strong> Zahlen und Zusammenhänge statt Emotion.</li>
+    </ol>
+  </section>
+</BaseLayout>
+
+<style>
+  .prinzipien { display: grid; gap: .6rem; padding-left: 1.2rem; }
+</style>

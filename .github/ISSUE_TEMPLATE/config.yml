@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: "💬 Frage oder Diskussion"
+    url: https://github.com/pseidler89-sudo/kompetenzzentrum/discussions
+    about: "Allgemeine Fragen, Ideen und Austausch bitte in den Discussions."

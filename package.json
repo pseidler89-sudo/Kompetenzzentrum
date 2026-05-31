@@ -1,0 +1,21 @@
+{
+  "name": "kompetenzzentrum",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Offene Plattform, die Falschbehauptungen faktenbasiert und je nach Vorwissen aufbereitet.",
+  "license": "CC-BY-SA-4.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "node scripts/validate-content.mjs && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "validate": "node scripts/validate-content.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.2.5",
+    "remark-directive": "^3.0.0",
+    "unist-util-visit": "^5.0.0",
+    "@astrojs/sitemap": "^3.2.1"
+  }
+}

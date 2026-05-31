@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { datumFormat, pfad } from "../../lib/labels";
+
+export async function getStaticPaths() {
+  const artikel = await getCollection("methodik");
+  return artikel.map((a) => ({ params: { slug: a.id }, props: { artikel: a } }));
+}
+
+const { artikel } = Astro.props;
+const { Content } = await render(artikel);
+const githubEdit = `https://github.com/pseidler89-sudo/kompetenzzentrum/blob/main/src/content/methodik/${artikel.id}.md`;
+---
+
+<BaseLayout titel={artikel.data.titel} beschreibung={artikel.data.zusammenfassung}>
+  <article class="prose">
+    <a href={pfad("/methodik")} class="muted" style="text-decoration:none;">← Methodik</a>
+    <h1 style="margin-top:1rem;">{artikel.data.titel}</h1>
+    <p class="lead">{artikel.data.zusammenfassung}</p>
+    <Content />
+    <footer class="fc-footer">
+      {artikel.data.aktualisiert && <p class="muted">Aktualisiert am {datumFormat(artikel.data.aktualisiert)}</p>}
+      <p><a href={githubEdit} rel="noopener">Diese Seite auf GitHub verbessern ✎</a></p>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .fc-footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border); font-size: .92rem; }
+</style>

@@ -1,0 +1,126 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FaktencheckCard from "../components/FaktencheckCard.astro";
+import { pfad } from "../lib/labels";
+
+const eintraege = (await getCollection("faktenchecks")).sort(
+  (a, b) => b.data.veroeffentlicht.valueOf() - a.data.veroeffentlicht.valueOf(),
+);
+const featured = eintraege.slice(0, 4);
+---
+
+<BaseLayout titel="Kompetenzzentrum" breit>
+  <section class="hero">
+    <p class="hero__kicker">Falschbehauptungen prüfen lernen</p>
+    <h1>Weniger Empörung. Mehr Zahlen, Fakten und Nachvollziehbarkeit.</h1>
+    <p class="lead">
+      Ein offenes Nachschlagewerk gegen Desinformation – mit Schwerpunkt auf
+      faktenfremder rechter Polemik. Jede Behauptung wird mit Quellen geprüft und
+      <strong>je nach deinem Vorwissen</strong> aufbereitet: vom schnellen Einstieg
+      bis zur wissenschaftlichen Tiefe.
+    </p>
+    <div class="hero__cta">
+      <a class="btn btn--primary" href={pfad("/faktenchecks")}>Faktenchecks ansehen</a>
+      <a class="btn btn--ghost" href={pfad("/werkzeugkasten")}>Selbst prüfen lernen</a>
+    </div>
+  </section>
+
+  <section class="zwecke container-wide">
+    <div class="zweck card">
+      <h3>🧭 Für Neugierige</h3>
+      <p>Du willst dir selbst ein Bild machen? Stöbere durch geprüfte Themen und stell deine eigene Tiefe ein.</p>
+    </div>
+    <div class="zweck card">
+      <h3>💬 Für Diskussionen</h3>
+      <p>Du brauchst belastbare Zahlen für ein Gespräch? Kurzantworten und Quellen, sofort griffbereit.</p>
+    </div>
+    <div class="zweck card">
+      <h3>🤝 Zum Mitmachen</h3>
+      <p>Alles liegt offen auf GitHub. Uni, Initiative oder Einzelperson – jede:r kann Inhalte prüfen und ergänzen.</p>
+    </div>
+  </section>
+
+  <section class="container" style="margin-top:4rem;">
+    <div class="tiefe">
+      <div>
+        <h2 style="margin-top:0;">Ein Thema, drei Tiefen</h2>
+        <p>
+          Information soll niemanden überfordern – und niemanden langweilen. Bei jedem
+          Faktencheck wählst du selbst, wie tief es geht. Deine Auswahl bleibt gespeichert.
+        </p>
+        <ul class="tiefe__liste">
+          <li><strong>Einstieg</strong> – kurz und klar, ganz ohne Vorwissen.</li>
+          <li><strong>Vertiefung</strong> – die Zahlen dahinter und die Zusammenhänge.</li>
+          <li><strong>Wissenschaftlich</strong> – Primärquellen, Methodik und statistische Fallstricke.</li>
+        </ul>
+        <p>
+          Dazu zeigt jeder Beitrag, <em>welche Manipulationstechnik</em> im Spiel ist und
+          <em>wie du die Behauptung selbst überprüfst</em>. So wächst mit jedem Lesen die eigene Kompetenz.
+        </p>
+      </div>
+      <div class="tiefe__bsp" aria-hidden="true">
+        <div class="tiefe__chip tiefe__chip--aktiv">Einstieg</div>
+        <div class="tiefe__chip">Vertiefung</div>
+        <div class="tiefe__chip">Wissenschaftlich</div>
+        <p class="tiefe__demo">„Kurz gesagt: Die Behauptung stimmt so nicht – hier ist der belegte Stand …“</p>
+      </div>
+    </div>
+  </section>
+
+  {featured.length > 0 && (
+    <section class="container-wide" style="margin-top:4rem;">
+      <div class="abschnitt-kopf">
+        <h2 style="margin:0;">Neueste Faktenchecks</h2>
+        <a href={pfad("/faktenchecks")}>Alle ansehen →</a>
+      </div>
+      <div class="grid grid--2" style="margin-top:1.25rem;">
+        {featured.map((e) => <FaktencheckCard slug={e.id} data={e.data} />)}
+      </div>
+    </section>
+  )}
+
+  <section class="container mitmach-cta">
+    <h2>Mach mit – Wissen gehört allen</h2>
+    <p class="muted">
+      Dieses Projekt lebt von vielen Augen und Quellen. Faktenchecks schreiben,
+      Zahlen aktualisieren, Quellen prüfen, übersetzen, gestalten – jeder Beitrag zählt
+      und ist öffentlich nachvollziehbar.
+    </p>
+    <div class="hero__cta" style="justify-content:center;">
+      <a class="btn btn--primary" href={pfad("/mitmachen")}>So kannst du beitragen</a>
+      <a class="btn btn--ghost" href="https://github.com/pseidler89-sudo/kompetenzzentrum">Projekt auf GitHub</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { max-width: 48rem; margin: 2rem auto 1rem; text-align: center; padding: 0 1rem; }
+  .hero__kicker { text-transform: uppercase; letter-spacing: .08em; font-weight: 800; color: var(--c-accent); font-size: .85rem; margin: 0; }
+  .hero h1 { margin: .5rem 0 1rem; }
+  .hero__cta { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; margin-top: 1.5rem; }
+
+  .zwecke { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.1rem; margin-top: 3rem; }
+  .zweck h3 { margin: 0 0 .35rem; }
+  .zweck p { margin: 0; }
+
+  .tiefe { display: grid; grid-template-columns: 1.3fr 1fr; gap: 2rem; align-items: center; }
+  .tiefe__liste { list-style: none; padding: 0; display: grid; gap: .5rem; }
+  .tiefe__liste li { padding-left: 1.2rem; position: relative; }
+  .tiefe__liste li::before { content: "▸"; position: absolute; left: 0; color: var(--c-accent); }
+  .tiefe__bsp { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 1.25rem; box-shadow: var(--shadow); }
+  .tiefe__chip { display: inline-block; margin: .15rem; padding: .35rem .8rem; border-radius: 999px; font-weight: 700; font-size: .85rem; background: var(--c-surface-2); color: var(--c-text-soft); }
+  .tiefe__chip--aktiv { background: var(--c-accent); color: #fff; }
+  .tiefe__demo { margin: 1rem 0 0; font-size: 1.05rem; border-top: 1px solid var(--c-border); padding-top: 1rem; }
+
+  .abschnitt-kopf { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+  .abschnitt-kopf a { font-weight: 600; text-decoration: none; }
+
+  .mitmach-cta { text-align: center; margin-top: 4rem; padding: 2.5rem 1.5rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
+  .mitmach-cta h2 { margin-top: 0; }
+  .mitmach-cta p { max-width: 40rem; margin: .5rem auto 0; }
+
+  @media (max-width: 760px) {
+    .tiefe { grid-template-columns: 1fr; }
+  }
+</style>

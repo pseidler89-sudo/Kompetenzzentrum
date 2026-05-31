@@ -1,0 +1,104 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import StufenSchalter from "../../components/StufenSchalter.astro";
+import UrteilBadge from "../../components/UrteilBadge.astro";
+import Quellen from "../../components/Quellen.astro";
+import { THEMA_LABEL, TECHNIK_LABEL, STATUS_LABEL, datumFormat, pfad } from "../../lib/labels";
+
+export async function getStaticPaths() {
+  const eintraege = await getCollection("faktenchecks");
+  return eintraege.map((e) => ({ params: { slug: e.id }, props: { eintrag: e } }));
+}
+
+const { eintrag } = Astro.props;
+const { data } = eintrag;
+const { Content } = await render(eintrag);
+
+const alle = await getCollection("faktenchecks");
+const verwandt = (data.verwandt ?? [])
+  .map((slug) => alle.find((e) => e.id === slug))
+  .filter(Boolean);
+
+const githubEdit = `https://github.com/pseidler89-sudo/kompetenzzentrum/blob/main/src/content/faktenchecks/${eintrag.id}.md`;
+---
+
+<BaseLayout titel={data.titel} beschreibung={data.zusammenfassung}>
+  <article>
+    <a href={pfad("/faktenchecks")} class="muted" style="text-decoration:none;">← Alle Faktenchecks</a>
+
+    <div class="card__meta" style="margin-top:1rem;">
+      <UrteilBadge urteil={data.urteil} />
+      {data.themen.map((t) => <span class="badge">{THEMA_LABEL[t] ?? t}</span>)}
+      {data.status !== "geprueft" && <span class="badge" title="Redaktioneller Status">{STATUS_LABEL[data.status]}</span>}
+    </div>
+
+    <h1 style="margin-top:.75rem;">{data.titel}</h1>
+
+    <div class="behauptung-box">
+      <span class="behauptung-box__label">Die Behauptung</span>
+      <p>„{data.behauptung}“</p>
+    </div>
+
+    <div class="kurzantwort-box">
+      <span class="kurzantwort-box__label">Kurzantwort</span>
+      <p class="lead" style="color:var(--c-text);margin:.25rem 0 0;">{data.kurzantwort}</p>
+    </div>
+
+    {data.techniken.length > 0 && (
+      <div class="tag-list" style="margin:1.25rem 0;">
+        <span class="muted" style="font-size:.85rem;align-self:center;">Genutzte Techniken:</span>
+        {data.techniken.map((t) => (
+          <a class="badge" href={pfad(`/werkzeugkasten#${t}`)}>{TECHNIK_LABEL[t] ?? t}</a>
+        ))}
+      </div>
+    )}
+
+    <StufenSchalter />
+
+    <div class="prose" data-faktencheck-body>
+      <Content />
+    </div>
+
+    <Quellen quellen={data.quellen} />
+
+    {verwandt.length > 0 && (
+      <section style="margin-top:2.5rem;">
+        <h2>Verwandte Faktenchecks</h2>
+        <div class="grid grid--2">
+          {verwandt.map((e: any) => (
+            <a class="card" href={pfad(`/faktenchecks/${e.id}`)}>
+              <UrteilBadge urteil={e.data.urteil} />
+              <h3>{e.data.titel}</h3>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <footer class="fc-footer">
+      <p class="muted">
+        Veröffentlicht am {datumFormat(data.veroeffentlicht)}
+        {data.aktualisiert && ` · aktualisiert am ${datumFormat(data.aktualisiert)}`}
+        {data.mitwirkende.length > 0 && ` · Mitwirkende: ${data.mitwirkende.join(", ")}`}
+      </p>
+      <p>
+        <a href={githubEdit} rel="noopener">Diesen Faktencheck auf GitHub verbessern ✎</a>
+        — Fehler gefunden oder eine Quelle zu ergänzen? Jeder Beitrag ist willkommen.
+      </p>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .behauptung-box, .kurzantwort-box { margin: 1.5rem 0; padding: 1rem 1.25rem; border-radius: var(--radius); }
+  .behauptung-box { background: var(--c-falsch-bg); border: 1px solid color-mix(in srgb, var(--c-falsch) 25%, transparent); }
+  .kurzantwort-box { background: var(--c-accent-soft); border: 1px solid color-mix(in srgb, var(--c-accent) 25%, transparent); }
+  .behauptung-box__label, .kurzantwort-box__label {
+    font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em;
+  }
+  .behauptung-box__label { color: var(--c-falsch); }
+  .kurzantwort-box__label { color: var(--c-accent); }
+  .behauptung-box p { margin: .25rem 0 0; font-size: 1.15rem; font-style: italic; }
+  .fc-footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border); font-size: .92rem; }
+</style>

@@ -1,0 +1,86 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { TECHNIK_LABEL, TECHNIK_ERKLAERUNG } from "../lib/labels";
+
+const techniken = Object.keys(TECHNIK_LABEL);
+
+const sift = [
+  { kurz: "Stopp", text: "Bevor du teilst oder dich aufregst: kurz innehalten. Kennst du die Quelle? Löst die Meldung starke Emotionen aus? Genau dann ist Vorsicht geboten." },
+  { kurz: "Investigate the source", text: "Wer steht hinter der Quelle? Suche den Namen des Mediums/Autors getrennt – nicht auf der Seite selbst, sondern „seitwärts“ (Wikipedia, andere Medien)." },
+  { kurz: "Find better coverage", text: "Berichten seriöse, unabhängige Quellen dasselbe? Gibt es nur eine einzige Quelle, ist Skepsis angebracht." },
+  { kurz: "Trace claims", text: "Verfolge Zitate, Zahlen und Bilder zurück zum Ursprung. Oft ist der Kontext entscheidend – oder die Originalquelle sagt etwas ganz anderes." },
+];
+---
+
+<BaseLayout titel="Werkzeugkasten" beschreibung="Methoden, um Informationen selbst zu finden und zu bewerten – plus die häufigsten Manipulationstechniken im Überblick.">
+  <h1>Werkzeugkasten</h1>
+  <p class="lead">
+    Faktenchecks lesen hilft. Selbst prüfen können hilft dauerhaft. Hier lernst du,
+    wie man Informationen findet, einordnet und Manipulation erkennt.
+  </p>
+
+  <section>
+    <h2>Die SIFT-Methode: in 4 Schritten zur Einordnung</h2>
+    <p>
+      Profis prüfen nicht, indem sie eine Seite gründlich lesen, sondern indem sie
+      <strong>seitwärts lesen</strong> („lateral reading“): Sie verlassen die Seite und
+      schauen, was andere über sie sagen. Die SIFT-Methode fasst das zusammen.
+    </p>
+    <div class="grid grid--2">
+      {sift.map((s, i) => (
+        <div class="card">
+          <div class="card__meta"><span class="badge">Schritt {i + 1}</span></div>
+          <h3 style="margin:0;">{s.kurz}</h3>
+          <p style="margin:0;">{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <h2>Schnell-Checkliste für jede Behauptung</h2>
+    <ul class="checkliste">
+      <li><strong>Quelle:</strong> Wer sagt das – und welches Interesse könnte dahinterstecken?</li>
+      <li><strong>Beleg:</strong> Wird eine überprüfbare Quelle genannt? Führt der Link wirklich dorthin?</li>
+      <li><strong>Bezugsgröße:</strong> Steht eine Zahl im Verhältnis (pro Kopf, im Zeitverlauf, im Vergleich)?</li>
+      <li><strong>Aktualität:</strong> Wie alt ist die Information? Gilt sie noch?</li>
+      <li><strong>Konsens:</strong> Was sagt die Mehrheit der Fachleute – nicht eine laute Einzelstimme?</li>
+      <li><strong>Emotion:</strong> Soll hier informiert oder vor allem Wut/Angst erzeugt werden?</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Praktische Recherche-Werkzeuge</h2>
+    <ul class="werkzeuge">
+      <li><strong>Rückwärts-Bildersuche</strong> (Google Lens, TinEye): Stammt ein Foto wirklich aus dem behaupteten Kontext?</li>
+      <li><strong>Amtliche Statistik:</strong> <a href="https://www.destatis.de" rel="noopener">Destatis</a>, <a href="https://www.bundesbank.de" rel="noopener">Bundesbank</a>, <a href="https://www.bka.de" rel="noopener">BKA (PKS)</a> – Zahlen aus erster Hand.</li>
+      <li><strong>Wissenschaft:</strong> <a href="https://scholar.google.com" rel="noopener">Google Scholar</a>, <a href="https://www.science-media-center.de" rel="noopener">Science Media Center</a> für eingeordnete Forschung.</li>
+      <li><strong>Etablierte Faktenchecks:</strong> <a href="https://correctiv.org/faktencheck/" rel="noopener">CORRECTIV</a>, <a href="https://www.tagesschau.de/faktenfinder" rel="noopener">ARD-Faktenfinder</a>, <a href="https://euvsdisinfo.eu" rel="noopener">EUvsDisinfo</a>.</li>
+    </ul>
+  </section>
+
+  <section id="techniken">
+    <h2>Manipulationstechniken erkennen</h2>
+    <p>
+      Desinformation nutzt wiederkehrende Muster. Wer sie kennt, erkennt sie wieder –
+      das nennt man <em>Prebunking</em>. Die ersten fünf folgen dem FLICC-Modell der
+      Wissenschaftskommunikation.
+    </p>
+    <div class="technik-liste">
+      {techniken.map((t) => (
+        <div class="technik" id={t}>
+          <h3 style="margin:.2rem 0;">{TECHNIK_LABEL[t]}</h3>
+          <p style="margin:0;">{TECHNIK_ERKLAERUNG[t]}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  section { margin-top: 3rem; }
+  .checkliste, .werkzeuge { display: grid; gap: .6rem; padding-left: 1.2rem; }
+  .technik-liste { display: grid; gap: .9rem; }
+  .technik { padding: 1rem 1.25rem; background: var(--c-surface); border: 1px solid var(--c-border); border-left: 4px solid #8338ec; border-radius: var(--radius); scroll-margin-top: 5rem; }
+  .technik:target { border-left-width: 6px; box-shadow: var(--shadow); }
+</style>
