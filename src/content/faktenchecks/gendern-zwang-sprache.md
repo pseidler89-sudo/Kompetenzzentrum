@@ -1,7 +1,7 @@
 ---
 titel: "„Gendern wird uns aufgezwungen und zerstört die deutsche Sprache“"
 behauptung: "Es gibt einen staatlichen Gender-Zwang, und geschlechtergerechte Sprache ruiniert unser Deutsch."
-kurzantwort: "Einen allgemeinen gesetzlichen „Gender-Zwang" gibt es nicht – der amtliche Standard (Rat für deutsche Rechtschreibung) empfiehlt Genderzeichen wie den Stern gerade nicht verpflichtend, und mehrere Länder schränken sie in Behörden sogar ein. Dass Mehrheiten Genderzeichen skeptisch sehen, stimmt; dass Sprache dadurch „zerstört" werde, ist eine Wertung, kein Befund."
+kurzantwort: "Einen allgemeinen gesetzlichen „Gender-Zwang” gibt es nicht – der amtliche Standard (Rat für deutsche Rechtschreibung) empfiehlt Genderzeichen wie den Stern gerade nicht verpflichtend, und mehrere Länder schränken sie in Behörden sogar ein. Dass Mehrheiten Genderzeichen skeptisch sehen, stimmt; dass Sprache dadurch „zerstört” werde, ist eine Wertung, kein Befund."
 urteil: "fehlender-kontext"
 themen: ["demokratie-medien"]
 techniken: ["emotionalisierung", "falsche-gleichsetzung", "cherry-picking"]

@@ -1,17 +1,17 @@
 ---
 titel: "„Der ‚große Austausch‘ – die Deutschen werden planmäßig ersetzt“"
-behauptung: "Eliten tauschen die einheimische Bevölkerung durch gezielte Masseneinwanderung systematisch aus ('Großer Austausch'/'Umvolkung')."
-kurzantwort: "Der „große Austausch" ist eine rechtsextreme Verschwörungserzählung, kein Befund. Dass sich die Bevölkerung durch Migration und niedrige Geburtenraten verändert, ist offen dokumentiert und wird breit diskutiert. Die Behauptung eines geheimen, gesteuerten Plans zum „Ersetzen" eines Volkes ist durch nichts belegt – die Sicherheitsbehörden ordnen sie dem Rechtsextremismus zu."
+behauptung: "Eliten tauschen die einheimische Bevölkerung durch gezielte Masseneinwanderung systematisch aus (‚Großer Austausch‘ / ‚Umvolkung‘)."
+kurzantwort: "Der ‚große Austausch‘ ist eine rechtsextreme Verschwörungserzählung, kein Befund. Dass sich die Bevölkerung durch Migration und niedrige Geburtenraten verändert, ist offen dokumentiert und wird breit diskutiert. Die Behauptung eines geheimen, gesteuerten Plans zum ‚Ersetzen‘ eines Volkes ist durch nichts belegt – die Sicherheitsbehörden ordnen sie dem Rechtsextremismus zu."
 urteil: "falsch"
 themen: ["migration", "demokratie-medien"]
 techniken: ["verschwoerung", "falsche-kausalitaet", "emotionalisierung"]
-zusammenfassung: "Warum der 'Große Austausch' eine Verschwörungserzählung ist – und wie man realen demografischen Wandel von einem behaupteten Geheimplan unterscheidet."
+zusammenfassung: "Warum der ‚Große Austausch‘ eine Verschwörungserzählung ist – und wie man realen demografischen Wandel von einem behaupteten Geheimplan unterscheidet."
 status: "geprueft"
 veroeffentlicht: 2026-05-31
 mitwirkende: ["Kompetenzzentrum-Redaktion"]
 verwandt: ["migration-sozialstaat", "migration-kriminalstatistik"]
 quellen:
-  - titel: "Verfassungsschutzberichte – Rechtsextremismus, 'Großer Austausch' als Ideologieelement"
+  - titel: "Verfassungsschutzberichte – Rechtsextremismus, ‚Großer Austausch‘ als Ideologieelement"
     herausgeber: "Bundesamt für Verfassungsschutz (BfV)"
     url: "https://www.verfassungsschutz.de"
     art: "primaer"
@@ -19,8 +19,8 @@ quellen:
     herausgeber: "Statistisches Bundesamt (Destatis)"
     url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Bevoelkerung/_inhalt.html"
     art: "primaer"
-  - titel: "Verschwörungserzählungen erkennen: der 'Große Austausch'"
-    herausgeber: "Bundeszentrale für politische Bildung (bpb) / Amadeu Antonio Stiftung"
+  - titel: "Verschwörungserzählungen erkennen: der ‚Große Austausch‘"
+    herausgeber: "Bundeszentrale für politische Bildung (bpb)"
     url: "https://www.bpb.de/themen/rechtsextremismus/"
     art: "sekundaer"
 ---
@@ -54,7 +54,7 @@ Realer demografischer Wandel ist ein legitimes Diskussionsthema. Die Verschwöru
 
 **Struktur einer Verschwörungserzählung.** Sie weist die typischen Merkmale auf (vgl. Forschung zu Verschwörungsdenken): unterstellte böse **Absicht** mächtiger Akteure, Annahme eines **geheimen Plans**, **Unfälschbarkeit** (jede Evidenz wird umgedeutet), und ein **manichäisches** Freund-Feind-Bild. Diese Merkmale unterscheiden sie kategorial von empirischer Demografie.
 
-**Was die Daten sagen.** Destatis und seine Bevölkerungsvorausberechnungen dokumentieren Migration, Geburten, Sterbefälle und Altersstruktur transparent und ergebnisoffen, inklusive Unsicherheitsbändern. Sie zeigen Wandel – aber keinen Beleg für eine zentrale Steuerung mit dem Ziel des „Ersetzens". Komposition von Bevölkerung ist das Resultat vieler dezentraler Entscheidungen und Ereignisse, nicht eines Drehbuchs.
+**Was die Daten sagen.** Destatis und seine Bevölkerungsvorausberechnungen dokumentieren Migration, Geburten, Sterbefälle und Altersstruktur transparent und ergebnisoffen, inklusive Unsicherheitsbändern. Sie zeigen Wandel – aber keinen Beleg für eine zentrale Steuerung mit dem Ziel des „Ersetzens". Die Zusammensetzung der Bevölkerung ist das Resultat vieler dezentraler Entscheidungen und Ereignisse, nicht eines Drehbuchs.
 
 **Wichtige Abgrenzung.** Kritik an konkreter Migrationspolitik, Sorgen um Integration oder Debatten über Zuwanderungszahlen sind legitim und faktenbasiert führbar. Die Verschwörungserzählung ist davon zu trennen: Sie behauptet einen *Akteur mit Austausch-Absicht* – und genau dieser Kern ist unbelegt.
 :::
