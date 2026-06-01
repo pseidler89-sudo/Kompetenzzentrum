@@ -8,6 +8,7 @@ import { glob } from "astro/loaders";
 export const THEMEN = [
   "migration",
   "klima-energie",
+  "umwelt-landwirtschaft",
   "wirtschaft-soziales",
   "gesundheit",
   "demokratie-medien",

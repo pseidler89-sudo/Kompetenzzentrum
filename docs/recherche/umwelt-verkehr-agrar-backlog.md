@@ -36,7 +36,10 @@ Neutralität: Wir prüfen Aussagen, nicht Lager.
   passenger cars“ (theicct.org); UBA Elektromobilität; Fraunhofer ISI.
 - *Hoher Nutzwert, sachlich gut belegt, mittlere Brisanz. Überschneidet sich mit B.*
 
-### A2. „Windräder töten Unmengen Vögel und sind Hauptursache des Artensterbens.“
+### A2. „Windräder töten Unmengen Vögel und sind Hauptursache des Artensterbens.“ — ✅ GEBAUT (06/2026, `in-pruefung`)
+> Faktencheck `windkraft-voegel.md`, urteil *irreführend*. Größenordnungen aus Wikipedia
+> „Vogelschlag" (Windkraft 0,1–0,44 Mio./J USA vs. Katzen/Gebäude/Verkehr; NABU: keine
+> Vogelart gefährdet). Quellen: Wikipedia Vogelschlag (gelesen) + UBA Windenergie (erreichbar).
 - **Faktenrichtung:** Vogelschlag an Windrädern existiert, ist aber gegenüber anderen
   Ursachen (Glasscheiben, Katzen, Straßenverkehr) klein; Hauptursachen des Insekten-/
   Artenrückgangs sind Landnutzung, Pestizide, Klimawandel. Kein Freibrief, aber die
@@ -84,7 +87,10 @@ Neutralität: Wir prüfen Aussagen, nicht Lager.
 
 ## C. Agrarwirtschaft
 
-### C1. „Die Landwirtschaft spielt fürs Klima kaum eine Rolle / Methan von Kühen ist harmlos.“
+### C1. „Die Landwirtschaft spielt fürs Klima kaum eine Rolle / Methan von Kühen ist harmlos.“ — ✅ GEBAUT (06/2026, `in-pruefung`)
+> Faktencheck `landwirtschaft-klima.md`, urteil *irreführend*. UBA: ~8,2 % der dt. THG
+> (2020); Methan-GWP ≈ 28 (100 J). Quellen: UBA-Agrar-THG (erreichbar) + Wikipedia
+> Landwirtschaft & Methan (gelesen).
 - **Faktenrichtung:** Die Landwirtschaft ist ein relevanter Treibhausgas-Verursacher
   (v. a. Methan aus Tierhaltung, Lachgas aus Düngung). Methan ist kurzlebiger, aber
   je Molekül deutlich klimawirksamer als CO₂.

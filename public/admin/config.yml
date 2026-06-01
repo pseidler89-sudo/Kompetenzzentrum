@@ -50,6 +50,7 @@ collections:
           - { label: "Migration & Asyl", value: "migration" }
           - { label: "Kriminalität & Sicherheit", value: "kriminalitaet-sicherheit" }
           - { label: "Klima & Energie", value: "klima-energie" }
+          - { label: "Umwelt & Landwirtschaft", value: "umwelt-landwirtschaft" }
           - { label: "Wirtschaft & Soziales", value: "wirtschaft-soziales" }
           - { label: "Gesundheit", value: "gesundheit" }
           - { label: "Demokratie & Medien", value: "demokratie-medien" }
