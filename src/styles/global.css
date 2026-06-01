@@ -212,13 +212,14 @@ blockquote {
 }
 .brand { display: flex; align-items: center; gap: .55rem; font-weight: 800; letter-spacing: -0.02em; text-decoration: none; color: var(--c-text); font-size: 1.08rem; }
 .brand__mark { width: 1.65rem; height: 1.65rem; flex: none; }
-/* Navigation: Desktop = Pill-Leiste, Burger versteckt.
-   Wichtig: <details> versteckt geschlossene Kinder – auf Desktop erzwingen
-   wir daher die Sichtbarkeit der Nav unabhängig vom open-Zustand. */
-.nav-toggle { margin-left: auto; }
+/* Navigation. Desktop = Pill-Leiste. Das <details> wird per display:contents
+   aufgelöst, damit das Burger-Disclosure die Nav NICHT versteckt – neuere
+   Browser verbergen geschlossene <details>-Inhalte via content-visibility
+   (::details-content), was sogar display:flex !important ausgehebelt hat.
+   Mobil (Media Query unten) wird daraus wieder ein echtes Burger-<details>. */
+.nav-toggle { display: contents; }
 .nav-toggle > summary { display: none; }
-.nav-toggle > .site-nav { display: flex !important; }
-.site-nav { display: flex; gap: .35rem; flex-wrap: wrap; align-items: center; }
+.site-nav { display: flex; gap: .35rem; flex-wrap: wrap; align-items: center; margin-left: auto; }
 .site-nav a {
   color: var(--c-text-soft); text-decoration: none; font-weight: 600; font-size: 0.93rem;
   padding: .4rem .65rem; border-radius: 7px; transition: color .12s ease, background-color .12s ease;
@@ -410,7 +411,9 @@ tbody tr:nth-child(even) { background: color-mix(in srgb, var(--c-surface-2) 45%
   .prose { font-size: 1.08rem; }
   h2 { margin-top: 2.25rem; }
 
-  /* Burger-Menü auf schmalen Screens. */
+  /* Burger-Menü auf schmalen Screens: <details> wieder als echte Box (statt
+     display:contents), damit das Dropdown daran ankert und der Button rechts steht. */
+  .nav-toggle { display: block; position: relative; margin-left: auto; }
   .nav-toggle > summary {
     display: inline-flex; align-items: center; gap: .4rem; cursor: pointer;
     list-style: none; padding: .4rem .7rem; border-radius: var(--radius-sm);
