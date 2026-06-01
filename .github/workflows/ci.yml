@@ -21,3 +21,19 @@ jobs:
         run: npm run build
       - name: Astro check (Typen)
         run: npx astro check || true
+
+  # Eigener Job: prüft die Erreichbarkeit aller Quellen-URLs im offenen
+  # Internet von GitHub (anders als die lokale, abgeschottete Build-Umgebung).
+  # Tote/erfundene Links (404/DNS) lassen diesen Job scheitern; Bot-Blocks
+  # (403/429) erscheinen nur als Warnung im Log.
+  quellen-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Quellen-Links prüfen
+        run: npm run check:links
