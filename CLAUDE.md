@@ -52,7 +52,11 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
 ## Stand (zuletzt)
 - **9 Faktenchecks** (+1: Gesundheit – „Antibiotika bei Erkältung“, Status
   `in-pruefung`, wartet auf menschliche Abnahme → dann auf `geprueft` setzen).
-- **17 Maschen** (15 + 2 aus Backlog: Gish-Galopp #16, Mehrheits-Argument/Bandwagon #17).
+- **19 Maschen** (15 + 4 aus Backlog: Gish-Galopp #16, Bandwagon #17, Sündenbock #18,
+  Lügen-Flut/Firehose #19). Sündenbock & Firehose bewusst maximal neutral/techniknah.
+- **Social-Media-Karten umgesetzt:** Open-Graph-/Twitter-Meta in `BaseLayout.astro`
+  (Detailseiten `og:type=article`), Default-Karte `public/og-default.png` aus
+  `scripts/make-og-image.mjs` (sharp). Absolute URLs aus der Astro-Config.
 - Interaktive Tiefen-Demo auf Startseite, mobiles Burger-Menü, README als Einladung.
 - Verifikation: Link-Check in CI (`ci.yml` Job `quellen-links`).
 - **Netzwerk-Policy / Whitelist GETESTET (06/2026):** Custom-Allowlist greift.
@@ -65,8 +69,8 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
 - **Nur Feature-Branch pushen.** Lokal kann man versehentlich auf `main` landen –
   danach wieder `git checkout claude/factcheck-...` und prüfen, dass `main` ==
   `origin/main` (kein versehentlicher main-Push).
-- **`reihenfolge` der Maschen:** flicc 1–6, rhetorik 7–17. Neue rhetorik-Maschen
-  fortlaufend ≥18, damit „Die 5 Kerntechniken“ (= flicc) stimmt.
+- **`reihenfolge` der Maschen:** flicc 1–6, rhetorik 7–19. Neue rhetorik-Maschen
+  fortlaufend ≥20, damit „Die 5 Kerntechniken“ (= flicc) stimmt.
 - **CMS-Techniken an ZWEI Stellen** in `public/admin/config.yml` pflegen
   (faktenchecks `techniken` + maschen `code`).
 - **Frontmatter:** keine geraden `"` in Werten (normalize-Script fängt’s, aber
@@ -74,15 +78,15 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
 
 ## Offene / mögliche nächste Schritte
 - ~~Whitelist verifizieren~~ ✅ erledigt (06/2026, siehe Stand oben).
-- ~~Gish-Galopp & Bandwagon~~ ✅ umgesetzt. **Noch offen im Backlog:** Sündenbock
-  und Firehose (beide politisch sensibel, brauchen besonders neutrales Pfad-A-Framing
-  → vor Umsetzung mit Nutzer abstimmen); Newspeak (niedrige Priorität); Vernebelung
-  (überlappt mit Gish-Galopp, vermutlich verzichtbar); Angstrhetorik (laut Backlog als
-  Abschnitt in „Emotionalisierung“ statt eigene Masche).
+- ~~Gish-Galopp, Bandwagon, Sündenbock, Firehose~~ ✅ umgesetzt (Sündenbock & Firehose
+  bewusst maximal neutral/techniknah, mit Nutzer abgestimmt). **Noch offen im Backlog:**
+  Newspeak (niedrige Priorität); Vernebelung (überlappt mit Gish-Galopp, verzichtbar);
+  Angstrhetorik (laut Backlog als Abschnitt in „Emotionalisierung“ statt eigene Masche).
 - ~~Themen-Balance Gesundheit~~ ✅ erster Gesundheits-Faktencheck da (Antibiotika).
   Weitere Themen außerhalb Migration/Klima weiterhin wünschenswert.
 - **Gesundheits-Faktencheck abnehmen:** Quellen sind erreichbar + inhaltlich geprüft
   (IQWiG, WHO), aber Status `in-pruefung` – menschliches Gegenlesen fehlt für `geprueft`.
-- **Social-Media-Karten** (Open Graph je Masche/Faktencheck) – beim Nutzer „in der
-  Pipeline“. **Offen: ob Claude das übernehmen soll (Konfliktgefahr mit Nutzer-Arbeit).**
-- Projektname evtl. überdenken (Faktenkompass / Durchblick / Prüfstein) – offen.
+- ~~Social-Media-Karten~~ ✅ umgesetzt (OG-/Twitter-Meta + Default-Karte, PR #3).
+  Optionale Ausbaustufe: pro-Seite generierte OG-Bilder (Titel im Bild) via satori –
+  bewusst NICHT gemacht (Default-Karte genügt, kein neues Dependency).
+- **Projektname bleibt „Kompetenzzentrum“** (06/2026 mit Nutzer entschieden).

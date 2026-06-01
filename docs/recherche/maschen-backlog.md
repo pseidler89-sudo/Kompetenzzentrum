@@ -10,10 +10,14 @@ gebaut werden können.
 > Die hier gelisteten URLs stammen aus KI-Recherche und sind teils nur per
 > Such-Snippet gegengeprüft – nicht ungelesen übernehmen.
 
-## Bereits umgesetzt (10 → 17)
+## Bereits umgesetzt (10 → 19)
 Whataboutism · Falsche Verknüpfung (Clickbait) · Astroturfing ·
 Identitätsschwindel (Doppelgänger) · Falsche Ausgewogenheit (False Balance) ·
-**Gish-Galopp** (reihenfolge 16) · **Mehrheits-Argument / Bandwagon** (reihenfolge 17).
+**Gish-Galopp** (16) · **Mehrheits-Argument / Bandwagon** (17) ·
+**Sündenbock** (18) · **Lügen-Flut / Firehose** (19).
+
+Verbleibend zurückgestellt: Newspeak (niedrige Prio), Vernebelung (überlappt mit
+Gish-Galopp, verzichtbar), Angstrhetorik (als Abschnitt in „Emotionalisierung“).
 
 ---
 
@@ -27,21 +31,23 @@ Identitätsschwindel (Doppelgänger) · Falsche Ausgewogenheit (False Balance) �
   muster (E-Mobilität-Schwall), Quelle = Wikipedia (Volltext geprüft, 200).
   Brandolinis Gesetz separat verifiziert (de.wikipedia.org/wiki/Brandolinis_Gesetz).
 
-### 2. Firehose of Falsehood (Lügen-Feuerwehrschlauch, Massenmedien)
+### 2. Firehose of Falsehood (Lügen-Feuerwehrschlauch) — ✅ UMGESETZT (06/2026)
 - **Was:** Massenhaft, schnell, über viele Kanäle widersprüchliche Falschmeldungen
   → Ziel ist Zynismus („man kann eh nichts glauben“), nicht Überzeugung. Propaganda/RAND.
-- **Beispiel-Idee:** Nach Nord-Stream-Sabotage zeitgleich Dutzende widersprüchliche
-  Narrative. **Politisch heikler (Russland-Bezug) – neutral framen.**
-- **Quellen:** de.wikipedia.org/wiki/Firehose_of_Falsehood · sueddeutsche.de
-  „propaganda-psychologie-wirkung“ · vsquare.org firehose-of-falsehood
-- **Hinweis:** Verwandt mit Gish-Galopp (1:1 vs. Masse). Evtl. zusammen denken.
+- **Umsetzung:** `src/content/maschen/firehose.md`, code `firehose`, reihenfolge 19.
+  Neutral gehalten: Mechanismus + RAND-Ursprung (Paul/Matthews 2016) faktisch genannt,
+  Beispiel als allgemeines Muster „nach einem großen Ereignis“ (kein aktuelles
+  geopolitisches Reizbeispiel). Querverweis auf Gish-Galopp (1:1 vs. Masse).
+  Quelle Wikipedia (Volltext geprüft, 200).
 
-### 3. Sündenbock / Scapegoating
+### 3. Sündenbock / Scapegoating — ✅ UMGESETZT (06/2026)
 - **Was:** Eine Gruppe wird pauschal für komplexe Probleme verantwortlich gemacht.
-- **Beispiel-Idee:** Migrationsdebatte (EDMO-Berichte). **Stark politisch aufgeladen –
-  bei Pfad A besonders neutrales Framing nötig, Fokus strikt auf Technik.**
-- **Quellen:** edmo.eu (EDMO-39/EDMO-28 PDFs) · migrationpolicy.org
-- **Hinweis:** Wertvoll, aber sensibel. Sorgfältig framen.
+- **Umsetzung:** `src/content/maschen/suendenbock.md`, code `suendenbock`,
+  reihenfolge 18. **Neutral gehalten (Pfad A):** ausdrücklich „Technik, keine
+  Richtung“ – Beispieltargets über alle Lager gestreut („die Ausländer“ / „die
+  Eliten“ / „die Konzerne“ / „die Boomer“), neutrales Mieten-Beispiel statt
+  Migrationsfokus. Mechanismus (Frustration→Aggression, René Girard) + historischer
+  Hinweis. Quelle Wikipedia (Volltext geprüft, 200).
 
 ### 4. Bandwagon / Mehrheits-Argument (argumentum ad populum) — ✅ UMGESETZT (06/2026)
 - **Was:** „Das sehen doch alle so“ ersetzt Belege; sozialer Konformitätsdruck.
