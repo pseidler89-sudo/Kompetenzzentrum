@@ -45,6 +45,8 @@ export const TECHNIKEN = [
   "falsche-ausgewogenheit",
   "gish-galopp",
   "bandwagon",
+  "suendenbock",
+  "firehose",
 ] as const;
 
 const quelle = z.object({

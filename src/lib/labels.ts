@@ -45,6 +45,8 @@ export const TECHNIK_LABEL: Record<string, string> = {
   "falsche-ausgewogenheit": "Falsche Ausgewogenheit",
   "gish-galopp": "Gish-Galopp",
   bandwagon: "Mehrheits-Argument (Bandwagon)",
+  suendenbock: "Sündenbock",
+  firehose: "Lügen-Flut (Firehose)",
 };
 
 /** Kurzerklärung jeder Technik – für den Werkzeugkasten. */
@@ -66,6 +68,8 @@ export const TECHNIK_ERKLAERUNG: Record<string, string> = {
   "falsche-ausgewogenheit": "Eine Randmeinung wird gleichwertig neben den Forschungsstand gestellt – als gäbe es offenen Streit.",
   "gish-galopp": "Eine Flut vieler kleiner Behauptungen macht eine geordnete Widerlegung im Zeitrahmen unmöglich.",
   bandwagon: "„Das sehen doch alle so“ wird als Beweis ausgegeben – eine Mehrheit macht eine Aussage aber nicht wahr.",
+  suendenbock: "Ein komplexes Problem wird pauschal einer einzelnen, leicht erkennbaren Gruppe angelastet.",
+  firehose: "Viele schnelle, oft widersprüchliche Falschmeldungen über viele Kanäle – Ziel ist Verwirrung, nicht Überzeugung.",
 };
 
 /**
@@ -91,6 +95,8 @@ export const TECHNIK_KONTER: Record<string, string> = {
   "falsche-ausgewogenheit": "Frag nach dem Verhältnis: Wie viele Fachleute stehen wirklich hinter jeder Seite? Gleiche Redezeit heißt nicht gleiche Evidenz.",
   "gish-galopp": "Nimm das Tempo raus und greif einen Punkt heraus. Zehn schwache Behauptungen ergeben kein starkes Argument.",
   bandwagon: "Frag nach Zahlen: „alle“ oder „die Mehrheit“ – wie viele genau, und woher? Eine schweigende Mehrheit kann niemand nachzählen.",
+  suendenbock: "Frag: Hat das Problem wirklich nur eine Ursache? Und gibt es Zahlen, die der genannten Gruppe den Anteil zuordnen – oder ist die Schuld nur behauptet?",
+  firehose: "Lass dich vom Tempo nicht in Resignation treiben. Prüfe einzelne, belegbare Fakten in Ruhe – „man kann eh nichts glauben“ ist genau das Ziel.",
 };
 
 export const STATUS_LABEL: Record<string, string> = {

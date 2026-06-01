@@ -77,6 +77,8 @@ collections:
           - { label: "Falsche Ausgewogenheit (False Balance)", value: "falsche-ausgewogenheit" }
           - { label: "Gish-Galopp (Behauptungs-Flut)", value: "gish-galopp" }
           - { label: "Mehrheits-Argument (Bandwagon)", value: "bandwagon" }
+          - { label: "Sündenbock", value: "suendenbock" }
+          - { label: "Lügen-Flut (Firehose)", value: "firehose" }
       - { name: zusammenfassung, label: "Kurzbeschreibung (für Vorschau & Suchmaschinen)", widget: text, pattern: ['^.{1,300}$', "Höchstens 300 Zeichen."] }
       - name: status
         label: "Redaktioneller Status"
@@ -164,6 +166,8 @@ collections:
           - { label: "Falsche Ausgewogenheit (False Balance)", value: "falsche-ausgewogenheit" }
           - { label: "Gish-Galopp (Behauptungs-Flut)", value: "gish-galopp" }
           - { label: "Mehrheits-Argument (Bandwagon)", value: "bandwagon" }
+          - { label: "Sündenbock", value: "suendenbock" }
+          - { label: "Lügen-Flut (Firehose)", value: "firehose" }
       - name: kategorie
         label: "Kategorie"
         widget: select
