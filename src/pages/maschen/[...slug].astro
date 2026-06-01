@@ -21,7 +21,7 @@ const faktenchecks = (await getCollection("faktenchecks"))
 const q = data.beispiel_quelle;
 ---
 
-<BaseLayout titel={data.titel} beschreibung={data.kurz}>
+<BaseLayout titel={data.titel} beschreibung={data.kurz} seitentyp="article">
   <article class="masche">
     <a href={pfad("/maschen")} class="muted" style="text-decoration:none;">← Alle Maschen</a>
 

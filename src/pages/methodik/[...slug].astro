@@ -12,7 +12,7 @@ const { artikel } = Astro.props;
 const { Content } = await render(artikel);
 ---
 
-<BaseLayout titel={artikel.data.titel} beschreibung={artikel.data.zusammenfassung}>
+<BaseLayout titel={artikel.data.titel} beschreibung={artikel.data.zusammenfassung} seitentyp="article">
   <article class="prose">
     <a href={pfad("/methodik")} class="muted" style="text-decoration:none;">← Methodik</a>
     <h1 style="margin-top:1rem;">{artikel.data.titel}</h1>
