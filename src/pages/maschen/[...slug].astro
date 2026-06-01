@@ -1,8 +1,9 @@
 ---
 import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import UrteilBadge from "../../components/UrteilBadge.astro";
-import { pfad } from "../../lib/labels";
+import { pfad, MASCHE_ICON } from "../../lib/labels";
 import { md } from "../../lib/markdown";
 
 export async function getStaticPaths() {
@@ -26,7 +27,10 @@ const q = data.beispiel_quelle;
     <a href={pfad("/maschen")} class="muted" style="text-decoration:none;">← Alle Maschen</a>
 
     <p class="eyebrow">{data.kategorie === "flicc" ? "Kerntechnik der Desinformation" : "Häufiges Muster"}</p>
-    <h1>{data.titel}</h1>
+    <div class="masche-titel">
+      <span class={`masche-ic${data.kategorie === "flicc" ? "" : " masche-ic--rhetorik"}`} aria-hidden="true"><Icon name={MASCHE_ICON[data.code] ?? "lucide:shield-alert"} /></span>
+      <h1>{data.titel}</h1>
+    </div>
     <p class="lead">{data.kurz}</p>
 
     <section class="block">
@@ -75,6 +79,16 @@ const q = data.beispiel_quelle;
 <style>
   .masche { max-width: var(--max-width); }
   .eyebrow { text-transform: uppercase; letter-spacing: .06em; font-weight: 800; color: var(--c-technik); font-size: .8rem; margin: 1rem 0 .3rem; }
+  .masche-titel { display: flex; align-items: center; gap: .8rem; }
+  .masche-titel h1 { margin: 0; }
+  .masche-ic {
+    width: 2.8rem; height: 2.8rem; flex: none; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    background: color-mix(in srgb, var(--c-technik) 12%, var(--c-surface));
+    color: var(--c-technik);
+  }
+  .masche-ic--rhetorik { background: var(--c-surface-2); color: var(--c-text-soft); }
+  .masche-ic svg { width: 1.5rem; height: 1.5rem; }
   .block { margin-top: 2.5rem; }
   .block h2 { border-left: 4px solid var(--c-technik); padding-left: .7rem; }
   .beispiel-box { background: var(--c-surface); border: 1px solid var(--c-border); border-left: 4px solid var(--c-border-strong); border-radius: var(--radius); padding: 1.1rem 1.3rem; }

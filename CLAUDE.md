@@ -31,6 +31,13 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
 - Drei Tiefen: `StufenSchalter.astro` + `data-stufe` + localStorage.
 - Maschen: `src/content/maschen/*.md`, Codes = `TECHNIKEN`-Enum. Kategorie
   `flicc` (genau 5 Kerntechniken) oder `rhetorik`. Labels in `src/lib/labels.ts`.
+- **Maschen-Icons (P3):** je Code ein Lucide-Icon via `MASCHE_ICON` (in `labels.ts`),
+  gerendert mit **astro-icon** (Build-Time, **kein** Runtime-JS) auf Maschen-Liste &
+  Detailseite. Neues Dev-Dependency: `astro-icon` + `@iconify-json/lucide` (bewusst
+  ergänzt – einzige Ausnahme von „kein neues Dependency", weil build-time/inline).
+- **Grafik-Baukasten:** Autor:innen-Tool unter `public/tools/grafik.html` (eigenständige
+  statische Datei, Tokens inline) → erreichbar `/<base>/tools/grafik.html`, verlinkt
+  von „Mitmachen". Klick → fertiges `daten:`-YAML zum Kopieren.
 - Faktencheck-Detailseite hat **Kopierbutton** (Fakt+Quelle+Link) = die
   „Diskussionshilfe“ (eigene Seite wurde entfernt).
 - **Datengrafiken (P1):** optionales `daten`-Frontmatter pro Faktencheck →
@@ -55,6 +62,9 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   Alt-Branch `sharp-euler-KJ9Wu` war ein Duplikat und wurde entfernt.
 
 ## Stand (zuletzt)
+- **v1.0 (06/2026):** Design-Handoff P1 (Datengrafiken) + P3 (Maschen-Icons) +
+  Grafik-Baukasten eingebaut, Startseiten-Tiefen-Demo springt nicht mehr. Ziel:
+  veröffentlichen und Feedback sammeln.
 - **13 Faktenchecks.** Fünf warten auf menschliche Abnahme (`in-pruefung` → dann
   `geprueft`): „Antibiotika bei Erkältung“ (gesundheit); „E-Auto-Klimabilanz“;
   „Bio-Landwirtschaft immer besser“; „Windkraft & Vögel“; „Landwirtschaft & Klima“.

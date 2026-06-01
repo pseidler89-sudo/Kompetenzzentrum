@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import remarkDirective from "remark-directive";
 import sitemap from "@astrojs/sitemap";
+import icon from "astro-icon";
 import { remarkStufen } from "./src/plugins/remark-stufen.mjs";
 
 // Für GitHub Pages: site + base anpassen.
@@ -18,5 +19,5 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkDirective, remarkStufen],
   },
-  integrations: [sitemap()],
+  integrations: [sitemap(), icon()],
 });

@@ -51,6 +51,33 @@ export const TECHNIK_LABEL: Record<string, string> = {
   firehose: "Lügen-Flut (Firehose)",
 };
 
+/**
+ * Ein dezentes Line-Icon (Lucide) je Masche – schnelleres Wiedererkennen im
+ * Raster, kein dekoratives Beiwerk. Gerendert via astro-icon (Build-Time, kein
+ * Runtime-JS). Bedeutung steht im Titel; Icons sind aria-hidden.
+ */
+export const MASCHE_ICON: Record<string, string> = {
+  "fake-experten": "lucide:user-round-x",
+  "logischer-fehlschluss": "lucide:shuffle",
+  "unerfuellbare-erwartung": "lucide:infinity",
+  "cherry-picking": "lucide:filter",
+  verschwoerung: "lucide:eye",
+  "falsche-kausalitaet": "lucide:git-compare-arrows",
+  "fehlender-bezugswert": "lucide:ruler",
+  emotionalisierung: "lucide:flame",
+  "falsche-gleichsetzung": "lucide:equal",
+  "aus-dem-kontext-gerissen": "lucide:scissors",
+  whataboutism: "lucide:corner-up-right",
+  "falsche-verknuepfung": "lucide:link",
+  astroturfing: "lucide:sprout",
+  identitaetsschwindel: "lucide:venetian-mask",
+  "falsche-ausgewogenheit": "lucide:scale",
+  "gish-galopp": "lucide:gauge",
+  bandwagon: "lucide:users-round",
+  suendenbock: "lucide:target",
+  firehose: "lucide:droplets",
+};
+
 /** Kurzerklärung jeder Technik – für den Werkzeugkasten. */
 export const TECHNIK_ERKLAERUNG: Record<string, string> = {
   "fake-experten": "Eine Einzelmeinung ohne Fachbezug wird als gleichwertig zum wissenschaftlichen Konsens dargestellt.",
