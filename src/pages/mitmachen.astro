@@ -1,9 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { pfad } from "../lib/labels";
 
 const repo = "https://github.com/pseidler89-sudo/kompetenzzentrum";
 const wege = [
-  { icon: "✍️", titel: "Faktencheck schreiben", text: "Du kennst dich mit einem Thema aus? Schreib einen neuen Faktencheck nach unserer Vorlage – inklusive Quellen.", link: `${repo}/issues/new?template=neuer-faktencheck.yml`, linkText: "Faktencheck vorschlagen" },
+  { icon: "📝", titel: "Im Editor schreiben (ohne Technik)", text: "Der einfachste Weg: Melde dich mit GitHub an und schreib einen Faktencheck im Formular-Editor – mit Auswahlmenüs und Quellen-Feldern, ganz ohne Markdown.", link: pfad("/admin/"), linkText: "Editor öffnen" },
+  { icon: "✍️", titel: "Faktencheck vorschlagen", text: "Lieber erst eine Idee einbringen? Schlag eine Behauptung vor, die geprüft werden soll.", link: `${repo}/issues/new?template=neuer-faktencheck.yml`, linkText: "Thema vorschlagen" },
   { icon: "🔍", titel: "Quellen & Zahlen prüfen", text: "Sind alle Zahlen aktuell, alle Links gültig? Sorgfältiges Gegenlesen ist Gold wert.", link: `${repo}/issues`, linkText: "Offene Aufgaben ansehen" },
   { icon: "🐛", titel: "Fehler melden", text: "Falsche Zahl, toter Link, missverständliche Formulierung? Sag uns Bescheid.", link: `${repo}/issues/new?template=fehler-melden.yml`, linkText: "Fehler melden" },
   { icon: "💻", titel: "Technik & Design", text: "Astro, CSS, Barrierefreiheit, Übersetzung: Auch an der Plattform selbst kannst du mitbauen.", link: `${repo}`, linkText: "Repository öffnen" },
