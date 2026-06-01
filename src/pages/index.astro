@@ -68,11 +68,17 @@ const featured = eintraege.slice(0, 4);
           <em>wie du die Behauptung selbst überprüfst</em>. So wächst mit jedem Lesen die eigene Kompetenz.
         </p>
       </div>
-      <div class="tiefe__bsp" aria-hidden="true">
-        <div class="tiefe__chip tiefe__chip--aktiv">Einstieg</div>
-        <div class="tiefe__chip">Vertiefung</div>
-        <div class="tiefe__chip">Wissenschaftlich</div>
-        <p class="tiefe__demo">„Kurz gesagt: Die Behauptung stimmt so nicht – hier ist der belegte Stand …“</p>
+      <div class="tiefe__bsp" id="tiefe-demo">
+        <p class="tiefe__frage">Beispiel-Behauptung: <em>„Windkraft ist viel zu teuer.“</em></p>
+        <div class="tiefe__chips" role="group" aria-label="Tiefe wählen">
+          <button type="button" class="tiefe__chip tiefe__chip--aktiv" data-stufe="einstieg" aria-pressed="true">Einstieg</button>
+          <button type="button" class="tiefe__chip" data-stufe="vertiefung" aria-pressed="false">Vertiefung</button>
+          <button type="button" class="tiefe__chip" data-stufe="wissenschaftlich" aria-pressed="false">Wissenschaftlich</button>
+        </div>
+        <p class="tiefe__demo" data-stufe="einstieg">Kurz gesagt: Das stimmt so nicht. Strom aus <strong>neuer Windkraft an Land ist günstiger</strong> als aus neuen Kohle- oder Gaskraftwerken.</p>
+        <p class="tiefe__demo" data-stufe="vertiefung" hidden>Die Erzeugungskosten neuer Windkraft an Land liegen laut Fraunhofer ISE bei rund <strong>4–9 ct/kWh</strong>, neue Gaskraftwerke bei <strong>8–16 ct/kWh</strong>. Im Neubau ist Wind also im Schnitt die günstigere Option.</p>
+        <p class="tiefe__demo" data-stufe="wissenschaftlich" hidden>Verglichen werden die <em>Stromgestehungskosten</em> (LCOE) über die gesamte Lebensdauer. Sauber wird der Vergleich, wenn man beides einrechnet: Integrationskosten für Netz/Speicher bei Wind &amp; Solar – und den CO₂-Preis bei fossilen. Die Fraunhofer-ISE-Studie (2024) tut das; Wind an Land bleibt die günstigste Neubauoption.</p>
+        <p class="tiefe__hint muted">↑ Tiefe umschalten – genau wie in jedem Faktencheck.</p>
       </div>
     </div>
   </section>
@@ -101,6 +107,27 @@ const featured = eintraege.slice(0, 4);
       <a class="btn btn--ghost" href="https://github.com/pseidler89-sudo/kompetenzzentrum">Projekt auf GitHub</a>
     </div>
   </section>
+
+  <script>
+    const demo = document.getElementById("tiefe-demo");
+    if (demo) {
+      const chips = demo.querySelectorAll<HTMLButtonElement>(".tiefe__chip");
+      const texte = demo.querySelectorAll<HTMLParagraphElement>(".tiefe__demo");
+      chips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          const stufe = chip.dataset.stufe;
+          chips.forEach((c) => {
+            const aktiv = c === chip;
+            c.classList.toggle("tiefe__chip--aktiv", aktiv);
+            c.setAttribute("aria-pressed", String(aktiv));
+          });
+          texte.forEach((t) => {
+            t.hidden = t.dataset.stufe !== stufe;
+          });
+        });
+      });
+    }
+  </script>
 </BaseLayout>
 
 <style>
@@ -140,9 +167,16 @@ const featured = eintraege.slice(0, 4);
   .tiefe__liste li { padding-left: 1.2rem; position: relative; }
   .tiefe__liste li::before { content: "▸"; position: absolute; left: 0; color: var(--c-accent); }
   .tiefe__bsp { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 1.25rem; box-shadow: var(--shadow); }
-  .tiefe__chip { display: inline-block; margin: .15rem; padding: .35rem .8rem; border-radius: 999px; font-weight: 700; font-size: .85rem; background: var(--c-surface-2); color: var(--c-text-soft); }
-  .tiefe__chip--aktiv { background: var(--c-accent); color: #fff; }
+  .tiefe__frage { margin: 0 0 .75rem; font-size: .92rem; color: var(--c-text-soft); }
+  .tiefe__frage em { color: var(--c-text); font-style: normal; font-weight: 600; }
+  .tiefe__chips { display: flex; flex-wrap: wrap; gap: .35rem; }
+  .tiefe__chip { display: inline-block; padding: .35rem .8rem; border-radius: 999px; font-weight: 700; font-size: .85rem; background: var(--c-surface-2); color: var(--c-text-soft); border: 1px solid transparent; cursor: pointer; transition: background .15s, color .15s; }
+  .tiefe__chip:hover { background: var(--c-accent-soft); color: var(--c-accent); }
+  .tiefe__chip--aktiv, .tiefe__chip--aktiv:hover { background: var(--c-accent); color: #fff; }
+  .tiefe__chip:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
   .tiefe__demo { margin: 1rem 0 0; font-size: 1.05rem; border-top: 1px solid var(--c-border); padding-top: 1rem; }
+  .tiefe__demo[hidden] { display: none; }
+  .tiefe__hint { margin: .9rem 0 0; font-size: .8rem; }
 
   .abschnitt-kopf { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
   .abschnitt-kopf a { font-weight: 600; text-decoration: none; }
