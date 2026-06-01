@@ -32,15 +32,18 @@ function karte(m: (typeof maschen)[number]) {
   </header>
 
   <section>
-    <h2>Die 5 Kerntechniken (FLICC)</h2>
+    <h2>Die 5 Kerntechniken</h2>
     <p class="muted">
-      Fünf Muster, die in der Wissenschaftskommunikation als Kern von Desinformation
-      gelten – von erfundenen Expert:innen bis zur Verschwörungserzählung.
+      Diese fünf Muster gelten in der Forschung als der Kern von Desinformation –
+      von erfundenen Expert:innen bis zur Verschwörungserzählung. Fachleute fassen
+      sie unter dem Kürzel <abbr title="Fake Experts, Logical Fallacies, Impossible Expectations, Cherry Picking, Conspiracy Theories – die fünf Kernmuster der Wissenschaftsleugnung">FLICC</abbr>
+      zusammen (englisch für die fünf Anfangsbuchstaben). Den Namen muss man sich
+      nicht merken – die Muster zu kennen, reicht völlig.
     </p>
     <div class="masche-grid">
       {flicc.map((m) => (
         <a class="masche-card" href={pfad(`/maschen/${m.id}`)}>
-          <span class="masche-card__tag">FLICC</span>
+          <span class="masche-card__tag">Kerntechnik</span>
           <h3>{m.data.titel}</h3>
           <p>{m.data.kurz}</p>
           <span class="masche-card__more">Masche ansehen →</span>

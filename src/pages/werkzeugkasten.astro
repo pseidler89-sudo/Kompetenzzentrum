@@ -1,30 +1,30 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { TECHNIK_LABEL, pfad } from "../lib/labels";
-
-const techniken = Object.keys(TECHNIK_LABEL);
+import { pfad } from "../lib/labels";
 
 const sift = [
-  { kurz: "Stopp", text: "Bevor du teilst oder dich aufregst: kurz innehalten. Kennst du die Quelle? Löst die Meldung starke Emotionen aus? Genau dann ist Vorsicht geboten." },
-  { kurz: "Investigate the source", text: "Wer steht hinter der Quelle? Suche den Namen des Mediums/Autors getrennt – nicht auf der Seite selbst, sondern „seitwärts“ (Wikipedia, andere Medien)." },
-  { kurz: "Find better coverage", text: "Berichten seriöse, unabhängige Quellen dasselbe? Gibt es nur eine einzige Quelle, ist Skepsis angebracht." },
-  { kurz: "Trace claims", text: "Verfolge Zitate, Zahlen und Bilder zurück zum Ursprung. Oft ist der Kontext entscheidend – oder die Originalquelle sagt etwas ganz anderes." },
+  { kurz: "Innehalten", original: "Stop", text: "Bevor du teilst oder dich aufregst: kurz innehalten. Kennst du die Quelle? Löst die Meldung starke Emotionen aus? Genau dann ist Vorsicht geboten." },
+  { kurz: "Quelle hinterfragen", original: "Investigate the source", text: "Wer steht hinter der Quelle? Suche den Namen des Mediums/Autors getrennt – nicht auf der Seite selbst, sondern „seitwärts“ (Wikipedia, andere Medien)." },
+  { kurz: "Bessere Belege suchen", original: "Find better coverage", text: "Berichten seriöse, unabhängige Quellen dasselbe? Gibt es nur eine einzige Quelle, ist Skepsis angebracht." },
+  { kurz: "Behauptung zurückverfolgen", original: "Trace claims", text: "Verfolge Zitate, Zahlen und Bilder zurück zum Ursprung. Oft ist der Kontext entscheidend – oder die Originalquelle sagt etwas ganz anderes." },
 ];
 ---
 
-<BaseLayout titel="Werkzeugkasten" beschreibung="Methoden, um Informationen selbst zu finden und zu bewerten – plus die häufigsten Manipulationstechniken im Überblick.">
+<BaseLayout titel="Werkzeugkasten" beschreibung="Methoden, um Informationen selbst zu finden und zu bewerten.">
   <h1>Werkzeugkasten</h1>
   <p class="lead">
-    Faktenchecks lesen hilft. Selbst prüfen können hilft dauerhaft. Hier lernst du,
-    wie man Informationen findet, einordnet und Manipulation erkennt.
+    Hier geht es ums <strong>Selbst-Prüfen</strong>: wie du Informationen findest,
+    einordnest und bewertest. (Die Manipulations-<em>Maschen</em>, mit denen du
+    getäuscht werden sollst, findest du auf der eigenen <a href={pfad("/maschen")}>Maschen-Seite</a>.)
   </p>
 
   <section>
-    <h2>Die SIFT-Methode: in 4 Schritten zur Einordnung</h2>
+    <h2>Die 4-Schritte-Methode zum Einordnen</h2>
     <p>
       Profis prüfen nicht, indem sie eine Seite gründlich lesen, sondern indem sie
-      <strong>seitwärts lesen</strong> („lateral reading“): Sie verlassen die Seite und
-      schauen, was andere über sie sagen. Die SIFT-Methode fasst das zusammen.
+      <strong>seitwärts lesen</strong>: Sie verlassen die Seite und schauen, was
+      andere über sie sagen. Diese vier Schritte fassen das zusammen
+      (international bekannt als <abbr title="Stop, Investigate, Find, Trace">SIFT</abbr>-Methode).
     </p>
     <div class="grid grid--2">
       {sift.map((s, i) => (
@@ -59,34 +59,24 @@ const sift = [
     </ul>
   </section>
 
-  <section id="techniken">
-    <h2>Manipulationstechniken erkennen</h2>
+  <section id="techniken" class="masche-verweis">
+    <h2>Und die Gegenseite: Manipulation erkennen</h2>
     <p>
-      Desinformation nutzt immer wieder dieselben Maschen. Wer sie kennt, erkennt sie
-      überall wieder – wie eine Impfung gegen Desinformation (<em>Prebunking</em>).
-      Jede Masche ist einzeln erklärt: wie sie funktioniert, ein aktuelles Beispiel
-      aus der Politik und konkrete Tipps zum Durchschauen.
+      Selbst prüfen ist die eine Hälfte. Die andere: die <strong>Maschen</strong> kennen,
+      mit denen man dich täuschen will. Jede ist einzeln erklärt – wie sie funktioniert,
+      ein aktuelles Beispiel und wie du sie durchschaust.
     </p>
-    <div class="masche-teaser">
-      {techniken.map((t) => (
-        <a class="masche-pill" href={pfad(`/maschen/${t}`)}>{TECHNIK_LABEL[t]}</a>
-      ))}
-    </div>
-    <p style="margin-top:1.25rem;">
-      <a class="btn btn--primary" href={pfad("/maschen")}>Alle Maschen ansehen</a>
-    </p>
+    <a class="btn btn--primary" href={pfad("/maschen")}>Zu den Maschen</a>
   </section>
 </BaseLayout>
 
 <style>
   section { margin-top: 3rem; }
   .checkliste, .werkzeuge { display: grid; gap: .6rem; padding-left: 1.2rem; }
-  .masche-teaser { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }
-  .masche-pill {
-    display: inline-block; padding: .4rem .85rem; border-radius: 999px;
-    background: color-mix(in srgb, var(--c-technik) 8%, var(--c-surface));
-    border: 1px solid color-mix(in srgb, var(--c-technik) 30%, transparent);
-    color: var(--c-technik); font-weight: 600; font-size: .9rem; text-decoration: none;
+  .masche-verweis {
+    padding: 1.75rem; border-radius: var(--radius);
+    background: color-mix(in srgb, var(--c-technik) 7%, var(--c-surface));
+    border: 1px solid color-mix(in srgb, var(--c-technik) 25%, transparent);
   }
-  .masche-pill:hover { background: color-mix(in srgb, var(--c-technik) 16%, var(--c-surface)); }
+  .masche-verweis h2 { margin-top: 0; }
 </style>

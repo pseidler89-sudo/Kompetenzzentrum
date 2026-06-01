@@ -27,7 +27,6 @@ const verwandt = (data.verwandt ?? [])
   .map((slug) => alle.find((e) => e.id === slug))
   .filter(Boolean);
 
-const githubEdit = `https://github.com/pseidler89-sudo/kompetenzzentrum/blob/main/src/content/faktenchecks/${eintrag.id}.md`;
 ---
 
 <BaseLayout titel={data.titel} beschreibung={data.zusammenfassung}>
@@ -111,10 +110,6 @@ const githubEdit = `https://github.com/pseidler89-sudo/kompetenzzentrum/blob/mai
         Veröffentlicht am {datumFormat(data.veroeffentlicht)}
         {data.aktualisiert && ` · aktualisiert am ${datumFormat(data.aktualisiert)}`}
         {data.mitwirkende.length > 0 && ` · Mitwirkende: ${data.mitwirkende.join(", ")}`}
-      </p>
-      <p>
-        <a href={githubEdit} rel="noopener">Diesen Faktencheck auf GitHub verbessern ✎</a>
-        — Fehler gefunden oder eine Quelle zu ergänzen? Jeder Beitrag ist willkommen.
       </p>
     </footer>
   </article>

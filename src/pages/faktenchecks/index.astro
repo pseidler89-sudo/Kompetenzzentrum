@@ -2,75 +2,164 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import FaktencheckCard from "../../components/FaktencheckCard.astro";
-import { THEMA_LABEL, THEMA_REIHENFOLGE } from "../../lib/labels";
+import { THEMA_LABEL, THEMA_REIHENFOLGE, URTEIL_LABEL, TECHNIK_LABEL, pfad } from "../../lib/labels";
 
 const eintraege = (await getCollection("faktenchecks")).sort(
   (a, b) => b.data.veroeffentlicht.valueOf() - a.data.veroeffentlicht.valueOf(),
 );
 
-// Nur Themen anzeigen, zu denen es Inhalte gibt.
+// Nur Filterwerte anzeigen, zu denen es Inhalte gibt.
 const vorhandeneThemen = THEMA_REIHENFOLGE.filter((t) =>
   eintraege.some((e) => e.data.themen.includes(t as any)),
+);
+const vorhandeneUrteile = Object.keys(URTEIL_LABEL).filter((u) =>
+  eintraege.some((e) => e.data.urteil === u),
+);
+const vorhandeneTechniken = Object.keys(TECHNIK_LABEL).filter((t) =>
+  eintraege.some((e) => e.data.techniken.includes(t as any)),
 );
 ---
 
 <BaseLayout titel="Faktenchecks" beschreibung="Geprüfte Antworten auf verbreitete Falschbehauptungen – mit Zahlen, Quellen und Anleitung zum Selberprüfen.">
   <h1>Faktenchecks</h1>
   <p class="lead">
-    Verbreitete Behauptungen – Punkt für Punkt geprüft. Wähle pro Beitrag deine
-    Informationstiefe und lerne nebenbei, wie man so etwas selbst überprüft.
+    Verbreitete Behauptungen – Punkt für Punkt geprüft. Such gezielt nach einem
+    Stichwort oder filtere nach Thema, Urteil und Masche.
   </p>
 
-  <div class="filter" role="group" aria-label="Nach Thema filtern">
-    <button type="button" class="filter-btn" data-thema="alle" aria-pressed="true">Alle ({eintraege.length})</button>
-    {vorhandeneThemen.map((t) => (
-      <button type="button" class="filter-btn" data-thema={t} aria-pressed="false">{THEMA_LABEL[t]}</button>
-    ))}
+  <div class="suchzeile">
+    <input type="search" id="fc-suche" class="suche" placeholder="Stichwort suchen (z.B. Bürgergeld, Tempolimit) …" aria-label="Faktenchecks durchsuchen" />
+    <button type="button" id="fc-reset" class="reset-btn" hidden>Filter zurücksetzen</button>
   </div>
+
+  <details class="filter-gruppe" open>
+    <summary>Thema</summary>
+    <div class="filter" role="group" aria-label="Nach Thema filtern">
+      <button type="button" class="filter-btn" data-filter="thema" data-wert="alle" aria-pressed="true">Alle</button>
+      {vorhandeneThemen.map((t) => (
+        <button type="button" class="filter-btn" data-filter="thema" data-wert={t} aria-pressed="false">{THEMA_LABEL[t]}</button>
+      ))}
+    </div>
+  </details>
+
+  <details class="filter-gruppe">
+    <summary>Urteil</summary>
+    <div class="filter" role="group" aria-label="Nach Urteil filtern">
+      <button type="button" class="filter-btn" data-filter="urteil" data-wert="alle" aria-pressed="true">Alle</button>
+      {vorhandeneUrteile.map((u) => (
+        <button type="button" class={`filter-btn filter-btn--urteil urteil--${u}`} data-filter="urteil" data-wert={u} aria-pressed="false">{URTEIL_LABEL[u]}</button>
+      ))}
+    </div>
+  </details>
+
+  <details class="filter-gruppe">
+    <summary>Masche</summary>
+    <div class="filter" role="group" aria-label="Nach Manipulationstechnik filtern">
+      <button type="button" class="filter-btn" data-filter="technik" data-wert="alle" aria-pressed="true">Alle</button>
+      {vorhandeneTechniken.map((t) => (
+        <button type="button" class="filter-btn" data-filter="technik" data-wert={t} aria-pressed="false">{TECHNIK_LABEL[t]}</button>
+      ))}
+    </div>
+  </details>
+
+  <p class="treffer muted" id="fc-treffer">{eintraege.length} Faktenchecks</p>
 
   <div class="grid grid--2" id="fc-liste">
     {eintraege.map((e) => (
-      <div class="fc-item" data-themen={e.data.themen.join(" ")}>
+      <div
+        class="fc-item"
+        data-themen={e.data.themen.join(" ")}
+        data-urteil={e.data.urteil}
+        data-techniken={e.data.techniken.join(" ")}
+        data-suchtext={`${e.data.titel} ${e.data.behauptung} ${e.data.kurzantwort} ${e.data.themen.join(" ")}`.toLowerCase()}
+      >
         <FaktencheckCard slug={e.id} data={e.data} />
       </div>
     ))}
   </div>
 
   <p id="leer" class="muted center" hidden style="margin-top:2rem;">
-    Zu diesem Thema gibt es noch keinen Faktencheck. <a href="/mitmachen">Du kannst den ersten schreiben.</a>
+    Kein Faktencheck passt zu dieser Auswahl.
+    <button type="button" id="fc-reset-2" class="linklike">Filter zurücksetzen</button>
   </p>
 </BaseLayout>
 
 <style>
-  .filter { display: flex; gap: .5rem; flex-wrap: wrap; margin: 1.5rem 0 2rem; }
+  .suchzeile { display: flex; gap: .75rem; align-items: center; margin: 1.5rem 0 1rem; flex-wrap: wrap; }
+  .suche { flex: 1; min-width: 14rem; padding: .8rem 1rem; font-size: 1rem; font-family: inherit; border: 1px solid var(--c-border); border-radius: var(--radius-sm); background: var(--c-surface); color: var(--c-text); }
+  .reset-btn { font-family: inherit; font-weight: 600; font-size: .9rem; padding: .55rem 1rem; border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--c-border); background: var(--c-surface); color: var(--c-text-soft); }
+  .reset-btn:hover { border-color: var(--c-accent); }
+
+  .filter-gruppe { margin: 0 0 .6rem; }
+  .filter-gruppe > summary { cursor: pointer; font-weight: 700; font-size: .9rem; color: var(--c-text-soft); padding: .3rem 0; list-style: revert; }
+  .filter { display: flex; gap: .5rem; flex-wrap: wrap; margin: .5rem 0 .75rem; }
   .filter-btn {
-    font-family: inherit; font-weight: 600; font-size: .9rem;
-    padding: .45rem .9rem; border-radius: 999px; cursor: pointer;
+    font-family: inherit; font-weight: 600; font-size: .88rem;
+    padding: .4rem .85rem; border-radius: 999px; cursor: pointer;
     border: 1px solid var(--c-border); background: var(--c-surface); color: var(--c-text-soft);
   }
   .filter-btn:hover { border-color: var(--c-accent); }
   .filter-btn[aria-pressed="true"] { background: var(--c-accent); border-color: var(--c-accent); color: #fff; }
+  .filter-btn--urteil[aria-pressed="true"] { background: var(--c-text); border-color: var(--c-text); }
+
+  .treffer { margin: .5rem 0 1.25rem; font-weight: 600; }
   .fc-item.versteckt { display: none; }
+  .linklike { background: none; border: none; color: var(--c-link); cursor: pointer; font: inherit; text-decoration: underline; padding: 0; }
 </style>
 
 <script>
   function init() {
+    const suche = document.getElementById("fc-suche") as HTMLInputElement | null;
     const btns = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
     const items = document.querySelectorAll<HTMLElement>(".fc-item");
     const leer = document.getElementById("leer");
+    const treffer = document.getElementById("fc-treffer");
+    const reset = document.getElementById("fc-reset");
+    const reset2 = document.getElementById("fc-reset-2");
+
+    // Aktiver Filter je Kategorie ("alle" = kein Filter).
+    const aktiv: Record<string, string> = { thema: "alle", urteil: "alle", technik: "alle" };
+
+    function anwenden() {
+      const q = (suche?.value ?? "").trim().toLowerCase();
+      let sichtbar = 0;
+      items.forEach((it) => {
+        const themen = (it.dataset.themen ?? "").split(" ");
+        const techniken = (it.dataset.techniken ?? "").split(" ");
+        const passt =
+          (aktiv.thema === "alle" || themen.includes(aktiv.thema)) &&
+          (aktiv.urteil === "alle" || it.dataset.urteil === aktiv.urteil) &&
+          (aktiv.technik === "alle" || techniken.includes(aktiv.technik)) &&
+          (!q || (it.dataset.suchtext ?? "").includes(q));
+        it.classList.toggle("versteckt", !passt);
+        if (passt) sichtbar++;
+      });
+      if (leer) leer.hidden = sichtbar > 0;
+      if (treffer) treffer.textContent = `${sichtbar} ${sichtbar === 1 ? "Faktencheck" : "Faktenchecks"}`;
+      const aktivCount = Object.values(aktiv).filter((v) => v !== "alle").length + (q ? 1 : 0);
+      if (reset) reset.hidden = aktivCount === 0;
+    }
+
     btns.forEach((btn) => {
       btn.addEventListener("click", () => {
-        const thema = btn.dataset.thema!;
-        btns.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
-        let sichtbar = 0;
-        items.forEach((it) => {
-          const treffer = thema === "alle" || (it.dataset.themen ?? "").split(" ").includes(thema);
-          it.classList.toggle("versteckt", !treffer);
-          if (treffer) sichtbar++;
-        });
-        if (leer) leer.hidden = sichtbar > 0;
+        const kat = btn.dataset.filter!;
+        aktiv[kat] = btn.dataset.wert!;
+        // In derselben Gruppe nur einen Button aktiv lassen.
+        document.querySelectorAll<HTMLButtonElement>(`.filter-btn[data-filter="${kat}"]`)
+          .forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+        anwenden();
       });
     });
+    suche?.addEventListener("input", anwenden);
+
+    function alleZuruecksetzen() {
+      aktiv.thema = aktiv.urteil = aktiv.technik = "alle";
+      if (suche) suche.value = "";
+      btns.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.wert === "alle")));
+      anwenden();
+    }
+    reset?.addEventListener("click", alleZuruecksetzen);
+    reset2?.addEventListener("click", alleZuruecksetzen);
   }
   init();
   document.addEventListener("astro:page-load", init);

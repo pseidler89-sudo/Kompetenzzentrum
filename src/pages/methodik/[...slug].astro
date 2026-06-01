@@ -10,7 +10,6 @@ export async function getStaticPaths() {
 
 const { artikel } = Astro.props;
 const { Content } = await render(artikel);
-const githubEdit = `https://github.com/pseidler89-sudo/kompetenzzentrum/blob/main/src/content/methodik/${artikel.id}.md`;
 ---
 
 <BaseLayout titel={artikel.data.titel} beschreibung={artikel.data.zusammenfassung}>
@@ -19,10 +18,11 @@ const githubEdit = `https://github.com/pseidler89-sudo/kompetenzzentrum/blob/mai
     <h1 style="margin-top:1rem;">{artikel.data.titel}</h1>
     <p class="lead">{artikel.data.zusammenfassung}</p>
     <Content />
-    <footer class="fc-footer">
-      {artikel.data.aktualisiert && <p class="muted">Aktualisiert am {datumFormat(artikel.data.aktualisiert)}</p>}
-      <p><a href={githubEdit} rel="noopener">Diese Seite auf GitHub verbessern ✎</a></p>
-    </footer>
+    {artikel.data.aktualisiert && (
+      <footer class="fc-footer">
+        <p class="muted">Aktualisiert am {datumFormat(artikel.data.aktualisiert)}</p>
+      </footer>
+    )}
   </article>
 </BaseLayout>
 

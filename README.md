@@ -1,8 +1,8 @@
 # 🧭 Kompetenzzentrum
 
 > **Falschbehauptungen prüfen lernen.** Eine offene, faktenbasierte Plattform, die
-> verbreitete Desinformation – mit Schwerpunkt auf faktenfremder rechter Polemik –
-> Schritt für Schritt aufklärt und dabei **je nach Vorwissen** aufbereitet.
+> verbreitete Desinformation Schritt für Schritt aufklärt und dabei
+> **je nach Vorwissen** aufbereitet.
 
 [![CI](https://github.com/pseidler89-sudo/kompetenzzentrum/actions/workflows/ci.yml/badge.svg)](https://github.com/pseidler89-sudo/kompetenzzentrum/actions/workflows/ci.yml)
 [![Deploy](https://github.com/pseidler89-sudo/kompetenzzentrum/actions/workflows/deploy.yml/badge.svg)](https://github.com/pseidler89-sudo/kompetenzzentrum/actions/workflows/deploy.yml)
