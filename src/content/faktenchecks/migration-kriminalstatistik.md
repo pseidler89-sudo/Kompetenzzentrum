@@ -65,4 +65,31 @@ pruefen: |
   - Öffne die aktuelle **PKS** auf der Seite des BKA und suche die Hinweise zur Aussagekraft. Schon dort steht, dass Gruppenvergleiche heikel sind.
   - Frag bei jeder „Beweis“-Grafik: Sind **Alter und Geschlecht** berücksichtigt? Wurden **aufenthaltsrechtliche Delikte** herausgerechnet? Steht eine **Quote** (je 100.000) oder nur eine absolute Zahl da?
   - Vergleiche die Behauptung mit den Einordnungen von **Mediendienst Integration** oder **bpb** – seitwärts lesen statt einer Einzelquelle vertrauen.
+daten:
+  - typ: vergleich
+    titel: "Anzeigequote bei Jugendgewalt – <strong>gleiche Tat, ungleich oft angezeigt</strong>"
+    quelle: "Studie zu Jugendgewalt · Polizeiliche Kriminalstatistik"
+    primaer: true
+    werte:
+      - label: "Mit Migrationsgeschichte"
+        sublabel: "Anteil angezeigter Fälle"
+        wert: 22.4
+        farbe: accent
+      - label: "Ohne Migrationsgeschichte"
+        sublabel: "Anteil angezeigter Fälle"
+        wert: 7.9
+        farbe: neutral
+  - typ: anteil
+    titel: "Anteil an Bevölkerung vs. an Tatverdächtigen – <strong>Rohzahl ohne Alter, Geschlecht, Deliktart</strong>"
+    hinweis: "Rohzahl, nicht demografisch bereinigt – genau das ist die Masche „fehlender Bezugswert“."
+    quelle: "Polizeiliche Kriminalstatistik (BKA), 2024"
+    primaer: true
+    werte:
+      - label: "Anteil an der Bevölkerung"
+        wert: 15
+        farbe: neutral
+      - label: "Anteil an Tatverdächtigen"
+        sublabel: "Rohzahl, unstandardisiert"
+        wert: 33
+        farbe: teils
 ---

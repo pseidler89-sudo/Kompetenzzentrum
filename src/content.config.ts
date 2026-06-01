@@ -59,6 +59,31 @@ const quelle = z.object({
   art: z.enum(["primaer", "sekundaer"]).default("sekundaer"),
 });
 
+// P1 · Datenvisualisierung – optionale, belegte Grafiken pro Faktencheck.
+// Reines Astro+CSS (Datenviz.astro), keine neue Abhängigkeit.
+const datenWert = z.object({
+  label: z.string().default(""),
+  sublabel: z.string().default(""),
+  wert: z.number(),
+  einheit: z.string().default("%"),
+  farbe: z
+    .enum(["accent", "neutral", "falsch", "irrefuehrend", "kontext", "teils", "pruefen"])
+    .default("neutral"),
+});
+
+const datenChart = z.object({
+  // vergleich = Balken nebeneinander · anteil = Anteil am Ganzen
+  // zusammensetzung = gestapelter Balken (Summe 100) · kennzahl = große Zahl(en)
+  typ: z.enum(["vergleich", "anteil", "zusammensetzung", "kennzahl"]),
+  titel: z.string().default(""),
+  hinweis: z.string().default(""),
+  quelle: z.string().default(""),
+  primaer: z.boolean().default(false),
+  // Achsen-Maximum. Leer lassen: bei % automatisch 100, sonst größter Wert.
+  skala: z.number().optional(),
+  werte: z.array(datenWert).default([]),
+});
+
 const faktenchecks = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/faktenchecks" }),
   schema: z.object({
@@ -94,6 +119,8 @@ const faktenchecks = defineCollection({
     technik_text: z.string().default(""),
     // „So prüfst du das selbst“-Block.
     pruefen: z.string().default(""),
+    // Optionale, belegte Datengrafiken (P1). Bestehende Checks bleiben gültig.
+    daten: z.array(datenChart).default([]),
   }),
 });
 

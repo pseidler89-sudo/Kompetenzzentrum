@@ -4,6 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import StufenSchalter from "../../components/StufenSchalter.astro";
 import UrteilBadge from "../../components/UrteilBadge.astro";
 import Quellen from "../../components/Quellen.astro";
+import Datenviz from "../../components/Datenviz.astro";
 import { THEMA_LABEL, TECHNIK_LABEL, STATUS_LABEL, datumFormat, pfad } from "../../lib/labels";
 import { md } from "../../lib/markdown";
 
@@ -98,6 +99,13 @@ const teilenText = `„${data.behauptung}“\n\nFakt: ${data.kurzantwort}\n\nQue
         </aside>
       )}
     </div>
+
+    {data.daten?.length > 0 && (
+      <section class="fc-daten" aria-label="Die Zahlen im Überblick">
+        <h2>Die Zahlen im Überblick</h2>
+        <Datenviz daten={data.daten} />
+      </section>
+    )}
 
     <Quellen quellen={data.quellen} />
 
