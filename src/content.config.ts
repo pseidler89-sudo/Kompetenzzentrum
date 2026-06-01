@@ -43,6 +43,8 @@ export const TECHNIKEN = [
   "astroturfing",
   "identitaetsschwindel",
   "falsche-ausgewogenheit",
+  "gish-galopp",
+  "bandwagon",
 ] as const;
 
 const quelle = z.object({

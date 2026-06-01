@@ -44,34 +44,39 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   ausdrückliche Aufforderung. GitHub nur über MCP-Tools.
 
 ## Stand (zuletzt)
-- 8 Faktenchecks, **15 Maschen** (10 + 5 neue: Whataboutism, Falsche Verknüpfung,
-  Astroturfing, Identitätsschwindel, Falsche Ausgewogenheit).
+- **9 Faktenchecks** (+1: Gesundheit – „Antibiotika bei Erkältung“, Status
+  `in-pruefung`, wartet auf menschliche Abnahme → dann auf `geprueft` setzen).
+- **17 Maschen** (15 + 2 aus Backlog: Gish-Galopp #16, Mehrheits-Argument/Bandwagon #17).
 - Interaktive Tiefen-Demo auf Startseite, mobiles Burger-Menü, README als Einladung.
 - Verifikation: Link-Check in CI (`ci.yml` Job `quellen-links`).
-- **Netzwerk-Policy:** Umgebung lief auf „Trusted“ → externe Quellen 403 (WebFetch
-  & curl). Nutzer hat eine **Custom-Allowlist** mit Quell-Domains eingetragen;
-  greift erst in neuer Session. **TODO: Whitelist testen** (curl auf correctiv.org,
-  destatis.de, riffreporter.de, de.wikipedia.org – Erwartung: 200).
+- **Netzwerk-Policy / Whitelist GETESTET (06/2026):** Custom-Allowlist greift.
+  Volltext-Abruf bestätigt (200) für correctiv.org, destatis.de, riffreporter.de,
+  *.wikipedia.org, bpb.de, who.int, rki.de, gesundheitsinformation.de (IQWiG), edmo.eu.
+  **Ausnahme:** `tagesschau.de` = „Blocked by egress policy“ (trotz Listung) →
+  ggf. in Custom-Allowlist ergänzen. Quellen können jetzt im Volltext geprüft werden.
 
 ## Stolpersteine (gelernt)
 - **Nur Feature-Branch pushen.** Lokal kann man versehentlich auf `main` landen –
   danach wieder `git checkout claude/factcheck-...` und prüfen, dass `main` ==
   `origin/main` (kein versehentlicher main-Push).
-- **`reihenfolge` der Maschen:** flicc 1–6, rhetorik 7–15. Neue rhetorik-Maschen
-  fortlaufend ≥16, damit „Die 5 Kerntechniken“ (= flicc) stimmt.
+- **`reihenfolge` der Maschen:** flicc 1–6, rhetorik 7–17. Neue rhetorik-Maschen
+  fortlaufend ≥18, damit „Die 5 Kerntechniken“ (= flicc) stimmt.
 - **CMS-Techniken an ZWEI Stellen** in `public/admin/config.yml` pflegen
   (faktenchecks `techniken` + maschen `code`).
 - **Frontmatter:** keine geraden `"` in Werten (normalize-Script fängt’s, aber
   bewusst typografische „…“ schreiben).
 
 ## Offene / mögliche nächste Schritte
-- **Whitelist verifizieren** (curl auf correctiv.org/destatis.de/riffreporter.de/
-  de.wikipedia.org → 200), dann Quellen künftig im Volltext prüfen.
-- **Zurückgestellte Maschen** mit Quellen: siehe `docs/recherche/maschen-backlog.md`
-  (Gish-Galopp/Firehose, Sündenbock, Bandwagon, Newspeak …) – jeweils erst
-  Volltext-Quelle prüfen, neutral framen.
-- **Themen-Balance:** 2–3 Faktenchecks außerhalb Migration/Klima (z. B. Gesundheit –
-  Thema existiert im Schema, ist aber leer).
+- ~~Whitelist verifizieren~~ ✅ erledigt (06/2026, siehe Stand oben).
+- ~~Gish-Galopp & Bandwagon~~ ✅ umgesetzt. **Noch offen im Backlog:** Sündenbock
+  und Firehose (beide politisch sensibel, brauchen besonders neutrales Pfad-A-Framing
+  → vor Umsetzung mit Nutzer abstimmen); Newspeak (niedrige Priorität); Vernebelung
+  (überlappt mit Gish-Galopp, vermutlich verzichtbar); Angstrhetorik (laut Backlog als
+  Abschnitt in „Emotionalisierung“ statt eigene Masche).
+- ~~Themen-Balance Gesundheit~~ ✅ erster Gesundheits-Faktencheck da (Antibiotika).
+  Weitere Themen außerhalb Migration/Klima weiterhin wünschenswert.
+- **Gesundheits-Faktencheck abnehmen:** Quellen sind erreichbar + inhaltlich geprüft
+  (IQWiG, WHO), aber Status `in-pruefung` – menschliches Gegenlesen fehlt für `geprueft`.
 - **Social-Media-Karten** (Open Graph je Masche/Faktencheck) – beim Nutzer „in der
-  Pipeline“.
+  Pipeline“. **Offen: ob Claude das übernehmen soll (Konfliktgefahr mit Nutzer-Arbeit).**
 - Projektname evtl. überdenken (Faktenkompass / Durchblick / Prüfstein) – offen.

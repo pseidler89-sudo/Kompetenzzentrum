@@ -10,22 +10,22 @@ gebaut werden können.
 > Die hier gelisteten URLs stammen aus KI-Recherche und sind teils nur per
 > Such-Snippet gegengeprüft – nicht ungelesen übernehmen.
 
-## Bereits umgesetzt (10 → 15)
+## Bereits umgesetzt (10 → 17)
 Whataboutism · Falsche Verknüpfung (Clickbait) · Astroturfing ·
-Identitätsschwindel (Doppelgänger) · Falsche Ausgewogenheit (False Balance).
+Identitätsschwindel (Doppelgänger) · Falsche Ausgewogenheit (False Balance) ·
+**Gish-Galopp** (reihenfolge 16) · **Mehrheits-Argument / Bandwagon** (reihenfolge 17).
 
 ---
 
 ## Zurückgestellt – Kandidaten
 
-### 1. Gish-Galopp (Behauptungs-Flut, 1:1-Debatte)
+### 1. Gish-Galopp (Behauptungs-Flut, 1:1-Debatte) — ✅ UMGESETZT (06/2026)
 - **Was:** In kurzer Zeit eine Flut von Behauptungen/Halbwahrheiten, sodass
   Widerlegen unmöglich wird (Brandolinis Gesetz). Kategorie: rhetorik.
-- **Beispiel-Idee:** Talkshow/Online-Debatte; Leserbrief mit Dauerfeuer an
-  „dass…“-Sätzen zur E-Mobilität. **Braucht ein besser belegbares konkretes Beispiel.**
-- **Quellen:** de.wikipedia.org/wiki/Gish-Galopp · dergoldenealuhut.de/gish-galopp
-- **Hinweis:** Sehr nützlich für den Diskussions-Use-Case. Priorität hoch, sobald
-  gutes Beispiel.
+- **Umsetzung:** `src/content/maschen/gish-galopp.md`, reihenfolge 16. Beispiel
+  ankert am dokumentierten Ursprung (Duane Gish / Eugenie Scott 2004) + Alltags-
+  muster (E-Mobilität-Schwall), Quelle = Wikipedia (Volltext geprüft, 200).
+  Brandolinis Gesetz separat verifiziert (de.wikipedia.org/wiki/Brandolinis_Gesetz).
 
 ### 2. Firehose of Falsehood (Lügen-Feuerwehrschlauch, Massenmedien)
 - **Was:** Massenhaft, schnell, über viele Kanäle widersprüchliche Falschmeldungen
@@ -43,12 +43,11 @@ Identitätsschwindel (Doppelgänger) · Falsche Ausgewogenheit (False Balance).
 - **Quellen:** edmo.eu (EDMO-39/EDMO-28 PDFs) · migrationpolicy.org
 - **Hinweis:** Wertvoll, aber sensibel. Sorgfältig framen.
 
-### 4. Bandwagon / Mehrheits-Argument (argumentum ad populum)
+### 4. Bandwagon / Mehrheits-Argument (argumentum ad populum) — ✅ UMGESETZT (06/2026)
 - **Was:** „Das sehen doch alle so“ ersetzt Belege; sozialer Konformitätsdruck.
-- **Beispiel-Idee:** „Die schweigende Mehrheit lehnt das ab“ ohne Umfragedaten.
-- **Quellen:** propwatch.org (Bandwagon) · odp.library.tamu.edu propaganda-techniques
-- **Hinweis:** Könnte auch als Unterart des logischen Fehlschlusses gelten – als
-  eigene Masche aber alltagsnah und gut erkennbar.
+- **Umsetzung:** `src/content/maschen/bandwagon.md`, code `bandwagon`, reihenfolge 17.
+  Beispiel „schweigende Mehrheit“; Quelle = Wikipedia *Argumentum ad populum*
+  (Volltext geprüft, 200). Bewusst als eigene rhetorik-Masche (alltagsnah).
 
 ### 5. Euphemismus / Newspeak (Umdeutung durch Sprache)
 - **Was:** Belastete Begriffe durch harmlose ersetzen („Spezialoperation“ statt Krieg).
@@ -82,3 +81,10 @@ neuemedienmacher.de *.neuemedienmacher.de *.wikipedia.org auswaertiges-amt.de
 *.auswaertiges-amt.de tagesschau.de *.tagesschau.de
 ```
 Sinnvolle Ergänzungen: dpa-Faktencheck, Science Media Center, EUvsDisinfo, edmo.eu.
+
+**Whitelist-Test (06/2026):** Volltext-Abruf bestätigt für correctiv.org, destatis.de,
+riffreporter.de, *.wikipedia.org, bpb.de, edmo.eu, who.int, rki.de,
+gesundheitsinformation.de (IQWiG), pei.de, bzga.de, svr-migration.de.
+**Ausnahme:** `tagesschau.de` → „Blocked by egress policy“ (trotz Listung). Wer
+tagesschau-Quellen braucht, muss die Domain in der Custom-Allowlist ergänzen oder
+eine Alternativquelle wählen. (svr-migration.de nur mit Browser-User-Agent, sonst 403.)

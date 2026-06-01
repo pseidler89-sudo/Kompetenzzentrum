@@ -43,6 +43,8 @@ export const TECHNIK_LABEL: Record<string, string> = {
   astroturfing: "Astroturfing",
   identitaetsschwindel: "Identitätsschwindel",
   "falsche-ausgewogenheit": "Falsche Ausgewogenheit",
+  "gish-galopp": "Gish-Galopp",
+  bandwagon: "Mehrheits-Argument (Bandwagon)",
 };
 
 /** Kurzerklärung jeder Technik – für den Werkzeugkasten. */
@@ -62,6 +64,8 @@ export const TECHNIK_ERKLAERUNG: Record<string, string> = {
   astroturfing: "Eine bezahlte oder gesteuerte Kampagne tarnt sich als spontane Bürgerbewegung.",
   identitaetsschwindel: "Eine Falschmeldung tarnt sich im Look einer seriösen Quelle (gefälschte Medienseite, Behörde).",
   "falsche-ausgewogenheit": "Eine Randmeinung wird gleichwertig neben den Forschungsstand gestellt – als gäbe es offenen Streit.",
+  "gish-galopp": "Eine Flut vieler kleiner Behauptungen macht eine geordnete Widerlegung im Zeitrahmen unmöglich.",
+  bandwagon: "„Das sehen doch alle so“ wird als Beweis ausgegeben – eine Mehrheit macht eine Aussage aber nicht wahr.",
 };
 
 /**
@@ -85,6 +89,8 @@ export const TECHNIK_KONTER: Record<string, string> = {
   astroturfing: "Frag: Wer steckt dahinter und wer zahlt? Tauchen identische Texte unter vielen frischen Accounts auf, ist es selten spontan.",
   identitaetsschwindel: "Prüfe die URL Zeichen für Zeichen und das Impressum. Ruf die Meldung über die echte Startseite des Mediums auf.",
   "falsche-ausgewogenheit": "Frag nach dem Verhältnis: Wie viele Fachleute stehen wirklich hinter jeder Seite? Gleiche Redezeit heißt nicht gleiche Evidenz.",
+  "gish-galopp": "Nimm das Tempo raus und greif einen Punkt heraus. Zehn schwache Behauptungen ergeben kein starkes Argument.",
+  bandwagon: "Frag nach Zahlen: „alle“ oder „die Mehrheit“ – wie viele genau, und woher? Eine schweigende Mehrheit kann niemand nachzählen.",
 };
 
 export const STATUS_LABEL: Record<string, string> = {
