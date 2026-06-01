@@ -73,6 +73,17 @@ const q = data.beispiel_quelle;
         </div>
       </section>
     )}
+
+    <aside class="masche-grundlage">
+      <p>
+        <strong>Wissenschaftlich fundiert.</strong>{" "}
+        {data.kategorie === "flicc"
+          ? "Diese Technik gehört zum FLICC-Modell der Desinformationsforschung (Cook, Lewandowsky, Ecker u. a.)."
+          : "Dieses Muster ist in der Forschung zu Desinformation gut dokumentiert."}{" "}
+        Die Belege – u. a. das <em>Debunking Handbook 2020</em> und peer-reviewte
+        Studien – stehen unter <a href={pfad("/methodik/wissenschaftliche-grundlagen")}>Wissenschaftliche Grundlagen</a>.
+      </p>
+    </aside>
   </article>
 </BaseLayout>
 
@@ -89,6 +100,12 @@ const q = data.beispiel_quelle;
   }
   .masche-ic--rhetorik { background: var(--c-surface-2); color: var(--c-text-soft); }
   .masche-ic svg { width: 1.5rem; height: 1.5rem; }
+  .masche-grundlage {
+    margin-top: 2.5rem; padding: 1rem 1.2rem;
+    background: var(--c-surface-2); border-radius: var(--radius);
+    border-left: 3px solid var(--c-technik);
+  }
+  .masche-grundlage p { margin: 0; font-size: .9rem; color: var(--c-text-soft); }
   .block { margin-top: 2.5rem; }
   .block h2 { border-left: 4px solid var(--c-technik); padding-left: .7rem; }
   .beispiel-box { background: var(--c-surface); border: 1px solid var(--c-border); border-left: 4px solid var(--c-border-strong); border-radius: var(--radius); padding: 1.1rem 1.3rem; }
