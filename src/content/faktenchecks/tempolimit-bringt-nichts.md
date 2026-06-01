@@ -20,9 +20,9 @@ quellen:
     herausgeber: "Umweltbundesamt (UBA)"
     url: "https://www.umweltbundesamt.de/themen/verkehr-laerm"
     art: "primaer"
-  - titel: "Tempolimit: Was bringt es wirklich?"
-    herausgeber: "ADAC"
-    url: "https://www.adac.de/verkehr/standpunkte-studien/positionen/tempolimit/"
+  - titel: "Tempolimit (Überblick: Wirkung auf CO₂ und Verkehrssicherheit)"
+    herausgeber: "Wikipedia"
+    url: "https://de.wikipedia.org/wiki/Tempolimit"
     art: "sekundaer"
 einleitung: |
   Ein Tempolimit ist kein Allheilmittel – aber „bringt nichts" stimmt nicht. Es ist eine der wenigen Klimamaßnahmen, die ohne einen Cent Investition und ab dem ersten Tag wirkt. Die zentrale Frage ist nicht „löst es das Klimaproblem allein?", sondern „was kostet die eingesparte Tonne CO₂?" – und da schneidet das Tempolimit ausgesprochen gut ab.
