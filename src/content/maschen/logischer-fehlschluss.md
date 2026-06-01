@@ -12,13 +12,13 @@ so_funktionierts: |
 
   Weitere Beispiele: vom Einzelfall aufs Ganze schließen, oder die Person angreifen statt das Argument (ad hominem).
 beispiel: |
-  Ein verbreitetes Muster in politischen Debatten ist der Strohmann: Einer Position wird etwas unterstellt, das so nie gesagt wurde, um es dann genüsslich zu „widerlegen".
+  **Strohmann in der Klimadebatte:** Sagt jemand „Für die Energiewende müssen wir in die Stromnetze investieren", lautet die Antwort oft: „Du willst also die Steuern erhöhen und die Ärmsten noch ärmer machen!" – etwas, das nie gesagt wurde. Statt über Netzinvestitionen zu reden, wird eine erfundene Position angegriffen.
 
-  Selbst Faktencheck-Redaktionen wird gelegentlich vorgeworfen, sie unterstellten Behauptungen, die so nicht getätigt wurden – ein Hinweis darauf, wie verbreitet und wie schwer erkennbar diese Masche ist. Die Lehre: Prüfe immer, ob wirklich die *echte* Aussage des Gegenübers angegriffen wird – oder eine bequeme Karikatur davon.
+  Ein zweites Muster: Wer den Kohleausstieg befürwortet, bekommt unterstellt, er glaube, „Deutschland könne den Klimawandel im Alleingang aufhalten" – eine Haltung, die so niemand vertritt. Der echte (differenzierte) Standpunkt wird durch eine leicht lächerlich zu machende Karikatur ersetzt.
 beispiel_quelle:
-  titel: "Faktenchecks: Warum sie für unsere Demokratie unverzichtbar sind"
-  herausgeber: "Amadeu Antonio Stiftung"
-  url: "https://www.amadeu-antonio-stiftung.de/faktenchecks-warum-sie-fuer-unsere-demokratie-unverzichtbar-sind-132021/"
+  titel: "Desinformations-Strategien: Das Strohmann-Argument"
+  herausgeber: "Prüfpunkt / Klimadialoge.de"
+  url: "https://klimadialoge.de/strohmann/"
   datum: "2025"
 durchschauen: |
   - **Strohmann-Test:** Wird wirklich die *echte* Position angegriffen – oder eine verzerrte Version davon? Frag: „Hat die Gegenseite das so gesagt?"

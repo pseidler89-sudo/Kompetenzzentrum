@@ -1,122 +1,104 @@
 # 🧭 Kompetenzzentrum
 
-> **Falschbehauptungen prüfen lernen.** Eine offene, faktenbasierte Plattform, die
-> verbreitete Desinformation Schritt für Schritt aufklärt und dabei
-> **je nach Vorwissen** aufbereitet.
+**Falschbehauptungen prüfen lernen.** Ein offenes, kostenloses Nachschlagewerk
+gegen Desinformation – mit geprüften Fakten und einem klaren Versprechen:
+**weniger Empörung, mehr Zahlen.** Du entscheidest selbst, wie tief du gehst.
 
-[![CI](https://github.com/pseidler89-sudo/kompetenzzentrum/actions/workflows/ci.yml/badge.svg)](https://github.com/pseidler89-sudo/kompetenzzentrum/actions/workflows/ci.yml)
-[![Deploy](https://github.com/pseidler89-sudo/kompetenzzentrum/actions/workflows/deploy.yml/badge.svg)](https://github.com/pseidler89-sudo/kompetenzzentrum/actions/workflows/deploy.yml)
-Inhalte: CC BY-SA 4.0 · Code: MIT
+👉 **Zur Website: <https://pseidler89-sudo.github.io/Kompetenzzentrum/>**
 
 ---
 
-## Worum geht es?
+## Was dich erwartet
 
-Im Netz kursieren unzählige Falschbehauptungen. Sie sind oft emotional, eingängig
-und schwer zu kontern, wenn einem die Zahlen fehlen. Das Kompetenzzentrum setzt
-dagegen auf **weniger Empörung, mehr Fakten** – und darauf, Menschen zu befähigen,
-selbst zu prüfen.
+**🔍 Faktenchecks** – Verbreitete Behauptungen, Punkt für Punkt geprüft. Jede mit
+einem klaren Urteil (falsch, irreführend …), belegten Quellen und einer Anleitung,
+wie du es **selbst** nachprüfst. Such gezielt nach Stichwort oder filtere nach
+Thema, Urteil und Manipulations­technik.
 
-Das Projekt verfolgt drei Zwecke:
+**🎭 Maschen** – Desinformation nutzt immer wieder dieselben Tricks. Wer sie kennt,
+durchschaut sie überall. Jede „Masche" ist erklärt: wie sie funktioniert, ein
+aktuelles Beispiel und wie du sie entlarvst. (Hier wird niemand bloßgestellt –
+auf diese Maschen fällt jede:r mal herein.)
 
-1. **Selbst bilden** – Neugierige stöbern durch geprüfte Themen.
-2. **Diskussionen stützen** – belegte Kurzantworten und Quellen, sofort griffbereit.
-3. **Gemeinsam wachsen** – alles liegt offen auf GitHub; Unis, Initiativen und
-   Einzelpersonen können mitarbeiten, und jede Aussage ist öffentlich nachvollziehbar.
+**🧰 Werkzeugkasten & Methodik** – Wie man Informationen findet, einordnet und
+bewertet. Plus: nach welchen Regeln dieses Projekt arbeitet.
 
-## Das Besondere: ein Thema, drei Tiefen
+**💬 Diskussionshilfe** – Belegte Kurzantworten zum schnellen Nachschlagen.
 
-Jeder Faktencheck lässt sich in drei Informationstiefen lesen – die Auswahl wird
-gespeichert und gilt für die ganze Seite:
+### Das Besondere: ein Thema, drei Tiefen
+
+Jeder Faktencheck lässt sich in drei Stufen lesen – du wählst, deine Auswahl bleibt
+gespeichert:
 
 - **Einstieg** – kurz und klar, ganz ohne Vorwissen.
 - **Vertiefung** – die Zahlen dahinter und die Zusammenhänge.
 - **Wissenschaftlich** – Primärquellen, Methodik und statistische Fallstricke.
 
-Dazu zeigt jeder Beitrag die genutzte **Manipulationstechnik** (Prebunking) und
-einen **„So prüfst du das selbst“**-Block. So wächst mit jedem Lesen die eigene
-Medienkompetenz.
+---
 
-## Inhalte im Piloten
+## Mitmachen
 
-**Faktenchecks**
-- „Ausländer sind krimineller als Deutsche“ (Kriminalstatistik)
-- „Mit Bürgergeld hat man mehr als wer arbeiten geht“ (Lohnabstand)
-- „Das Heizungsgesetz verbietet Gasheizungen“ (GEG)
-- „Erneuerbare sind schuld an den hohen Strompreisen“ (Merit-Order)
+Dieses Projekt ist offen und lebt von vielen Augen und Quellen. Du musst kein:e
+Programmierer:in sein.
 
-**Werkzeugkasten** – SIFT-Methode, Recherche-Tools, 10 Manipulationstechniken.
-**Methodik** – Wie wir arbeiten · Statistik richtig lesen.
-**Diskussionshilfe** – durchsuchbare Faktenkarten zum Kopieren.
+- **Etwas stimmt nicht?** [Fehler melden](../../issues/new?template=fehler-melden.yml)
+- **Thema vorschlagen?** [Faktencheck anregen](../../issues/new?template=neuer-faktencheck.yml)
+- **Selbst schreiben?** Über den eingebauten Redaktions-Editor (`/admin` auf der
+  Website) – mit Formularfeldern, ganz ohne technisches Wissen. Details im
+  [Beitrags-Leitfaden](CONTRIBUTING.md).
 
-## Technik
+Für alle Inhalte gelten unsere [Redaktionsstandards](docs/redaktionsstandards.md):
+Belegpflicht, Fairness, sachlicher Ton, offene Korrekturen.
 
-- **[Astro](https://astro.build)** – statische Site, schnell und SEO-freundlich.
-- **Content Collections** mit Zod-Schema – erzwingt u.a. die **Quellen-Pflicht**.
-- Inhalte als **Markdown** mit einfachen Direktiven (`:::stufe`, `:::pruefen`,
-  `:::technik`) – niedrige Hürde für Mitwirkende.
-- Kein Backend, kein Tracking. Läuft kostenlos auf **GitHub Pages**.
+> **Unser Grundsatz:** Wir prüfen *Aussagen*, nicht Personen. Die Methode –
+> Belegpflicht und Fairness – gilt für jede Behauptung gleichermaßen, egal von
+> welcher Seite sie kommt.
+
+---
+
+## Für Entwickler:innen
+
+<details>
+<summary>Technische Details (Setup, Aufbau, Deployment)</summary>
+
+Statische Website mit **[Astro](https://astro.build)**, Inhalte als Markdown in
+**Content Collections** mit Zod-Schema (erzwingt u.a. die Quellen-Pflicht). Kein
+Backend, kein Tracking, läuft kostenlos auf GitHub Pages. Das Redaktions-CMS unter
+`/admin` nutzt [Sveltia CMS](https://github.com/sveltia/sveltia-cms).
 
 ```
 src/
 ├── content/
-│   ├── faktenchecks/      # die Faktenchecks (Markdown)
-│   └── methodik/          # Methodik-Artikel
-├── content.config.ts      # Schema (Themen, Urteile, Techniken, Quellen-Pflicht)
-├── components/            # Astro-Komponenten (Stufenschalter, Quellen, …)
-├── pages/                 # Seiten & Routen
-├── plugins/               # remark-stufen: Direktiven → HTML
-└── lib/labels.ts          # Anzeige-Texte
-docs/                      # Vorlage & Redaktionsstandards
-scripts/validate-content.mjs   # Inhaltsprüfung (CI)
+│   ├── faktenchecks/   # Faktenchecks (Markdown, Inhalt als Felder)
+│   ├── maschen/        # Manipulationstechniken
+│   └── methodik/       # Methodik-Artikel
+├── content.config.ts   # Schema (Themen, Urteile, Techniken, Quellen-Pflicht)
+├── components/ · layouts/ · pages/ · lib/
+public/admin/           # Redaktions-CMS (Sveltia)
+docs/                   # Vorlage, Redaktionsstandards, CMS-Einrichtung
+scripts/                # Inhaltsprüfung & Frontmatter-Reparatur (laufen im Build)
 ```
 
-## Lokal starten
-
-Voraussetzung: Node.js 18+.
+**Lokal starten** (Node.js 18+):
 
 ```bash
 npm install
-npm run dev        # http://localhost:4321
-npm run build      # Inhaltsprüfung + statischer Build nach dist/
+npm run dev     # http://localhost:4321
+npm run build   # Frontmatter-Reparatur + Inhaltsprüfung + Build nach dist/
 ```
 
-## Deployment (GitHub Pages)
+**Deployment:** In den Repo-Einstellungen *Settings → Pages → Source: GitHub
+Actions* wählen. Jeder Push auf `main` baut und veröffentlicht automatisch
+(`.github/workflows/deploy.yml`); der Base-Pfad wird aus dem Repo-Namen abgeleitet.
 
-1. In den Repo-Einstellungen **Settings → Pages → Source: GitHub Actions** wählen.
-2. Auf `main` pushen – der Workflow `deploy.yml` baut und veröffentlicht
-   automatisch. Der Base-Pfad wird aus dem Repo-Namen abgeleitet, ein manuelles
-   Anpassen entfällt.
+**CMS-Login einrichten:** siehe [docs/cms-einrichten.md](docs/cms-einrichten.md)
+(einmaliger OAuth-Vermittler via Cloudflare Worker).
 
-Die Seite ist dann unter `https://<owner>.github.io/<repo>/` erreichbar.
+</details>
 
-## Mitmachen
-
-Beiträge sind ausdrücklich erwünscht – siehe **[CONTRIBUTING.md](CONTRIBUTING.md)**
-und die **[Faktencheck-Vorlage](docs/faktencheck-vorlage.md)**. Der einfachste
-Einstieg:
-
-- 🐛 [Fehler melden](../../issues/new?template=fehler-melden.yml)
-- 📋 [Faktencheck vorschlagen](../../issues/new?template=neuer-faktencheck.yml)
-
-Verbindlich sind die [Redaktionsstandards](docs/redaktionsstandards.md):
-Belegpflicht, Truth Sandwich, Fairness, sachlicher Ton.
-
-## Roadmap (Auswahl)
-
-- [ ] Mehr Faktenchecks (Asyl-Kosten, Gendern, Tempolimit, Migration & Sozialstaat …)
-- [ ] Volltextsuche über alle Inhalte
-- [ ] Quellen-Linkchecker in der CI
-- [ ] Teilbare Karten-/Bild-Exporte für Social Media
-- [ ] Mehrsprachigkeit (leichte Sprache, EN)
+---
 
 ## Lizenz
 
 Inhalte unter [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.de),
-Code unter MIT – Details in [LICENSE](LICENSE).
-
----
-
-*Dieses Projekt prüft Aussagen, nicht Personen. Der Schwerpunkt ergibt sich aus
-Faktenlage und Bedarf; die Methode – Belegpflicht und Fairness – gilt für jede
-Behauptung gleichermaßen.*
+Code unter [MIT](LICENSE) – frei nutzbar mit Namensnennung.

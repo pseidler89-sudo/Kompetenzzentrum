@@ -9,14 +9,14 @@ so_funktionierts: |
 
   Verwandt ist das „Verschieben des Torpfostens": Sobald ein geforderter Beleg geliefert wird, wird einfach ein neuer, noch höherer Standard verlangt. Das Ziel ist nie die Klärung, sondern das endlose Säen von Zweifel.
 beispiel: |
-  Ein Muster aus der Tempolimit-Debatte: Gegen die berechneten CO₂-Einsparungen wird eingewandt, sie seien „nicht exakt bezifferbar" oder „mit Unsicherheiten behaftet" – und damit wird die ganze Maßnahme als wirkungslos hingestellt.
+  **Klassiker aus der Klimadebatte:** „Es ist doch gar nicht zu 100 % bewiesen, dass der Mensch das Klima erwärmt." Dieser Satz klingt vernünftig, verlangt aber einen Beweisstandard, den die Wissenschaft grundsätzlich nicht liefert – sie arbeitet mit *überwältigender Evidenz*, nicht mit absoluter Gewissheit. Tatsächlich bestätigen 97–99 % der Fachpublikationen den menschengemachten Klimawandel. Die geforderte „100 %" sind eine Latte, die bewusst unerreichbar gelegt ist, um berechtigte Zweifel vorzutäuschen.
 
-  Tatsächlich nennt das Umweltbundesamt bewusst eine *Spanne* (je nach Tempo und Befolgungsgrad), wie es seriöse Modellrechnungen tun. Daraus „also bringt es nichts" zu folgern, verlangt eine Punktgenauigkeit, die keine Prognose leisten kann – und ignoriert, dass die Maßnahme nahezu kostenlos und sofort wirkt. (Mehr im Faktencheck zum Tempolimit.)
+  **Zweites Muster (Tempolimit):** Gegen die berechneten CO₂-Einsparungen wird eingewandt, sie seien „nicht exakt bezifferbar". Dabei nennt das Umweltbundesamt bewusst eine *Spanne* – wie jede seriöse Prognose. Daraus „bringt also nichts" zu folgern, verlangt eine Punktgenauigkeit, die keine Modellrechnung leisten kann.
 beispiel_quelle:
-  titel: "Tempolimit – Wirkung auf die Treibhausgasemissionen"
-  herausgeber: "Umweltbundesamt (UBA)"
-  url: "https://www.umweltbundesamt.de/themen/verkehr/nachhaltige-mobilitaet/tempolimit"
-  datum: "2023"
+  titel: "Fakt ist: Klimawandel – Mythen und Falschbehauptungen"
+  herausgeber: "klimafakten.de"
+  url: "https://www.klimafakten.de/klimawissen/fakt-ist"
+  datum: "2025"
 durchschauen: |
   - **Ist der Standard erfüllbar?** Könnte *irgendeine* Studie diesen Beweis je liefern? Wenn nicht, ist die Latte unfair hoch.
   - **100 % gibt es selten:** Seriöse Wissenschaft arbeitet mit Wahrscheinlichkeiten und Spannen, nicht mit absoluter Gewissheit.
