@@ -7,6 +7,16 @@ aktualisiert: 2026-05-31
 
 Glaubwürdigkeit kann man nicht behaupten, nur belegen. Deshalb liegt unsere Arbeitsweise offen.
 
+## Der Lernweg in drei Fragen
+
+Hinter der Seite steht eine einfache, von der Forschung gestützte Reihenfolge:
+
+1. **Was gibt es für Manipulation?** – Die **Maschen** erklären die gängigen Techniken (Prebunking: das Muster kennen, bevor man darauf trifft).
+2. **Wie erkenne ich sie?** – Jede Masche liefert konkrete Erkennungs-Fragen; der **Werkzeugkasten** bündelt sie.
+3. **Wie stelle ich richtig?** – Der Leitfaden *Richtig widerlegen* zeigt, wie eine Korrektur wirklich hängen bleibt (Truth-Sandwich).
+
+Die **Faktenchecks** verbinden alle drei Schritte an konkreten, belegten Beispielen.
+
 ## Das Truth-Sandwich
 
 Forschung zur Korrektur von Falschinformation (u.a. das *Debunking Handbook 2020*) zeigt: Wer eine Falschbehauptung widerlegt, sollte **mit dem Fakt beginnen und enden** – und den Mythos nur kurz und klar markiert dazwischen nennen. Sonst bleibt am Ende der Mythos hängen. Genau diesem Aufbau folgt jeder Faktencheck:
