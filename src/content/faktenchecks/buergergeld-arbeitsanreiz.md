@@ -17,7 +17,7 @@ quellen:
     art: "primaer"
   - titel: "Grundsicherung / Bürgergeld – gesetzliche Grundlagen"
     herausgeber: "Bundesministerium für Arbeit und Soziales (BMAS)"
-    url: "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/buergergeld.html"
+    url: "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/grundsicherung-buergergeld.html"
     art: "primaer"
   - titel: "Lohnabstand: Lohnt sich Arbeit gegenüber dem Bürgergeld? (Analysen)"
     herausgeber: "Institut der deutschen Wirtschaft (IW Köln)"
