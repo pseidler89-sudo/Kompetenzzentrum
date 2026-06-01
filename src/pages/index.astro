@@ -75,9 +75,11 @@ const featured = eintraege.slice(0, 4);
           <button type="button" class="tiefe__chip" data-stufe="vertiefung" aria-pressed="false">Vertiefung</button>
           <button type="button" class="tiefe__chip" data-stufe="wissenschaftlich" aria-pressed="false">Wissenschaftlich</button>
         </div>
-        <p class="tiefe__demo" data-stufe="einstieg">Kurz gesagt: Das stimmt so nicht. Strom aus <strong>neuer Windkraft an Land ist günstiger</strong> als aus neuen Kohle- oder Gaskraftwerken.</p>
-        <p class="tiefe__demo" data-stufe="vertiefung" hidden>Die Erzeugungskosten neuer Windkraft an Land liegen laut Fraunhofer ISE bei rund <strong>4–9 ct/kWh</strong>, neue Gaskraftwerke bei <strong>8–16 ct/kWh</strong>. Im Neubau ist Wind also im Schnitt die günstigere Option.</p>
-        <p class="tiefe__demo" data-stufe="wissenschaftlich" hidden>Verglichen werden die <em>Stromgestehungskosten</em> (LCOE) über die gesamte Lebensdauer. Sauber wird der Vergleich, wenn man beides einrechnet: Integrationskosten für Netz/Speicher bei Wind &amp; Solar – und den CO₂-Preis bei fossilen. Die Fraunhofer-ISE-Studie (2024) tut das; Wind an Land bleibt die günstigste Neubauoption.</p>
+        <div class="tiefe__demo-wrap">
+          <p class="tiefe__demo" data-stufe="einstieg" aria-hidden="false">Kurz gesagt: Das stimmt so nicht. Strom aus <strong>neuer Windkraft an Land ist günstiger</strong> als aus neuen Kohle- oder Gaskraftwerken.</p>
+          <p class="tiefe__demo" data-stufe="vertiefung" aria-hidden="true">Die Erzeugungskosten neuer Windkraft an Land liegen laut Fraunhofer ISE bei rund <strong>4–9 ct/kWh</strong>, neue Gaskraftwerke bei <strong>8–16 ct/kWh</strong>. Im Neubau ist Wind also im Schnitt die günstigere Option.</p>
+          <p class="tiefe__demo" data-stufe="wissenschaftlich" aria-hidden="true">Verglichen werden die <em>Stromgestehungskosten</em> (LCOE) über die gesamte Lebensdauer. Sauber wird der Vergleich, wenn man beides einrechnet: Integrationskosten für Netz/Speicher bei Wind &amp; Solar – und den CO₂-Preis bei fossilen. Die Fraunhofer-ISE-Studie (2024) tut das; Wind an Land bleibt die günstigste Neubauoption.</p>
+        </div>
         <p class="tiefe__hint muted">↑ Tiefe umschalten – genau wie in jedem Faktencheck.</p>
       </div>
     </div>
@@ -122,7 +124,7 @@ const featured = eintraege.slice(0, 4);
             c.setAttribute("aria-pressed", String(aktiv));
           });
           texte.forEach((t) => {
-            t.hidden = t.dataset.stufe !== stufe;
+            t.setAttribute("aria-hidden", String(t.dataset.stufe !== stufe));
           });
         });
       });
@@ -174,8 +176,11 @@ const featured = eintraege.slice(0, 4);
   .tiefe__chip:hover { background: var(--c-accent-soft); color: var(--c-accent); }
   .tiefe__chip--aktiv, .tiefe__chip--aktiv:hover { background: var(--c-accent); color: #fff; }
   .tiefe__chip:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
-  .tiefe__demo { margin: 1rem 0 0; font-size: 1.05rem; border-top: 1px solid var(--c-border); padding-top: 1rem; }
-  .tiefe__demo[hidden] { display: none; }
+  /* Alle drei Tiefen liegen in derselben Grid-Zelle gestapelt: die Box ist
+     immer so hoch wie der längste Text – Umschalten ändert die Höhe nicht (kein Springen). */
+  .tiefe__demo-wrap { display: grid; }
+  .tiefe__demo { grid-area: 1 / 1; margin: 1rem 0 0; font-size: 1.05rem; border-top: 1px solid var(--c-border); padding-top: 1rem; transition: opacity .15s ease; }
+  .tiefe__demo[aria-hidden="true"] { visibility: hidden; opacity: 0; }
   .tiefe__hint { margin: .9rem 0 0; font-size: .8rem; }
 
   .abschnitt-kopf { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
