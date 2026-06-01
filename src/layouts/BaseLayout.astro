@@ -26,7 +26,7 @@ const nav = [
   { href: "/maschen", text: "Maschen" },
   { href: "/werkzeugkasten", text: "Werkzeugkasten" },
   { href: "/methodik", text: "Methodik" },
-  { href: "/mitmachen", text: "Mitmachen" },
+  { href: "/mitmachen", text: "Mitmachen", cta: true },
 ];
 const aktuell = Astro.url.pathname.replace(/\/$/, "");
 const vollerTitel = titel === "Kompetenzzentrum" ? titel : `${titel} · Kompetenzzentrum`;
@@ -84,7 +84,7 @@ const vollerTitel = titel === "Kompetenzzentrum" ? titel : `${titel} · Kompeten
           </summary>
           <nav class="site-nav" aria-label="Hauptnavigation">
             {nav.map((n) => (
-              <a href={pfad(n.href)} aria-current={aktuell === pfad(n.href).replace(/\/$/, "") ? "page" : undefined}>{n.text}</a>
+              <a href={pfad(n.href)} class={n.cta ? "nav-cta" : undefined} aria-current={aktuell === pfad(n.href).replace(/\/$/, "") ? "page" : undefined}>{n.text}</a>
             ))}
           </nav>
         </details>
