@@ -13,9 +13,9 @@ beispiel: |
 
   Die Empörung kam vor der Information. Wer in Angst gerät, liest selten den Gesetzestext nach. (Mehr im Faktencheck zum Heizungsgesetz.)
 beispiel_quelle:
-  titel: "Gebäudeenergiegesetz (GEG) – Fragen und Antworten zum Heizungstausch"
-  herausgeber: "Bundesministerium für Wirtschaft und Klimaschutz (BMWK)"
-  url: "https://www.bmwk.de/Redaktion/DE/Artikel/Energie/heizungsgesetz-haeufige-fragen.html"
+  titel: "Gebäudeenergiegesetz (GEG) – Bestandsschutz, Übergangsfristen, Förderung"
+  herausgeber: "Wikipedia"
+  url: "https://de.wikipedia.org/wiki/Geb%C3%A4udeenergiegesetz"
   datum: "2024"
 durchschauen: |
   - **Kurz innehalten:** Spürst du Wut oder Angst? Genau dann lohnt es sich, *vor* dem Teilen zu prüfen.

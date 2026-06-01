@@ -14,6 +14,12 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   Zielgruppe (auch rechts-offene, noch erreichbare Leser). Wir prüfen **Aussagen,
   nicht Personen**. Dass AfD/CDU/FDP in Beispielen oft vorkommen, merkt man selbst.
 - **„Weniger Emotionen, mehr Zahlen und Fakten.“**
+- **Quellen-Wahrnehmung (Pfad A).** Faktencheck-Medien (z. B. CORRECTIV) sind seriös,
+  wirken auf Teile der Zielgruppe aber parteilich. Daher **sichtbar primär/amtlich/
+  akademisch** belegen (Destatis, BKA, UBA, BNetzA, Ministerien, bpb, WHO, peer-reviewt);
+  Medien-Faktenchecks als Ergänzung, nicht als alleiniger Anker. Maschen sind über
+  `methodik/wissenschaftliche-grundlagen` akademisch verankert (Debunking Handbook 2020,
+  FLICC) – jede Masche verlinkt das.
 - **Jedes Beispiel konkret UND belegt** – nie generisch. Quelle = erreichbar
   (CI prüft) **und** inhaltlich selbst nachgelesen (menschlich), bevor `geprueft`.
   Grundsatz: lieber keine Quelle als eine ungeprüfte. Siehe
