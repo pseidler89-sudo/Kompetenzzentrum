@@ -70,6 +70,11 @@ collections:
           - { label: "Emotionalisierung", value: "emotionalisierung" }
           - { label: "Falsche Gleichsetzung", value: "falsche-gleichsetzung" }
           - { label: "Aus dem Kontext gerissen", value: "aus-dem-kontext-gerissen" }
+          - { label: "Whataboutism", value: "whataboutism" }
+          - { label: "Falsche Verknüpfung (Clickbait)", value: "falsche-verknuepfung" }
+          - { label: "Astroturfing", value: "astroturfing" }
+          - { label: "Identitätsschwindel", value: "identitaetsschwindel" }
+          - { label: "Falsche Ausgewogenheit (False Balance)", value: "falsche-ausgewogenheit" }
       - { name: zusammenfassung, label: "Kurzbeschreibung (für Vorschau & Suchmaschinen)", widget: text, pattern: ['^.{1,300}$', "Höchstens 300 Zeichen."] }
       - name: status
         label: "Redaktioneller Status"
@@ -150,6 +155,11 @@ collections:
           - { label: "Emotionalisierung", value: "emotionalisierung" }
           - { label: "Falsche Gleichsetzung", value: "falsche-gleichsetzung" }
           - { label: "Aus dem Kontext gerissen", value: "aus-dem-kontext-gerissen" }
+          - { label: "Whataboutism", value: "whataboutism" }
+          - { label: "Falsche Verknüpfung (Clickbait)", value: "falsche-verknuepfung" }
+          - { label: "Astroturfing", value: "astroturfing" }
+          - { label: "Identitätsschwindel", value: "identitaetsschwindel" }
+          - { label: "Falsche Ausgewogenheit (False Balance)", value: "falsche-ausgewogenheit" }
       - name: kategorie
         label: "Kategorie"
         widget: select
