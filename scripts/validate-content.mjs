@@ -37,11 +37,29 @@ for (const datei of dateien) {
 
   for (const stufe of ["einstieg", "vertiefung", "wissenschaftlich"]) {
     if (!body.includes(`:::stufe{name="${stufe}"}`)) {
-      fehler.push(`${datei}: Stufe "${stufe}" fehlt.`);
+      fehler.push(
+        `${datei}: Die Tiefe „${stufe}“ fehlt. Füge einen Abschnitt ` +
+          `:::stufe{name="${stufe}"} … ::: hinzu (jeder Faktencheck braucht alle drei Tiefen).`,
+      );
     }
   }
   if (!body.includes(":::pruefen")) {
-    warnungen.push(`${datei}: Kein :::pruefen-Block ("So prüfst du das selbst").`);
+    warnungen.push(
+      `${datei}: Kein „So prüfst du das selbst“-Block. Empfohlen: ein :::pruefen … ::: ` +
+        `mit konkreten Schritten, wie Leser:innen die Behauptung selbst nachprüfen.`,
+    );
+  }
+
+  // Frühwarnung: gerade Anführungszeichen im Frontmatter, die den Build kippen.
+  for (const zeile of fm.split("\n")) {
+    const m = zeile.match(/^\s*(?:- )?[\w-]+:\s*"(.*)"\s*$/);
+    if (m && m[1].includes('"')) {
+      warnungen.push(
+        `${datei}: Gerades Anführungszeichen (") in einem Frontmatter-Wert gefunden. ` +
+          `Das wird automatisch korrigiert (npm run build). Sonst: „ … “ verwenden.`,
+      );
+      break;
+    }
   }
 
   // verwandt: prüfen

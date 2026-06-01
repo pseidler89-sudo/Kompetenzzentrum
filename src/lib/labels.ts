@@ -54,6 +54,24 @@ export const TECHNIK_ERKLAERUNG: Record<string, string> = {
   "aus-dem-kontext-gerissen": "Ein Zitat oder Bild wird ohne seinen ursprünglichen Zusammenhang verwendet.",
 };
 
+/**
+ * Pro Technik ein konkreter „So durchschaust du es“-Konter.
+ * Leitgedanke: niemanden bloßstellen, sondern befähigen – die Botschaft ist
+ * „so wirst du manipuliert, und SO erkennst du es“, nicht „wer das glaubt, ist dumm“.
+ */
+export const TECHNIK_KONTER: Record<string, string> = {
+  "fake-experten": "Frag: Forscht diese Person wirklich zum Thema? Was sagt die Mehrheit der Fachleute – nicht eine einzelne laute Stimme?",
+  "logischer-fehlschluss": "Prüfe, ob die Schlussfolgerung wirklich aus den Argumenten folgt – oder ob ein Gedankensprung übersprungen wird.",
+  "unerfuellbare-erwartung": "Frag dich: Könnte IRGENDEINE Studie diesen Beweisstandard je erfüllen? Wenn nicht, ist die Latte unfair hoch gelegt.",
+  "cherry-picking": "Schau dir die ganze Datenreihe an, nicht den herausgepickten Ausschnitt. Was wurde weggelassen?",
+  verschwoerung: "Frag nach konkreten Belegen für den „Plan“: Wer genau, welches Dokument? Vage bleiben ist das Erkennungszeichen.",
+  "falsche-kausalitaet": "Nur weil zwei Dinge zusammen auftreten, verursacht das eine nicht das andere. Gibt es eine dritte Ursache?",
+  "fehlender-bezugswert": "Frag: im Verhältnis wozu? Pro Kopf, im Zeitverlauf, im Vergleich – eine Zahl ohne Bezug sagt wenig.",
+  emotionalisierung: "Spür kurz in dich hinein: Soll hier informiert oder vor allem Wut/Angst erzeugt werden? Dann erst weiterlesen.",
+  "falsche-gleichsetzung": "Frag: Sind die beiden Dinge wirklich vergleichbar? Oft hinkt der Vergleich an einer entscheidenden Stelle.",
+  "aus-dem-kontext-gerissen": "Such das Originalzitat oder -bild. Oft sagt der volle Zusammenhang etwas ganz anderes.",
+};
+
 export const STATUS_LABEL: Record<string, string> = {
   entwurf: "Entwurf",
   "in-pruefung": "In Prüfung",

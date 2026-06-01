@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { TECHNIK_LABEL, TECHNIK_ERKLAERUNG } from "../lib/labels";
+import { TECHNIK_LABEL, TECHNIK_ERKLAERUNG, TECHNIK_KONTER } from "../lib/labels";
 
 const techniken = Object.keys(TECHNIK_LABEL);
 
@@ -60,17 +60,25 @@ const sift = [
   </section>
 
   <section id="techniken">
-    <h2>Manipulationstechniken erkennen</h2>
+    <h2>So wirst du manipuliert – und so durchschaust du es</h2>
     <p>
-      Desinformation nutzt wiederkehrende Muster. Wer sie kennt, erkennt sie wieder –
-      das nennt man <em>Prebunking</em>. Die ersten fünf folgen dem FLICC-Modell der
-      Wissenschaftskommunikation.
+      Hier geht es nicht darum, jemanden bloßzustellen. Auf diese Maschen fällt
+      <strong>jeder</strong> mal herein – sie sind gemacht, um zu funktionieren.
+      Der Trick ist: Wer das Muster einmal kennt, erkennt es beim nächsten Mal sofort.
+      Das nennt die Forschung <em>Prebunking</em> – wie eine Impfung gegen Desinformation.
+      Die ersten fünf folgen dem FLICC-Modell der Wissenschaftskommunikation.
     </p>
     <div class="technik-liste">
       {techniken.map((t) => (
         <div class="technik" id={t}>
           <h3 style="margin:.2rem 0;">{TECHNIK_LABEL[t]}</h3>
-          <p style="margin:0;">{TECHNIK_ERKLAERUNG[t]}</p>
+          <p class="technik__masche">{TECHNIK_ERKLAERUNG[t]}</p>
+          {TECHNIK_KONTER[t] && (
+            <p class="technik__konter">
+              <span class="technik__konter-label">So durchschaust du es</span>
+              {TECHNIK_KONTER[t]}
+            </p>
+          )}
         </div>
       ))}
     </div>
@@ -84,4 +92,18 @@ const sift = [
   .technik { padding: 1rem 1.25rem; background: var(--c-surface); border: 1px solid var(--c-border); border-left: 4px solid var(--c-technik); border-radius: var(--radius-sm); scroll-margin-top: 5rem; box-shadow: var(--shadow); }
   .technik h3 { color: var(--c-technik); }
   .technik:target { border-left-width: 6px; box-shadow: var(--shadow-lift); }
+  .technik__masche { margin: 0; color: var(--c-text-soft); }
+  .technik__konter {
+    margin: .7rem 0 0; padding: .6rem .85rem; border-radius: var(--radius-sm);
+    background: color-mix(in srgb, #2e7d32 9%, var(--c-surface));
+    border: 1px solid color-mix(in srgb, #2e7d32 25%, transparent);
+    font-size: .95rem;
+  }
+  .technik__konter-label {
+    display: block; font-size: .72rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: .05em; color: #2e7d32; margin-bottom: .15rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    .technik__konter-label { color: #6cc070; }
+  }
 </style>
