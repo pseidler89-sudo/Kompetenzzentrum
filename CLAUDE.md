@@ -33,6 +33,11 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   `flicc` (genau 5 Kerntechniken) oder `rhetorik`. Labels in `src/lib/labels.ts`.
 - Faktencheck-Detailseite hat **Kopierbutton** (Fakt+Quelle+Link) = die
   „Diskussionshilfe“ (eigene Seite wurde entfernt).
+- **Datengrafiken (P1):** optionales `daten`-Frontmatter pro Faktencheck →
+  `Datenviz.astro` (reines CSS, nur global.css-Tokens; Typen: vergleich/anteil/
+  zusammensetzung/kennzahl). Gerendert in `[...slug].astro` als Block „Die Zahlen
+  im Überblick" vor den Quellen. CMS-Feld `daten` in `config.yml` vorhanden. Regel:
+  nur wo eine Zahl/Beziehung getragen wird, **mit Quelle**; %-Achsen skalieren auf 100.
 - CMS-Config: `public/admin/config.yml` (Selects für techniken müssen zu
   `TECHNIKEN` passen – an ZWEI Stellen pflegen).
 - Build: `npm run build` (= normalize + validate + astro build). `npm run check:links`

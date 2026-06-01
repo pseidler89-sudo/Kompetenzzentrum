@@ -133,6 +133,51 @@ collections:
       - { name: technik_text, label: "Technik – Erklärung", widget: markdown, required: false, hint: "Welche Manipulationstechnik steckt dahinter?" }
       - { name: pruefen, label: "So prüfst du das selbst", widget: markdown, required: false, hint: "Konkrete Schritte zum Selber-Nachprüfen (gern als Liste)." }
 
+      - name: daten
+        label: "Datengrafiken (optional)"
+        label_singular: "Grafik"
+        widget: list
+        required: false
+        summary: "{{fields.typ}} – {{fields.titel}}"
+        hint: "Nur wo eine Grafik eine Zahl/Beziehung trägt – nie Dekoration. Jede Grafik braucht eine Quelle."
+        fields:
+          - name: typ
+            label: "Typ"
+            widget: select
+            default: "vergleich"
+            options:
+              - { label: "Vergleich (Balken nebeneinander)", value: "vergleich" }
+              - { label: "Anteil am Ganzen", value: "anteil" }
+              - { label: "Zusammensetzung (gestapelt, Summe 100)", value: "zusammensetzung" }
+              - { label: "Kennzahl (große Zahl)", value: "kennzahl" }
+          - { name: titel, label: "Titel", widget: string, required: false, hint: "Darf <strong>…</strong> für Hervorhebung enthalten." }
+          - { name: hinweis, label: "Hinweis", widget: string, required: false }
+          - { name: quelle, label: "Quelle", widget: string, required: false }
+          - { name: primaer, label: "Primärquelle (amtlich/original)", widget: boolean, default: false, required: false }
+          - { name: skala, label: "Achsen-Maximum (leer = automatisch)", widget: number, required: false, value_type: float }
+          - name: werte
+            label: "Werte"
+            label_singular: "Wert"
+            widget: list
+            summary: "{{fields.label}}: {{fields.wert}}"
+            fields:
+              - { name: label, label: "Label", widget: string, required: false }
+              - { name: sublabel, label: "Unterzeile", widget: string, required: false }
+              - { name: wert, label: "Wert (Zahl)", widget: number, value_type: float }
+              - { name: einheit, label: "Einheit", widget: string, default: "%", required: false }
+              - name: farbe
+                label: "Farbe"
+                widget: select
+                default: "neutral"
+                options:
+                  - { label: "Akzent (Kernzahl)", value: "accent" }
+                  - { label: "Neutral (Vergleich)", value: "neutral" }
+                  - { label: "Falsch", value: "falsch" }
+                  - { label: "Irreführend", value: "irrefuehrend" }
+                  - { label: "Fehlender Kontext", value: "kontext" }
+                  - { label: "Teils richtig", value: "teils" }
+                  - { label: "Prüfen", value: "pruefen" }
+
   - name: maschen
     label: "Maschen (Manipulationstechniken)"
     label_singular: "Masche"

@@ -60,4 +60,28 @@ pruefen: |
   - Schau dir auf **SMARD** (Bundesnetzagentur) an, wie Börsenpreis, Gaspreis und Wind-/Solar-Einspeisung zusammenhängen – besonders die Spitzen 2022.
   - Vergleiche die **Stromgestehungskosten** der Fraunhofer-ISE-Studie für neue Anlagen.
   - Zerlege deine eigene **Stromrechnung** in ihre Bestandteile (Beschaffung, Netzentgelt, Steuern/Abgaben). Du wirst keine EEG-Umlage mehr finden.
+daten:
+  - typ: kennzahl
+    titel: "Was von der früheren Ökostrom-Umlage übrig ist"
+    quelle: "Bundesnetzagentur · Strompreisanalyse"
+    primaer: true
+    werte:
+      - wert: 0
+        einheit: " ct"
+        sublabel: "EEG-Umlage auf deiner Stromrechnung – seit Juli 2022 abgeschafft."
+        farbe: pruefen
+  - typ: zusammensetzung
+    titel: "Bestandteile des Strompreises – <strong>keine EEG-Umlage mehr enthalten</strong>"
+    hinweis: "Typische Anteile laut Strompreisanalyse; exakte Werte schwanken je Jahr und Anbieter."
+    quelle: "Bundesnetzagentur · Strompreisanalyse"
+    werte:
+      - label: "Beschaffung & Vertrieb"
+        wert: 40
+        farbe: accent
+      - label: "Netzentgelte"
+        wert: 28
+        farbe: teils
+      - label: "Steuern & Abgaben"
+        wert: 32
+        farbe: neutral
 ---

@@ -1,0 +1,166 @@
+---
+/**
+ * Datenviz.astro — ruhige, markenkonforme Datengrafiken für Faktenchecks.
+ *
+ * Zweck: „weniger Emotionen, mehr Zahlen und Fakten" sichtbar machen. Eine
+ * Grafik nur, wenn sie eine ZAHL oder BEZIEHUNG trägt — nie als Dekoration.
+ * Jede Grafik nennt ihre Quelle (Belegpflicht).
+ *
+ * Reines CSS, kein Chart-Framework, keine Runtime-Abhängigkeit — passt zur
+ * „reines Astro + CSS"-Linie. Nutzt ausschließlich die Tokens aus global.css.
+ *
+ * Datenquelle: das optionale `daten`-Frontmatter-Feld der Faktenchecks
+ * (siehe content-config-snippet.ts). Beispiel in beispiel-frontmatter.md.
+ */
+type Farbe = "accent" | "neutral" | "falsch" | "irrefuehrend" | "kontext" | "teils" | "pruefen";
+
+interface Wert {
+  label?: string;
+  sublabel?: string;
+  wert: number;
+  einheit?: string;
+  farbe?: Farbe;
+}
+interface Chart {
+  typ: "vergleich" | "anteil" | "zusammensetzung" | "kennzahl";
+  titel?: string;
+  hinweis?: string;
+  quelle?: string;
+  primaer?: boolean;
+  skala?: number; // Achsen-Maximum (Ehrlichkeit!). Default: 100 bei %, sonst größter Wert.
+  werte: Wert[];
+}
+interface Props { daten?: Chart[]; }
+
+const { daten = [] } = Astro.props;
+
+const farbVar = (f?: Farbe) => ({
+  accent: "var(--c-accent)",
+  falsch: "var(--c-falsch)",
+  irrefuehrend: "var(--c-irrefuehrend)",
+  kontext: "var(--c-kontext)",
+  teils: "var(--c-teils)",
+  pruefen: "var(--c-pruefen)",
+  neutral: "var(--c-border-strong)",
+}[f ?? "neutral"]);
+
+// Achsen-Maximum: bei reinen Prozentwerten ehrlich auf 100 % skalieren,
+// sonst auf den größten Wert. So wird visuell nichts aufgeblasen.
+const achse = (c: Chart) =>
+  c.skala ??
+  (c.werte.every((w) => (w.einheit ?? "%") === "%") ? 100 : Math.max(...c.werte.map((w) => w.wert)));
+---
+
+{daten.length > 0 && (
+  <div class="dv-set">
+    {daten.map((c) => {
+      const max = achse(c);
+      return (
+        <figure class="dv">
+          {c.titel && <figcaption class="dv__title" set:html={c.titel} />}
+          {c.hinweis && <p class="dv__hint" set:html={c.hinweis} />}
+
+          {c.typ === "kennzahl" && (
+            <div class="dv__stats">
+              {c.werte.map((w) => (
+                <div class="dv__stat" style={`border-left-color:${farbVar(w.farbe ?? "accent")}`}>
+                  <div class="dv__num" style={`color:${farbVar(w.farbe ?? "accent")}`}>{w.wert}{w.einheit ?? ""}</div>
+                  {w.sublabel && <div class="dv__cap">{w.sublabel}</div>}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {(c.typ === "vergleich" || c.typ === "anteil") && (
+            <div class="dv__bars">
+              {c.werte.map((w) => (
+                <div class="dv__row">
+                  <div class="dv__lab">{w.label}{w.sublabel && <small>{w.sublabel}</small>}</div>
+                  <div class="dv__track" role="img" aria-label={`${w.label}: ${w.wert}${w.einheit ?? "%"}`}>
+                    <div class="dv__fill" style={`width:${Math.max(1, (w.wert / max) * 100)}%;background:${farbVar(w.farbe)}`}></div>
+                  </div>
+                  <div class="dv__val" style={w.farbe === "accent" ? "color:var(--c-accent)" : ""}>{w.wert}{w.einheit ?? "%"}</div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {c.typ === "zusammensetzung" && (
+            <>
+              <div class="dv__stack" role="img" aria-label={c.titel}>
+                {c.werte.map((w) => (
+                  <div class="dv__seg" style={`width:${w.wert}%;background:${farbVar(w.farbe)}`}>
+                    <span>{w.label} {w.wert}{w.einheit ?? "%"}</span>
+                  </div>
+                ))}
+              </div>
+              <div class="dv__legend">
+                {c.werte.map((w) => (<span><i style={`background:${farbVar(w.farbe)}`}></i>{w.label}</span>))}
+              </div>
+            </>
+          )}
+
+          {c.quelle && (
+            <div class="dv__source">{c.quelle}{c.primaer && <span class="q-tag">Primärquelle</span>}</div>
+          )}
+        </figure>
+      );
+    })}
+  </div>
+)}
+
+<style>
+  .dv-set { display: flex; flex-direction: column; gap: 1.25rem; margin: 1.75rem 0; }
+  .dv {
+    margin: 0; padding: 1.25rem 1.4rem;
+    background: var(--c-surface); border: 1px solid var(--c-border);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+  }
+  .dv__title { font-family: var(--font-sans); font-size: .98rem; color: var(--c-text-soft); margin: 0 0 1rem; }
+  .dv__title :global(strong) { color: var(--c-text); font-weight: 700; }
+  .dv__hint { font-family: var(--font-sans); font-size: .85rem; color: var(--c-text-soft); font-style: italic; margin: -.5rem 0 1rem; }
+
+  /* Quellen-Zeile mit Buch-Icon */
+  .dv__source {
+    display: flex; align-items: center; gap: .4rem;
+    margin-top: 1rem; padding-top: .75rem; border-top: 1px solid var(--c-border);
+    font-family: var(--font-sans); font-size: .75rem; color: var(--c-text-soft);
+  }
+  .dv__source::before {
+    content: ""; width: .9rem; height: .9rem; flex: none; background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 19.5A2.5 2.5 0 0 1 6.5 17H20'/%3E%3Cpath d='M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z'/%3E%3C/svg%3E") center/contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 19.5A2.5 2.5 0 0 1 6.5 17H20'/%3E%3Cpath d='M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  .dv .q-tag {
+    font-family: var(--font-sans); font-size: .62rem; font-weight: 800; padding: .08rem .4rem; border-radius: 999px;
+    background: var(--c-accent-soft); color: var(--c-accent); text-transform: uppercase; letter-spacing: .03em;
+  }
+
+  /* Balken */
+  .dv__bars { display: flex; flex-direction: column; gap: 14px; }
+  .dv__row { display: grid; grid-template-columns: 190px 1fr auto; gap: 14px; align-items: center; font-family: var(--font-sans); }
+  .dv__lab { font-size: .9rem; font-weight: 600; }
+  .dv__lab small { display: block; font-weight: 500; color: var(--c-text-soft); font-size: .78rem; }
+  .dv__track { position: relative; height: 30px; background: var(--c-surface-2); border-radius: 6px; overflow: hidden; }
+  .dv__fill { height: 100%; border-radius: 6px; min-width: 4px; }
+  .dv__val { font-weight: 800; font-size: .9rem; font-variant-numeric: tabular-nums; min-width: 3.4rem; text-align: right; }
+
+  /* Kennzahl */
+  .dv__stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 14px; }
+  .dv__stat { background: var(--c-surface); border: 1px solid var(--c-border); border-left: 4px solid var(--c-accent); border-radius: var(--radius-sm); padding: 16px 18px; box-shadow: var(--shadow); }
+  .dv__num { font-family: var(--font-sans); font-size: 2.1rem; font-weight: 800; letter-spacing: -.02em; line-height: 1; }
+  .dv__cap { font-family: var(--font-sans); margin-top: 6px; font-size: .88rem; color: var(--c-text-soft); }
+
+  /* Zusammensetzung */
+  .dv__stack { display: flex; height: 42px; border-radius: 8px; overflow: hidden; border: 1px solid var(--c-border); }
+  .dv__seg { display: flex; align-items: center; justify-content: center; color: #fff; font-family: var(--font-sans); font-weight: 700; font-size: .78rem; min-width: 0; overflow: hidden; white-space: nowrap; }
+  .dv__seg span { padding: 0 .4rem; text-overflow: ellipsis; overflow: hidden; }
+  .dv__legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px; font-family: var(--font-sans); font-size: .82rem; color: var(--c-text-soft); }
+  .dv__legend span { display: inline-flex; align-items: center; gap: .4rem; }
+  .dv__legend i { width: .8rem; height: .8rem; border-radius: 3px; display: inline-block; flex: none; }
+
+  @media (max-width: 560px) {
+    .dv__row { grid-template-columns: 1fr auto; }
+    .dv__lab { grid-column: 1 / -1; }
+  }
+</style>
