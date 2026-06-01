@@ -20,7 +20,12 @@ Neutralität: Wir prüfen Aussagen, nicht Lager.
 
 ## A. Umweltschutz allgemein
 
-### A1. „E-Autos sind wegen der Akku-Produktion in der Gesamtbilanz klimaschädlicher als Verbrenner.“
+### A1. „E-Autos sind wegen der Akku-Produktion in der Gesamtbilanz klimaschädlicher als Verbrenner.“ — ✅ GEBAUT (06/2026, `in-pruefung`)
+> Faktencheck `e-auto-klimabilanz.md`, urteil *größtenteils-falsch*. Quellen: CORRECTIV
+> (im Volltext gelesen; Fraunhofer-ISI-Break-even 55.000–115.000 km vs. Diesel,
+> 17.000–42.000 km mit Ökostrom; Akku-CO₂ ICCT 2021 ~60 statt veraltet 171 kg/kWh) +
+> ICCT 2021 (erreichbar). Finale Zahlenabnahme am Original bleibt menschlicher Schritt.
+
 - **Faktenrichtung:** Über den **gesamten Lebenszyklus** (Produktion + Nutzung +
   Strommix) schneiden Batterie-E-Autos in Europa klar besser ab als Verbrenner; der
   Vorsprung wächst, je grüner der Strom. Der höhere CO₂-Rucksack der Produktion wird
@@ -113,7 +118,10 @@ Neutralität: Wir prüfen Aussagen, nicht Lager.
 - **Quellen:** UBA (Grundwasser/Nitrat); BMUV; Nitratbericht (Bund/Länder).
 - *Sensibel – Methodik des Messnetzes ruhig und nachvollziehbar erklären.*
 
-### C5. „Bio-Landwirtschaft ist immer besser fürs Klima und die Umwelt.“
+### C5. „Bio-Landwirtschaft ist immer besser fürs Klima und die Umwelt.“ — ✅ GEBAUT (06/2026, `in-pruefung`)
+> Faktencheck `bio-landwirtschaft-immer-besser.md`, urteil *teils-richtig*. Kern: Bezugsgröße
+> (pro Fläche vs. pro kg). Quellen: UBA Ökolandbau (erreichbar) + Wikipedia (im Volltext gelesen).
+
 - **Faktenrichtung:** Teils richtig, teils zu pauschal. Bio schneidet je **Fläche**
   oft besser ab (Biodiversität, weniger Pestizide), je **erzeugter Menge** wegen
   geringerer Erträge teils schlechter (höherer Flächenbedarf). Es kommt auf die
