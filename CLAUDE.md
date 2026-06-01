@@ -53,13 +53,25 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   greift erst in neuer Session. **TODO: Whitelist testen** (curl auf correctiv.org,
   destatis.de, riffreporter.de, de.wikipedia.org – Erwartung: 200).
 
+## Stolpersteine (gelernt)
+- **Nur Feature-Branch pushen.** Lokal kann man versehentlich auf `main` landen –
+  danach wieder `git checkout claude/factcheck-...` und prüfen, dass `main` ==
+  `origin/main` (kein versehentlicher main-Push).
+- **`reihenfolge` der Maschen:** flicc 1–6, rhetorik 7–15. Neue rhetorik-Maschen
+  fortlaufend ≥16, damit „Die 5 Kerntechniken“ (= flicc) stimmt.
+- **CMS-Techniken an ZWEI Stellen** in `public/admin/config.yml` pflegen
+  (faktenchecks `techniken` + maschen `code`).
+- **Frontmatter:** keine geraden `"` in Werten (normalize-Script fängt’s, aber
+  bewusst typografische „…“ schreiben).
+
 ## Offene / mögliche nächste Schritte
-- Whitelist verifizieren (s. o.), dann Quellen künftig im Volltext prüfen.
-- Themen-Balance: 2–3 Faktenchecks außerhalb Migration/Klima (z. B. Gesundheit –
+- **Whitelist verifizieren** (curl auf correctiv.org/destatis.de/riffreporter.de/
+  de.wikipedia.org → 200), dann Quellen künftig im Volltext prüfen.
+- **Zurückgestellte Maschen** mit Quellen: siehe `docs/recherche/maschen-backlog.md`
+  (Gish-Galopp/Firehose, Sündenbock, Bandwagon, Newspeak …) – jeweils erst
+  Volltext-Quelle prüfen, neutral framen.
+- **Themen-Balance:** 2–3 Faktenchecks außerhalb Migration/Klima (z. B. Gesundheit –
   Thema existiert im Schema, ist aber leer).
-- Zurückgestellte Maschen mit guter Beleglage: Gish-Galopp/Firehose, Sündenbock,
-  Bandwagon, Newspeak.
-- Teilbare **Social-Media-Karten** (Open Graph je Masche/Faktencheck) – beim
-  Nutzer „in der Pipeline“.
-- Evtl. Projektname überdenken (Kandidaten: Faktenkompass, Durchblick, Prüfstein) –
-  offen, vom Nutzer noch nicht entschieden.
+- **Social-Media-Karten** (Open Graph je Masche/Faktencheck) – beim Nutzer „in der
+  Pipeline“.
+- Projektname evtl. überdenken (Faktenkompass / Durchblick / Prüfstein) – offen.
