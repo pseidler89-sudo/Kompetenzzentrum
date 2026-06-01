@@ -98,6 +98,11 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   ggf. in Custom-Allowlist ergänzen. Quellen können jetzt im Volltext geprüft werden.
 
 ## Stolpersteine (gelernt)
+- **`public/.nojekyll` MUSS existieren.** Sonst läuft auf GitHub Pages Jekyll und
+  **ignoriert Ordner mit `_`-Präfix** → Astros `_astro/` (gehashtes CSS/JS) liefert
+  404, während alle anderen Dateien (favicon, og-image, /tools, /admin) laden →
+  Seite **komplett unstyled, kein Header-Menü**. Symptom: nur `_astro/*` ist 404,
+  `/.nojekyll` ebenfalls 404. Fix: leere Datei `public/.nojekyll` (landet via Build in `dist/`).
 - **Pages-Deploy: nicht mit Merges spammen.** Hashed CSS/JS + `cancel-in-progress`
   führten dazu, dass viele schnelle Merges Deploys mittendrin abbrachen → Live-HTML
   zeigte auf CSS-Hashes, die (noch) nicht da waren → **komplett unstyled** (riesiges
