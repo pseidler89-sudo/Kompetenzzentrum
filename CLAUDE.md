@@ -98,6 +98,12 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   ggf. in Custom-Allowlist ergänzen. Quellen können jetzt im Volltext geprüft werden.
 
 ## Stolpersteine (gelernt)
+- **Pages-Deploy: nicht mit Merges spammen.** Hashed CSS/JS + `cancel-in-progress`
+  führten dazu, dass viele schnelle Merges Deploys mittendrin abbrachen → Live-HTML
+  zeigte auf CSS-Hashes, die (noch) nicht da waren → **komplett unstyled** (riesiges
+  Logo-SVG als Symptom). Fix: `cancel-in-progress: false` in `deploy.yml` (atomar).
+  Trotzdem: Änderungen möglichst **bündeln**, nicht 5 PRs in 2 Minuten mergen, und
+  nach dem letzten Merge ~2 min warten, bis Pages konsistent ist (CSS-Link → 200 prüfen).
 - **Tote Quellen-Links = rote CI = „Run failed“-Mail-Flut.** Der CI-Job
   `quellen-links` (`npm run check:links`) bricht bei 404/410/DNS ab (403/429/503 =
   nur Warnung). Behörden/Verbände bauen URLs gern um → Links sterben still.
