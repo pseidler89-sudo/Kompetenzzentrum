@@ -296,7 +296,9 @@ a.badge:hover { border-color: var(--c-border-strong); color: var(--c-text); }
   color: inherit;
   transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease;
 }
-a.card:hover { border-color: var(--c-border-strong); transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+a.card { cursor: pointer; }
+a.card:hover { border-color: var(--c-accent); transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+a.card:hover h3 { color: var(--c-accent); }
 .card__meta { display: flex; gap: .45rem; flex-wrap: wrap; align-items: center; }
 .card h3 { margin: 0; font-size: 1.12rem; letter-spacing: -0.01em; }
 .card p { margin: 0; color: var(--c-text-soft); font-size: 0.95rem; }

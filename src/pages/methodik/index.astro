@@ -17,9 +17,10 @@ const artikel = (await getCollection("methodik")).sort(
 
   <div class="grid grid--2" style="margin-top:2rem;">
     {artikel.map((a) => (
-      <a class="card" href={pfad(`/methodik/${a.id}`)}>
+      <a class="card methodik-card" href={pfad(`/methodik/${a.id}`)}>
         <h3 style="margin:0;">{a.data.titel}</h3>
         <p style="margin:0;">{a.data.zusammenfassung}</p>
+        <span class="methodik-card__more">Mehr lesen <span class="pfeil" aria-hidden="true">→</span></span>
       </a>
     ))}
   </div>
@@ -39,4 +40,7 @@ const artikel = (await getCollection("methodik")).sort(
 
 <style>
   .prinzipien { display: grid; gap: .6rem; padding-left: 1.2rem; }
+  .methodik-card__more { margin-top: auto; padding-top: .35rem; font-weight: 700; font-size: .9rem; color: var(--c-accent); }
+  .methodik-card__more .pfeil { display: inline-block; transition: transform .15s ease; }
+  .methodik-card:hover .methodik-card__more .pfeil { transform: translateX(4px); }
 </style>
