@@ -1,10 +1,11 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import StufenSchalter from "../../components/StufenSchalter.astro";
 import UrteilBadge from "../../components/UrteilBadge.astro";
 import Quellen from "../../components/Quellen.astro";
 import { THEMA_LABEL, TECHNIK_LABEL, STATUS_LABEL, datumFormat, pfad } from "../../lib/labels";
+import { md } from "../../lib/markdown";
 
 export async function getStaticPaths() {
   const eintraege = await getCollection("faktenchecks");
@@ -13,7 +14,13 @@ export async function getStaticPaths() {
 
 const { eintrag } = Astro.props;
 const { data } = eintrag;
-const { Content } = await render(eintrag);
+
+// Die drei Tiefen, gerendert aus den Inhaltsfeldern.
+const stufen = [
+  { key: "einstieg", label: "Einstieg", html: md(data.einstieg) },
+  { key: "vertiefung", label: "Vertiefung", html: md(data.vertiefung) },
+  { key: "wissenschaftlich", label: "Wissenschaftlich", html: md(data.wissenschaftlich) },
+];
 
 const alle = await getCollection("faktenchecks");
 const verwandt = (data.verwandt ?? [])
@@ -54,10 +61,33 @@ const githubEdit = `https://github.com/pseidler89-sudo/kompetenzzentrum/blob/mai
       </div>
     )}
 
+    {data.einleitung && (
+      <div class="prose fc-einleitung" set:html={md(data.einleitung)} />
+    )}
+
     <StufenSchalter />
 
     <div class="prose" data-faktencheck-body>
-      <Content />
+      {stufen.map((s) => (
+        <div class={`stufe stufe-${s.key}`} data-stufe={s.key}>
+          <p class="stufe-heading">{s.label}</p>
+          <div set:html={s.html} />
+        </div>
+      ))}
+
+      {data.technik_titel && (
+        <aside class="box box-technik" data-technik={data.technik_titel}>
+          <p class="box-label"><strong>Technik erkannt: {data.technik_titel}</strong></p>
+          <div set:html={md(data.technik_text)} />
+        </aside>
+      )}
+
+      {data.pruefen && (
+        <aside class="box box-pruefen">
+          <p class="box-label"><strong>So prüfst du das selbst</strong></p>
+          <div set:html={md(data.pruefen)} />
+        </aside>
+      )}
     </div>
 
     <Quellen quellen={data.quellen} />

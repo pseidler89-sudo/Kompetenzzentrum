@@ -35,18 +35,21 @@ for (const datei of dateien) {
   const fm = frontmatter(pfad ? text : "");
   const body = text.slice(text.indexOf("---", 3) + 3);
 
+  // Die drei Tiefen sind jetzt eigene Frontmatter-Felder (key: |).
   for (const stufe of ["einstieg", "vertiefung", "wissenschaftlich"]) {
-    if (!body.includes(`:::stufe{name="${stufe}"}`)) {
+    const feld = fm.match(new RegExp(`^${stufe}:\\s*(\\|[-+0-9]*\\s*$|.+)`, "m"));
+    const hatInhalt = feld && (feld[1].startsWith("|") ? true : feld[1].trim().length > 2);
+    if (!hatInhalt) {
       fehler.push(
-        `${datei}: Die Tiefe „${stufe}“ fehlt. Füge einen Abschnitt ` +
-          `:::stufe{name="${stufe}"} … ::: hinzu (jeder Faktencheck braucht alle drei Tiefen).`,
+        `${datei}: Die Tiefe „${stufe}“ fehlt oder ist leer. ` +
+          `Jeder Faktencheck braucht die drei Felder einstieg, vertiefung, wissenschaftlich.`,
       );
     }
   }
-  if (!body.includes(":::pruefen")) {
+  if (!/^pruefen:\s*\|/m.test(fm)) {
     warnungen.push(
-      `${datei}: Kein „So prüfst du das selbst“-Block. Empfohlen: ein :::pruefen … ::: ` +
-        `mit konkreten Schritten, wie Leser:innen die Behauptung selbst nachprüfen.`,
+      `${datei}: Kein „So prüfst du das selbst“-Block (Feld „pruefen“). ` +
+        `Empfohlen: konkrete Schritte, wie Leser:innen die Behauptung selbst nachprüfen.`,
     );
   }
 

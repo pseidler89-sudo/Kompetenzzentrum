@@ -71,6 +71,19 @@ const faktenchecks = defineCollection({
     quellen: z.array(quelle).min(1),
     // Verwandte Faktenchecks (Slugs) für Querverweise.
     verwandt: z.array(z.string()).default([]),
+
+    // Inhalt als eigene Felder (statt :::-Direktiven im Body).
+    // So muss niemand Markdown-Direktiven-Syntax kennen – weder im CMS
+    // noch beim direkten Bearbeiten. Markdown im Feld bleibt erlaubt.
+    einleitung: z.string().default(""),
+    einstieg: z.string(),
+    vertiefung: z.string(),
+    wissenschaftlich: z.string(),
+    // Erkannte Manipulationstechnik (Freitext-Titel + Erklärung).
+    technik_titel: z.string().default(""),
+    technik_text: z.string().default(""),
+    // „So prüfst du das selbst“-Block.
+    pruefen: z.string().default(""),
   }),
 });
 

@@ -14,9 +14,10 @@
     "validate": "node scripts/normalize-frontmatter.mjs && node scripts/validate-content.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
     "astro": "^5.2.5",
+    "marked": "^15.0.12",
     "remark-directive": "^3.0.0",
-    "unist-util-visit": "^5.0.0",
-    "@astrojs/sitemap": "^3.2.1"
+    "unist-util-visit": "^5.0.0"
   }
 }

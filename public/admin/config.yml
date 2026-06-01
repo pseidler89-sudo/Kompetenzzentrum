@@ -1,0 +1,140 @@
+# Sveltia CMS – Redaktionsoberfläche für das Kompetenzzentrum.
+# Doku: https://github.com/sveltia/sveltia-cms
+
+backend:
+  name: github
+  repo: pseidler89-sudo/Kompetenzzentrum
+  branch: main
+  # OAuth-Vermittler (Cloudflare Worker) – ermöglicht den „Login mit GitHub“-Knopf.
+  # base_url wird auf die Worker-URL gesetzt, sobald der Worker eingerichtet ist.
+  base_url: https://kompetenzzentrum-auth.example.workers.dev
+
+# Beiträge landen zunächst als Entwurf/Pull-Request statt direkt auf main.
+publish_mode: editorial_workflow
+
+# Sprache der Oberfläche
+locale: de
+
+media_folder: "public/uploads"
+public_folder: "/Kompetenzzentrum/uploads"
+
+collections:
+  - name: faktenchecks
+    label: "Faktenchecks"
+    label_singular: "Faktencheck"
+    folder: "src/content/faktenchecks"
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: yaml-frontmatter
+    summary: "{{titel}}  ·  {{urteil}}"
+    fields:
+      - { name: titel, label: "Titel", widget: string, hint: "Kurzer, klarer Titel – oft die Behauptung in Anführungszeichen." }
+      - { name: behauptung, label: "Die Behauptung", widget: text, hint: "Die geprüfte Falschbehauptung, möglichst im Wortlaut." }
+      - { name: kurzantwort, label: "Kurzantwort (Fakt zuerst)", widget: text, hint: "1–2 Sätze: der belegte Fakt. Steht ganz oben (Truth-Sandwich)." }
+      - name: urteil
+        label: "Urteil"
+        widget: select
+        default: "irrefuehrend"
+        options:
+          - { label: "Falsch", value: "falsch" }
+          - { label: "Größtenteils falsch", value: "groesstenteils-falsch" }
+          - { label: "Irreführend", value: "irrefuehrend" }
+          - { label: "Fehlender Kontext", value: "fehlender-kontext" }
+          - { label: "Teils richtig, teils falsch", value: "teils-richtig" }
+      - name: themen
+        label: "Themen"
+        widget: select
+        multiple: true
+        min: 1
+        options:
+          - { label: "Migration & Asyl", value: "migration" }
+          - { label: "Kriminalität & Sicherheit", value: "kriminalitaet-sicherheit" }
+          - { label: "Klima & Energie", value: "klima-energie" }
+          - { label: "Wirtschaft & Soziales", value: "wirtschaft-soziales" }
+          - { label: "Gesundheit", value: "gesundheit" }
+          - { label: "Demokratie & Medien", value: "demokratie-medien" }
+      - name: techniken
+        label: "Manipulationstechniken"
+        widget: select
+        multiple: true
+        required: false
+        hint: "Welche Maschen stecken in der Behauptung?"
+        options:
+          - { label: "Schein-Expert:innen", value: "fake-experten" }
+          - { label: "Logischer Fehlschluss", value: "logischer-fehlschluss" }
+          - { label: "Unerfüllbare Erwartung", value: "unerfuellbare-erwartung" }
+          - { label: "Rosinenpickerei (Cherry Picking)", value: "cherry-picking" }
+          - { label: "Verschwörungserzählung", value: "verschwoerung" }
+          - { label: "Falsche Ursache-Wirkung", value: "falsche-kausalitaet" }
+          - { label: "Fehlender Bezugswert", value: "fehlender-bezugswert" }
+          - { label: "Emotionalisierung", value: "emotionalisierung" }
+          - { label: "Falsche Gleichsetzung", value: "falsche-gleichsetzung" }
+          - { label: "Aus dem Kontext gerissen", value: "aus-dem-kontext-gerissen" }
+      - { name: zusammenfassung, label: "Kurzbeschreibung (für Vorschau & Suchmaschinen)", widget: text, pattern: ['^.{1,300}$', "Höchstens 300 Zeichen."] }
+      - name: status
+        label: "Redaktioneller Status"
+        widget: select
+        default: "entwurf"
+        options:
+          - { label: "Entwurf", value: "entwurf" }
+          - { label: "In Prüfung", value: "in-pruefung" }
+          - { label: "Geprüft", value: "geprueft" }
+      - { name: veroeffentlicht, label: "Veröffentlicht am", widget: datetime, date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+      - { name: aktualisiert, label: "Aktualisiert am", widget: datetime, date_format: "YYYY-MM-DD", time_format: false, picker_utc: true, required: false }
+      - { name: mitwirkende, label: "Mitwirkende", widget: list, required: false, default: [], hint: "Namen oder GitHub-Handles." }
+
+      - name: quellen
+        label: "Quellen"
+        label_singular: "Quelle"
+        widget: list
+        min: 1
+        summary: "{{fields.herausgeber}} – {{fields.titel}}"
+        hint: "Jede zentrale Aussage braucht einen Beleg. Amtliche Primärquellen bevorzugen."
+        fields:
+          - { name: titel, label: "Titel der Quelle", widget: string }
+          - { name: herausgeber, label: "Herausgeber", widget: string, hint: "z. B. Statistisches Bundesamt, BKA, Bundesnetzagentur" }
+          - { name: url, label: "Link (URL)", widget: string, required: false, pattern: ['^https?://.+', "Bitte eine vollständige URL (https://…)"] }
+          - { name: datum, label: "Datum/Jahr", widget: string, required: false }
+          - name: art
+            label: "Art"
+            widget: select
+            default: "sekundaer"
+            options:
+              - { label: "Primärquelle (amtlich/original)", value: "primaer" }
+              - { label: "Sekundärquelle", value: "sekundaer" }
+
+      - name: verwandt
+        label: "Verwandte Faktenchecks"
+        widget: relation
+        required: false
+        multiple: true
+        collection: faktenchecks
+        value_field: "{{slug}}"
+        search_fields: ["titel"]
+        display_fields: ["titel"]
+        hint: "Optional: thematisch verwandte Beiträge zum Verlinken."
+
+      # ---- Inhalt: Einleitung + drei Tiefen + Technik + Prüfen ----
+      - { name: einleitung, label: "Einleitung (Fakt zuerst)", widget: markdown, required: false, hint: "Ein einleitender Absatz – beginnt mit dem belegten Stand, nicht mit dem Mythos." }
+      - { name: einstieg, label: "① Einstieg", widget: markdown, hint: "Kurz & verständlich, ganz ohne Vorwissen." }
+      - { name: vertiefung, label: "② Vertiefung", widget: markdown, hint: "Die Zahlen dahinter und die Zusammenhänge." }
+      - { name: wissenschaftlich, label: "③ Wissenschaftlich", widget: markdown, hint: "Primärquellen, Methodik, statistische Fallstricke." }
+      - { name: technik_titel, label: "Technik – Titel", widget: string, required: false, hint: "z. B. „Cherry Picking & fehlender Bezugswert“" }
+      - { name: technik_text, label: "Technik – Erklärung", widget: markdown, required: false, hint: "Welche Manipulationstechnik steckt dahinter?" }
+      - { name: pruefen, label: "So prüfst du das selbst", widget: markdown, required: false, hint: "Konkrete Schritte zum Selber-Nachprüfen (gern als Liste)." }
+
+  - name: methodik
+    label: "Methodik-Artikel"
+    label_singular: "Methodik-Artikel"
+    folder: "src/content/methodik"
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: yaml-frontmatter
+    fields:
+      - { name: titel, label: "Titel", widget: string }
+      - { name: zusammenfassung, label: "Kurzbeschreibung", widget: text }
+      - { name: reihenfolge, label: "Reihenfolge", widget: number, default: 99, value_type: int }
+      - { name: aktualisiert, label: "Aktualisiert am", widget: datetime, date_format: "YYYY-MM-DD", time_format: false, picker_utc: true, required: false }
+      - { name: body, label: "Inhalt", widget: markdown }
