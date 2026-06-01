@@ -81,6 +81,7 @@ const sift = [
   section { margin-top: 3rem; }
   .checkliste, .werkzeuge { display: grid; gap: .6rem; padding-left: 1.2rem; }
   .technik-liste { display: grid; gap: .9rem; }
-  .technik { padding: 1rem 1.25rem; background: var(--c-surface); border: 1px solid var(--c-border); border-left: 4px solid #8338ec; border-radius: var(--radius); scroll-margin-top: 5rem; }
-  .technik:target { border-left-width: 6px; box-shadow: var(--shadow); }
+  .technik { padding: 1rem 1.25rem; background: var(--c-surface); border: 1px solid var(--c-border); border-left: 4px solid var(--c-technik); border-radius: var(--radius-sm); scroll-margin-top: 5rem; box-shadow: var(--shadow); }
+  .technik h3 { color: var(--c-technik); }
+  .technik:target { border-left-width: 6px; box-shadow: var(--shadow-lift); }
 </style>

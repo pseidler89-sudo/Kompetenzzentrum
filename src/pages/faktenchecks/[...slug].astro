@@ -91,14 +91,18 @@ const githubEdit = `https://github.com/pseidler89-sudo/kompetenzzentrum/blob/mai
 </BaseLayout>
 
 <style>
-  .behauptung-box, .kurzantwort-box { margin: 1.5rem 0; padding: 1rem 1.25rem; border-radius: var(--radius); }
-  .behauptung-box { background: var(--c-falsch-bg); border: 1px solid color-mix(in srgb, var(--c-falsch) 25%, transparent); }
-  .kurzantwort-box { background: var(--c-accent-soft); border: 1px solid color-mix(in srgb, var(--c-accent) 25%, transparent); }
+  .behauptung-box, .kurzantwort-box {
+    margin: 1.5rem 0; padding: 1.1rem 1.3rem; border-radius: var(--radius);
+    border: 1px solid var(--c-border); border-left-width: 4px;
+  }
+  .behauptung-box { background: var(--c-surface-2); border-left-color: var(--c-falsch); }
+  .kurzantwort-box { background: var(--c-accent-soft); border-left-color: var(--c-accent); }
   .behauptung-box__label, .kurzantwort-box__label {
-    font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em;
+    font-size: .76rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em;
   }
   .behauptung-box__label { color: var(--c-falsch); }
   .kurzantwort-box__label { color: var(--c-accent); }
-  .behauptung-box p { margin: .25rem 0 0; font-size: 1.15rem; font-style: italic; }
-  .fc-footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border); font-size: .92rem; }
+  .behauptung-box p { margin: .3rem 0 0; font-size: 1.15rem; font-style: italic; color: var(--c-text); }
+  .kurzantwort-box .lead { font-size: 1.18rem; line-height: 1.5; }
+  .fc-footer { margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border); font-size: .92rem; }
 </style>

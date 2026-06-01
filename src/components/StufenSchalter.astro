@@ -10,7 +10,10 @@
 ---
 
 <div class="stufen-schalter" role="group" aria-label="Informationstiefe wählen">
-  <span class="stufen-schalter__label">Aufbereitung für:</span>
+  <div class="stufen-schalter__head">
+    <span class="stufen-schalter__label">Informationstiefe</span>
+    <span class="stufen-schalter__hint">Deine Auswahl bleibt gespeichert</span>
+  </div>
   <div class="stufen-schalter__buttons">
     <button type="button" data-set-stufe="einstieg" aria-pressed="false">
       <strong>Einstieg</strong><span>Kompakt, kein Vorwissen</span>
@@ -28,30 +31,44 @@
   .stufen-schalter {
     display: flex;
     flex-direction: column;
-    gap: .6rem;
-    margin: 1.5rem 0 2rem;
-    padding: 1rem;
+    gap: .7rem;
+    margin: 1.75rem 0 2.25rem;
+    padding: 1rem 1.1rem 1.1rem;
     background: var(--c-surface);
     border: 1px solid var(--c-border);
     border-radius: var(--radius);
+    box-shadow: var(--shadow);
   }
-  .stufen-schalter__label { font-weight: 700; font-size: .9rem; color: var(--c-text-soft); }
-  .stufen-schalter__buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
+  .stufen-schalter__head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: .75rem;
+  }
+  .stufen-schalter__label {
+    font-weight: 700; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--c-text-soft);
+  }
+  .stufen-schalter__hint { font-size: .78rem; color: var(--c-text-soft); }
+  .stufen-schalter__buttons {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: .4rem;
+    background: var(--c-surface-2); padding: .3rem; border-radius: 10px;
+  }
   .stufen-schalter button {
-    display: flex; flex-direction: column; gap: .15rem; text-align: left;
-    padding: .6rem .8rem; cursor: pointer;
-    border: 1px solid var(--c-border); border-radius: 8px;
-    background: var(--c-surface-2); color: var(--c-text);
-    font-family: inherit;
+    display: flex; flex-direction: column; gap: .12rem; text-align: left;
+    padding: .55rem .75rem; cursor: pointer;
+    border: 1px solid transparent; border-radius: 7px;
+    background: transparent; color: var(--c-text);
+    font-family: inherit; font-weight: 700; font-size: .95rem;
+    transition: background-color .12s ease, border-color .12s ease, color .12s ease, box-shadow .12s ease;
   }
-  .stufen-schalter button span { font-size: .78rem; color: var(--c-text-soft); font-weight: 500; }
-  .stufen-schalter button:hover { border-color: var(--c-accent); }
+  .stufen-schalter button span { font-size: .76rem; color: var(--c-text-soft); font-weight: 500; }
+  .stufen-schalter button:hover { background: var(--c-surface); border-color: var(--c-border); }
   .stufen-schalter button[aria-pressed="true"] {
     background: var(--c-accent); border-color: var(--c-accent); color: #fff;
+    box-shadow: 0 1px 3px rgba(16,24,40,.18);
   }
-  .stufen-schalter button[aria-pressed="true"] span { color: rgba(255,255,255,.85); }
+  .stufen-schalter button[aria-pressed="true"] span { color: rgba(255,255,255,.88); }
   @media (max-width: 560px) {
     .stufen-schalter__buttons { grid-template-columns: 1fr; }
+    .stufen-schalter__head { flex-direction: column; gap: .15rem; }
   }
 </style>
 

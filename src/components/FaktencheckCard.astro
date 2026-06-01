@@ -16,12 +16,28 @@ interface Props {
 const { slug, data } = Astro.props;
 ---
 
-<a class="card" href={pfad(`/faktenchecks/${slug}`)}>
+<a class={`card fc-card fc-card--${data.urteil}`} href={pfad(`/faktenchecks/${slug}`)}>
   <div class="card__meta">
     <UrteilBadge urteil={data.urteil} />
     {data.themen.slice(0, 2).map((t) => <span class="badge">{THEMA_LABEL[t] ?? t}</span>)}
   </div>
   <h3>{data.titel}</h3>
-  <p class="muted" style="font-style:italic;">„{data.behauptung}“</p>
+  <p class="fc-card__claim">„{data.behauptung}“</p>
   <p>{data.kurzantwort}</p>
 </a>
+
+<style>
+  .fc-card { position: relative; padding-top: 1.45rem; overflow: hidden; }
+  .fc-card::before {
+    content: ""; position: absolute; inset: 0 0 auto 0; height: 4px;
+    background: var(--c-teils);
+  }
+  .fc-card--falsch::before, .fc-card--groesstenteils-falsch::before { background: var(--c-falsch); }
+  .fc-card--irrefuehrend::before { background: var(--c-irrefuehrend); }
+  .fc-card--fehlender-kontext::before { background: var(--c-kontext); }
+  .fc-card--teils-richtig::before { background: var(--c-teils); }
+  .fc-card__claim {
+    font-style: italic; color: var(--c-text-soft);
+    padding-left: .75rem; border-left: 2px solid var(--c-border-strong);
+  }
+</style>

@@ -30,9 +30,15 @@ const vollerTitel = titel === "Kompetenzzentrum" ? titel : `${titel} · Kompeten
     <meta property="og:title" content={vollerTitel} />
     <meta property="og:description" content={beschreibung} />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#1f6feb" />
+    <meta name="theme-color" content="#1c5fc4" />
     <link rel="icon" type="image/svg+xml" href={pfad("/favicon.svg")} />
     <link rel="sitemap" href={pfad("/sitemap-index.xml")} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
   </head>
   <body>
     <a href="#main" class="skip-link">Zum Inhalt springen</a>
