@@ -68,9 +68,11 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   Alt-Branch `sharp-euler-KJ9Wu` war ein Duplikat und wurde entfernt.
 
 ## Stand (zuletzt)
-- **v1.0 (06/2026):** Design-Handoff P1 (Datengrafiken) + P3 (Maschen-Icons) +
-  Grafik-Baukasten eingebaut, Startseiten-Tiefen-Demo springt nicht mehr. Ziel:
-  veröffentlichen und Feedback sammeln.
+- **v1.0 LIVE (06/2026):** Design-Handoff P1 (Datengrafiken) + P3 (Maschen-Icons) +
+  Grafik-Baukasten eingebaut, Startseiten-Tiefen-Demo springt nicht mehr. Seite
+  läuft gestylt inkl. Desktop-Header-Navigation (Faktenchecks · Maschen ·
+  Werkzeugkasten · Methodik · Mitmachen-CTA) und mobilem Burger. Pages-Auslieferung
+  gefixt (`.nojekyll` + `build.assets:"astro"`). Ziel jetzt: Feedback sammeln.
 - **13 Faktenchecks.** Fünf warten auf menschliche Abnahme (`in-pruefung` → dann
   `geprueft`): „Antibiotika bei Erkältung“ (gesundheit); „E-Auto-Klimabilanz“;
   „Bio-Landwirtschaft immer besser“; „Windkraft & Vögel“; „Landwirtschaft & Klima“.
@@ -98,11 +100,22 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   ggf. in Custom-Allowlist ergänzen. Quellen können jetzt im Volltext geprüft werden.
 
 ## Stolpersteine (gelernt)
-- **`public/.nojekyll` MUSS existieren.** Sonst läuft auf GitHub Pages Jekyll und
-  **ignoriert Ordner mit `_`-Präfix** → Astros `_astro/` (gehashtes CSS/JS) liefert
-  404, während alle anderen Dateien (favicon, og-image, /tools, /admin) laden →
-  Seite **komplett unstyled, kein Header-Menü**. Symptom: nur `_astro/*` ist 404,
-  `/.nojekyll` ebenfalls 404. Fix: leere Datei `public/.nojekyll` (landet via Build in `dist/`).
+- **GitHub-Pages-Asset-Auslieferung (hat uns 06/2026 viel Zeit gekostet).** Zwei
+  Dinge zusammen sorgten für „Seite komplett unstyled / kein Header":
+  1. **`public/.nojekyll` MUSS existieren** – sonst läuft Jekyll und ignoriert
+     `_`-Ordner → Astros `_astro/` (CSS/JS) = 404, alles andere lädt. Zusätzlich
+     legen wir die Assets per `build: { assets: "astro" }` (astro.config) in einen
+     Ordner **ohne** Unterstrich (`/astro/`) → doppelt Jekyll-immun.
+  2. **CDN-Verteilung dauert.** Nach einem Deploy liefern Fastly-Edges zeitversetzt
+     aus (mancher Knoten 200, ein anderer noch 404). Nicht in Panik neu deployen –
+     ein paar Minuten warten, dann `Strg+Shift+R`.
+- **Header-Navigation NICHT in `<details>` für den Desktop.** Aktuelle Browser
+  verstecken den Inhalt geschlossener `<details>` via `content-visibility`
+  (`::details-content`) – das hebelt sogar `display:flex !important` aus → Desktop
+  zeigte nur das Logo. Lösung (in `BaseLayout.astro`/`global.css`): **immer sichtbare
+  `.site-nav--desktop`-Leiste** außerhalb von `<details>`; der Burger ist ein
+  **separates** `<details class="nav-burger">`, nur per Media Query (≤720px) sichtbar.
+- **`public/.nojekyll` MUSS existieren.** (Kurzform – Details siehe oben.)
 - **Pages-Deploy: nicht mit Merges spammen.** Hashed CSS/JS + `cancel-in-progress`
   führten dazu, dass viele schnelle Merges Deploys mittendrin abbrachen → Live-HTML
   zeigte auf CSS-Hashes, die (noch) nicht da waren → **komplett unstyled** (riesiges
