@@ -16,6 +16,10 @@ export default defineConfig({
   site: SITE,
   base: BASE,
   trailingSlash: "ignore",
+  // Assets in einen Ordner OHNE Unterstrich legen: GitHub Pages/Jekyll ignoriert
+  // sonst `_astro/` (→ CSS/JS 404, Seite unstyled). Zusammen mit public/.nojekyll
+  // doppelt abgesichert.
+  build: { assets: "astro" },
   markdown: {
     remarkPlugins: [remarkDirective, remarkStufen],
   },
