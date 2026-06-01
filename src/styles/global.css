@@ -225,6 +225,10 @@ blockquote {
 }
 .site-nav a:hover { color: var(--c-text); background: var(--c-surface-2); }
 .site-nav a[aria-current="page"] { color: var(--c-accent); background: var(--c-accent-soft); }
+/* „Mitmachen" als hervorgehobene Aktion rechts in der Leiste. */
+.site-nav a.nav-cta { color: #fff; background: var(--c-accent); font-weight: 700; margin-left: .35rem; }
+.site-nav a.nav-cta:hover { color: #fff; background: var(--c-accent-strong); }
+.site-nav a.nav-cta[aria-current="page"] { color: #fff; background: var(--c-accent-strong); }
 
 .site-footer {
   border-top: 1px solid var(--c-border);
