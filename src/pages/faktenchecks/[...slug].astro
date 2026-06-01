@@ -27,6 +27,10 @@ const verwandt = (data.verwandt ?? [])
   .map((slug) => alle.find((e) => e.id === slug))
   .filter(Boolean);
 
+// Teilbarer Kurztext: Fakt + wichtigste Quelle + Link. Für Gespräche & Social Media.
+const primaer = data.quellen.find((q) => q.art === "primaer") ?? data.quellen[0];
+const seiteUrl = new URL(pfad(`/faktenchecks/${eintrag.id}`), Astro.site).href;
+const teilenText = `„${data.behauptung}“\n\nFakt: ${data.kurzantwort}\n\nQuelle: ${primaer.herausgeber}${primaer.datum ? `, ${primaer.datum}` : ""}\nMehr dazu: ${seiteUrl}`;
 ---
 
 <BaseLayout titel={data.titel} beschreibung={data.zusammenfassung}>
@@ -49,6 +53,12 @@ const verwandt = (data.verwandt ?? [])
     <div class="kurzantwort-box">
       <span class="kurzantwort-box__label">Kurzantwort</span>
       <p class="lead" style="color:var(--c-text);margin:.25rem 0 0;">{data.kurzantwort}</p>
+      <div class="teilen">
+        <button type="button" class="btn btn--ghost btn--klein" data-teilen={teilenText}>
+          📋 Kurzantwort kopieren
+        </button>
+        <span class="teilen__hint muted">Fakt + Quelle + Link – griffbereit für Gespräche und Social Media.</span>
+      </div>
     </div>
 
     {data.techniken.length > 0 && (
@@ -129,5 +139,27 @@ const verwandt = (data.verwandt ?? [])
   .kurzantwort-box__label { color: var(--c-accent); }
   .behauptung-box p { margin: .3rem 0 0; font-size: 1.15rem; font-style: italic; color: var(--c-text); }
   .kurzantwort-box .lead { font-size: 1.18rem; line-height: 1.5; }
+  .teilen { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; margin-top: .9rem; }
+  .btn--klein { padding: .4rem .8rem; font-size: .85rem; }
+  .btn--erfolg { background: var(--c-accent); color: #fff; border-color: var(--c-accent); }
+  .teilen__hint { font-size: .82rem; }
   .fc-footer { margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border); font-size: .92rem; }
 </style>
+
+<script>
+  function initTeilen() {
+    document.querySelectorAll<HTMLButtonElement>("[data-teilen]").forEach((b) => {
+      b.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(b.dataset.teilen!);
+          const alt = b.textContent;
+          b.textContent = "Kopiert ✓";
+          b.classList.add("btn--erfolg");
+          setTimeout(() => { b.textContent = alt; b.classList.remove("btn--erfolg"); }, 1800);
+        } catch { /* Zwischenablage nicht verfügbar */ }
+      });
+    });
+  }
+  initTeilen();
+  document.addEventListener("astro:page-load", initTeilen);
+</script>

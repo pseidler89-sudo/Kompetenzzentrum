@@ -18,6 +18,23 @@ Vorrang in dieser Reihenfolge:
 Nicht ausreichend: anonyme Behauptungen, Einzelmeinungen ohne Daten, Quellen,
 die ihrerseits keine Belege nennen.
 
+### Verifikation: zwei getrennte Pflichten
+
+Eine Quelle gilt erst als geprüft, wenn **beides** erfüllt ist:
+
+1. **Erreichbar** – der Link führt zu einer existierenden Seite. Das prüft die CI
+   automatisch (`npm run check:links`, läuft bei jedem Push in GitHub Actions).
+   Tote oder erfundene Links (404, nicht existente Domain) lassen die CI scheitern.
+2. **Inhaltlich tragend** – die Seite belegt die Aussage tatsächlich, im
+   richtigen Kontext. **Das kann keine Automatik leisten** – es ist redaktionelle
+   Pflicht und muss von einem Menschen gelesen worden sein, bevor ein Beitrag den
+   Status `geprueft` bekommt.
+
+Grundsatz: **Lieber keine Quelle als eine ungeprüfte.** Wer eine Aussage nicht
+selbst an der Quelle nachgelesen hat, markiert den Beitrag als `entwurf` und
+notiert offen, was noch zu prüfen ist. Eine Such-Trefferanzeige ersetzt nicht das
+Lesen des Originals.
+
 ## 2. Truth Sandwich
 
 Fakt zuerst – Mythos klar markiert nennen – widerlegen – Fakt wiederholen.
@@ -59,13 +76,16 @@ der Commit-Historie hinterlassen.
 
 ## 9. Neutralität gegenüber Personen und Parteien
 
-Geprüft werden **Aussagen**, nicht Personen. Der Schwerpunkt auf faktenfremder
-rechter Polemik ergibt sich aus der Faktenlage und dem Bedarf – das Vorgehen
-(Belegpflicht, Fairness) gilt unterschiedslos für jede Behauptung.
+Geprüft werden **Aussagen**, nicht Personen. Das Vorgehen – Belegpflicht und
+Fairness – gilt unterschiedslos für jede Behauptung, unabhängig davon, von welcher
+Seite sie kommt. Dass bestimmte Themen und Akteure in den Beispielen häufiger
+vorkommen, ergibt sich allein aus der Faktenlage und dem Bedarf, nicht aus einer
+parteilichen Ausrichtung.
 
 ## Review-Checkliste
 
-- [ ] Quellen vorhanden, Links funktionieren, Primärquellen wo möglich
+- [ ] Quellen vorhanden, Links erreichbar (CI) **und** Inhalt selbst nachgelesen
+- [ ] Primärquellen wo möglich
 - [ ] Alle drei Tiefen vorhanden und widerspruchsfrei
 - [ ] `:::pruefen`-Block mit nachvollziehbaren Schritten
 - [ ] Behauptung fair wiedergegeben

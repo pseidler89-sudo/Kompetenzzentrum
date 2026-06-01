@@ -38,6 +38,13 @@ export const TECHNIKEN = [
   "emotionalisierung",
   "falsche-gleichsetzung",
   "aus-dem-kontext-gerissen",
+  "whataboutism",
+  "falsche-verknuepfung",
+  "astroturfing",
+  "identitaetsschwindel",
+  "falsche-ausgewogenheit",
+  "gish-galopp",
+  "bandwagon",
 ] as const;
 
 const quelle = z.object({

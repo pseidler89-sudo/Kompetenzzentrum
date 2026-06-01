@@ -38,6 +38,13 @@ export const TECHNIK_LABEL: Record<string, string> = {
   emotionalisierung: "Emotionalisierung",
   "falsche-gleichsetzung": "Falsche Gleichsetzung",
   "aus-dem-kontext-gerissen": "Aus dem Kontext gerissen",
+  whataboutism: "Whataboutism",
+  "falsche-verknuepfung": "Falsche Verknüpfung",
+  astroturfing: "Astroturfing",
+  identitaetsschwindel: "Identitätsschwindel",
+  "falsche-ausgewogenheit": "Falsche Ausgewogenheit",
+  "gish-galopp": "Gish-Galopp",
+  bandwagon: "Mehrheits-Argument (Bandwagon)",
 };
 
 /** Kurzerklärung jeder Technik – für den Werkzeugkasten. */
@@ -52,6 +59,13 @@ export const TECHNIK_ERKLAERUNG: Record<string, string> = {
   emotionalisierung: "Angst, Wut oder Empörung sollen die sachliche Prüfung ersetzen.",
   "falsche-gleichsetzung": "Zwei nicht vergleichbare Dinge werden gleichgesetzt.",
   "aus-dem-kontext-gerissen": "Ein Zitat oder Bild wird ohne seinen ursprünglichen Zusammenhang verwendet.",
+  whataboutism: "Statt auf die Kritik einzugehen, wird mit „Und was ist mit …?“ aufs Thema abgelenkt.",
+  "falsche-verknuepfung": "Überschrift oder Bild passen gar nicht zum eigentlichen Inhalt – gemacht für den schnellen Klick.",
+  astroturfing: "Eine bezahlte oder gesteuerte Kampagne tarnt sich als spontane Bürgerbewegung.",
+  identitaetsschwindel: "Eine Falschmeldung tarnt sich im Look einer seriösen Quelle (gefälschte Medienseite, Behörde).",
+  "falsche-ausgewogenheit": "Eine Randmeinung wird gleichwertig neben den Forschungsstand gestellt – als gäbe es offenen Streit.",
+  "gish-galopp": "Eine Flut vieler kleiner Behauptungen macht eine geordnete Widerlegung im Zeitrahmen unmöglich.",
+  bandwagon: "„Das sehen doch alle so“ wird als Beweis ausgegeben – eine Mehrheit macht eine Aussage aber nicht wahr.",
 };
 
 /**
@@ -70,6 +84,13 @@ export const TECHNIK_KONTER: Record<string, string> = {
   emotionalisierung: "Spür kurz in dich hinein: Soll hier informiert oder vor allem Wut/Angst erzeugt werden? Dann erst weiterlesen.",
   "falsche-gleichsetzung": "Frag: Sind die beiden Dinge wirklich vergleichbar? Oft hinkt der Vergleich an einer entscheidenden Stelle.",
   "aus-dem-kontext-gerissen": "Such das Originalzitat oder -bild. Oft sagt der volle Zusammenhang etwas ganz anderes.",
+  whataboutism: "Hol das Gespräch zurück: „Das können wir gern auch besprechen – aber beantwortet das die ursprüngliche Frage?“",
+  "falsche-verknuepfung": "Erst lesen, dann teilen. Deckt der Text die Überschrift wirklich? Per Bildrückwärtssuche prüfen, ob das Bild echt dazugehört.",
+  astroturfing: "Frag: Wer steckt dahinter und wer zahlt? Tauchen identische Texte unter vielen frischen Accounts auf, ist es selten spontan.",
+  identitaetsschwindel: "Prüfe die URL Zeichen für Zeichen und das Impressum. Ruf die Meldung über die echte Startseite des Mediums auf.",
+  "falsche-ausgewogenheit": "Frag nach dem Verhältnis: Wie viele Fachleute stehen wirklich hinter jeder Seite? Gleiche Redezeit heißt nicht gleiche Evidenz.",
+  "gish-galopp": "Nimm das Tempo raus und greif einen Punkt heraus. Zehn schwache Behauptungen ergeben kein starkes Argument.",
+  bandwagon: "Frag nach Zahlen: „alle“ oder „die Mehrheit“ – wie viele genau, und woher? Eine schweigende Mehrheit kann niemand nachzählen.",
 };
 
 export const STATUS_LABEL: Record<string, string> = {

@@ -23,7 +23,8 @@ auf diese Maschen fällt jede:r mal herein.)
 **🧰 Werkzeugkasten & Methodik** – Wie man Informationen findet, einordnet und
 bewertet. Plus: nach welchen Regeln dieses Projekt arbeitet.
 
-**💬 Diskussionshilfe** – Belegte Kurzantworten zum schnellen Nachschlagen.
+**💬 Für Gespräche gemacht** – Jeder Faktencheck hat einen Knopf, der die belegte
+Kurzantwort samt Quelle und Link kopiert – griffbereit fürs Gespräch oder für Social Media.
 
 ### Das Besondere: ein Thema, drei Tiefen
 
