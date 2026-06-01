@@ -39,9 +39,15 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   läuft NUR in GitHub Actions (offenes Netz), nicht lokal.
 
 ## Branch / Workflow
-- Entwicklung & Push **nur** auf `claude/factcheck-misinformation-platform-OjE9f`.
-- **Nicht** auf `main` pushen (vom System geblockt) und **keine PRs** ohne
-  ausdrückliche Aufforderung. GitHub nur über MCP-Tools.
+- **`main` = live.** GitHub Pages deployt automatisch aus `main` (`deploy.yml`).
+  Was nicht auf `main` ist, ist **nicht live** – das war die Stolperfalle: lange lagen
+  fertige Commits nur auf einem Feature-Branch und die Seite hing 6 Commits zurück.
+- **Direkt-Push auf `main` ist blockiert** (Schutz) → Änderungen **immer über PR**
+  nach `main` mergen, damit sie live gehen. GitHub nur über MCP-Tools.
+- **Pro Aufgabe ein kurzlebiger Feature-Branch** (`claude/<thema>`), nach dem Merge
+  aufräumen. Nicht mehrere Dauer-Branches parallel halten (sonst Wildwuchs).
+- Konsolidiert am 06/2026: Feature-Stand via PR #1 nach `main` gebracht, Seite live;
+  Alt-Branch `sharp-euler-KJ9Wu` war ein Duplikat und wurde entfernt.
 
 ## Stand (zuletzt)
 - **9 Faktenchecks** (+1: Gesundheit – „Antibiotika bei Erkältung“, Status
