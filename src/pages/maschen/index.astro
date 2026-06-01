@@ -1,7 +1,8 @@
 ---
 import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { pfad } from "../../lib/labels";
+import { pfad, MASCHE_ICON } from "../../lib/labels";
 
 const maschen = (await getCollection("maschen")).sort(
   (a, b) => a.data.reihenfolge - b.data.reihenfolge,
@@ -43,7 +44,10 @@ function karte(m: (typeof maschen)[number]) {
     <div class="masche-grid">
       {flicc.map((m) => (
         <a class="masche-card" href={pfad(`/maschen/${m.id}`)}>
-          <span class="masche-card__tag">Kerntechnik</span>
+          <div class="masche-card__top">
+            <span class="masche-ic" aria-hidden="true"><Icon name={MASCHE_ICON[m.data.code] ?? "lucide:shield-alert"} /></span>
+            <span class="masche-card__tag">Kerntechnik</span>
+          </div>
           <h3>{m.data.titel}</h3>
           <p>{m.data.kurz}</p>
           <span class="masche-card__more">Masche ansehen →</span>
@@ -60,6 +64,9 @@ function karte(m: (typeof maschen)[number]) {
     <div class="masche-grid">
       {rhetorik.map((m) => (
         <a class="masche-card masche-card--rhetorik" href={pfad(`/maschen/${m.id}`)}>
+          <div class="masche-card__top">
+            <span class="masche-ic" aria-hidden="true"><Icon name={MASCHE_ICON[m.data.code] ?? "lucide:shield-alert"} /></span>
+          </div>
           <h3>{m.data.titel}</h3>
           <p>{m.data.kurz}</p>
           <span class="masche-card__more">Masche ansehen →</span>
@@ -95,6 +102,15 @@ function karte(m: (typeof maschen)[number]) {
   }
   .masche-card--rhetorik { border-top-color: var(--c-border-strong); }
   .masche-card:hover { transform: translateY(-2px); border-color: var(--c-technik); }
+  .masche-card__top { display: flex; align-items: center; gap: .7rem; }
+  .masche-ic {
+    width: 2.3rem; height: 2.3rem; flex: none; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    background: color-mix(in srgb, var(--c-technik) 12%, var(--c-surface));
+    color: var(--c-technik);
+  }
+  .masche-card--rhetorik .masche-ic { background: var(--c-surface-2); color: var(--c-text-soft); }
+  .masche-ic svg { width: 1.25rem; height: 1.25rem; }
   .masche-card__tag { font-size: .68rem; font-weight: 800; letter-spacing: .05em; color: var(--c-technik); text-transform: uppercase; }
   .masche-card h3 { margin: 0; font-size: 1.12rem; }
   .masche-card p { margin: 0; color: var(--c-text-soft); font-size: .92rem; line-height: 1.5; flex: 1; }
