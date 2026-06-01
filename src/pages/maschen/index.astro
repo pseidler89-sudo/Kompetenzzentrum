@@ -1,0 +1,101 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { pfad } from "../../lib/labels";
+
+const maschen = (await getCollection("maschen")).sort(
+  (a, b) => a.data.reihenfolge - b.data.reihenfolge,
+);
+
+const flicc = maschen.filter((m) => m.data.kategorie === "flicc");
+const rhetorik = maschen.filter((m) => m.data.kategorie === "rhetorik");
+
+function karte(m: (typeof maschen)[number]) {
+  return m;
+}
+---
+
+<BaseLayout titel="Maschen erkennen" beschreibung="Die wiederkehrenden Manipulationstechniken hinter Desinformation – mit aktuellen Beispielen und konkreten Tipps, wie du sie durchschaust.">
+  <header class="maschen-hero">
+    <p class="eyebrow">So wirst du manipuliert – und so durchschaust du es</p>
+    <h1>Maschen erkennen</h1>
+    <p class="lead">
+      Falschbehauptungen wechseln ständig das Thema – die <strong>Maschen dahinter</strong>
+      bleiben fast immer dieselben. Wer sie einmal kennt, erkennt sie überall wieder:
+      ob bei Migration, Klima oder Sozialpolitik. Das ist wie eine Impfung gegen
+      Desinformation – Fachleute nennen es <em>Prebunking</em>.
+    </p>
+    <p class="muted hinweis-fair">
+      Hier wird niemand bloßgestellt. Auf diese Maschen fällt jede:r mal herein –
+      sie sind gemacht, um zu funktionieren. Genau deshalb lohnt es sich, sie zu kennen.
+    </p>
+  </header>
+
+  <section>
+    <h2>Die 5 Kerntechniken (FLICC)</h2>
+    <p class="muted">
+      Fünf Muster, die in der Wissenschaftskommunikation als Kern von Desinformation
+      gelten – von erfundenen Expert:innen bis zur Verschwörungserzählung.
+    </p>
+    <div class="masche-grid">
+      {flicc.map((m) => (
+        <a class="masche-card" href={pfad(`/maschen/${m.id}`)}>
+          <span class="masche-card__tag">FLICC</span>
+          <h3>{m.data.titel}</h3>
+          <p>{m.data.kurz}</p>
+          <span class="masche-card__more">Masche ansehen →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <h2>Weitere häufige Muster</h2>
+    <p class="muted">
+      Rhetorische Tricks und Denkfehler, die in politischen Debatten besonders oft vorkommen.
+    </p>
+    <div class="masche-grid">
+      {rhetorik.map((m) => (
+        <a class="masche-card masche-card--rhetorik" href={pfad(`/maschen/${m.id}`)}>
+          <h3>{m.data.titel}</h3>
+          <p>{m.data.kurz}</p>
+          <span class="masche-card__more">Masche ansehen →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="maschen-cta">
+    <h2>Lieber an konkreten Behauptungen lernen?</h2>
+    <p class="muted">
+      Beide Wege führen zum Ziel: Über die <a href={pfad("/faktenchecks")}>Faktenchecks</a>
+      siehst du die Maschen an echten, geprüften Behauptungen – jede Masche zeigt dir
+      umgekehrt, in welchen Faktenchecks sie steckt.
+    </p>
+    <a class="btn btn--ghost" href={pfad("/faktenchecks")}>Zu den Faktenchecks</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .maschen-hero { max-width: 46rem; margin: 1rem 0 2.5rem; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .06em; font-weight: 800; color: var(--c-technik); font-size: .8rem; margin: 0 0 .4rem; }
+  .hinweis-fair { font-size: .95rem; border-left: 3px solid var(--c-technik); padding-left: .9rem; margin-top: 1.25rem; }
+  section { margin-top: 3rem; }
+  .masche-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+  .masche-card {
+    display: flex; flex-direction: column; gap: .5rem;
+    background: var(--c-surface); border: 1px solid var(--c-border);
+    border-top: 3px solid var(--c-technik);
+    border-radius: var(--radius); padding: 1.1rem 1.2rem;
+    text-decoration: none; color: inherit; box-shadow: var(--shadow);
+    transition: transform .15s ease, border-color .15s ease;
+  }
+  .masche-card--rhetorik { border-top-color: var(--c-border-strong); }
+  .masche-card:hover { transform: translateY(-2px); border-color: var(--c-technik); }
+  .masche-card__tag { font-size: .68rem; font-weight: 800; letter-spacing: .05em; color: var(--c-technik); text-transform: uppercase; }
+  .masche-card h3 { margin: 0; font-size: 1.12rem; }
+  .masche-card p { margin: 0; color: var(--c-text-soft); font-size: .92rem; line-height: 1.5; flex: 1; }
+  .masche-card__more { font-size: .85rem; font-weight: 700; color: var(--c-technik); }
+  .maschen-cta { padding: 1.75rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
+  .maschen-cta h2 { margin-top: 0; }
+</style>

@@ -1,0 +1,92 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import UrteilBadge from "../../components/UrteilBadge.astro";
+import { pfad } from "../../lib/labels";
+import { md } from "../../lib/markdown";
+
+export async function getStaticPaths() {
+  const maschen = await getCollection("maschen");
+  return maschen.map((m) => ({ params: { slug: m.id }, props: { masche: m } }));
+}
+
+const { masche } = Astro.props;
+const { data } = masche;
+
+// Faktenchecks, die diese Masche nutzen.
+const faktenchecks = (await getCollection("faktenchecks"))
+  .filter((f) => f.data.techniken.includes(data.code))
+  .sort((a, b) => b.data.veroeffentlicht.valueOf() - a.data.veroeffentlicht.valueOf());
+
+const githubEdit = `https://github.com/pseidler89-sudo/Kompetenzzentrum/blob/main/src/content/maschen/${masche.id}.md`;
+const q = data.beispiel_quelle;
+---
+
+<BaseLayout titel={data.titel} beschreibung={data.kurz}>
+  <article class="masche">
+    <a href={pfad("/maschen")} class="muted" style="text-decoration:none;">← Alle Maschen</a>
+
+    <p class="eyebrow">{data.kategorie === "flicc" ? "FLICC-Kerntechnik" : "Häufiges Muster"}</p>
+    <h1>{data.titel}</h1>
+    <p class="lead">{data.kurz}</p>
+
+    <section class="block">
+      <h2>So funktioniert die Masche</h2>
+      <div class="prose" set:html={md(data.so_funktionierts)} />
+    </section>
+
+    {data.beispiel && (
+      <section class="block">
+        <h2>Aktuelles Beispiel</h2>
+        <div class="beispiel-box">
+          <div class="prose" set:html={md(data.beispiel)} />
+          {q && (
+            <p class="beispiel-quelle">
+              Beleg:&nbsp;
+              {q.url ? <a href={q.url} rel="noopener">{q.titel}</a> : <span>{q.titel}</span>}
+              <span class="muted"> · {q.herausgeber}{q.datum ? `, ${q.datum}` : ""}</span>
+            </p>
+          )}
+        </div>
+      </section>
+    )}
+
+    <section class="block">
+      <h2>So durchschaust du es</h2>
+      <div class="prose durchschauen" set:html={md(data.durchschauen)} />
+    </section>
+
+    {faktenchecks.length > 0 && (
+      <section class="block">
+        <h2>Diese Masche in echten Faktenchecks</h2>
+        <p class="muted">Hier siehst du die Technik an konkreten, geprüften Behauptungen:</p>
+        <div class="fc-liste">
+          {faktenchecks.map((f) => (
+            <a class="fc-link" href={pfad(`/faktenchecks/${f.id}`)}>
+              <UrteilBadge urteil={f.data.urteil} />
+              <span>{f.data.titel}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <footer class="masche-footer">
+      <p><a href={githubEdit} rel="noopener">Diese Masche auf GitHub verbessern ✎</a></p>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .masche { max-width: var(--max-width); }
+  .eyebrow { text-transform: uppercase; letter-spacing: .06em; font-weight: 800; color: var(--c-technik); font-size: .8rem; margin: 1rem 0 .3rem; }
+  .block { margin-top: 2.5rem; }
+  .block h2 { border-left: 4px solid var(--c-technik); padding-left: .7rem; }
+  .beispiel-box { background: var(--c-surface); border: 1px solid var(--c-border); border-left: 4px solid var(--c-border-strong); border-radius: var(--radius); padding: 1.1rem 1.3rem; }
+  .beispiel-quelle { margin: .9rem 0 0; padding-top: .7rem; border-top: 1px solid var(--c-border); font-size: .88rem; }
+  .durchschauen { background: color-mix(in srgb, var(--c-pruefen) 8%, var(--c-surface)); border: 1px solid color-mix(in srgb, var(--c-pruefen) 25%, transparent); border-radius: var(--radius); padding: 1rem 1.3rem; }
+  .fc-liste { display: grid; gap: .6rem; margin-top: 1rem; }
+  .fc-link { display: flex; align-items: center; gap: .7rem; padding: .7rem .9rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius-sm); text-decoration: none; color: inherit; }
+  .fc-link:hover { border-color: var(--c-technik); }
+  .masche-footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border); font-size: .92rem; }
+</style>

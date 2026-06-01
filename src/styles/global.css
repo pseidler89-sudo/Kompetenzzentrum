@@ -40,10 +40,69 @@
   --radius-sm: 8px;
   --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 2px 8px rgba(16, 24, 40, 0.05);
   --shadow-lift: 0 2px 4px rgba(16, 24, 40, 0.06), 0 8px 24px rgba(16, 24, 40, 0.08);
+
+  /* Schrift-Stack (Referenz, für direkte Nutzung). */
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+
+  /* Semantische Typo-Tokens – Rolle → konkrete Größe/Gewicht,
+     damit Designs konsistent bleiben (gespiegelt aus dem Design-System-Handoff). */
+  --type-h1-size: clamp(2rem, 1.4rem + 2.6vw, 2.85rem);
+  --type-h1-weight: 800;
+  --type-h1-spacing: -0.022em;
+
+  --type-h2-size: clamp(1.45rem, 1.2rem + 1vw, 1.75rem);
+  --type-h2-weight: 700;
+  --type-h2-spacing: -0.015em;
+
+  --type-h3-size: 1.2rem;
+  --type-h3-weight: 700;
+  --type-h3-spacing: -0.01em;
+
+  --type-body-size: 1.0625rem;   /* 17px UI/Basis        */
+  --type-body-line: 1.65;
+  --type-prose-size: 1.14rem;    /* Serif-Artikeltext    */
+  --type-prose-line: 1.72;
+  --type-lead-size: 1.22rem;     /* Intro-Absatz         */
+  --type-small-size: 0.92rem;
+  --type-eyebrow-size: 0.78rem;  /* Versal-Labels        */
+  --type-eyebrow-spacing: 0.06em;
+}
+
+/* Optionaler manueller Theme-Override via [data-theme]. Der OS-gesteuerte
+   prefers-color-scheme-Mechanismus (siehe unten) bleibt der Standard. */
+:root[data-theme="dark"] {
+  --c-bg: #121417;
+  --c-surface: #1a1d22;
+  --c-surface-2: #23272e;
+  --c-text: #e9ebee;
+  --c-text-soft: #abb2bc;
+  --c-border: #2b303a;
+  --c-border-strong: #3a414d;
+
+  --c-accent: #6aa6ff;
+  --c-accent-strong: #93bcff;
+  --c-accent-soft: #182942;
+  --c-link: #8db8ff;
+
+  --c-falsch: #ff8a85;
+  --c-falsch-bg: #38191a;
+  --c-irrefuehrend: #f0b67a;
+  --c-irrefuehrend-bg: #382712;
+  --c-kontext: #e3cf73;
+  --c-kontext-bg: #322c12;
+  --c-teils: #c4ccd6;
+  --c-teils-bg: #262a30;
+
+  --c-pruefen: #6fcf97;
+  --c-technik: #c6a3ff;
+
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.4);
+  color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --c-bg: #121417;
     --c-surface: #1a1d22;
     --c-surface-2: #23272e;

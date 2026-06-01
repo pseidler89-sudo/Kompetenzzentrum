@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { TECHNIK_LABEL, TECHNIK_ERKLAERUNG, TECHNIK_KONTER } from "../lib/labels";
+import { TECHNIK_LABEL, pfad } from "../lib/labels";
 
 const techniken = Object.keys(TECHNIK_LABEL);
 
@@ -60,50 +60,33 @@ const sift = [
   </section>
 
   <section id="techniken">
-    <h2>So wirst du manipuliert – und so durchschaust du es</h2>
+    <h2>Manipulationstechniken erkennen</h2>
     <p>
-      Hier geht es nicht darum, jemanden bloßzustellen. Auf diese Maschen fällt
-      <strong>jeder</strong> mal herein – sie sind gemacht, um zu funktionieren.
-      Der Trick ist: Wer das Muster einmal kennt, erkennt es beim nächsten Mal sofort.
-      Das nennt die Forschung <em>Prebunking</em> – wie eine Impfung gegen Desinformation.
-      Die ersten fünf folgen dem FLICC-Modell der Wissenschaftskommunikation.
+      Desinformation nutzt immer wieder dieselben Maschen. Wer sie kennt, erkennt sie
+      überall wieder – wie eine Impfung gegen Desinformation (<em>Prebunking</em>).
+      Jede Masche ist einzeln erklärt: wie sie funktioniert, ein aktuelles Beispiel
+      aus der Politik und konkrete Tipps zum Durchschauen.
     </p>
-    <div class="technik-liste">
+    <div class="masche-teaser">
       {techniken.map((t) => (
-        <div class="technik" id={t}>
-          <h3 style="margin:.2rem 0;">{TECHNIK_LABEL[t]}</h3>
-          <p class="technik__masche">{TECHNIK_ERKLAERUNG[t]}</p>
-          {TECHNIK_KONTER[t] && (
-            <p class="technik__konter">
-              <span class="technik__konter-label">So durchschaust du es</span>
-              {TECHNIK_KONTER[t]}
-            </p>
-          )}
-        </div>
+        <a class="masche-pill" href={pfad(`/maschen/${t}`)}>{TECHNIK_LABEL[t]}</a>
       ))}
     </div>
+    <p style="margin-top:1.25rem;">
+      <a class="btn btn--primary" href={pfad("/maschen")}>Alle Maschen ansehen</a>
+    </p>
   </section>
 </BaseLayout>
 
 <style>
   section { margin-top: 3rem; }
   .checkliste, .werkzeuge { display: grid; gap: .6rem; padding-left: 1.2rem; }
-  .technik-liste { display: grid; gap: .9rem; }
-  .technik { padding: 1rem 1.25rem; background: var(--c-surface); border: 1px solid var(--c-border); border-left: 4px solid var(--c-technik); border-radius: var(--radius-sm); scroll-margin-top: 5rem; box-shadow: var(--shadow); }
-  .technik h3 { color: var(--c-technik); }
-  .technik:target { border-left-width: 6px; box-shadow: var(--shadow-lift); }
-  .technik__masche { margin: 0; color: var(--c-text-soft); }
-  .technik__konter {
-    margin: .7rem 0 0; padding: .6rem .85rem; border-radius: var(--radius-sm);
-    background: color-mix(in srgb, #2e7d32 9%, var(--c-surface));
-    border: 1px solid color-mix(in srgb, #2e7d32 25%, transparent);
-    font-size: .95rem;
+  .masche-teaser { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }
+  .masche-pill {
+    display: inline-block; padding: .4rem .85rem; border-radius: 999px;
+    background: color-mix(in srgb, var(--c-technik) 8%, var(--c-surface));
+    border: 1px solid color-mix(in srgb, var(--c-technik) 30%, transparent);
+    color: var(--c-technik); font-weight: 600; font-size: .9rem; text-decoration: none;
   }
-  .technik__konter-label {
-    display: block; font-size: .72rem; font-weight: 800; text-transform: uppercase;
-    letter-spacing: .05em; color: #2e7d32; margin-bottom: .15rem;
-  }
-  @media (prefers-color-scheme: dark) {
-    .technik__konter-label { color: #6cc070; }
-  }
+  .masche-pill:hover { background: color-mix(in srgb, var(--c-technik) 16%, var(--c-surface)); }
 </style>

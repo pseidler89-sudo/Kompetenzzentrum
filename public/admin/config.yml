@@ -123,6 +123,62 @@ collections:
       - { name: technik_text, label: "Technik – Erklärung", widget: markdown, required: false, hint: "Welche Manipulationstechnik steckt dahinter?" }
       - { name: pruefen, label: "So prüfst du das selbst", widget: markdown, required: false, hint: "Konkrete Schritte zum Selber-Nachprüfen (gern als Liste)." }
 
+  - name: maschen
+    label: "Maschen (Manipulationstechniken)"
+    label_singular: "Masche"
+    folder: "src/content/maschen"
+    create: true
+    slug: "{{fields.code}}"
+    extension: md
+    format: yaml-frontmatter
+    summary: "{{titel}}"
+    hint: "Eine Manipulationstechnik mit aktuellem Beispiel und Tipps zum Durchschauen."
+    fields:
+      - { name: titel, label: "Titel der Masche", widget: string }
+      - name: code
+        label: "Technik-Code (verknüpft mit Faktenchecks)"
+        widget: select
+        hint: "Muss exakt einem Technik-Code entsprechen. Der Dateiname wird daraus gebildet."
+        options:
+          - { label: "Schein-Expert:innen", value: "fake-experten" }
+          - { label: "Logischer Fehlschluss", value: "logischer-fehlschluss" }
+          - { label: "Unerfüllbare Erwartung", value: "unerfuellbare-erwartung" }
+          - { label: "Rosinenpickerei (Cherry Picking)", value: "cherry-picking" }
+          - { label: "Verschwörungserzählung", value: "verschwoerung" }
+          - { label: "Falsche Ursache-Wirkung", value: "falsche-kausalitaet" }
+          - { label: "Fehlender Bezugswert", value: "fehlender-bezugswert" }
+          - { label: "Emotionalisierung", value: "emotionalisierung" }
+          - { label: "Falsche Gleichsetzung", value: "falsche-gleichsetzung" }
+          - { label: "Aus dem Kontext gerissen", value: "aus-dem-kontext-gerissen" }
+      - name: kategorie
+        label: "Kategorie"
+        widget: select
+        default: "rhetorik"
+        options:
+          - { label: "FLICC-Kerntechnik", value: "flicc" }
+          - { label: "Häufiges rhetorisches Muster", value: "rhetorik" }
+      - { name: kurz, label: "Kurzbeschreibung (ein Satz)", widget: text }
+      - { name: reihenfolge, label: "Reihenfolge", widget: number, default: 99, value_type: int }
+      - { name: so_funktionierts, label: "So funktioniert die Masche", widget: markdown }
+      - { name: beispiel, label: "Aktuelles Beispiel", widget: markdown, required: false }
+      - name: beispiel_quelle
+        label: "Beleg fürs Beispiel"
+        widget: object
+        required: false
+        fields:
+          - { name: titel, label: "Titel der Quelle", widget: string }
+          - { name: herausgeber, label: "Herausgeber", widget: string }
+          - { name: url, label: "Link", widget: string, required: false }
+          - { name: datum, label: "Datum/Jahr", widget: string, required: false }
+          - name: art
+            label: "Art"
+            widget: select
+            default: "sekundaer"
+            options:
+              - { label: "Primärquelle", value: "primaer" }
+              - { label: "Sekundärquelle", value: "sekundaer" }
+      - { name: durchschauen, label: "So durchschaust du es", widget: markdown, hint: "Konkrete Prüf-Fragen, gern als Liste." }
+
   - name: methodik
     label: "Methodik-Artikel"
     label_singular: "Methodik-Artikel"

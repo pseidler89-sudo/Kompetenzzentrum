@@ -97,4 +97,24 @@ const methodik = defineCollection({
   }),
 });
 
-export const collections = { faktenchecks, methodik };
+// Manipulationstechniken („Maschen“) – die technik-basierte Lernspur.
+// Jede Masche erklärt das Muster, zeigt ein aktuelles, belegtes Beispiel
+// und gibt konkrete Schritte zum Durchschauen.
+const maschen = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/maschen" }),
+  schema: z.object({
+    titel: z.string(),
+    // Muss einem Code aus TECHNIKEN entsprechen (Verknüpfung zu Faktenchecks).
+    code: z.enum(TECHNIKEN),
+    // FLICC-Kerntechnik oder allgemeines rhetorisches Muster.
+    kategorie: z.enum(["flicc", "rhetorik"]).default("rhetorik"),
+    kurz: z.string(),
+    reihenfolge: z.number().default(99),
+    so_funktionierts: z.string(),
+    beispiel: z.string().default(""),
+    beispiel_quelle: quelle.optional(),
+    durchschauen: z.string(),
+  }),
+});
+
+export const collections = { faktenchecks, methodik, maschen };
