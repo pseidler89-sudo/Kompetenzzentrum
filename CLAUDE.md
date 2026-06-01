@@ -50,20 +50,21 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   Alt-Branch `sharp-euler-KJ9Wu` war ein Duplikat und wurde entfernt.
 
 ## Stand (zuletzt)
-- **11 Faktenchecks.** Drei warten auf menschliche Abnahme (`in-pruefung` → dann
-  `geprueft`): Gesundheit „Antibiotika bei Erkältung“; „E-Auto-Klimabilanz“
-  (klima-energie); „Bio-Landwirtschaft immer besser“ (klima-energie, bewusst eine
-  grün-konnotierte Pauschale → Pfad-A-Neutralität). Beim E-Auto-Check sind die
-  Primärquellen (ICCT/Fraunhofer) erreichbar + via CORRECTIV-Faktencheck im Volltext
-  gegengelesen; finale Zahlenabnahme am Original bleibt menschlicher Schritt.
+- **13 Faktenchecks.** Fünf warten auf menschliche Abnahme (`in-pruefung` → dann
+  `geprueft`): „Antibiotika bei Erkältung“ (gesundheit); „E-Auto-Klimabilanz“;
+  „Bio-Landwirtschaft immer besser“; „Windkraft & Vögel“; „Landwirtschaft & Klima“.
+  Bei den Umwelt/Klima-Checks sind die Primärquellen (UBA/ICCT/Fraunhofer) erreichbar +
+  via lesbarer Sekundärquelle (CORRECTIV bzw. Wikipedia) im Volltext gegengelesen;
+  finale Zahlenabnahme am Original bleibt menschlicher Schritt.
 - **19 Maschen** (15 + 4 aus Backlog: Gish-Galopp #16, Bandwagon #17, Sündenbock #18,
   Lügen-Flut/Firehose #19). Sündenbock & Firehose bewusst maximal neutral/techniknah.
 - **Methodik dreigliedrig:** Was gibt es / Wie erkenne ich (Maschen) → Richtig
   widerlegen (neuer Leitfaden, Truth-Sandwich) → Faktenchecks. Akademische Belege
   in `methodik/wissenschaftliche-grundlagen` (reihenfolge 90, dezent am Ende).
-- **Hinweis Themen:** Umwelt/Verkehr/Agrar haben kein eigenes Thema; aktuell als
-  `klima-energie` getaggt. Eigenes Thema „umwelt-landwirtschaft“ wäre überlegenswert,
-  wenn mehr aus `docs/recherche/umwelt-verkehr-agrar-backlog.md` gebaut wird.
+- **Neues Thema `umwelt-landwirtschaft`** („Umwelt & Landwirtschaft“) eingeführt –
+  in `content.config.ts`, `labels.ts` (Label + Reihenfolge) und `public/admin/config.yml`.
+  Getaggt: Bio, Windkraft & Vögel, Landwirtschaft & Klima (dual mit klima-energie).
+  Verbleibende Backlog-Themen in `docs/recherche/umwelt-verkehr-agrar-backlog.md`.
 - **Social-Media-Karten umgesetzt:** Open-Graph-/Twitter-Meta in `BaseLayout.astro`
   (Detailseiten `og:type=article`), Default-Karte `public/og-default.png` aus
   `scripts/make-og-image.mjs` (sharp). Absolute URLs aus der Astro-Config.

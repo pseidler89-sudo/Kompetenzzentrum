@@ -3,7 +3,7 @@ titel: "„Bio-Landwirtschaft ist immer besser für Klima und Umwelt“"
 behauptung: "Ökologische Landwirtschaft ist der konventionellen in jeder Hinsicht überlegen – wer Bio kauft, handelt automatisch klima- und umweltfreundlicher."
 kurzantwort: "Bio hat reale Umweltvorteile: mehr Artenvielfalt, weniger Pestizide, oft gesündere Böden und sauberere Gewässer. „Immer und in allem besser“ stimmt aber nicht – wegen geringerer Erträge braucht Bio mehr Fläche, und je erzeugtem Kilogramm sind die Treibhausgase nicht automatisch niedriger. Es kommt auf die Bezugsgröße an."
 urteil: "teils-richtig"
-themen: ["klima-energie"]
+themen: ["umwelt-landwirtschaft", "klima-energie"]
 techniken: ["fehlender-bezugswert", "cherry-picking"]
 zusammenfassung: "Wo Bio-Landwirtschaft der konventionellen wirklich überlegen ist – und wo der pauschale „immer besser“-Satz an der Bezugsgröße (pro Fläche vs. pro Kilogramm) scheitert."
 status: "in-pruefung"

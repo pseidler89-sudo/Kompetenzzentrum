@@ -3,6 +3,7 @@
 export const THEMA_LABEL: Record<string, string> = {
   migration: "Migration & Asyl",
   "klima-energie": "Klima & Energie",
+  "umwelt-landwirtschaft": "Umwelt & Landwirtschaft",
   "wirtschaft-soziales": "Wirtschaft & Soziales",
   gesundheit: "Gesundheit",
   "demokratie-medien": "Demokratie & Medien",
@@ -14,6 +15,7 @@ export const THEMA_REIHENFOLGE = [
   "migration",
   "kriminalitaet-sicherheit",
   "klima-energie",
+  "umwelt-landwirtschaft",
   "wirtschaft-soziales",
   "gesundheit",
   "demokratie-medien",
