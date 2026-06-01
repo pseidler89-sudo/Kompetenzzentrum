@@ -33,7 +33,7 @@ const seiteUrl = new URL(pfad(`/faktenchecks/${eintrag.id}`), Astro.site).href;
 const teilenText = `„${data.behauptung}“\n\nFakt: ${data.kurzantwort}\n\nQuelle: ${primaer.herausgeber}${primaer.datum ? `, ${primaer.datum}` : ""}\nMehr dazu: ${seiteUrl}`;
 ---
 
-<BaseLayout titel={data.titel} beschreibung={data.zusammenfassung}>
+<BaseLayout titel={data.titel} beschreibung={data.zusammenfassung} seitentyp="article">
   <article>
     <a href={pfad("/faktenchecks")} class="muted" style="text-decoration:none;">← Alle Faktenchecks</a>
 

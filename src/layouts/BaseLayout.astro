@@ -6,8 +6,20 @@ interface Props {
   titel: string;
   beschreibung?: string;
   breit?: boolean;
+  bild?: string;
+  seitentyp?: "website" | "article";
 }
-const { titel, beschreibung = "Falschbehauptungen prüfen lernen – faktenbasiert, transparent, je nach Vorwissen aufbereitet.", breit = false } = Astro.props;
+const {
+  titel,
+  beschreibung = "Falschbehauptungen prüfen lernen – faktenbasiert, transparent, je nach Vorwissen aufbereitet.",
+  breit = false,
+  bild = "/og-default.png",
+  seitentyp = "website",
+} = Astro.props;
+
+// Absolute URLs für Social-Media-Karten (brauchen vollständige https-Adressen).
+const ogBild = new URL(pfad(bild), Astro.site).href;
+const seiteUrl = new URL(Astro.url.pathname, Astro.site).href;
 
 const nav = [
   { href: "/faktenchecks", text: "Faktenchecks" },
@@ -27,9 +39,21 @@ const vollerTitel = titel === "Kompetenzzentrum" ? titel : `${titel} · Kompeten
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{vollerTitel}</title>
     <meta name="description" content={beschreibung} />
+    <link rel="canonical" href={seiteUrl} />
     <meta property="og:title" content={vollerTitel} />
     <meta property="og:description" content={beschreibung} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={seitentyp} />
+    <meta property="og:url" content={seiteUrl} />
+    <meta property="og:site_name" content="Kompetenzzentrum" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:image" content={ogBild} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Kompetenzzentrum – Falschbehauptungen prüfen lernen" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={vollerTitel} />
+    <meta name="twitter:description" content={beschreibung} />
+    <meta name="twitter:image" content={ogBild} />
     <meta name="theme-color" content="#1c5fc4" />
     <link rel="icon" type="image/svg+xml" href={pfad("/favicon.svg")} />
     <link rel="sitemap" href={pfad("/sitemap-index.xml")} />
