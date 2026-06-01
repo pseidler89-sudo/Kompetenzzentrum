@@ -6,8 +6,7 @@ backend:
   repo: pseidler89-sudo/Kompetenzzentrum
   branch: main
   # OAuth-Vermittler (Cloudflare Worker) – ermöglicht den „Login mit GitHub“-Knopf.
-  # base_url wird auf die Worker-URL gesetzt, sobald der Worker eingerichtet ist.
-  base_url: https://kompetenzzentrum-auth.example.workers.dev
+  base_url: https://sveltia-cms-auth.p-seidler.workers.dev
 
 # Beiträge landen zunächst als Entwurf/Pull-Request statt direkt auf main.
 publish_mode: editorial_workflow
