@@ -25,6 +25,21 @@ Unsere Regeln – Truth-Sandwich, Prebunking, das Benennen von Manipulations­te
 - European Digital Media Observatory (2024). **EDMO Guidelines for Effective Media Literacy Initiatives.** EDMO Working Group on Media Literacy Standards and Best Practices. [edmo.eu](https://www.edmo.eu).
   *Grundlage für: Wirksamkeits-Prinzipien (klare Ziele, Befähigung statt Belehrung, evidenzbasiert, evaluieren) – und die Warnung, dass Medienkompetenz nicht in pauschales Misstrauen gegenüber **allen** Quellen umschlagen darf (vgl. unsere Masche „Lügen-Flut").*
 
+## Kognitive Werkzeuge gegen Desinformation
+
+- Kozyreva, A., Lewandowsky, S., & Hertwig, R. (2020). **Citizens Versus the Internet: Confronting Digital Challenges With Cognitive Tools.** *Psychological Science in the Public Interest, 21*(3), 103–156. DOI:10.1177/1529100620946707.
+  *Grundlage für: „Boosting" – Menschen mit einfachen kognitiven Werkzeugen (Querlesen, Innehalten, Quelle/Motiv prüfen) gegen digitale Manipulation stärken, statt nur zu warnen. Speist unseren Werkzeugkasten und die „So durchschaust du es"-Schritte.*
+
+## Weiterführende Beispiele & Ressourcen
+
+- **European Digital Media Observatory (EDMO)** – unabhängiges EU-Netzwerk gegen Desinformation mit laufenden Analysen realer Fälle: [edmo.eu](https://www.edmo.eu).
+- Fallanalyse, die mehrere hier erklärte Maschen bündelt (Verschwörungserzählung bei Institutionen-Misstrauen, KI-Fälschungen als „Beweis", „Tempo vor Genauigkeit", algorithmische Verstärkung): [Desinformation rund um ein Attentat – „two sides of the same coin"](https://edmo.eu/publications/trumps-assassination-attempts-and-related-disinformation-are-two-sides-of-the-same-coin/) (EDMO, 2026).
+
+> Zur Quellenwahl: Wir belegen mit Institutionen, die Herausgeber, Methodik und
+> Finanzierung offenlegen (Behörden, Forschung, transparente Faktencheck-Redaktionen).
+> Angebote einzelner Creator ohne Impressum/Redaktionsprinzipien nutzen wir
+> allenfalls als Wegweiser zu deren Primärquellen, nicht als eigenständigen Beleg.
+
 ## Wie diese Quellen in die Seite einfließen
 
 - **Maschen** setzen Prebunking/Inoculation um (Technik kennen → erkennen).
