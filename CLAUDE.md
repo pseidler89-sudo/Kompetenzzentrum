@@ -66,6 +66,15 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   ggf. in Custom-Allowlist ergänzen. Quellen können jetzt im Volltext geprüft werden.
 
 ## Stolpersteine (gelernt)
+- **Tote Quellen-Links = rote CI = „Run failed“-Mail-Flut.** Der CI-Job
+  `quellen-links` (`npm run check:links`) bricht bei 404/410/DNS ab (403/429/503 =
+  nur Warnung). Behörden/Verbände bauen URLs gern um → Links sterben still.
+  **Vorsorge:** (1) Beim Anlegen einer Quelle möglichst **stabile/aktuelle URL**
+  wählen und einmal kurz aufrufen. (2) Kommen „Run failed“-Mails, zuerst lokal
+  `npm run check:links` laufen lassen, `[TOT]`-Zeilen suchen, URL auf den neuen
+  Pfad des Herausgebers aktualisieren oder durch erreichbare, gleichwertige Quelle
+  ersetzen (Ersatz im Volltext gegenlesen). Historie: 06/2026 BMAS- & ADAC-Link tot,
+  via PR #5 ersetzt → CI wieder grün.
 - **Nur Feature-Branch pushen.** Lokal kann man versehentlich auf `main` landen –
   danach wieder `git checkout claude/factcheck-...` und prüfen, dass `main` ==
   `origin/main` (kein versehentlicher main-Push).
