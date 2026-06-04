@@ -147,12 +147,13 @@ collections:
       - { name: pruefen, label: "So prüfst du das selbst", widget: markdown, required: false, hint: "Konkrete Schritte zum Selber-Nachprüfen (gern als Liste)." }
 
       - name: daten
-        label: "Datengrafiken (optional)"
+        label: "Datengrafiken (optional, fortgeschritten)"
         label_singular: "Grafik"
         widget: list
         required: false
+        collapsed: true
         summary: "{{fields.typ}} – {{fields.titel}}"
-        hint: "Nur wo eine Grafik eine Zahl/Beziehung trägt – nie Dekoration. Jede Grafik braucht eine Quelle."
+        hint: "Optional und einklappbar lassen, wenn nicht gebraucht. Am einfachsten visuell im Grafik-Baukasten zusammenklicken (Live-Vorschau) und die Werte hierher übertragen. Nur wo eine Grafik eine Zahl/Beziehung trägt – nie Deko, und immer mit Quelle."
         fields:
           - name: typ
             label: "Typ"

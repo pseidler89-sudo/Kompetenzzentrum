@@ -60,6 +60,12 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
 - CMS-Config: `public/admin/config.yml` (Selects für techniken müssen zu
   `TECHNIKEN` passen – an ZWEI Stellen pflegen). Entry-Listen interaktiv via
   `view_filters`/`view_groups`/`sortable_fields` (Status/Urteil/Kategorie).
+- **CMS-Bedienung:** Sveltia hat eine **Live-Vorschau** (Augen-Icon) – auf dem
+  **Desktop side-by-side**, mobil nur umschaltbar (Platz). Redigieren am Laptop
+  empfehlen. Datengrafiken im CMS sind „advanced"/eingeklappt; einfacher visuell
+  im **Grafik-Baukasten** (`/tools/grafik.html`, mobil-fix 06/2026) bauen. Echte
+  site-genaue Vorschau bräuchte ein Custom-Preview-Template (Sveltia unterstützt
+  das nur eingeschränkt) – offener größerer Schritt.
 - Build: `npm run build` (= normalize + validate + astro build). `npm run check:links`
   läuft NUR in GitHub Actions (offenes Netz), nicht lokal.
 
