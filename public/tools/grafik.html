@@ -32,7 +32,17 @@
   .head p { color: var(--c-text-soft); margin: 0; max-width: 60ch; font-size: .95rem; }
 
   .layout { max-width: 1080px; margin: 0 auto; padding: 18px 24px 60px; display: grid; grid-template-columns: 360px 1fr; gap: 24px; align-items: start; }
-  @media (max-width: 860px){ .layout { grid-template-columns: 1fr; } }
+  @media (max-width: 860px){
+    .layout { grid-template-columns: 1fr; }
+    .panel { position: static; }   /* einspaltig: nicht mehr sticky */
+  }
+  @media (max-width: 560px){
+    .layout { padding: 14px 14px 48px; gap: 18px; }
+    /* Wert-Zeilen sauber untereinander statt gequetscht nebeneinander */
+    .wert .grid2, .wert .grid2b { grid-template-columns: 1fr; }
+    .wert input, .wert select { font-size: .95rem; padding: .6rem .6rem; }
+    .seg button { padding: .6rem .4rem; }
+  }
 
   /* ---- Controls ---- */
   .panel { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px; position: sticky; top: 16px; }
