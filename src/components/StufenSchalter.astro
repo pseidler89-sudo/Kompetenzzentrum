@@ -38,6 +38,10 @@
     border: 1px solid var(--c-border);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
+    /* Bleibt beim Lesen langer Beiträge greifbar (sitzt unter dem Sticky-Header). */
+    position: sticky;
+    top: 3.5rem;
+    z-index: 40;
   }
   .stufen-schalter__head {
     display: flex; align-items: baseline; justify-content: space-between; gap: .75rem;

@@ -21,12 +21,25 @@ collections:
   - name: faktenchecks
     label: "Faktenchecks"
     label_singular: "Faktencheck"
+    description: "Geprüfte Antworten auf konkrete Falschbehauptungen. Tipp: oben nach Status/Urteil filtern oder nach Thema gruppieren."
     folder: "src/content/faktenchecks"
     create: true
     slug: "{{slug}}"
     extension: md
     format: yaml-frontmatter
-    summary: "{{titel}}  ·  {{urteil}}"
+    summary: "{{urteil}}  ·  {{titel}}"
+    # Interaktive Entry-Liste: Schnellfilter, Gruppierung und Sortierung.
+    view_filters:
+      - { label: "Status: Entwurf", field: status, pattern: "entwurf" }
+      - { label: "Status: In Prüfung", field: status, pattern: "in-pruefung" }
+      - { label: "Status: Geprüft", field: status, pattern: "geprueft" }
+      - { label: "Urteil: Falsch", field: urteil, pattern: "falsch" }
+      - { label: "Urteil: Irreführend", field: urteil, pattern: "irrefuehrend" }
+      - { label: "Urteil: Teils richtig", field: urteil, pattern: "teils-richtig" }
+    view_groups:
+      - { label: "Nach Status", field: status }
+      - { label: "Nach Urteil", field: urteil }
+    sortable_fields: ["titel", "veroeffentlicht", "urteil", "status"]
     fields:
       - { name: titel, label: "Titel", widget: string, hint: "Kurzer, klarer Titel – oft die Behauptung in Anführungszeichen." }
       - { name: behauptung, label: "Die Behauptung", widget: text, hint: "Die geprüfte Falschbehauptung, möglichst im Wortlaut." }
@@ -181,13 +194,20 @@ collections:
   - name: maschen
     label: "Maschen (Manipulationstechniken)"
     label_singular: "Masche"
+    description: "Manipulationstechniken (Prebunking). FLICC = die 5 Kerntechniken, sonst rhetorische Muster. Reihenfolge: flicc 1–6, rhetorik 7+."
     folder: "src/content/maschen"
     create: true
     slug: "{{fields.code}}"
     extension: md
     format: yaml-frontmatter
-    summary: "{{titel}}"
+    summary: "#{{reihenfolge}}  ·  {{titel}}"
     hint: "Eine Manipulationstechnik mit aktuellem Beispiel und Tipps zum Durchschauen."
+    view_filters:
+      - { label: "FLICC-Kerntechnik", field: kategorie, pattern: "flicc" }
+      - { label: "Rhetorisches Muster", field: kategorie, pattern: "rhetorik" }
+    view_groups:
+      - { label: "Nach Kategorie", field: kategorie }
+    sortable_fields: ["reihenfolge", "titel", "kategorie"]
     fields:
       - { name: titel, label: "Titel der Masche", widget: string }
       - name: code

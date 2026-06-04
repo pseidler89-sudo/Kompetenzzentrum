@@ -20,8 +20,18 @@ const featured = eintraege.slice(0, 4);
       vom schnellen Einstieg bis zur wissenschaftlichen Tiefe. Du entscheidest
       selbst, wie tief du gehst – und lernst nebenbei, Manipulation zu durchschauen.
     </p>
+    <form class="hero-suche" role="search" action={pfad("/faktenchecks")} method="get">
+      <input
+        type="search"
+        name="q"
+        class="hero-suche__input"
+        placeholder="Welche Behauptung willst du prüfen? (z. B. Bürgergeld, Tempolimit, E-Auto)"
+        aria-label="Behauptung suchen und prüfen"
+      />
+      <button type="submit" class="btn btn--primary hero-suche__btn">Prüfen</button>
+    </form>
     <div class="hero__cta">
-      <a class="btn btn--primary" href={pfad("/faktenchecks")}>Faktenchecks ansehen</a>
+      <a class="btn btn--ghost" href={pfad("/faktenchecks")}>Alle Faktenchecks</a>
       <a class="btn btn--ghost" href={pfad("/maschen")}>Maschen erkennen lernen</a>
     </div>
   </section>
@@ -151,7 +161,21 @@ const featured = eintraege.slice(0, 4);
   }
   .hero h1 { margin: .75rem auto 1rem; max-width: 18ch; }
   .hero .lead { max-width: 42rem; margin: 0 auto; }
-  .hero__cta { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; margin-top: 1.75rem; }
+  .hero-suche {
+    display: flex; gap: .5rem; max-width: 38rem; margin: 1.75rem auto 0;
+  }
+  .hero-suche__input {
+    flex: 1; min-width: 0; font-size: 1.05rem; padding: .85rem 1.1rem;
+    border: 1px solid var(--c-border-strong); border-radius: 999px;
+    background: var(--c-surface); color: var(--c-text); box-shadow: var(--shadow);
+  }
+  .hero-suche__input:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 1px; border-color: var(--c-accent); }
+  .hero-suche__btn { border-radius: 999px; padding-left: 1.4rem; padding-right: 1.4rem; }
+  .hero__cta { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem; }
+  @media (max-width: 480px) {
+    .hero-suche { flex-direction: column; }
+    .hero-suche__btn { width: 100%; }
+  }
 
   .zwecke { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.25rem; margin-top: 3.5rem; }
   .zweck { align-items: flex-start; }
