@@ -44,6 +44,10 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
 - **Grafik-Baukasten:** Autor:innen-Tool unter `public/tools/grafik.html` (eigenständige
   statische Datei, Tokens inline) → erreichbar `/<base>/tools/grafik.html`, verlinkt
   von „Mitmachen". Klick → fertiges `daten:`-YAML zum Kopieren.
+- **Faktencheck-Baukasten:** `src/pages/tools/faktencheck-baukasten.astro` – Formular
+  **links**, echte **Live-Vorschau rechts** (nutzt globale Faktencheck-Stile), erzeugt
+  Frontmatter + „Auf GitHub anlegen"-Link (`/new/main?filename=…&value=…`) → öffnet den
+  vorausgefüllten Editor → PR. Umgeht die Sveltia-Grenzen (site-genaue Vorschau), Handy+Desktop.
 - Faktencheck-Detailseite hat **Kopierbutton** (Fakt+Quelle+Link) = die
   „Diskussionshilfe“ (eigene Seite wurde entfernt).
 - **Datengrafiken (P1):** optionales `daten`-Frontmatter pro Faktencheck →
@@ -164,6 +168,11 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   Weitere Themen außerhalb Migration/Klima weiterhin wünschenswert.
 - **Gesundheits-Faktencheck abnehmen:** Quellen sind erreichbar + inhaltlich geprüft
   (IQWiG, WHO), aber Status `in-pruefung` – menschliches Gegenlesen fehlt für `geprueft`.
+- **NÄCHSTER SCHRITT (Nutzer-Wunsch): Doku schön aufbereiten.** CONTRIBUTING.md,
+  `docs/redaktionsstandards.md` & Co. als **grafisch aufbereitete Seiten auf der Site**
+  (nicht roher Markdown auf GitHub mit `npm run`-Technik). Nicht-Techniker:innen sollen
+  einen schönen Leitfaden bekommen; technische Schritte separat/ausgeblendet. Methodik-
+  Collection oder eigene `/leitfaden`-Seiten; von „Mitmachen" verlinken.
 - ~~Social-Media-Karten~~ ✅ umgesetzt (OG-/Twitter-Meta + Default-Karte, PR #3).
   Optionale Ausbaustufe: pro-Seite generierte OG-Bilder (Titel im Bild) via satori –
   bewusst NICHT gemacht (Default-Karte genügt, kein neues Dependency).

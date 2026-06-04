@@ -1,0 +1,361 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { THEMEN, URTEILE, TECHNIKEN } from "../../content.config";
+import { THEMA_LABEL, URTEIL_LABEL, TECHNIK_LABEL, pfad } from "../../lib/labels";
+
+// Reihenfolge der Themen wie im Katalog wäre schön, hier reicht die Schema-Reihenfolge.
+const repo = "pseidler89-sudo/Kompetenzzentrum";
+---
+
+<BaseLayout titel="Faktencheck-Baukasten" beschreibung="Faktencheck im Formular zusammenstellen – mit echter Live-Vorschau – und direkt als Pull Request auf GitHub anlegen." breit>
+  <div class="fcb-head">
+    <p class="eyebrow">Werkzeug für Mitwirkende</p>
+    <h1>Faktencheck-Baukasten</h1>
+    <p class="lead">
+      Links eintragen, rechts <strong>live sehen, wie es auf der Seite aussieht</strong>.
+      Am Ende „Auf GitHub anlegen“ – dein Beitrag wird automatisch ein Pull Request,
+      den die Redaktion prüft. Kein Markdown, kein <code>npm</code>, keine Technik nötig.
+    </p>
+  </div>
+
+  <div class="fcb">
+    <!-- ============ EINGABE ============ -->
+    <form class="fcb-form" id="fcb-form" autocomplete="off">
+      <p class="fcb-step">1 · Die Behauptung</p>
+      <label class="fcb-field">
+        <span>Behauptung (möglichst im Wortlaut)</span>
+        <textarea id="f-behauptung" rows="2" placeholder="z. B. „Das Bürgergeld lohnt sich mehr als Arbeit.“"></textarea>
+      </label>
+      <label class="fcb-field">
+        <span>Titel (kurz, oft die Behauptung in Anführungszeichen)</span>
+        <input id="f-titel" type="text" placeholder="„Arbeit lohnt sich nicht mehr“" />
+      </label>
+
+      <p class="fcb-step">2 · Das Urteil & die Kurzantwort</p>
+      <label class="fcb-field">
+        <span>Urteil</span>
+        <select id="f-urteil">
+          {URTEILE.map((u) => <option value={u}>{URTEIL_LABEL[u]}</option>)}
+        </select>
+      </label>
+      <label class="fcb-field">
+        <span>Kurzantwort (Fakt zuerst – 1–2 Sätze, steht ganz oben)</span>
+        <textarea id="f-kurzantwort" rows="3" placeholder="Der belegte Fakt in einem Satz …"></textarea>
+      </label>
+      <label class="fcb-field">
+        <span>Kurzbeschreibung (für Vorschau & Suchmaschinen, max. 300 Zeichen)</span>
+        <textarea id="f-zus" rows="2" maxlength="300"></textarea>
+      </label>
+
+      <p class="fcb-step">3 · Einordnung</p>
+      <div class="fcb-field">
+        <span>Themen</span>
+        <div class="fcb-checks">
+          {THEMEN.map((t) => (
+            <label class="fcb-check"><input type="checkbox" name="thema" value={t} />{THEMA_LABEL[t]}</label>
+          ))}
+        </div>
+      </div>
+      <div class="fcb-field">
+        <span>Erkannte Maschen (optional)</span>
+        <div class="fcb-checks">
+          {TECHNIKEN.map((t) => (
+            <label class="fcb-check"><input type="checkbox" name="technik" value={t} />{TECHNIK_LABEL[t]}</label>
+          ))}
+        </div>
+      </div>
+
+      <p class="fcb-step">4 · Der Inhalt (drei Tiefen)</p>
+      <label class="fcb-field">
+        <span>Einleitung (Fakt zuerst – beginnt mit dem belegten Stand)</span>
+        <textarea id="f-einleitung" rows="2"></textarea>
+      </label>
+      <label class="fcb-field">
+        <span>① Einstieg – kompakt, ohne Vorwissen</span>
+        <textarea id="f-einstieg" rows="4"></textarea>
+      </label>
+      <label class="fcb-field">
+        <span>② Vertiefung – Zahlen & Kontext</span>
+        <textarea id="f-vertiefung" rows="4"></textarea>
+      </label>
+      <label class="fcb-field">
+        <span>③ Wissenschaftlich – Quellen & Methodik</span>
+        <textarea id="f-wiss" rows="4"></textarea>
+      </label>
+
+      <p class="fcb-step">5 · Technik & Selbst-Prüfen (optional)</p>
+      <label class="fcb-field">
+        <span>Technik – Titel</span>
+        <input id="f-technik-titel" type="text" placeholder="z. B. „Fehlender Bezugswert & Cherry Picking“" />
+      </label>
+      <label class="fcb-field">
+        <span>Technik – Erklärung</span>
+        <textarea id="f-technik-text" rows="3"></textarea>
+      </label>
+      <label class="fcb-field">
+        <span>So prüfst du das selbst (gern als Liste mit „- “)</span>
+        <textarea id="f-pruefen" rows="3"></textarea>
+      </label>
+
+      <p class="fcb-step">6 · Quellen (Pflicht – Primärquellen bevorzugen)</p>
+      <div id="f-quellen" class="fcb-quellen"></div>
+      <button type="button" id="f-quelle-add" class="fcb-add">+ Quelle hinzufügen</button>
+
+      <p class="fcb-hint muted">Tipp: Für Datengrafiken den <a href={pfad("/tools/grafik.html")}>Grafik-Baukasten</a> nutzen.</p>
+    </form>
+
+    <!-- ============ LIVE-VORSCHAU ============ -->
+    <div class="fcb-preview-col">
+      <p class="fcb-step">Live-Vorschau</p>
+      <article class="fcb-preview" id="fcb-preview"></article>
+
+      <div class="fcb-out">
+        <p class="fcb-step">Fertig? So geht dein Beitrag live:</p>
+        <div class="fcb-actions">
+          <a id="f-github" class="btn btn--primary" href="#" target="_blank" rel="noopener">Auf GitHub anlegen → Pull Request</a>
+          <button type="button" id="f-copy" class="btn btn--ghost">Text kopieren</button>
+        </div>
+        <p class="muted" style="font-size:.85rem;margin:.6rem 0 0;">
+          „Auf GitHub anlegen“ öffnet den fertig ausgefüllten Datei-Editor. Mit „Propose changes“
+          entsteht automatisch ein Pull Request – die Redaktion liest gegen und gibt frei.
+        </p>
+        <details class="fcb-raw">
+          <summary>Text/Frontmatter ansehen</summary>
+          <pre id="f-raw"></pre>
+        </details>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .fcb-head { max-width: 46rem; margin-bottom: 1.5rem; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .06em; font-weight: 800; color: var(--c-accent); font-size: .8rem; margin: 0 0 .3rem; }
+  .fcb { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem; align-items: start; }
+  @media (max-width: 900px) { .fcb { grid-template-columns: 1fr; } }
+
+  .fcb-step { font-size: .76rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--c-accent); margin: 1.6rem 0 .6rem; }
+  .fcb-form .fcb-step:first-child { margin-top: 0; }
+  .fcb-field { display: block; margin-bottom: .9rem; }
+  .fcb-field > span { display: block; font-size: .85rem; font-weight: 600; color: var(--c-text-soft); margin-bottom: .3rem; }
+  .fcb-form input[type=text], .fcb-form textarea, .fcb-form select {
+    width: 100%; font: inherit; font-size: .95rem; padding: .55rem .7rem; color: var(--c-text);
+    background: var(--c-surface); border: 1px solid var(--c-border-strong); border-radius: 8px;
+  }
+  .fcb-form textarea { resize: vertical; line-height: 1.5; }
+  .fcb-form :focus-visible { outline: 2px solid var(--c-accent); outline-offset: 1px; border-color: var(--c-accent); }
+  .fcb-checks { display: flex; flex-wrap: wrap; gap: .4rem .9rem; }
+  .fcb-check { display: inline-flex; align-items: center; gap: .35rem; font-size: .9rem; font-weight: 500; }
+  .fcb-check input { width: auto; }
+
+  .fcb-quellen { display: flex; flex-direction: column; gap: .6rem; }
+  .fcb-quelle { border: 1px solid var(--c-border); border-radius: 9px; padding: .7rem; background: var(--c-surface); display: grid; gap: .4rem; }
+  .fcb-quelle .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; }
+  @media (max-width: 560px) { .fcb-quelle .row2 { grid-template-columns: 1fr; } }
+  .fcb-quelle .del { justify-self: start; font: inherit; font-size: .8rem; color: var(--c-falsch); background: none; border: none; cursor: pointer; padding: 0; }
+  .fcb-add { font: inherit; font-weight: 700; font-size: .9rem; cursor: pointer; width: 100%; padding: .6rem; border: 1px dashed var(--c-border-strong); border-radius: 8px; background: var(--c-surface); color: var(--c-accent); margin-top: .6rem; }
+
+  .fcb-preview-col { position: sticky; top: 4rem; }
+  @media (max-width: 900px) { .fcb-preview-col { position: static; } }
+  .fcb-preview {
+    background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 1.4rem 1.5rem; min-height: 8rem;
+  }
+  .fcb-preview .platzhalter { color: var(--c-text-soft); font-style: italic; }
+
+  /* seiten-scoped Boxen aus der Faktencheck-Detailseite gespiegelt */
+  .fcb-preview .behauptung-box, .fcb-preview .kurzantwort-box {
+    margin: 1.1rem 0; padding: 1rem 1.2rem; border-radius: var(--radius); border: 1px solid var(--c-border); border-left-width: 4px;
+  }
+  .fcb-preview .behauptung-box { background: var(--c-surface-2); border-left-color: var(--c-falsch); }
+  .fcb-preview .kurzantwort-box { background: var(--c-accent-soft); border-left-color: var(--c-accent); }
+  .fcb-preview .box-label-sm { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; }
+  .fcb-preview .behauptung-box .box-label-sm { color: var(--c-falsch); }
+  .fcb-preview .kurzantwort-box .box-label-sm { color: var(--c-accent); }
+  .fcb-preview .behauptung-box p { margin: .3rem 0 0; font-style: italic; font-size: 1.1rem; }
+  .fcb-preview .kurzantwort-box p { margin: .25rem 0 0; font-size: 1.1rem; line-height: 1.5; }
+  .fcb-preview .tag-list { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1rem 0; align-items: center; }
+
+  .fcb-out { margin-top: 1.25rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 1.1rem 1.2rem; }
+  .fcb-actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .fcb-raw { margin-top: .8rem; }
+  .fcb-raw pre { margin: .5rem 0 0; padding: .8rem; background: var(--c-surface-2); border-radius: 8px; font-family: var(--font-mono); font-size: .78rem; white-space: pre-wrap; max-height: 18rem; overflow: auto; }
+  .fcb-hint { font-size: .85rem; margin-top: 1rem; }
+</style>
+
+<script define:vars={{ repo }}>
+  const $ = (id) => document.getElementById(id);
+
+  // --- mini-Markdown nur für die Vorschau (fett, Absätze, einfache Listen) ---
+  function esc(s) { return (s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function inline(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>"); }
+  function mdToHtml(src) {
+    if (!src || !src.trim()) return "";
+    const blocks = src.replace(/\r/g, "").split(/\n{2,}/);
+    return blocks.map((b) => {
+      const lines = b.split("\n");
+      if (lines.every((l) => /^\s*-\s+/.test(l) || !l.trim())) {
+        const items = lines.filter((l) => l.trim()).map((l) => `<li>${inline(l.replace(/^\s*-\s+/, ""))}</li>`).join("");
+        return `<ul>${items}</ul>`;
+      }
+      return `<p>${lines.map(inline).join("<br>")}</p>`;
+    }).join("");
+  }
+
+  // --- Quellen-Zeilen ---
+  const quellenBox = $("f-quellen");
+  function addQuelle(vals = {}) {
+    const div = document.createElement("div");
+    div.className = "fcb-quelle";
+    div.innerHTML = `
+      <input type="text" class="q-titel" placeholder="Titel der Quelle" value="${(vals.titel||"").replace(/"/g,"&quot;")}" />
+      <div class="row2">
+        <input type="text" class="q-hg" placeholder="Herausgeber (z. B. Destatis, BKA)" value="${(vals.herausgeber||"").replace(/"/g,"&quot;")}" />
+        <input type="text" class="q-datum" placeholder="Jahr/Datum (optional)" value="${(vals.datum||"").replace(/"/g,"&quot;")}" />
+      </div>
+      <div class="row2">
+        <input type="text" class="q-url" placeholder="Link https:// (optional)" value="${(vals.url||"").replace(/"/g,"&quot;")}" />
+        <select class="q-art">
+          <option value="primaer">Primärquelle (amtlich/original)</option>
+          <option value="sekundaer">Sekundärquelle</option>
+        </select>
+      </div>
+      <button type="button" class="del">Entfernen</button>`;
+    div.querySelector(".q-art").value = vals.art || "primaer";
+    div.querySelector(".del").addEventListener("click", () => { div.remove(); render(); });
+    div.querySelectorAll("input,select").forEach((el) => el.addEventListener("input", render));
+    quellenBox.appendChild(div);
+  }
+  $("f-quelle-add").addEventListener("click", () => { addQuelle(); render(); });
+
+  function getQuellen() {
+    return [...quellenBox.querySelectorAll(".fcb-quelle")].map((d) => ({
+      titel: d.querySelector(".q-titel").value.trim(),
+      herausgeber: d.querySelector(".q-hg").value.trim(),
+      datum: d.querySelector(".q-datum").value.trim(),
+      url: d.querySelector(".q-url").value.trim(),
+      art: d.querySelector(".q-art").value,
+    })).filter((q) => q.titel || q.herausgeber);
+  }
+
+  function checked(name) { return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map((c) => c.value); }
+  function labelFor(name, val) {
+    const el = document.querySelector(`input[name="${name}"][value="${val}"]`);
+    return el ? el.parentElement.textContent.trim() : val;
+  }
+
+  function slugify(s) {
+    return (s || "faktencheck").toLowerCase()
+      .replace(/[äÄ]/g, "ae").replace(/[öÖ]/g, "oe").replace(/[üÜ]/g, "ue").replace(/ß/g, "ss")
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || "faktencheck";
+  }
+
+  // ---------- VORSCHAU ----------
+  function render() {
+    const v = {
+      behauptung: $("f-behauptung").value.trim(),
+      titel: $("f-titel").value.trim(),
+      urteil: $("f-urteil").value,
+      kurzantwort: $("f-kurzantwort").value.trim(),
+      zus: $("f-zus").value.trim(),
+      einleitung: $("f-einleitung").value.trim(),
+      einstieg: $("f-einstieg").value.trim(),
+      vertiefung: $("f-vertiefung").value.trim(),
+      wiss: $("f-wiss").value.trim(),
+      tTitel: $("f-technik-titel").value.trim(),
+      tText: $("f-technik-text").value.trim(),
+      pruefen: $("f-pruefen").value.trim(),
+    };
+    const themen = checked("thema");
+    const techniken = checked("technik");
+    const quellen = getQuellen();
+    const urteilLabel = document.querySelector(`#f-urteil option[value="${v.urteil}"]`).textContent;
+
+    // --- Vorschau-HTML (nutzt echte globale Klassen) ---
+    let html = "";
+    const hasAny = v.behauptung || v.titel || v.kurzantwort || v.einstieg;
+    if (!hasAny) {
+      html = `<p class="platzhalter">Hier erscheint live, wie dein Faktencheck aussehen wird. Fang links mit der Behauptung an.</p>`;
+    } else {
+      html += `<div class="card__meta" style="display:flex;gap:.45rem;flex-wrap:wrap;align-items:center;margin-bottom:.6rem;">`;
+      html += `<span class="badge urteil urteil--${v.urteil}">${esc(urteilLabel)}</span>`;
+      themen.forEach((t) => { html += `<span class="badge">${esc(labelFor("thema", t))}</span>`; });
+      html += `</div>`;
+      if (v.titel) html += `<h1 style="margin:.4rem 0 0;">${esc(v.titel)}</h1>`;
+      if (v.behauptung) html += `<div class="behauptung-box"><span class="box-label-sm">Die Behauptung</span><p>„${esc(v.behauptung)}“</p></div>`;
+      if (v.kurzantwort) html += `<div class="kurzantwort-box"><span class="box-label-sm">Kurzantwort</span><p>${esc(v.kurzantwort)}</p></div>`;
+      if (techniken.length) {
+        html += `<div class="tag-list"><span class="muted" style="font-size:.85rem;">Erkannte Maschen:</span>`;
+        techniken.forEach((t) => { html += `<span class="badge badge--technik">${esc(labelFor("technik", t))} →</span>`; });
+        html += `</div>`;
+      }
+      if (v.einleitung) html += `<div class="prose">${mdToHtml(v.einleitung)}</div>`;
+      const stufen = [["Einstieg", v.einstieg], ["Vertiefung", v.vertiefung], ["Wissenschaftlich", v.wiss]];
+      html += `<div class="prose">`;
+      stufen.forEach(([label, txt]) => { if (txt) html += `<p class="stufe-heading">${label}</p>${mdToHtml(txt)}`; });
+      if (v.tTitel || v.tText) html += `<aside class="box box-technik"><p class="box-label"><strong>Technik erkannt: ${esc(v.tTitel)}</strong></p>${mdToHtml(v.tText)}</aside>`;
+      if (v.pruefen) html += `<aside class="box box-pruefen"><p class="box-label"><strong>So prüfst du das selbst</strong></p>${mdToHtml(v.pruefen)}</aside>`;
+      html += `</div>`;
+      if (quellen.length) {
+        html += `<section class="quellen"><h2>Quellen</h2><ol>`;
+        quellen.forEach((q) => {
+          html += `<li class="${q.art === "primaer" ? "q-primaer" : ""}">${q.url ? `<a href="${esc(q.url)}">${esc(q.titel)}</a>` : esc(q.titel)}${q.art === "primaer" ? ` <span class="q-tag">Primärquelle</span>` : ""}<br><span class="muted">${esc(q.herausgeber)}${q.datum ? " · " + esc(q.datum) : ""}</span></li>`;
+        });
+        html += `</ol></section>`;
+      }
+    }
+    $("fcb-preview").innerHTML = html;
+
+    // --- Frontmatter erzeugen ---
+    const today = new Date().toISOString().slice(0, 10);
+    const qs = (s) => `"${(s || "").replace(/"/g, "”").replace(/\n/g, " ")}"`;
+    const block = (s) => s ? `|\n${s.replace(/\r/g, "").split("\n").map((l) => "  " + l).join("\n")}` : `""`;
+    const arr = (a) => "[" + a.map((x) => `"${x}"`).join(", ") + "]";
+    let fm = "---\n";
+    fm += `titel: ${qs(v.titel)}\n`;
+    fm += `behauptung: ${qs(v.behauptung)}\n`;
+    fm += `kurzantwort: ${qs(v.kurzantwort)}\n`;
+    fm += `urteil: "${v.urteil}"\n`;
+    fm += `themen: ${arr(themen.length ? themen : ["migration"])}\n`;
+    fm += `techniken: ${arr(techniken)}\n`;
+    fm += `zusammenfassung: ${qs(v.zus || v.kurzantwort)}\n`;
+    fm += `status: "entwurf"\n`;
+    fm += `veroeffentlicht: ${today}\n`;
+    fm += `mitwirkende: []\n`;
+    fm += `quellen:\n`;
+    if (quellen.length) {
+      quellen.forEach((q) => {
+        fm += `  - titel: ${qs(q.titel)}\n    herausgeber: ${qs(q.herausgeber)}\n`;
+        if (q.url) fm += `    url: ${qs(q.url)}\n`;
+        if (q.datum) fm += `    datum: ${qs(q.datum)}\n`;
+        fm += `    art: "${q.art}"\n`;
+      });
+    } else {
+      fm += `  - titel: "QUELLE EINTRAGEN"\n    herausgeber: ""\n    art: "primaer"\n`;
+    }
+    fm += `verwandt: []\n`;
+    fm += `einleitung: ${block(v.einleitung)}\n`;
+    fm += `einstieg: ${block(v.einstieg)}\n`;
+    fm += `vertiefung: ${block(v.vertiefung)}\n`;
+    fm += `wissenschaftlich: ${block(v.wiss)}\n`;
+    fm += `technik_titel: ${qs(v.tTitel)}\n`;
+    fm += `technik_text: ${block(v.tText)}\n`;
+    fm += `pruefen: ${block(v.pruefen)}\n`;
+    fm += "---\n";
+
+    $("f-raw").textContent = fm;
+
+    // --- GitHub „neue Datei"-Link (öffnet Editor vorausgefüllt → PR) ---
+    const slug = slugify(v.titel || v.behauptung);
+    const url = `https://github.com/${repo}/new/main?filename=src/content/faktenchecks/${slug}.md&value=${encodeURIComponent(fm)}`;
+    $("f-github").setAttribute("href", url);
+  }
+
+  $("f-copy").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText($("f-raw").textContent); const b = $("f-copy"); const t = b.textContent; b.textContent = "Kopiert ✓"; setTimeout(() => (b.textContent = t), 1600); } catch {}
+  });
+
+  document.getElementById("fcb-form").addEventListener("input", render);
+  addQuelle(); // eine leere Quelle vorbereiten
+  render();
+</script>
