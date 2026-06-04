@@ -160,6 +160,11 @@ const vorhandeneTechniken = Object.keys(TECHNIK_LABEL).filter((t) =>
     }
     reset?.addEventListener("click", alleZuruecksetzen);
     reset2?.addEventListener("click", alleZuruecksetzen);
+
+    // Stichwort aus der Startseiten-Suche (?q=…) übernehmen und anwenden.
+    const q0 = new URLSearchParams(location.search).get("q");
+    if (q0 && suche) suche.value = q0;
+    anwenden();
   }
   init();
   document.addEventListener("astro:page-load", init);

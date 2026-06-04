@@ -51,8 +51,15 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   zusammensetzung/kennzahl). Gerendert in `[...slug].astro` als Block „Die Zahlen
   im Überblick" vor den Quellen. CMS-Feld `daten` in `config.yml` vorhanden. Regel:
   nur wo eine Zahl/Beziehung getragen wird, **mit Quelle**; %-Achsen skalieren auf 100.
+- **Release 1.1 (Onboarding/Share):** Hero-**Suche** auf der Startseite (`<form>` →
+  `/faktenchecks?q=…`, dort vom Such-Script übernommen); **dynamische OG-Karten** pro
+  Faktencheck (`src/pages/og/[slug].png.ts`, SVG→sharp, Titel + ruhiges Urteils-Chip,
+  in `[...slug].astro` via `bild`-Prop); **JSON-Export** `/faktenchecks.json`
+  (`src/pages/faktenchecks.json.ts`, Fundament für Extension); **Sticky** Tiefen-
+  Umschalter (`StufenSchalter` `position:sticky`).
 - CMS-Config: `public/admin/config.yml` (Selects für techniken müssen zu
-  `TECHNIKEN` passen – an ZWEI Stellen pflegen).
+  `TECHNIKEN` passen – an ZWEI Stellen pflegen). Entry-Listen interaktiv via
+  `view_filters`/`view_groups`/`sortable_fields` (Status/Urteil/Kategorie).
 - Build: `npm run build` (= normalize + validate + astro build). `npm run check:links`
   läuft NUR in GitHub Actions (offenes Netz), nicht lokal.
 
