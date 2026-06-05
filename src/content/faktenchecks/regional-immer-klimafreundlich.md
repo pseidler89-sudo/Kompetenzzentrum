@@ -6,8 +6,9 @@ urteil: "irrefuehrend"
 themen: ["umwelt-landwirtschaft", "klima-energie"]
 techniken: ["fehlender-bezugswert", "falsche-gleichsetzung"]
 zusammenfassung: "Warum „kurze Wege“ allein noch keine gute Klimabilanz ergeben – welche Faktoren wirklich zählen und wann regional tatsächlich die bessere Wahl ist."
-status: "in-pruefung"
+status: "geprueft"
 veroeffentlicht: 2026-06-05
+aktualisiert: 2026-06-05
 mitwirkende: ["Kompetenzzentrum-Redaktion"]
 verwandt: ["bio-landwirtschaft-immer-besser", "landwirtschaft-klima"]
 quellen:
