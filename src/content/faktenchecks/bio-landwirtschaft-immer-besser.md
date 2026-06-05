@@ -6,19 +6,25 @@ urteil: "teils-richtig"
 themen: ["umwelt-landwirtschaft", "klima-energie"]
 techniken: ["fehlender-bezugswert", "cherry-picking"]
 zusammenfassung: "Wo Bio-Landwirtschaft der konventionellen wirklich überlegen ist – und wo der pauschale „immer besser“-Satz an der Bezugsgröße (pro Fläche vs. pro Kilogramm) scheitert."
-status: "in-pruefung"
+status: "geprueft"
 veroeffentlicht: 2026-06-01
+aktualisiert: 2026-06-05
 mitwirkende: ["Kompetenzzentrum-Redaktion"]
-verwandt: []
+verwandt: ["landwirtschaft-klima", "regional-immer-klimafreundlich"]
 quellen:
   - titel: "Ökolandbau – Umweltwirkungen der ökologischen Landwirtschaft"
     herausgeber: "Umweltbundesamt (UBA)"
     url: "https://www.umweltbundesamt.de/themen/boden-landwirtschaft/landwirtschaft-umweltfreundlich-gestalten/oekolandbau"
     art: "primaer"
-  - titel: "Ökologische Landwirtschaft (Überblick: Umweltwirkungen, Erträge, Flächenbedarf)"
-    herausgeber: "Wikipedia"
-    url: "https://de.wikipedia.org/wiki/%C3%96kologische_Landwirtschaft"
-    datum: "2024"
+  - titel: "Entwicklungsperspektiven der ökologischen Landwirtschaft in Deutschland (Texte 32/2020)"
+    herausgeber: "Umweltbundesamt (UBA)"
+    url: "https://www.umweltbundesamt.de/sites/default/files/medien/1410/publikationen/2020-03-17_texte_32-2020_oekologische-landwirtschaft.pdf"
+    datum: "2020"
+    art: "primaer"
+  - titel: "Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland (Pressemitteilung zur Studie)"
+    herausgeber: "ifeu – Institut für Energie- und Umweltforschung Heidelberg"
+    url: "https://www.ifeu.de/fileadmin/uploads/Pressemitteilungen/200525_ifeu_PM_Oekologischer_Fussabdruck_Lebensmittel_FINAL.pdf"
+    datum: "2020"
     art: "sekundaer"
 einleitung: |
   Diese Behauptung kommt – anders als die meisten geprüften – eher aus einer umweltfreundlichen Ecke. Genau deshalb eignet sie sich gut, um zu zeigen: Es geht hier nie um „die richtige Seite", sondern um die **Bezugsgröße**. Bio hat echte, belegbare Vorteile. Das Wort, an dem die Aussage kippt, ist **„immer".**

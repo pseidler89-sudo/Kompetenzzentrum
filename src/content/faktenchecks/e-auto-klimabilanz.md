@@ -6,21 +6,27 @@ urteil: "groesstenteils-falsch"
 themen: ["klima-energie"]
 techniken: ["cherry-picking", "fehlender-bezugswert"]
 zusammenfassung: "Warum die Akku-Bilanz allein nichts über die Klimawirkung eines E-Autos sagt – die Break-even-Zahlen, der häufige Trick mit veralteten Daten und worauf es im Lebenszyklus ankommt."
-status: "in-pruefung"
+status: "geprueft"
 veroeffentlicht: 2026-06-01
+aktualisiert: 2026-06-05
 mitwirkende: ["Kompetenzzentrum-Redaktion"]
 verwandt: ["tempolimit-bringt-nichts"]
 quellen:
-  - titel: "Nein, E-Autos sparen nicht erst nach 219.000 Kilometern Emissionen im Vergleich zu einem Diesel"
-    herausgeber: "CORRECTIV"
-    url: "https://correctiv.org/faktencheck/2022/02/17/nein-e-autos-sparen-nicht-erst-nach-219-000-kilometern-fahrt-emissionen-im-vergleich-zu-einem-diesel/"
-    datum: "2022"
-    art: "sekundaer"
+  - titel: "Klimavorteil für E-Autos bestätigt"
+    herausgeber: "Umweltbundesamt (UBA)"
+    url: "https://www.umweltbundesamt.de/presse/pressemitteilungen/klimavorteil-fuer-e-autos-bestaetigt"
+    datum: "2024"
+    art: "primaer"
   - titel: "A global comparison of the life-cycle greenhouse gas emissions of combustion engine and electric passenger cars"
     herausgeber: "International Council on Clean Transportation (ICCT)"
     url: "https://theicct.org/publication/a-global-comparison-of-the-life-cycle-greenhouse-gas-emissions-of-combustion-engine-and-electric-passenger-cars/"
     datum: "2021"
     art: "primaer"
+  - titel: "Nein, E-Autos sparen nicht erst nach 219.000 Kilometern Emissionen im Vergleich zu einem Diesel"
+    herausgeber: "CORRECTIV"
+    url: "https://correctiv.org/faktencheck/2022/02/17/nein-e-autos-sparen-nicht-erst-nach-219-000-kilometern-fahrt-emissionen-im-vergleich-zu-einem-diesel/"
+    datum: "2022"
+    art: "sekundaer"
 einleitung: |
   Dass die Herstellung eines Akkus viel Energie kostet, stimmt – und ist der wahre Kern dieser Behauptung. Entscheidend für das Klima ist aber nicht ein einzelner Lebensabschnitt, sondern die **Gesamtbilanz über das ganze Autoleben**: Produktion plus Fahren plus Strom- bzw. Kraftstoffherstellung. Und über diese Strecke gerechnet liegt das E-Auto vorn.
 einstieg: |

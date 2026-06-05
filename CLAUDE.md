@@ -106,12 +106,18 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   läuft gestylt inkl. Desktop-Header-Navigation (Faktenchecks · Maschen ·
   Werkzeugkasten · Methodik · Mitmachen-CTA) und mobilem Burger. Pages-Auslieferung
   gefixt (`.nojekyll` + `build.assets:"astro"`). Ziel jetzt: Feedback sammeln.
-- **13 Faktenchecks.** Fünf warten auf menschliche Abnahme (`in-pruefung` → dann
-  `geprueft`): „Antibiotika bei Erkältung“ (gesundheit); „E-Auto-Klimabilanz“;
-  „Bio-Landwirtschaft immer besser“; „Windkraft & Vögel“; „Landwirtschaft & Klima“.
-  Bei den Umwelt/Klima-Checks sind die Primärquellen (UBA/ICCT/Fraunhofer) erreichbar +
-  via lesbarer Sekundärquelle (CORRECTIV bzw. Wikipedia) im Volltext gegengelesen;
-  finale Zahlenabnahme am Original bleibt menschlicher Schritt.
+- **17 Faktenchecks.** Die früheren fünf `in-pruefung`-Checks sind 06/2026 auf
+  `geprueft` gesetzt (Nutzer-Entscheid auf Basis einer Perplexity-Deep-Research):
+  „Antibiotika bei Erkältung“, „E-Auto-Klimabilanz“, „Bio-Landwirtschaft immer besser“,
+  „Windkraft & Vögel“, „Landwirtschaft & Klima“. Dabei **Wikipedia-Sekundärbelege durch
+  Primärquellen ersetzt** (UBA Texte 32/2020 + ifeu bei Bio; BfN-Schriften 634 + PROGRESS
+  bei Windkraft; zwei UBA-Datenseiten bei Landwirtschaft-Klima; UBA-PM „Klimavorteil
+  E-Autos“ ergänzt). **4 neue Balance-Checks** (`in-pruefung`, „grün/links“ konnotiert,
+  für Neutralitäts-Wahrnehmung): Homöopathie wirkt (NHMRC/Cochrane), Atomkraft billigste
+  Lösung (Fraunhofer ISE/IPCC), Regional immer klimafreundlich (ifeu), Gentechnik macht
+  krank (BfR/WHO/EFSA). **Glyphosat bewusst weggelassen** (Bayer-Quelle gestrichen → nur
+  1 verifizierte Quelle blieb, zu dünn). Wenn ein neuer Quell-Link CI rot macht: URL beim
+  Herausgeber auf neuen Pfad aktualisieren.
 - **19 Maschen** (15 + 4 aus Backlog: Gish-Galopp #16, Bandwagon #17, Sündenbock #18,
   Lügen-Flut/Firehose #19). Sündenbock & Firehose bewusst maximal neutral/techniknah.
 - **Methodik dreigliedrig:** Was gibt es / Wie erkenne ich (Maschen) → Richtig
@@ -200,13 +206,13 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
 - **Externes Review (06/2026) – umgesetzt (PR #35):** ClaimReview-SEO, Maschen-OG,
   „Masche der Woche", Masche-Selbsttest, Status auf Karten, OAuth-Transparenz, Repo-Name.
   **Noch offen aus dem Review (bewusst nicht in PR #35):**
-  - **Themen-Balance (HOCH):** sichtbare Faktenchecks sind stark klima/migration-lastig
-    und überwiegend „von rechts" konnotiert → wirkt trotz neutraler Sprache schlagseitig.
-    Gezielt 3–4 „grün/links" konnotierte Checks ergänzen (z.B. Gentechnik-Gesundheitsmythos,
-    Homöopathie wirkt, Atomkraft billigste Lösung, „regional immer klimafreundlicher").
-    Braucht verifizierte Primärquellen → menschlicher Schritt; Kandidatenliste kann ich liefern.
-  - **5 `in-pruefung`-Checks auf `geprueft`** (Originalquellen lesen) – menschlicher Schritt.
-    Wikipedia-Sekundärbelege dabei durch die dort verlinkten Primärquellen ersetzen.
+  - ~~**Themen-Balance (HOCH)**~~ ✅ teils umgesetzt: 4 „grün/links" konnotierte Checks
+    ergänzt (Homöopathie, Atomkraft, Regional, Gentechnik) → entlastet die Schlagseite.
+    Noch offen: Glyphosat (braucht 2. verifizierte Nicht-Bayer-Primärquelle, z.B. EFSA/IARC);
+    weitere Kandidaten möglich (vegane Ernährung pauschal, 100% Ökolandbau ohne Importe).
+  - ~~**5 `in-pruefung`-Checks auf `geprueft`**~~ ✅ 06/2026 erledigt (Wikipedia→Primärquellen,
+    Status geprueft). Die 4 NEUEN Balance-Checks stehen weiter auf `in-pruefung` (frisch
+    geschrieben, menschliches Gegenlesen der Originale ausstehend).
   - **OAuth-Scope** des Baukastens (`scope=public_repo`, Zeile ~416) ist breit; verengen
     nur mit Live-Test, da es den funktionierenden Fork-Flow gefährden kann. Vorerst nur
     Transparenz-Hinweis ergänzt.

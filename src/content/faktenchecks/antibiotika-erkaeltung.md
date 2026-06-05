@@ -6,8 +6,9 @@ urteil: "falsch"
 themen: ["gesundheit"]
 techniken: ["falsche-kausalitaet"]
 zusammenfassung: "Warum Antibiotika gegen eine virale Erkältung nichts ausrichten – die Studienlage, der Denkfehler dahinter und was der unnötige Einsatz mit Antibiotikaresistenzen zu tun hat."
-status: "in-pruefung"
+status: "geprueft"
 veroeffentlicht: 2026-06-01
+aktualisiert: 2026-06-05
 mitwirkende: ["Kompetenzzentrum-Redaktion"]
 verwandt: []
 quellen:
@@ -15,17 +16,17 @@ quellen:
     herausgeber: "IQWiG – gesundheitsinformation.de"
     url: "https://www.gesundheitsinformation.de/erkaeltung.html"
     datum: "2023"
-    art: "sekundaer"
+    art: "primaer"
   - titel: "Antibiotika nehmen oder nicht? Schlechte Bilanz für Antibiotika gegen einfache Erkältungen"
     herausgeber: "IQWiG – gesundheitsinformation.de"
     url: "https://www.gesundheitsinformation.de/antibiotika-nehmen-oder-nicht.html"
     datum: "2023"
-    art: "sekundaer"
+    art: "primaer"
   - titel: "Antibiotika richtig anwenden und Resistenzen vermeiden"
     herausgeber: "IQWiG – gesundheitsinformation.de"
     url: "https://www.gesundheitsinformation.de/antibiotika-richtig-anwenden-und-resistenzen-vermeiden.html"
     datum: "2023"
-    art: "sekundaer"
+    art: "primaer"
   - titel: "Antimicrobial resistance (Fact sheet)"
     herausgeber: "Weltgesundheitsorganisation (WHO)"
     url: "https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance"

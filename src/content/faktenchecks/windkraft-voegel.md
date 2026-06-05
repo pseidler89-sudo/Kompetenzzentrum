@@ -6,16 +6,22 @@ urteil: "irrefuehrend"
 themen: ["umwelt-landwirtschaft", "klima-energie"]
 techniken: ["fehlender-bezugswert", "falsche-kausalitaet"]
 zusammenfassung: "Wie viele Vögel wirklich an Windrädern sterben – im Vergleich zu Katzen, Glas und Verkehr – und warum die Windkraft nicht der Treiber des Artenrückgangs ist."
-status: "in-pruefung"
+status: "geprueft"
 veroeffentlicht: 2026-06-01
+aktualisiert: 2026-06-05
 mitwirkende: ["Kompetenzzentrum-Redaktion"]
 verwandt: []
 quellen:
-  - titel: "Vogelschlag (Größenordnungen der Verlustursachen im Vergleich)"
-    herausgeber: "Wikipedia"
-    url: "https://de.wikipedia.org/wiki/Vogelschlag"
-    datum: "2024"
-    art: "sekundaer"
+  - titel: "Vögel und Windenergienutzung – Best-Practice-Beispiele und planerische Ansätze (BfN-Schriften 634)"
+    herausgeber: "Bundesamt für Naturschutz (BfN)"
+    url: "https://www.natur-und-erneuerbare.de/fileadmin/Daten/Download_Dokumente/01_Skripte/BfN-Schriften-634-Voegel-Windenergie-2022.pdf"
+    datum: "2022"
+    art: "primaer"
+  - titel: "PROGRESS – Kollisionsopfer von Vögeln an Windenergieanlagen (Zusammenfassung)"
+    herausgeber: "BioConsult SH u. a. (BMWi-Forschungsvorhaben)"
+    url: "https://www.bioconsult-sh.de/fileadmin/user_upload/Publikationen/2016/PROGRESS_Zusammenfassung.pdf"
+    datum: "2016"
+    art: "primaer"
   - titel: "Windenergie – Natur- und Artenschutz"
     herausgeber: "Umweltbundesamt (UBA)"
     url: "https://www.umweltbundesamt.de/themen/klima-energie/erneuerbare-energien/windenergie"
@@ -23,15 +29,14 @@ quellen:
 einleitung: |
   Diese Behauptung hat einen wahren Kern: Windräder töten tatsächlich Vögel und Fledermäuse, und an ungünstigen Standorten kann das einzelne Arten (etwa den Rotmilan) gefährden. Standortwahl und Auflagen sind deshalb berechtigt. Falsch wird es bei der **Größenordnung** und bei der Behauptung, die Windkraft sei *die* Ursache des Artensterbens.
 einstieg: |
-  Vergleicht man die Verlustursachen, landet die Windkraft **am unteren Ende**. Grobe Größenordnungen (Schätzungen, USA, pro Jahr):
+  Vergleicht man die Verlustursachen, landet die Windkraft **am unteren Ende**. Grobe Größenordnungen für **Deutschland** (Schätzungen, pro Jahr; u. a. NABU):
 
-  - **Katzen:** mehrere Hundert Millionen bis ~1 Milliarde
-  - **Gebäude/Glasscheiben:** bis zu mehrere Hundert Millionen
-  - **Pestizide/Landwirtschaft:** ~70–90 Millionen
-  - **Straßenverkehr:** ~60–80 Millionen
-  - **Windkraftanlagen:** ~0,1–0,44 Millionen
+  - **Glasscheiben/Gebäude:** bis zu ~115 Millionen
+  - **Straßen- und Bahnverkehr:** bis zu ~70 Millionen
+  - **freilaufende Katzen:** bis zu ~60 Millionen
+  - **Windkraftanlagen:** in der Größenordnung von ~100.000
 
-  Der **NABU** kam zu dem Schluss, dass durch Windenergie in Deutschland **keine Vogelart** in ihrem Bestand gefährdet sei. Zum Vergleich nennt der BUND grob **zehn Millionen** durch Straßenverkehr und Stromleitungen getötete Vögel pro Jahr in Deutschland.
+  Das sind **mehrere Hundert- bis Tausendmal** mehr Vögel durch Glas, Verkehr und Katzen als durch Windräder. Der **NABU** kommt zu dem Schluss, dass durch Windenergie in Deutschland **keine Vogelart** in ihrem Bestand gefährdet ist – einzelne kollisionsgefährdete Arten an bestimmten Standorten ausgenommen.
 
   Das macht Windräder nicht harmlos – aber sie sind nicht der Grund, warum es weniger Vögel und Insekten gibt.
 vertiefung: |
