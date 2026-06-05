@@ -1,7 +1,7 @@
 ---
 titel: "„E-Autos sind wegen der Akkuproduktion klimaschädlicher als Verbrenner“"
 behauptung: "Durch die aufwändige Akkuproduktion hat ein Elektroauto eine so schlechte CO₂-Bilanz, dass es über sein ganzes Autoleben klimaschädlicher ist als ein vergleichbarer Verbrenner."
-kurzantwort: "Über den gesamten Lebenszyklus stößt ein Batterie-Elektroauto in Deutschland weniger Treibhausgase aus als ein Verbrenner. Der höhere CO₂-Rucksack der Akkuproduktion ist gegenüber einem Diesel je nach Strommix nach rund 55.000–115.000 km ausgeglichen, mit Ökostrom schon nach etwa 17.000–42.000 km – danach fährt das E-Auto klimafreundlicher."
+kurzantwort: "Über den gesamten Lebenszyklus stößt ein Batterie-Elektroauto in Deutschland weniger Treibhausgase aus als ein Verbrenner. Der höhere CO₂-Rucksack der Akkuproduktion ist gegenüber einem Diesel je nach angenommener Batterie-CO₂ nach rund 55.000–114.000 km ausgeglichen, mit Ökostrom je nach Akkugröße schon nach rund 20.000–60.000 km – danach fährt das E-Auto klimafreundlicher."
 urteil: "groesstenteils-falsch"
 themen: ["klima-energie"]
 techniken: ["cherry-picking", "fehlender-bezugswert"]
@@ -22,6 +22,11 @@ quellen:
     url: "https://theicct.org/publication/a-global-comparison-of-the-life-cycle-greenhouse-gas-emissions-of-combustion-engine-and-electric-passenger-cars/"
     datum: "2021"
     art: "primaer"
+  - titel: "Ein Update zur Klimabilanz von Elektrofahrzeugen (Working Paper Sustainability and Innovation S 01/2020)"
+    herausgeber: "Fraunhofer ISI (M. Wietschel)"
+    url: "https://www.isi.fraunhofer.de/de/themen/elektromobilitaet.html"
+    datum: "2020"
+    art: "primaer"
   - titel: "Nein, E-Autos sparen nicht erst nach 219.000 Kilometern Emissionen im Vergleich zu einem Diesel"
     herausgeber: "CORRECTIV"
     url: "https://correctiv.org/faktencheck/2022/02/17/nein-e-autos-sparen-nicht-erst-nach-219-000-kilometern-fahrt-emissionen-im-vergleich-zu-einem-diesel/"
@@ -34,8 +39,8 @@ einstieg: |
 
   Ab welcher Fahrleistung das E-Auto klimafreundlicher ist (der „Break-even"), hängt vom Strommix ab:
 
-  - Mit dem **deutschen Strommix** liegt der Ausgleich gegenüber einem Diesel grob bei **55.000–115.000 km**.
-  - Mit **100 % Ökostrom** schon bei etwa **17.000–42.000 km**.
+  - Mit dem **deutschen Strommix** liegt der Ausgleich gegenüber einem Diesel grob bei **55.000–114.000 km** (je nach angenommener Batterie-CO₂).
+  - Mit **100 % Ökostrom** je nach Akkugröße schon bei etwa **20.000–60.000 km**.
 
   Da Autos in ihrem Leben weit mehr fahren (oft 150.000–200.000 km), ist das E-Auto am Ende klar im Vorteil. „Wegen des Akkus klimaschädlicher" greift also zu kurz: Es zeigt nur den Start, nicht das Rennen.
 vertiefung: |
@@ -47,11 +52,13 @@ vertiefung: |
 
   Mit den realistischeren Werten schrumpft der Produktions-Rückstand erheblich – und damit die Strecke bis zum Break-even.
 
-  **Die Break-even-Spanne (Fraunhofer ISI, Stand 2020, 40-kWh-Akku):**
+  **Die Break-even-Spanne (Fraunhofer ISI 2020, Mittelklasse-BEV):**
 
-  - gegenüber **Diesel**: 55.000–115.000 km
-  - gegenüber **Benziner**: 52.000–98.000 km
-  - mit **100 % Ökostrom**: 17.000–42.000 km (Diesel) bzw. 18.000–40.000 km (Benziner)
+  - gegenüber **Diesel**: rund **55.000 km** (niedrige Batterie-CO₂, 61 kg/kWh) bis **114.000 km** (hohe Batterie-CO₂, 146 kg/kWh)
+  - gegenüber **Benziner**: ab rund **51.000 km**
+  - mit **100 % Ökostrom**: je nach Akkugröße meist **unter 20.000 km** bis etwa **60.000 km**
+
+  Über die gesamte Nutzungsdauer spart ein 2019 gekauftes E-Auto laut der Studie **10–25 %** Treibhausgase gegenüber dem Verbrenner ein (deutscher Strommix), ein 2030 gekauftes 25–50 %.
 
   Die Behauptung „erst nach 219.000 km" beruht laut CORRECTIV auf eben jenen überholten Daten und ist „größtenteils falsch".
 

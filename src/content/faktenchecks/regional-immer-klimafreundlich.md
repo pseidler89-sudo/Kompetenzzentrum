@@ -11,11 +11,6 @@ veroeffentlicht: 2026-06-05
 mitwirkende: ["Kompetenzzentrum-Redaktion"]
 verwandt: ["bio-landwirtschaft-immer-besser", "landwirtschaft-klima"]
 quellen:
-  - titel: "Ökologische Optimierung regional erzeugter Lebensmittel: Energie- und Treibhausgasbilanzen (Kurzfassung)"
-    herausgeber: "ifeu – Institut für Energie- und Umweltforschung Heidelberg"
-    url: "https://www.ifeu.de/fileadmin/uploads/Kurzfassung_Lebensmittel_IFEU_2009.pdf"
-    datum: "2009"
-    art: "primaer"
   - titel: "Transport und Verpackung entscheiden oft über die Klimabilanz unserer Lebensmittel (Pressemitteilung zur Studie)"
     herausgeber: "ifeu – Institut für Energie- und Umweltforschung Heidelberg"
     url: "https://www.ifeu.de/fileadmin/uploads/Pressemitteilungen/200525_ifeu_PM_Oekologischer_Fussabdruck_Lebensmittel_FINAL.pdf"
