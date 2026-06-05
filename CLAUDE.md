@@ -67,6 +67,16 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   in `[...slug].astro` via `bild`-Prop); **JSON-Export** `/faktenchecks.json`
   (`src/pages/faktenchecks.json.ts`, Fundament für Extension); **Sticky** Tiefen-
   Umschalter (`StufenSchalter` `position:sticky`).
+- **Release 1.2 (externes Review, PR #35):** **`ClaimReview`-JSON-LD** pro Faktencheck
+  in `[...slug].astro` (schema.org, Urteil→ratingValue 1–5, build-time, kein Dep) →
+  Faktencheck-Rich-Results. **Eigene OG-Karten für Maschen** (`src/pages/og/masche/[slug].png.ts`,
+  in Masche-Detail via `bild`); Faktencheck-OG-Kicker **ehrlich nach Status** (nur `geprueft`
+  = „GEPRÜFT"). **Booster gegen Inoculation-Decay:** „Masche der Woche" auf Startseite
+  (deterministische Wochen-Rotation, build-time) + **Aktiv-Abruf-Selbsttest** auf jeder
+  Masche (`<details>`, nutzt das vorher ungenutzte `TECHNIK_KONTER`). Redaktioneller
+  **Status auf den Faktencheck-Karten** sichtbar (`FaktencheckCard`, `badge--status`).
+  **Transparenz-Hinweis** zum GitHub-Schreibrecht am Baukasten-Absenden. Repo-Name im
+  Footer/Startseite auf `Kompetenzzentrum` (Groß) vereinheitlicht.
 - CMS-Config: `public/admin/config.yml` (Selects für techniken müssen zu
   `TECHNIKEN` passen – an ZWEI Stellen pflegen). Entry-Listen interaktiv via
   `view_filters`/`view_groups`/`sortable_fields` (Status/Urteil/Kategorie).
@@ -187,3 +197,19 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   Optionale Ausbaustufe: pro-Seite generierte OG-Bilder (Titel im Bild) via satori –
   bewusst NICHT gemacht (Default-Karte genügt, kein neues Dependency).
 - **Projektname bleibt „Kompetenzzentrum“** (06/2026 mit Nutzer entschieden).
+- **Externes Review (06/2026) – umgesetzt (PR #35):** ClaimReview-SEO, Maschen-OG,
+  „Masche der Woche", Masche-Selbsttest, Status auf Karten, OAuth-Transparenz, Repo-Name.
+  **Noch offen aus dem Review (bewusst nicht in PR #35):**
+  - **Themen-Balance (HOCH):** sichtbare Faktenchecks sind stark klima/migration-lastig
+    und überwiegend „von rechts" konnotiert → wirkt trotz neutraler Sprache schlagseitig.
+    Gezielt 3–4 „grün/links" konnotierte Checks ergänzen (z.B. Gentechnik-Gesundheitsmythos,
+    Homöopathie wirkt, Atomkraft billigste Lösung, „regional immer klimafreundlicher").
+    Braucht verifizierte Primärquellen → menschlicher Schritt; Kandidatenliste kann ich liefern.
+  - **5 `in-pruefung`-Checks auf `geprueft`** (Originalquellen lesen) – menschlicher Schritt.
+    Wikipedia-Sekundärbelege dabei durch die dort verlinkten Primärquellen ersetzen.
+  - **OAuth-Scope** des Baukastens (`scope=public_repo`, Zeile ~416) ist breit; verengen
+    nur mit Live-Test, da es den funktionierenden Fork-Flow gefährden kann. Vorerst nur
+    Transparenz-Hinweis ergänzt.
+  - **Niedrig:** `astro check || true` in `ci.yml` schluckt Typfehler; Inter-Fonts vom
+    Google-CDN (vs. „trackingfrei"-Versprechen) selbst hosten; `display:none`-Tiefen ggf.
+    auf ARIA-Tab-Pattern (SEO ist aber ok, da statisch im DOM).
