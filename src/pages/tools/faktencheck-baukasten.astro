@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { THEMEN, URTEILE, TECHNIKEN } from "../../content.config";
-import { THEMA_LABEL, URTEIL_LABEL, TECHNIK_LABEL, pfad } from "../../lib/labels";
+import { THEMA_LABEL, URTEIL_LABEL, TECHNIK_LABEL, TECHNIK_ERKLAERUNG, pfad } from "../../lib/labels";
 
 // Reihenfolge der Themen wie im Katalog wäre schön, hier reicht die Schema-Reihenfolge.
 const repo = "pseidler89-sudo/Kompetenzzentrum";
@@ -57,10 +57,14 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
         </div>
       </div>
       <div class="fcb-field">
-        <span>Erkannte Maschen (optional)</span>
-        <div class="fcb-checks">
+        <span>Erkannte Maschen (optional) – ⓘ antippen für die Erklärung</span>
+        <div class="fcb-maschen">
           {TECHNIKEN.map((t) => (
-            <label class="fcb-check"><input type="checkbox" name="technik" value={t} />{TECHNIK_LABEL[t]}</label>
+            <div class="fcb-masche">
+              <label class="fcb-check"><input type="checkbox" name="technik" value={t} /><span class="fcb-masche-name">{TECHNIK_LABEL[t]}</span></label>
+              <button type="button" class="fcb-info" data-info aria-expanded="false" aria-label={`Erklärung: ${TECHNIK_LABEL[t]}`}>ⓘ</button>
+              <p class="fcb-masche-desc" hidden>{TECHNIK_ERKLAERUNG[t]}</p>
+            </div>
           ))}
         </div>
       </div>
@@ -83,13 +87,15 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
         <textarea id="f-wiss" rows="4"></textarea>
       </label>
 
-      <p class="fcb-step">5 · Technik & Selbst-Prüfen (optional)</p>
+      <p class="fcb-step">5 · Trick-Box & Selbst-Prüfen (optional)</p>
+      <p class="fcb-help muted">Die <strong>Maschen oben</strong> verlinken zur allgemeinen Erklärung. Diese Box ist etwas anderes: Hier sagst du optional in 1–2 Sätzen, <em>wie</em> der Trick in <em>genau dieser</em> Behauptung steckt. Kann auch leer bleiben.</p>
       <label class="fcb-field">
-        <span>Technik – Titel</span>
+        <span>Überschrift der Trick-Box</span>
         <input id="f-technik-titel" type="text" placeholder="z. B. „Fehlender Bezugswert & Cherry Picking“" />
+        <button type="button" id="f-technik-auto" class="fcb-mini">Aus markierten Maschen übernehmen</button>
       </label>
       <label class="fcb-field">
-        <span>Technik – Erklärung</span>
+        <span>Wie die Masche hier wirkt</span>
         <textarea id="f-technik-text" rows="3"></textarea>
       </label>
       <label class="fcb-field">
@@ -153,7 +159,20 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
   .fcb-check { display: inline-flex; align-items: center; gap: .35rem; font-size: .9rem; font-weight: 500; }
   .fcb-check input { width: auto; }
 
+  /* Maschen-Auswahl mit ⓘ-Erklärung */
+  .fcb-maschen { display: grid; gap: .15rem; }
+  .fcb-masche { display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: .5rem; padding: .15rem 0; border-bottom: 1px solid var(--c-border); }
+  .fcb-masche .fcb-check { font-weight: 600; }
+  .fcb-info { font: inherit; font-size: 1.05rem; line-height: 1; cursor: pointer; background: none; border: none; color: var(--c-accent); padding: .15rem .35rem; border-radius: 6px; }
+  .fcb-info:hover, .fcb-info[aria-expanded="true"] { background: var(--c-accent-soft); }
+  .fcb-masche-desc { grid-column: 1 / -1; margin: .1rem 0 .4rem; font-size: .85rem; color: var(--c-text-soft); line-height: 1.45; }
+  .fcb-help { font-size: .85rem; margin: -.2rem 0 .6rem; }
+  .fcb-mini { margin-top: .35rem; font: inherit; font-size: .78rem; font-weight: 700; color: var(--c-accent); background: none; border: none; padding: 0; cursor: pointer; text-decoration: underline; }
+
   .fcb-quellen { display: flex; flex-direction: column; gap: .6rem; }
+  .fcb-quelle .q-f { display: block; }
+  .fcb-quelle .q-f > span { display: block; font-size: .76rem; font-weight: 600; color: var(--c-text-soft); margin-bottom: .2rem; }
+  .fcb-quelle .q-bottom { align-items: end; }
   .fcb-quelle { border: 1px solid var(--c-border); border-radius: 9px; padding: .7rem; background: var(--c-surface); display: grid; gap: .4rem; }
   .fcb-quelle .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; }
   @media (max-width: 560px) { .fcb-quelle .row2 { grid-template-columns: 1fr; } }
@@ -220,20 +239,18 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
   function addQuelle(vals = {}) {
     const div = document.createElement("div");
     div.className = "fcb-quelle";
+    const v = (x) => (x || "").replace(/"/g, "&quot;");
     div.innerHTML = `
-      <input type="text" class="q-titel" placeholder="Titel der Quelle" value="${(vals.titel||"").replace(/"/g,"&quot;")}" />
+      <label class="q-f"><span>Titel der Quelle</span><input type="text" class="q-titel" placeholder="z. B. „Polizeiliche Kriminalstatistik 2024“" value="${v(vals.titel)}" /></label>
       <div class="row2">
-        <input type="text" class="q-hg" placeholder="Herausgeber (z. B. Destatis, BKA)" value="${(vals.herausgeber||"").replace(/"/g,"&quot;")}" />
-        <input type="text" class="q-datum" placeholder="Jahr/Datum (optional)" value="${(vals.datum||"").replace(/"/g,"&quot;")}" />
+        <label class="q-f"><span>Herausgeber</span><input type="text" class="q-hg" placeholder="Destatis, BKA, UBA …" value="${v(vals.herausgeber)}" /></label>
+        <label class="q-f"><span>Jahr/Datum (optional)</span><input type="text" class="q-datum" placeholder="2024" value="${v(vals.datum)}" /></label>
       </div>
-      <div class="row2">
-        <input type="text" class="q-url" placeholder="Link https:// (optional)" value="${(vals.url||"").replace(/"/g,"&quot;")}" />
-        <select class="q-art">
-          <option value="primaer">Primärquelle (amtlich/original)</option>
-          <option value="sekundaer">Sekundärquelle</option>
-        </select>
-      </div>
-      <button type="button" class="del">Entfernen</button>`;
+      <label class="q-f"><span>Link (optional)</span><input type="url" class="q-url" placeholder="https://…" value="${v(vals.url)}" /></label>
+      <div class="row2 q-bottom">
+        <label class="q-f"><span>Art</span><select class="q-art"><option value="primaer">Primärquelle (amtlich/original)</option><option value="sekundaer">Sekundärquelle</option></select></label>
+        <button type="button" class="del">Quelle entfernen</button>
+      </div>`;
     div.querySelector(".q-art").value = vals.art || "primaer";
     div.querySelector(".del").addEventListener("click", () => { div.remove(); render(); });
     div.querySelectorAll("input,select").forEach((el) => el.addEventListener("input", render));
@@ -470,6 +487,23 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
     }
   }
   $("f-submit").addEventListener("click", einreichen);
+
+  // ⓘ neben einer Masche: Erklärung ein-/ausklappen
+  document.querySelectorAll("[data-info]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const desc = btn.parentElement.querySelector(".fcb-masche-desc");
+      const oeffnen = desc.hidden;
+      desc.hidden = !oeffnen;
+      btn.setAttribute("aria-expanded", String(oeffnen));
+    });
+  });
+
+  // „Aus markierten Maschen übernehmen“ -> Trick-Box-Überschrift vorbefüllen
+  $("f-technik-auto").addEventListener("click", () => {
+    const namen = [...document.querySelectorAll('input[name="technik"]:checked')]
+      .map((c) => c.parentElement.querySelector(".fcb-masche-name").textContent.trim());
+    if (namen.length) { $("f-technik-titel").value = namen.join(" & "); render(); }
+  });
 
   document.getElementById("fcb-form").addEventListener("input", render);
   addQuelle(); // eine leere Quelle vorbereiten

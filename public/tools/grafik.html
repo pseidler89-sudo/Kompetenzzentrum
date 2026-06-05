@@ -33,15 +33,15 @@
 
   .layout { max-width: 1080px; margin: 0 auto; padding: 18px 24px 60px; display: grid; grid-template-columns: 360px 1fr; gap: 24px; align-items: start; }
   @media (max-width: 860px){
-    .layout { grid-template-columns: 1fr; }
+    .layout { grid-template-columns: 1fr; padding: 16px 14px 48px; gap: 18px; }
     .panel { position: static; }   /* einspaltig: nicht mehr sticky */
-  }
-  @media (max-width: 560px){
-    .layout { padding: 14px 14px 48px; gap: 18px; }
-    /* Wert-Zeilen sauber untereinander statt gequetscht nebeneinander */
+    /* Wert-Zeilen sauber UNTEREINANDER statt gequetscht nebeneinander */
     .wert .grid2, .wert .grid2b { grid-template-columns: 1fr; }
     .wert input, .wert select { font-size: .95rem; padding: .6rem .6rem; }
     .seg button { padding: .6rem .4rem; }
+  }
+  @media (max-width: 380px){
+    .seg { grid-template-columns: 1fr 1fr; }
   }
 
   /* ---- Controls ---- */
