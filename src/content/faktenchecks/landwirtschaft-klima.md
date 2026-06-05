@@ -6,25 +6,20 @@ urteil: "irrefuehrend"
 themen: ["umwelt-landwirtschaft", "klima-energie"]
 techniken: ["fehlender-bezugswert", "cherry-picking"]
 zusammenfassung: "Welchen Anteil die Landwirtschaft an den Treibhausgasen hat, warum Methan und Lachgas zählen – und wo die Behauptung „spielt keine Rolle“ die Zahlen kleinredet."
-status: "in-pruefung"
+status: "geprueft"
 veroeffentlicht: 2026-06-01
+aktualisiert: 2026-06-05
 mitwirkende: ["Kompetenzzentrum-Redaktion"]
 verwandt: ["bio-landwirtschaft-immer-besser"]
 quellen:
   - titel: "Beitrag der Landwirtschaft zu den Treibhausgas-Emissionen"
     herausgeber: "Umweltbundesamt (UBA)"
-    url: "https://www.umweltbundesamt.de/daten/land-forstwirtschaft/beitrag-der-landwirtschaft-zu-den-treibhausgas"
+    url: "https://www.umweltbundesamt.de/daten/umweltzustand-trends/land-forstwirtschaft/beitrag-der-landwirtschaft-zu-den-treibhausgas"
     art: "primaer"
-  - titel: "Landwirtschaft (Treibhausgasemissionen des Sektors)"
-    herausgeber: "Wikipedia"
-    url: "https://de.wikipedia.org/wiki/Landwirtschaft"
-    datum: "2024"
-    art: "sekundaer"
-  - titel: "Methan (Treibhauswirkung / Global Warming Potential)"
-    herausgeber: "Wikipedia"
-    url: "https://de.wikipedia.org/wiki/Methan"
-    datum: "2024"
-    art: "sekundaer"
+  - titel: "Treibhausgas-Emissionen in Deutschland (Daten nach Sektoren)"
+    herausgeber: "Umweltbundesamt (UBA)"
+    url: "https://www.umweltbundesamt.de/daten/umweltzustand-trends/klima/treibhausgas-emissionen-in-deutschland"
+    art: "primaer"
 einleitung: |
   Der wahre Kern: Gemessen an Energie, Industrie und Verkehr ist die Landwirtschaft beim CO₂ der kleinere Posten. Daraus „spielt kaum eine Rolle" zu machen, redet ihren Beitrag aber klein – und übersieht, dass Landwirtschaft vor allem über **andere** Treibhausgase wirkt: Methan und Lachgas.
 einstieg: |
@@ -45,7 +40,7 @@ vertiefung: |
 
   **Fair bleibt** ein Doppelpunkt zugunsten der Sachlichkeit: Methan ist **kurzlebig** (es zerfällt nach gut einem Jahrzehnt). Das ist kein Grund zur Entwarnung, sondern eine Chance – sinkende Methanemissionen wirken **schnell** klimakühlend, anders als langlebiges CO₂.
 wissenschaftlich: |
-  **GWP und Zeithorizont.** Die Klimawirkung eines Gases wird über das „Global Warming Potential" (GWP) relativ zu CO₂ angegeben. Für Methan liegt das GWP bei rund **28 (100-Jahre-Horizont)** und deutlich höher über 20 Jahre. Welcher Horizont gewählt wird, verändert die scheinbare Bedeutung von Methan – seriöse Kommunikation nennt den Bezug.
+  **GWP und Zeithorizont.** Die Klimawirkung eines Gases wird über das „Global Warming Potential" (GWP) relativ zu CO₂ angegeben. Für Methan liegt das GWP laut IPCC bei rund **28 (100-Jahre-Horizont)** und deutlich höher über 20 Jahre. Welcher Horizont gewählt wird, verändert die scheinbare Bedeutung von Methan – seriöse Kommunikation nennt den Bezug.
 
   **Sektorabgrenzung.** Die ausgewiesenen ~8,2 % betreffen die Landwirtschaft im engeren Sinn (Tierhaltung, Böden/Düngung). Emissionen aus vor- und nachgelagerten Stufen (Düngemittelherstellung, Transport, Handel, Konsum) werden anderen Sektoren zugerechnet – wer das Ernährungssystem als Ganzes betrachtet, kommt auf einen erheblich größeren Anteil. Beim Vergleich von Zahlen ist deshalb wichtig, **welche Systemgrenze** gemeint ist.
 
