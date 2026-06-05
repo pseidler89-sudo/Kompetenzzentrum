@@ -1,5 +1,5 @@
 ---
-import { THEMA_LABEL, pfad } from "../lib/labels";
+import { THEMA_LABEL, STATUS_LABEL, pfad } from "../lib/labels";
 import UrteilBadge from "./UrteilBadge.astro";
 
 interface Props {
@@ -19,6 +19,9 @@ const { slug, data } = Astro.props;
 <a class={`card fc-card fc-card--${data.urteil}`} href={pfad(`/faktenchecks/${slug}`)}>
   <div class="card__meta">
     <UrteilBadge urteil={data.urteil} />
+    {data.status !== "geprueft" && (
+      <span class="badge badge--status" title="Quellen noch in finaler redaktioneller Prüfung">{STATUS_LABEL[data.status] ?? data.status}</span>
+    )}
     {data.themen.slice(0, 2).map((t) => <span class="badge">{THEMA_LABEL[t] ?? t}</span>)}
   </div>
   <h3>{data.titel}</h3>
@@ -39,5 +42,10 @@ const { slug, data } = Astro.props;
   .fc-card__claim {
     font-style: italic; color: var(--c-text-soft);
     padding-left: .75rem; border-left: 2px solid var(--c-border-strong);
+  }
+  .badge--status {
+    background: color-mix(in srgb, var(--c-pruefen) 16%, var(--c-surface));
+    color: var(--c-pruefen); border: 1px solid color-mix(in srgb, var(--c-pruefen) 35%, transparent);
+    font-weight: 700;
   }
 </style>

@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import UrteilBadge from "../../components/UrteilBadge.astro";
-import { pfad, MASCHE_ICON } from "../../lib/labels";
+import { pfad, MASCHE_ICON, TECHNIK_KONTER } from "../../lib/labels";
 import { md } from "../../lib/markdown";
 
 export async function getStaticPaths() {
@@ -20,9 +20,10 @@ const faktenchecks = (await getCollection("faktenchecks"))
   .sort((a, b) => b.data.veroeffentlicht.valueOf() - a.data.veroeffentlicht.valueOf());
 
 const q = data.beispiel_quelle;
+const konter = TECHNIK_KONTER[data.code];
 ---
 
-<BaseLayout titel={data.titel} beschreibung={data.kurz} seitentyp="article">
+<BaseLayout titel={data.titel} beschreibung={data.kurz} seitentyp="article" bild={`/og/masche/${masche.id}.png`}>
   <article class="masche">
     <a href={pfad("/maschen")} class="muted" style="text-decoration:none;">← Alle Maschen</a>
 
@@ -51,6 +52,18 @@ const q = data.beispiel_quelle;
             </p>
           )}
         </div>
+      </section>
+    )}
+
+    {konter && (
+      <section class="block">
+        <details class="selbsttest">
+          <summary>
+            <span class="selbsttest__q">Kurz selbst überlegen: Welche <strong>eine Frage</strong> entlarvt diese Masche?</span>
+            <span class="selbsttest__hint muted">Erst überlegen, dann aufklappen – Selbst-Abrufen prägt sich besser ein.</span>
+          </summary>
+          <p class="selbsttest__a">{konter}</p>
+        </details>
       </section>
     )}
 
@@ -106,6 +119,18 @@ const q = data.beispiel_quelle;
     border-left: 3px solid var(--c-technik);
   }
   .masche-grundlage p { margin: 0; font-size: .9rem; color: var(--c-text-soft); }
+  .selbsttest {
+    background: color-mix(in srgb, var(--c-technik) 7%, var(--c-surface));
+    border: 1px solid color-mix(in srgb, var(--c-technik) 22%, transparent);
+    border-radius: var(--radius); padding: 1rem 1.25rem;
+  }
+  .selbsttest summary { cursor: pointer; font-weight: 700; list-style: none; }
+  .selbsttest summary::-webkit-details-marker { display: none; }
+  .selbsttest summary::before { content: "🧠 "; }
+  .selbsttest__q { display: block; }
+  .selbsttest__hint { display: block; font-weight: 500; font-size: .82rem; margin-top: .2rem; }
+  .selbsttest[open] summary { margin-bottom: .6rem; }
+  .selbsttest__a { margin: 0; font-size: 1.02rem; }
   .block { margin-top: 2.5rem; }
   .block h2 { border-left: 4px solid var(--c-technik); padding-left: .7rem; }
   .beispiel-box { background: var(--c-surface); border: 1px solid var(--c-border); border-left: 4px solid var(--c-border-strong); border-radius: var(--radius); padding: 1.1rem 1.3rem; }

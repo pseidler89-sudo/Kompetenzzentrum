@@ -5,7 +5,7 @@ import StufenSchalter from "../../components/StufenSchalter.astro";
 import UrteilBadge from "../../components/UrteilBadge.astro";
 import Quellen from "../../components/Quellen.astro";
 import Datenviz from "../../components/Datenviz.astro";
-import { THEMA_LABEL, TECHNIK_LABEL, STATUS_LABEL, datumFormat, pfad } from "../../lib/labels";
+import { THEMA_LABEL, TECHNIK_LABEL, STATUS_LABEL, URTEIL_LABEL, datumFormat, pfad } from "../../lib/labels";
 import { md } from "../../lib/markdown";
 
 export async function getStaticPaths() {
@@ -32,7 +32,41 @@ const verwandt = (data.verwandt ?? [])
 const primaer = data.quellen.find((q) => q.art === "primaer") ?? data.quellen[0];
 const seiteUrl = new URL(pfad(`/faktenchecks/${eintrag.id}`), Astro.site).href;
 const teilenText = `„${data.behauptung}“\n\nFakt: ${data.kurzantwort}\n\nQuelle: ${primaer.herausgeber}${primaer.datum ? `, ${primaer.datum}` : ""}\nMehr dazu: ${seiteUrl}`;
+
+// ClaimReview-Strukturdaten (schema.org) – damit Suchmaschinen den Faktencheck
+// als solchen erkennen und im Ergebnis hervorheben. ratingValue: 1 = falsch … 5 = wahr.
+const URTEIL_RATING: Record<string, number> = {
+  falsch: 1,
+  "groesstenteils-falsch": 2,
+  irrefuehrend: 2,
+  "fehlender-kontext": 3,
+  "teils-richtig": 3,
+};
+const orgUrl = new URL(pfad("/"), Astro.site).href;
+const claimReview = {
+  "@context": "https://schema.org",
+  "@type": "ClaimReview",
+  url: seiteUrl,
+  datePublished: data.veroeffentlicht.toISOString().slice(0, 10),
+  ...(data.aktualisiert ? { dateModified: data.aktualisiert.toISOString().slice(0, 10) } : {}),
+  claimReviewed: data.behauptung,
+  author: { "@type": "Organization", name: "Kompetenzzentrum", url: orgUrl },
+  reviewRating: {
+    "@type": "Rating",
+    ratingValue: URTEIL_RATING[data.urteil] ?? 3,
+    bestRating: 5,
+    worstRating: 1,
+    alternateName: URTEIL_LABEL[data.urteil] ?? data.urteil,
+  },
+  itemReviewed: {
+    "@type": "Claim",
+    name: data.behauptung,
+    appearance: { "@type": "CreativeWork", url: seiteUrl },
+  },
+};
 ---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(claimReview)} />
 
 <BaseLayout titel={data.titel} beschreibung={data.zusammenfassung} seitentyp="article" bild={`/og/${eintrag.id}.png`}>
   <article>
