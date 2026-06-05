@@ -36,8 +36,8 @@ const wege = [
     <ol class="ablauf">
       <li><strong>Thema wählen:</strong> Eine konkrete, verbreitete Behauptung. Am besten zuerst als Issue vorschlagen, damit nichts doppelt entsteht.</li>
       <li><strong>Recherchieren:</strong> Belege sammeln, Primärquellen bevorzugen (amtliche Statistik, Studien).</li>
-      <li><strong>Schreiben:</strong> Nach der <a href={`${repo}/blob/main/docs/faktencheck-vorlage.md`}>Vorlage</a> – mit den drei Tiefen (Einstieg, Vertiefung, Wissenschaftlich). Für belegte Datengrafiken hilft der <a href={pfad("/tools/grafik.html")}>Grafik-Baukasten</a> (klicken → fertiges YAML kopieren).</li>
-      <li><strong>Einreichen:</strong> Als Pull Request. Eine zweite Person liest gegen und prüft die Quellen.</li>
+      <li><strong>Schreiben:</strong> Am einfachsten im <a href={pfad("/tools/faktencheck-baukasten")}>Faktencheck-Baukasten</a> – Formular mit Live-Vorschau, in den drei Tiefen (Einstieg, Vertiefung, Wissenschaftlich).</li>
+      <li><strong>Einreichen:</strong> Im Baukasten ein Klick auf „Absenden" (kurz anmelden, fertig). Eine zweite Person liest gegen und prüft die Quellen.</li>
       <li><strong>Veröffentlichen:</strong> Nach Freigabe geht der Beitrag live – mit Nennung der Mitwirkenden.</li>
     </ol>
   </section>
@@ -46,18 +46,17 @@ const wege = [
     <h2>Qualitätsanspruch</h2>
     <p>
       Damit die Plattform vertrauenswürdig bleibt, gelten klare Regeln: Belegpflicht,
-      faire Wiedergabe der Gegenseite, sachlicher Ton, offene Korrekturen. Details
-      stehen in den <a href={`${repo}/blob/main/docs/redaktionsstandards.md`}>Redaktionsstandards</a>
-      und im <a href={`${repo}/blob/main/CONTRIBUTING.md`}>Beitrags-Leitfaden</a>.
+      faire Wiedergabe der Gegenseite, sachlicher Ton, offene Korrekturen. Alles
+      nachzulesen in unseren <a href={pfad("/methodik/redaktionsstandards")}>Redaktionsstandards</a>.
     </p>
   </section>
 
   <section class="start-cta">
     <h2 style="margin-top:0;">Bereit?</h2>
-    <p>Der einfachste erste Schritt: ein Issue eröffnen oder ein bestehendes übernehmen.</p>
+    <p>Der einfachste Weg: deinen Faktencheck zusammenstellen – mit Live-Vorschau, ein Klick zum Absenden.</p>
     <div class="hero__cta">
-      <a class="btn btn--primary" href={`${repo}/issues`}>Zu den Issues</a>
-      <a class="btn btn--ghost" href={`${repo}/blob/main/CONTRIBUTING.md`}>Beitrags-Leitfaden lesen</a>
+      <a class="btn btn--primary" href={pfad("/tools/faktencheck-baukasten")}>Faktencheck-Baukasten öffnen</a>
+      <a class="btn btn--ghost" href={pfad("/methodik/redaktionsstandards")}>Redaktionsstandards lesen</a>
     </div>
   </section>
 </BaseLayout>

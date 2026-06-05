@@ -40,16 +40,23 @@ gespeichert:
 ## Mitmachen
 
 Dieses Projekt ist offen und lebt von vielen Augen und Quellen. Du musst kein:e
-Programmierer:in sein.
+Programmierer:in sein – du siehst von GitHub nichts außer einem kurzen Login.
 
-- **Etwas stimmt nicht?** [Fehler melden](../../issues/new?template=fehler-melden.yml)
-- **Thema vorschlagen?** [Faktencheck anregen](../../issues/new?template=neuer-faktencheck.yml)
-- **Selbst schreiben?** Über den eingebauten Redaktions-Editor (`/admin` auf der
-  Website) – mit Formularfeldern, ganz ohne technisches Wissen. Details im
-  [Beitrags-Leitfaden](CONTRIBUTING.md).
+- **🧩 Faktencheck schreiben?** Am einfachsten im
+  [**Faktencheck-Baukasten**](https://pseidler89-sudo.github.io/Kompetenzzentrum/tools/faktencheck-baukasten):
+  Formular mit Live-Vorschau, in den drei Tiefen (Einstieg · Vertiefung ·
+  Wissenschaftlich), und ein Klick zum Absenden. Kein Markdown, keine Technik.
+- **🛠️ Bestehendes pflegen?** Der
+  [Redaktions-Editor](https://pseidler89-sudo.github.io/Kompetenzzentrum/admin/)
+  (`/admin`) öffnet Faktenchecks, Maschen und Methodik in Formularfeldern und
+  verwaltet den Status (Entwurf · In Prüfung · Geprüft).
+- **✍️ Thema vorschlagen?** [Faktencheck anregen](../../issues/new?template=neuer-faktencheck.yml)
+- **🐛 Etwas stimmt nicht?** [Fehler melden](../../issues/new?template=fehler-melden.yml)
 
-Für alle Inhalte gelten unsere [Redaktionsstandards](docs/redaktionsstandards.md):
-Belegpflicht, Fairness, sachlicher Ton, offene Korrekturen.
+Für alle Inhalte gelten unsere
+[**Redaktionsstandards**](https://pseidler89-sudo.github.io/Kompetenzzentrum/methodik/redaktionsstandards):
+Belegpflicht, Fairness, sachlicher Ton, offene Korrekturen. (Technische Fassung
+für Entwickler:innen: [docs/redaktionsstandards.md](docs/redaktionsstandards.md).)
 
 > **Unser Grundsatz:** Wir prüfen *Aussagen*, nicht Personen. Die Methode –
 > Belegpflicht und Fairness – gilt für jede Behauptung gleichermaßen, egal von
