@@ -175,7 +175,10 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
   </div>
 </BaseLayout>
 
-<style>
+<!-- is:global, weil Quellen-Zeilen, Werte-Zeilen und die Live-Vorschau per JS
+     (innerHTML) erzeugt werden und Astros scoped-Attribut nicht erhalten. Die
+     Regeln laden nur auf dieser Seite, sind also faktisch auf den Baukasten begrenzt. -->
+<style is:global>
   .fcb-head { max-width: 46rem; margin-bottom: 1.5rem; }
   .eyebrow { text-transform: uppercase; letter-spacing: .06em; font-weight: 800; color: var(--c-accent); font-size: .8rem; margin: 0 0 .3rem; }
   .fcb { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem; align-items: start; }
