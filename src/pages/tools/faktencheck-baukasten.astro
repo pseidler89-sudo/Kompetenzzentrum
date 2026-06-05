@@ -109,7 +109,35 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
       <div id="f-quellen" class="fcb-quellen"></div>
       <button type="button" id="f-quelle-add" class="fcb-add">+ Quelle hinzufügen</button>
 
-      <p class="fcb-hint muted">Tipp: Für Datengrafiken den <a href={pfad("/tools/grafik.html")}>Grafik-Baukasten</a> nutzen.</p>
+      <details class="fcb-collapse">
+        <summary class="fcb-step fcb-sum">7 · Zahlen-Grafik <span class="fcb-opt">optional · aufklappen</span></summary>
+        <p class="fcb-help muted">Nur, wenn eine <strong>Zahl oder ein Vergleich</strong> die Aussage trägt – immer mit Quelle. Rechts siehst du die Grafik sofort. Leer lassen = keine Grafik (völlig in Ordnung).</p>
+        <label class="fcb-field">
+          <span>Art der Grafik</span>
+          <select id="f-daten-typ">
+            <option value="vergleich">Balken-Vergleich (mehrere Werte gegenüberstellen)</option>
+            <option value="kennzahl">Große Kennzahl(en) (eine oder wenige Zahlen hervorheben)</option>
+          </select>
+        </label>
+        <label class="fcb-field">
+          <span>Titel der Grafik (optional)</span>
+          <input id="f-daten-titel" type="text" placeholder="z. B. „Anteil an Bevölkerung vs. Tatverdächtige“" />
+        </label>
+        <div class="fcb-field">
+          <span>Werte – Beschriftung · Zahl · Einheit · Farbe</span>
+          <div id="f-daten-rows" class="fcb-dwerte"></div>
+          <button type="button" id="f-daten-add" class="fcb-mini">+ Wert hinzufügen</button>
+        </div>
+        <label class="fcb-field">
+          <span>Hinweis unter der Grafik (optional)</span>
+          <input id="f-daten-hinweis" type="text" placeholder="z. B. „Werte gerundet; Bezugsjahr 2024.“" />
+        </label>
+        <label class="fcb-field">
+          <span>Quelle der Grafik (empfohlen)</span>
+          <input id="f-daten-quelle" type="text" placeholder="z. B. „Statistisches Bundesamt, 2024“" />
+        </label>
+        <label class="fcb-check"><input type="checkbox" id="f-daten-primaer" /> Diese Quelle ist eine Primärquelle</label>
+      </details>
     </form>
 
     <!-- ============ LIVE-VORSCHAU ============ -->
@@ -157,7 +185,7 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
   .fcb-form .fcb-step:first-child { margin-top: 0; }
   .fcb-field { display: block; margin-bottom: .9rem; }
   .fcb-field > span { display: block; font-size: .85rem; font-weight: 600; color: var(--c-text-soft); margin-bottom: .3rem; }
-  .fcb-form input[type=text], .fcb-form textarea, .fcb-form select {
+  .fcb-form input:not([type=checkbox]):not([type=radio]), .fcb-form textarea, .fcb-form select {
     width: 100%; font: inherit; font-size: .95rem; padding: .55rem .7rem; color: var(--c-text);
     background: var(--c-surface); border: 1px solid var(--c-border-strong); border-radius: 8px;
   }
@@ -192,8 +220,19 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
   .fcb-quelle { border: 1px solid var(--c-border); border-radius: 9px; padding: .7rem; background: var(--c-surface); display: grid; gap: .4rem; }
   .fcb-quelle .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; }
   @media (max-width: 560px) { .fcb-quelle .row2 { grid-template-columns: 1fr; } }
-  .fcb-quelle .del { justify-self: start; font: inherit; font-size: .8rem; color: var(--c-falsch); background: none; border: none; cursor: pointer; padding: 0; }
+  .fcb-quelle .del { justify-self: end; align-self: end; font: inherit; font-size: .8rem; font-weight: 600; color: var(--c-falsch); background: none; border: 1px solid var(--c-border); border-radius: 7px; cursor: pointer; padding: .4rem .7rem; }
+  .fcb-quelle .del:hover { background: var(--c-falsch-bg); border-color: var(--c-falsch); }
   .fcb-add { font: inherit; font-weight: 700; font-size: .9rem; cursor: pointer; width: 100%; padding: .6rem; border: 1px dashed var(--c-border-strong); border-radius: 8px; background: var(--c-surface); color: var(--c-accent); margin-top: .6rem; }
+
+  /* 7 · Zahlen-Grafik – Wert-Zeilen */
+  .fcb-dwerte { display: flex; flex-direction: column; gap: .4rem; }
+  .fcb-dwert { display: grid; grid-template-columns: 1fr 4.5rem 4rem 6rem auto; gap: .4rem; align-items: center; }
+  .fcb-dwert .dw-del { font: inherit; font-size: 1rem; line-height: 1; color: var(--c-falsch); background: none; border: 1px solid var(--c-border); border-radius: 7px; cursor: pointer; padding: .35rem .5rem; }
+  .fcb-dwert .dw-del:hover { background: var(--c-falsch-bg); border-color: var(--c-falsch); }
+  @media (max-width: 560px) {
+    .fcb-dwert { grid-template-columns: 1fr 1fr auto; }
+    .fcb-dwert .dw-label { grid-column: 1 / -1; }
+  }
 
   .fcb-preview-col { position: sticky; top: 4rem; }
   @media (max-width: 900px) { .fcb-preview-col { position: static; } }
@@ -216,6 +255,27 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
   .fcb-preview .kurzantwort-box p { margin: .25rem 0 0; font-size: 1.1rem; line-height: 1.5; }
   .fcb-preview .tag-list { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1rem 0; align-items: center; }
 
+  /* Datenviz-Optik in der Vorschau gespiegelt (aus Datenviz.astro) */
+  .fcb-preview .fc-daten h2 { font-size: 1.15rem; margin: 1.4rem 0 .2rem; }
+  .fcb-preview .dv-set { display: flex; flex-direction: column; gap: 1.25rem; margin: 1rem 0; }
+  .fcb-preview .dv { margin: 0; padding: 1.1rem 1.25rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); box-shadow: var(--shadow); }
+  .fcb-preview .dv__title { font-size: .98rem; color: var(--c-text-soft); margin: 0 0 1rem; }
+  .fcb-preview .dv__title strong { color: var(--c-text); font-weight: 700; }
+  .fcb-preview .dv__hint { font-size: .85rem; color: var(--c-text-soft); font-style: italic; margin: -.5rem 0 1rem; }
+  .fcb-preview .dv__bars { display: flex; flex-direction: column; gap: 14px; }
+  .fcb-preview .dv__row { display: grid; grid-template-columns: 150px 1fr auto; gap: 12px; align-items: center; }
+  .fcb-preview .dv__lab { font-size: .9rem; font-weight: 600; }
+  .fcb-preview .dv__track { position: relative; height: 28px; background: var(--c-surface-2); border-radius: 6px; overflow: hidden; }
+  .fcb-preview .dv__fill { height: 100%; border-radius: 6px; min-width: 4px; }
+  .fcb-preview .dv__val { font-weight: 800; font-size: .9rem; font-variant-numeric: tabular-nums; min-width: 3.4rem; text-align: right; }
+  .fcb-preview .dv__stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 12px; }
+  .fcb-preview .dv__stat { background: var(--c-surface); border: 1px solid var(--c-border); border-left: 4px solid var(--c-accent); border-radius: var(--radius-sm); padding: 14px 16px; box-shadow: var(--shadow); }
+  .fcb-preview .dv__num { font-size: 2rem; font-weight: 800; letter-spacing: -.02em; line-height: 1; }
+  .fcb-preview .dv__cap { margin-top: 6px; font-size: .88rem; color: var(--c-text-soft); }
+  .fcb-preview .dv__source { display: flex; align-items: center; gap: .4rem; margin-top: 1rem; padding-top: .75rem; border-top: 1px solid var(--c-border); font-size: .75rem; color: var(--c-text-soft); }
+  .fcb-preview .dv .q-tag { font-size: .62rem; font-weight: 800; padding: .08rem .4rem; border-radius: 999px; background: var(--c-accent-soft); color: var(--c-accent); text-transform: uppercase; letter-spacing: .03em; }
+  @media (max-width: 560px) { .fcb-preview .dv__row { grid-template-columns: 1fr auto; } .fcb-preview .dv__lab { grid-column: 1 / -1; } }
+
   .fcb-out { margin-top: 1.25rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 1.1rem 1.2rem; }
   .fcb-actions { display: flex; gap: .6rem; flex-wrap: wrap; }
   .fcb-status { margin: .7rem 0 0; padding: .6rem .85rem; border-radius: 8px; font-size: .9rem; font-weight: 600; }
@@ -236,6 +296,8 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
 
   // --- mini-Markdown nur für die Vorschau (fett, Absätze, einfache Listen) ---
   function esc(s) { return (s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  // YAML-sicherer String (gerade Anführungszeichen → typografische, keine Zeilenumbrüche).
+  function qs(s) { return `"${(s || "").replace(/"/g, "”").replace(/\n/g, " ")}"`; }
   function inline(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>"); }
   function mdToHtml(src) {
     if (!src || !src.trim()) return "";
@@ -273,6 +335,104 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
     quellenBox.appendChild(div);
   }
   $("f-quelle-add").addEventListener("click", () => { addQuelle(); render(); });
+
+  // --- Zahlen-Grafik (optional): Wert-Zeilen ---
+  const FARBE = {
+    accent: "var(--c-accent)", falsch: "var(--c-falsch)", irrefuehrend: "var(--c-irrefuehrend)",
+    kontext: "var(--c-kontext)", teils: "var(--c-teils)", pruefen: "var(--c-pruefen)", neutral: "var(--c-border-strong)",
+  };
+  const farbVar = (f) => FARBE[f] || FARBE.neutral;
+  const datenRows = $("f-daten-rows");
+  function addDatenRow(vals = {}) {
+    const div = document.createElement("div");
+    div.className = "fcb-dwert";
+    const v = (x) => (x == null ? "" : String(x)).replace(/"/g, "&quot;");
+    div.innerHTML = `
+      <input type="text" class="dw-label" placeholder="Beschriftung" value="${v(vals.label)}" />
+      <input type="text" inputmode="decimal" class="dw-wert" placeholder="Zahl" value="${v(vals.wert)}" />
+      <input type="text" class="dw-einheit" placeholder="%" value="${vals.einheit != null ? v(vals.einheit) : "%"}" />
+      <select class="dw-farbe">
+        <option value="accent">Blau</option>
+        <option value="neutral">Grau</option>
+        <option value="falsch">Rot</option>
+        <option value="pruefen">Grün</option>
+        <option value="irrefuehrend">Orange</option>
+        <option value="teils">Blaugrau</option>
+      </select>
+      <button type="button" class="dw-del" aria-label="Wert entfernen">✕</button>`;
+    div.querySelector(".dw-farbe").value = vals.farbe || "accent";
+    div.querySelector(".dw-del").addEventListener("click", () => { div.remove(); render(); });
+    div.querySelectorAll("input,select").forEach((el) => el.addEventListener("input", render));
+    datenRows.appendChild(div);
+  }
+  $("f-daten-add").addEventListener("click", () => { addDatenRow(); render(); });
+
+  function getDaten() {
+    const rows = [...datenRows.querySelectorAll(".fcb-dwert")].map((d) => ({
+      label: d.querySelector(".dw-label").value.trim(),
+      wertRaw: d.querySelector(".dw-wert").value.trim(),
+      einheit: d.querySelector(".dw-einheit").value.trim(),
+      farbe: d.querySelector(".dw-farbe").value,
+    })).filter((w) => w.wertRaw !== "" && !isNaN(parseFloat(w.wertRaw.replace(",", "."))));
+    if (!rows.length) return null;
+    return {
+      typ: $("f-daten-typ").value,
+      titel: $("f-daten-titel").value.trim(),
+      hinweis: $("f-daten-hinweis").value.trim(),
+      quelle: $("f-daten-quelle").value.trim(),
+      primaer: $("f-daten-primaer").checked,
+      werte: rows.map((w) => ({ label: w.label, wert: parseFloat(w.wertRaw.replace(",", ".")), einheit: w.einheit, farbe: w.farbe })),
+    };
+  }
+
+  // Vorschau-HTML der Grafik – spiegelt Datenviz.astro
+  function datenvizHtml(c) {
+    if (!c) return "";
+    const einheitBar = (w) => (w.einheit !== "" ? w.einheit : "%");
+    let inner = "";
+    if (c.titel) inner += `<figcaption class="dv__title">${inline(c.titel)}</figcaption>`;
+    if (c.hinweis) inner += `<p class="dv__hint">${inline(c.hinweis)}</p>`;
+    if (c.typ === "kennzahl") {
+      inner += `<div class="dv__stats">`;
+      c.werte.forEach((w) => {
+        const col = farbVar(w.farbe);
+        inner += `<div class="dv__stat" style="border-left-color:${col}"><div class="dv__num" style="color:${col}">${esc(String(w.wert))}${esc(w.einheit)}</div>${w.label ? `<div class="dv__cap">${esc(w.label)}</div>` : ""}</div>`;
+      });
+      inner += `</div>`;
+    } else {
+      const allPct = c.werte.every((w) => einheitBar(w) === "%");
+      const max = allPct ? 100 : Math.max(...c.werte.map((w) => w.wert), 1);
+      inner += `<div class="dv__bars">`;
+      c.werte.forEach((w) => {
+        const width = Math.max(1, (w.wert / (max || 1)) * 100);
+        inner += `<div class="dv__row"><div class="dv__lab">${esc(w.label)}</div><div class="dv__track"><div class="dv__fill" style="width:${width}%;background:${farbVar(w.farbe)}"></div></div><div class="dv__val">${esc(String(w.wert))}${esc(einheitBar(w))}</div></div>`;
+      });
+      inner += `</div>`;
+    }
+    if (c.quelle) inner += `<div class="dv__source">${esc(c.quelle)}${c.primaer ? ` <span class="q-tag">Primärquelle</span>` : ""}</div>`;
+    return `<section class="fc-daten"><h2>Die Zahlen im Überblick</h2><div class="dv-set"><figure class="dv">${inner}</figure></div></section>`;
+  }
+
+  // daten:-Frontmatter (nur wenn Werte vorhanden)
+  function datenFm(c) {
+    if (!c) return "";
+    let s = `daten:\n  - typ: "${c.typ}"\n`;
+    if (c.titel) s += `    titel: ${qs(c.titel)}\n`;
+    if (c.hinweis) s += `    hinweis: ${qs(c.hinweis)}\n`;
+    if (c.quelle) s += `    quelle: ${qs(c.quelle)}\n`;
+    if (c.primaer) s += `    primaer: true\n`;
+    s += `    werte:\n`;
+    c.werte.forEach((w) => {
+      if (c.typ === "kennzahl") {
+        s += `      - wert: ${w.wert}\n        einheit: ${qs(w.einheit)}\n`;
+        if (w.label) s += `        sublabel: ${qs(w.label)}\n`;
+        s += `        farbe: "${w.farbe}"\n`;
+      } else {
+        s += `      - label: ${qs(w.label)}\n        wert: ${w.wert}\n        einheit: ${qs(w.einheit)}\n        farbe: "${w.farbe}"\n`;
+      }
+    });
+    return s;
+  }
 
   function getQuellen() {
     return [...quellenBox.querySelectorAll(".fcb-quelle")].map((d) => ({
@@ -315,6 +475,7 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
     const themen = checked("thema");
     const techniken = checked("technik");
     const quellen = getQuellen();
+    const daten = getDaten();
     const urteilLabel = document.querySelector(`#f-urteil option[value="${v.urteil}"]`).textContent;
 
     // --- Vorschau-HTML (nutzt echte globale Klassen) ---
@@ -342,6 +503,7 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
       if (v.tTitel || v.tText) html += `<aside class="box box-technik"><p class="box-label"><strong>Technik erkannt: ${esc(v.tTitel)}</strong></p>${mdToHtml(v.tText)}</aside>`;
       if (v.pruefen) html += `<aside class="box box-pruefen"><p class="box-label"><strong>So prüfst du das selbst</strong></p>${mdToHtml(v.pruefen)}</aside>`;
       html += `</div>`;
+      html += datenvizHtml(daten);
       if (quellen.length) {
         html += `<section class="quellen"><h2>Quellen</h2><ol>`;
         quellen.forEach((q) => {
@@ -387,6 +549,7 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
     fm += `technik_titel: ${qs(v.tTitel)}\n`;
     fm += `technik_text: ${block(v.tText)}\n`;
     fm += `pruefen: ${block(v.pruefen)}\n`;
+    fm += datenFm(daten);
     fm += "---\n";
 
     $("f-raw").textContent = fm;
@@ -523,5 +686,6 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
 
   document.getElementById("fcb-form").addEventListener("input", render);
   addQuelle(); // eine leere Quelle vorbereiten
+  addDatenRow(); addDatenRow(); // zwei leere Wert-Zeilen für die optionale Grafik
   render();
 </script>

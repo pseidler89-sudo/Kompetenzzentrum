@@ -41,9 +41,9 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   gerendert mit **astro-icon** (Build-Time, **kein** Runtime-JS) auf Maschen-Liste &
   Detailseite. Neues Dev-Dependency: `astro-icon` + `@iconify-json/lucide` (bewusst
   ergänzt – einzige Ausnahme von „kein neues Dependency", weil build-time/inline).
-- **Grafik-Baukasten:** Autor:innen-Tool unter `public/tools/grafik.html` (eigenständige
-  statische Datei, Tokens inline) → erreichbar `/<base>/tools/grafik.html`, verlinkt
-  von „Mitmachen". Klick → fertiges `daten:`-YAML zum Kopieren.
+- **Grafik-Baukasten (LEGACY):** Standalone `public/tools/grafik.html` existiert noch,
+  ist aber **nirgends mehr verlinkt** (07/2026). Die Grafik-Erstellung wurde direkt in
+  den Faktencheck-Baukasten integriert (Schritt 7, s.u.). `grafik.html` kann später raus.
 - **Faktencheck-Baukasten:** `src/pages/tools/faktencheck-baukasten.astro` – Formular
   **links**, echte **Live-Vorschau rechts** (nutzt globale Faktencheck-Stile), erzeugt
   Frontmatter. **„Absenden" = 1-Klick-Einreichung:** OAuth-Popup (Sveltia-Worker
@@ -52,8 +52,13 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   jedem Fehler: vorausgefüllter `/new/main`-Editor-Link + „Text kopieren" (kein Regress).
   **1-Klick-Einreichung 06/2026 live getestet (PR #31) ✅.** Maschen-Auswahl mit
   ⓘ-Erklärung (TECHNIK_ERKLAERUNG); Beispiel-Platzhalter in allen Feldern; Trick-Box
-  einklappbar; Pflicht-Marker. **Bewusst KEIN Chart-Builder im Baukasten** (war mobil
-  zu fummelig) → Datengrafiken laufen über CMS/`daten` bzw. Standalone `grafik.html`.
+  einklappbar; Pflicht-Marker. **Schritt 7 „Zahlen-Grafik" (optional, eingeklappt, 07/2026):**
+  inline-Grafik-Editor mit echter Live-Vorschau (spiegelt `Datenviz.astro` unter `.fcb-preview .dv*`),
+  Typen **Balken-Vergleich** + **Kennzahl**, Wert-Zeilen (Beschriftung·Zahl·Einheit·Farbe),
+  erzeugt automatisch das `daten:`-Frontmatter beim Absenden – **kein Copy-Paste, kein
+  grafik.html mehr**. (Der alte Chart-Builder war mobil zu fummelig; diese Version ist
+  mobile-first, max. wenige Felder.) **Styling-Fix:** Eingabe-Selektor deckt jetzt
+  `input:not([type=checkbox])` ab (vorher fielen `type=url`/Quellen-Felder durchs Raster).
 - Faktencheck-Detailseite hat **Kopierbutton** (Fakt+Quelle+Link) = die
   „Diskussionshilfe“ (eigene Seite wurde entfernt).
 - **Datengrafiken (P1):** optionales `daten`-Frontmatter pro Faktencheck →
@@ -83,7 +88,7 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
 - **CMS-Bedienung:** Sveltia hat eine **Live-Vorschau** (Augen-Icon) – auf dem
   **Desktop side-by-side**, mobil nur umschaltbar (Platz). Redigieren am Laptop
   empfehlen. Datengrafiken im CMS sind „advanced"/eingeklappt; einfacher visuell
-  im **Grafik-Baukasten** (`/tools/grafik.html`, mobil-fix 06/2026) bauen. Echte
+  im **Faktencheck-Baukasten, Schritt 7** (inline, Live-Vorschau) bauen. Echte
   site-genaue Vorschau bräuchte ein Custom-Preview-Template (Sveltia unterstützt
   das nur eingeschränkt) – offener größerer Schritt.
 - Build: `npm run build` (= normalize + validate + astro build). `npm run check:links`
