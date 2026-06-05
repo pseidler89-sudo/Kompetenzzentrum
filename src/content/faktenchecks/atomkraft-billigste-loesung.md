@@ -21,10 +21,10 @@ quellen:
     url: "https://www.ipcc.ch/report/ar6/wg3/downloads/report/IPCC_AR6_WGIII_SPM.pdf"
     datum: "2022"
     art: "primaer"
-  - titel: "Studie zu Stromgestehungskosten: Erneuerbare den konventionellen Kraftwerken deutlich überlegen"
-    herausgeber: "Fraunhofer ISE (Presseinformation)"
-    url: "https://www.ise.fraunhofer.de/de/presse-und-medien/presseinformationen/2021/studie-zu-stromgestehungskosten-erneuerbare-energien-aufgrund-steigender-co2-kosten-den-konventionellen-kraftwerken-deutlich-ueberlegen.html"
-    datum: "2021"
+  - titel: "World Nuclear Industry Status Report (Bauzeiten und Kosten neuer Reaktoren)"
+    herausgeber: "Mycle Schneider Consulting (WNISR)"
+    url: "https://www.worldnuclearreport.org/"
+    datum: "2023"
     art: "sekundaer"
 einleitung: |
   Diese Behauptung kommt oft aus einer Ecke, die den Klimaschutz ernst nimmt und nach
