@@ -21,7 +21,7 @@ const URTEIL_FARBE: Record<string, string> = {
 
 export async function getStaticPaths() {
   const fc = await getCollection("faktenchecks");
-  return fc.map((e) => ({ params: { slug: e.id }, props: { titel: e.data.titel, urteil: e.data.urteil } }));
+  return fc.map((e) => ({ params: { slug: e.id }, props: { titel: e.data.titel, urteil: e.data.urteil, status: e.data.status } }));
 }
 
 function escapeXml(s: string): string {
@@ -52,8 +52,15 @@ function wrap(text: string, max: number): string[] {
 export const GET: APIRoute = async ({ props }) => {
   const titel = (props as { titel: string }).titel;
   const urteil = (props as { urteil: string }).urteil;
+  const status = (props as { status?: string }).status ?? "geprueft";
   const farbe = URTEIL_FARBE[urteil] ?? "#1c5fc4";
   const label = URTEIL_LABEL[urteil] ?? urteil;
+  // Ehrlich bleiben: nur geprüfte Checks bekommen den „GEPRÜFT"-Kicker.
+  const kicker = status === "geprueft" ? "BEHAUPTUNG GEPRÜFT" : "FAKTENCHECK · IN PRÜFUNG";
+  const fusszeile =
+    status === "geprueft"
+      ? "Mit Quellen geprüft · Aussagen, nicht Personen"
+      : "Quellen werden noch final geprüft · Aussagen, nicht Personen";
 
   const lines = wrap(titel, 25);
   const lineH = 66;
@@ -80,11 +87,11 @@ export const GET: APIRoute = async ({ props }) => {
     <path d="M13 24l8 8L34 16" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   </g>
   <text x="152" y="102" font-family="sans-serif" font-size="28" font-weight="700" fill="#1c5fc4">Kompetenzzentrum</text>
-  <text x="92" y="160" font-family="sans-serif" font-size="22" font-weight="700" fill="#3b4a5e" letter-spacing="2">BEHAUPTUNG GEPRÜFT</text>
+  <text x="92" y="160" font-family="sans-serif" font-size="22" font-weight="700" fill="#3b4a5e" letter-spacing="2">${escapeXml(kicker)}</text>
   ${titelSvg}
   <circle cx="104" cy="${chipY}" r="13" fill="${farbe}"/>
   <text x="130" y="${chipY + 12}" font-family="sans-serif" font-size="38" font-weight="800" fill="${farbe}">${escapeXml(label)}</text>
-  <text x="92" y="592" font-family="sans-serif" font-size="24" font-weight="600" fill="#3b4a5e">Mit Quellen geprüft · Aussagen, nicht Personen</text>
+  <text x="92" y="592" font-family="sans-serif" font-size="24" font-weight="600" fill="#3b4a5e">${escapeXml(fusszeile)}</text>
 </svg>`;
 
   const png = await sharp(Buffer.from(svg)).png().toBuffer();

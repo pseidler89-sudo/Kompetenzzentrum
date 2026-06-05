@@ -1,13 +1,24 @@
 ---
 import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import FaktencheckCard from "../components/FaktencheckCard.astro";
-import { pfad } from "../lib/labels";
+import { pfad, MASCHE_ICON } from "../lib/labels";
 
 const eintraege = (await getCollection("faktenchecks")).sort(
   (a, b) => b.data.veroeffentlicht.valueOf() - a.data.veroeffentlicht.valueOf(),
 );
 const featured = eintraege.slice(0, 4);
+
+// „Masche der Woche“ – rotiert deterministisch nach Kalenderwoche (Build-Zeit,
+// kein Backend). Wiederholung wirkt dem Vergessens-Effekt der Inoculation entgegen.
+const maschen = (await getCollection("maschen")).sort(
+  (a, b) => a.data.reihenfolge - b.data.reihenfolge,
+);
+const jetzt = new Date();
+const jahresStart = new Date(jetzt.getFullYear(), 0, 1);
+const woche = Math.floor((jetzt.getTime() - jahresStart.getTime()) / (7 * 24 * 3600 * 1000));
+const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
 ---
 
 <BaseLayout titel="Kompetenzzentrum" breit>
@@ -97,6 +108,27 @@ const featured = eintraege.slice(0, 4);
     </section>
   )}
 
+  {macheDerWoche && (
+    <section class="container" style="margin-top:4rem;">
+      <div class="abschnitt-kopf">
+        <h2 style="margin:0;">Masche der Woche</h2>
+        <a href={pfad("/maschen")}>Alle Maschen →</a>
+      </div>
+      <a class="masche-woche" href={pfad(`/maschen/${macheDerWoche.id}`)}>
+        <span class="masche-woche__ic" aria-hidden="true">
+          <Icon name={MASCHE_ICON[macheDerWoche.data.code] ?? "lucide:shield-alert"} />
+        </span>
+        <span class="masche-woche__txt">
+          <span class="masche-woche__eyebrow">{macheDerWoche.data.kategorie === "flicc" ? "Kerntechnik" : "Häufiges Muster"}</span>
+          <strong>{macheDerWoche.data.titel}</strong>
+          <span class="muted">{macheDerWoche.data.kurz}</span>
+        </span>
+        <span class="masche-woche__pfeil" aria-hidden="true">→</span>
+      </a>
+      <p class="muted" style="font-size:.85rem;margin:.6rem 0 0;">Jede Woche eine neue Technik – kurz auffrischen hält das Auge geschult.</p>
+    </section>
+  )}
+
   <section class="container mitmach-cta">
     <h2>Mach mit – Wissen gehört allen</h2>
     <p class="muted">
@@ -106,7 +138,7 @@ const featured = eintraege.slice(0, 4);
     </p>
     <div class="hero__cta" style="justify-content:center;">
       <a class="btn btn--primary" href={pfad("/mitmachen")}>So kannst du beitragen</a>
-      <a class="btn btn--ghost" href="https://github.com/pseidler89-sudo/kompetenzzentrum">Projekt auf GitHub</a>
+      <a class="btn btn--ghost" href="https://github.com/pseidler89-sudo/Kompetenzzentrum">Projekt auf GitHub</a>
     </div>
   </section>
 
@@ -185,6 +217,24 @@ const featured = eintraege.slice(0, 4);
 
   .abschnitt-kopf { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
   .abschnitt-kopf a { font-weight: 600; text-decoration: none; }
+
+  .masche-woche {
+    display: flex; align-items: center; gap: 1.1rem; margin-top: 1.25rem;
+    padding: 1.1rem 1.3rem; background: var(--c-surface); border: 1px solid var(--c-border);
+    border-left: 4px solid var(--c-technik); border-radius: var(--radius);
+    text-decoration: none; color: inherit; transition: border-color .15s, box-shadow .15s;
+  }
+  .masche-woche:hover { border-color: var(--c-technik); box-shadow: var(--shadow); }
+  .masche-woche__ic {
+    flex: none; width: 3rem; height: 3rem; border-radius: 12px; display: flex;
+    align-items: center; justify-content: center;
+    background: color-mix(in srgb, var(--c-technik) 12%, var(--c-surface)); color: var(--c-technik);
+  }
+  .masche-woche__ic svg { width: 1.6rem; height: 1.6rem; }
+  .masche-woche__txt { display: flex; flex-direction: column; gap: .1rem; }
+  .masche-woche__eyebrow { text-transform: uppercase; letter-spacing: .06em; font-weight: 800; font-size: .72rem; color: var(--c-technik); }
+  .masche-woche__txt strong { font-size: 1.1rem; }
+  .masche-woche__pfeil { margin-left: auto; font-size: 1.4rem; color: var(--c-technik); }
 
   .mitmach-cta { text-align: center; margin-top: 4rem; padding: 2.5rem 1.5rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
   .mitmach-cta h2 { margin-top: 0; }
