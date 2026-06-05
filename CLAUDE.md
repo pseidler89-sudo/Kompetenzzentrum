@@ -112,10 +112,12 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   „Windkraft & Vögel“, „Landwirtschaft & Klima“. Dabei **Wikipedia-Sekundärbelege durch
   Primärquellen ersetzt** (UBA Texte 32/2020 + ifeu bei Bio; BfN-Schriften 634 + PROGRESS
   bei Windkraft; zwei UBA-Datenseiten bei Landwirtschaft-Klima; UBA-PM „Klimavorteil
-  E-Autos“ ergänzt). **4 neue Balance-Checks** (`in-pruefung`, „grün/links“ konnotiert,
-  für Neutralitäts-Wahrnehmung): Homöopathie wirkt (NHMRC/Cochrane), Atomkraft billigste
-  Lösung (Fraunhofer ISE/IPCC), Regional immer klimafreundlich (ifeu), Gentechnik macht
-  krank (BfR/WHO/EFSA). **Glyphosat bewusst weggelassen** (Bayer-Quelle gestrichen → nur
+  E-Autos“ ergänzt). **4 neue Balance-Checks** (alle inzwischen `geprueft` nach
+  Nutzer-Gegenlesen am Original, 06/2026; „grün/links“ konnotiert, für Neutralitäts-
+  Wahrnehmung): Homöopathie wirkt (NHMRC + EASAC 2017; Cochrane raus = Paywall, Ullman/Cureus
+  abgelehnt = Lobby), Atomkraft billigste Lösung (Fraunhofer ISE 2024 verbatim + IPCC + WNISR),
+  Regional immer klimafreundlich (ifeu-PM), Gentechnik macht krank (BfR/WHO/EFSA).
+  **Glyphosat bewusst weggelassen** (Bayer-Quelle gestrichen → nur
   1 verifizierte Quelle blieb, zu dünn). Wenn ein neuer Quell-Link CI rot macht: URL beim
   Herausgeber auf neuen Pfad aktualisieren.
 - **19 Maschen** (15 + 4 aus Backlog: Gish-Galopp #16, Bandwagon #17, Sündenbock #18,
@@ -210,9 +212,11 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
     ergänzt (Homöopathie, Atomkraft, Regional, Gentechnik) → entlastet die Schlagseite.
     Noch offen: Glyphosat (braucht 2. verifizierte Nicht-Bayer-Primärquelle, z.B. EFSA/IARC);
     weitere Kandidaten möglich (vegane Ernährung pauschal, 100% Ökolandbau ohne Importe).
-  - ~~**5 `in-pruefung`-Checks auf `geprueft`**~~ ✅ 06/2026 erledigt (Wikipedia→Primärquellen,
-    Status geprueft). Die 4 NEUEN Balance-Checks stehen weiter auf `in-pruefung` (frisch
-    geschrieben, menschliches Gegenlesen der Originale ausstehend).
+  - ~~**5 `in-pruefung`-Checks auf `geprueft`**~~ ✅ 06/2026 erledigt (Wikipedia→Primärquellen).
+  - ~~**4 neue Balance-Checks auf `geprueft`**~~ ✅ 06/2026 erledigt – Nutzer hat die Originale
+    gegengelesen/Belege beschafft (NHMRC+EASAC, ISE 2024, ifeu, BfR/WHO/EFSA). **Alle 17
+    Faktenchecks stehen jetzt auf `geprueft`.** Lernpunkt: parteiische Quellen konsequent
+    ablehnen (Bayer bei Glyphosat, Ullman/Cureus bei Homöopathie) – nur primär/amtlich/akademisch.
   - **OAuth-Scope** des Baukastens (`scope=public_repo`, Zeile ~416) ist breit; verengen
     nur mit Live-Test, da es den funktionierenden Fork-Flow gefährden kann. Vorerst nur
     Transparenz-Hinweis ergänzt.

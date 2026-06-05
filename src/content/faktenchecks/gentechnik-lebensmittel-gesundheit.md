@@ -6,8 +6,9 @@ urteil: "groesstenteils-falsch"
 themen: ["gesundheit", "umwelt-landwirtschaft"]
 techniken: ["unerfuellbare-erwartung", "emotionalisierung"]
 zusammenfassung: "Wie zugelassene gentechnisch veränderte Lebensmittel geprüft werden, was Behörden zur Gesundheit sagen – und warum man die Gesundheitsfrage von den realen Debatten über Patente und Umwelt trennen sollte."
-status: "in-pruefung"
+status: "geprueft"
 veroeffentlicht: 2026-06-05
+aktualisiert: 2026-06-05
 mitwirkende: ["Kompetenzzentrum-Redaktion"]
 verwandt: []
 quellen:

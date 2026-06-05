@@ -1,13 +1,14 @@
 ---
 titel: "„Homöopathie wirkt – das ist erwiesen“"
 behauptung: "Homöopathische Mittel wirken nachweislich über den Placeboeffekt hinaus – das zeigen Studien."
-kurzantwort: "Große, unabhängige Auswertungen der Studienlage – darunter ein Überblick über die Cochrane-Reviews und das Evidenzgutachten des australischen NHMRC – finden für keine Erkrankung verlässliche Belege, dass Homöopathie über den Placeboeffekt hinaus wirkt. Der wahre Kern: Zuwendung, ein ausführliches Gespräch und die Selbstheilung des Körpers wirken – nur eben nicht die Kügelchen selbst."
+kurzantwort: "Große, unabhängige Auswertungen der Studienlage – das Evidenzgutachten des australischen NHMRC und die Stellungnahme der europäischen Wissenschaftsakademien (EASAC) – finden für keine Erkrankung verlässliche Belege, dass Homöopathie über den Placeboeffekt hinaus wirkt. Der wahre Kern: Zuwendung, ein ausführliches Gespräch und die Selbstheilung des Körpers wirken – nur eben nicht die Kügelchen selbst."
 urteil: "groesstenteils-falsch"
 themen: ["gesundheit"]
 techniken: ["cherry-picking", "falsche-ausgewogenheit"]
 zusammenfassung: "Was die unabhängige Studienlage zur Homöopathie wirklich sagt, warum einzelne positive Studien kein Wirksamkeitsnachweis sind – und welcher wahre Kern hinter dem Gefühl steckt, dass es „doch geholfen“ hat."
-status: "in-pruefung"
+status: "geprueft"
 veroeffentlicht: 2026-06-05
+aktualisiert: 2026-06-05
 mitwirkende: ["Kompetenzzentrum-Redaktion"]
 verwandt: ["antibiotika-erkaeltung"]
 quellen:
@@ -15,6 +16,11 @@ quellen:
     herausgeber: "National Health and Medical Research Council (NHMRC, Australien)"
     url: "https://www.nhmrc.gov.au/sites/default/files/documents/attachments/CEO-statement-signed.pdf"
     datum: "2019"
+    art: "primaer"
+  - titel: "Homeopathic products and practices: assessing the evidence and ensuring consistency in regulating medical claims in the EU"
+    herausgeber: "European Academies Science Advisory Council (EASAC)"
+    url: "https://easac.eu/publications/details/homeopathic-products-and-practices/"
+    datum: "2017"
     art: "primaer"
 einleitung: |
   Diese Behauptung kommt – anders als die meisten geprüften – oft aus einer eher
@@ -33,8 +39,8 @@ einstieg: |
   - Der **NHMRC** (Australien) wertete die gesamte Studienlage aus und kam zu dem
     Schluss, es gebe **keine Erkrankung**, bei der verlässlich belegt ist, dass
     Homöopathie wirkt.
-  - Ein Überblick über die **Cochrane-Reviews** – den Goldstandard der
-    Studienauswertung – fand keine Belege für eine Wirkung über Placebo hinaus.
+  - Die **europäischen Wissenschaftsakademien (EASAC)** kommen zum selben Schluss:
+    keine bekannte Erkrankung mit robusten, reproduzierbaren Belegen für eine Wirkung über Placebo hinaus.
 
   Warum fühlen sich dann viele besser? Weil **Zuwendung, ein langes Gespräch und die
   Selbstheilung** des Körpers tatsächlich wirken. Das ist der wahre Kern – nur eben
@@ -63,11 +69,11 @@ vertiefung: |
   oder anstelle einer Impfung.
 wissenschaftlich: |
   **Evidenzhierarchie.** Aussagekräftig sind nicht Einzelstudien, sondern deren
-  systematische Zusammenfassung in **Reviews** (idealerweise Cochrane) und übergeordnete
-  Bewertungen ganzer Forschungsfelder. Der Überblick über die Cochrane-Reviews zur
-  Homöopathie kommt zu dem Schluss, dass die verfügbaren Reviews **keine über Placebo
-  hinausgehende Wirkung** zeigen. Das NHMRC-Gutachten (2015) wertete 176 Studien zu 61
-  Erkrankungen aus und fand **keine** zuverlässige Evidenz für Wirksamkeit.
+  systematische Zusammenfassung in **Reviews** und übergeordnete Bewertungen ganzer
+  Forschungsfelder. Das **NHMRC-Gutachten** (2015) wertete 176 Studien zu 61 Erkrankungen
+  aus und fand **keine** zuverlässige Evidenz für Wirksamkeit. Die **EASAC** (2017), der
+  Zusammenschluss der europäischen Wissenschaftsakademien, bestätigt dies: keine bekannte
+  Erkrankung mit robuster, reproduzierbarer Evidenz für eine Wirkung über Placebo hinaus.
 
   **Warum eine einzelne positive Meta-Analyse das nicht umstößt.** Es existiert eine
   vieldiskutierte Übersicht (2023), nach der mehrere ältere Meta-Analysen statistisch
