@@ -176,11 +176,13 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   (IQWiG, WHO), aber Status `in-pruefung` – menschliches Gegenlesen fehlt für `geprueft`.
 - **1-Klick-Einreichung im Baukasten** ✅ gebaut (OAuth+API, Fork-Fallback, Editor-Fallback)
   – **Happy-Path mit Nutzer am Live-Login testen** (Sandbox kann OAuth nicht prüfen).
-- **NÄCHSTER SCHRITT (Nutzer-Wunsch): Doku schön aufbereiten.** CONTRIBUTING.md,
-  `docs/redaktionsstandards.md` & Co. als **grafisch aufbereitete Seiten auf der Site**
-  (nicht roher Markdown auf GitHub mit `npm run`-Technik). Nicht-Techniker:innen sollen
-  einen schönen Leitfaden bekommen; technische Schritte separat/ausgeblendet. Methodik-
-  Collection oder eigene `/leitfaden`-Seiten; von „Mitmachen" verlinken.
+- ~~Doku schön aufbereiten~~ ✅ umgesetzt (PR #33): On-Site-Seite
+  `methodik/redaktionsstandards` (Methodik-Collection, reihenfolge 4, **ohne**
+  `npm run`-/Technik-Details) – Nicht-Techniker:innen sehen einen lesbaren Leitfaden,
+  technische Fassung bleibt in `docs/`. `mitmachen.astro` (Schreiben/Einreichen + CTAs)
+  und README-„Mitmachen" führen jetzt mit dem **Faktencheck-Baukasten** (Live-Vorschau,
+  1-Klick) statt GitHub-Raw-Dateien; README verlinkt die On-Site-Redaktionsstandards
+  (absolute github.io-URLs), Entwickler:innen-Abschnitt bleibt eingeklappt.
 - ~~Social-Media-Karten~~ ✅ umgesetzt (OG-/Twitter-Meta + Default-Karte, PR #3).
   Optionale Ausbaustufe: pro-Seite generierte OG-Bilder (Titel im Bild) via satori –
   bewusst NICHT gemacht (Default-Karte genügt, kein neues Dependency).
