@@ -22,23 +22,20 @@ quellen:
     url: "https://www.bioconsult-sh.de/fileadmin/user_upload/Publikationen/2016/PROGRESS_Zusammenfassung.pdf"
     datum: "2016"
     art: "primaer"
-  - titel: "Windenergie – Natur- und Artenschutz"
+  - titel: "Windenergie an Land (Ausbau, Flächenbedarf, Naturschutz)"
     herausgeber: "Umweltbundesamt (UBA)"
     url: "https://www.umweltbundesamt.de/themen/klima-energie/erneuerbare-energien/windenergie"
     art: "primaer"
 einleitung: |
   Diese Behauptung hat einen wahren Kern: Windräder töten tatsächlich Vögel und Fledermäuse, und an ungünstigen Standorten kann das einzelne Arten (etwa den Rotmilan) gefährden. Standortwahl und Auflagen sind deshalb berechtigt. Falsch wird es bei der **Größenordnung** und bei der Behauptung, die Windkraft sei *die* Ursache des Artensterbens.
 einstieg: |
-  Vergleicht man die Verlustursachen, landet die Windkraft **am unteren Ende**. Grobe Größenordnungen für **Deutschland** (Schätzungen, pro Jahr; u. a. NABU):
+  Man muss zwei Fragen trennen: **Wie viele** Vögel sterben an Windrädern – und sind dadurch **Arten** bedroht?
 
-  - **Glasscheiben/Gebäude:** bis zu ~115 Millionen
-  - **Straßen- und Bahnverkehr:** bis zu ~70 Millionen
-  - **freilaufende Katzen:** bis zu ~60 Millionen
-  - **Windkraftanlagen:** in der Größenordnung von ~100.000
+  **Zur Menge.** In absoluten Zahlen ist die Windkraft eine kleine Verlustursache: Weit mehr Vögel sterben an Glasscheiben, im Straßenverkehr und durch freilaufende Katzen. Die große Forschungsstudie **PROGRESS** (im Auftrag des Bundes) zeigt, dass der Großteil der an Windrädern verunglückten Vögel **häufige, ungefährdete** Arten der Agrarlandschaft sind (Feldlerche, Star, Stockente, Ringeltaube, Möwen). Eine Gefährdung des millionenfachen **nächtlichen Zugs** nordischer Singvögel durch Windräder lässt sich nach PROGRESS **ausschließen**.
 
-  Das sind **mehrere Hundert- bis Tausendmal** mehr Vögel durch Glas, Verkehr und Katzen als durch Windräder. Der **NABU** kommt zu dem Schluss, dass durch Windenergie in Deutschland **keine Vogelart** in ihrem Bestand gefährdet ist – einzelne kollisionsgefährdete Arten an bestimmten Standorten ausgenommen.
+  **Zur Artgefährdung.** Für die meisten Arten gefährdet die Windkraft den Bestand nicht. Es gibt aber **Ausnahmen**: Für **Rotmilan und Mäusebussard** kann die zusätzliche Kollisions-Sterblichkeit bei weiterem Ausbau bestandsrelevant werden (PROGRESS). Genau deshalb sind Standortwahl, Abstände und Abschaltzeiten wichtig – nicht der pauschale Verzicht auf Windkraft.
 
-  Das macht Windräder nicht harmlos – aber sie sind nicht der Grund, warum es weniger Vögel und Insekten gibt.
+  Das macht Windräder also nicht harmlos – aber sie sind nicht der Grund, warum es insgesamt weniger Vögel und Insekten gibt. Dessen Haupttreiber liegen woanders.
 vertiefung: |
   **Zwei Dinge werden hier vermischt:**
 
