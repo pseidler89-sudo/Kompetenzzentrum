@@ -16,11 +16,6 @@ quellen:
     url: "https://www.nhmrc.gov.au/sites/default/files/documents/attachments/CEO-statement-signed.pdf"
     datum: "2019"
     art: "primaer"
-  - titel: "Homeopathy: What Does the „Best“ Evidence Tell Us? (Überblick über Cochrane-Reviews)"
-    herausgeber: "Medical Journal of Australia / peer-reviewt"
-    url: "https://pubmed.ncbi.nlm.nih.gov/20402610/"
-    datum: "2010"
-    art: "primaer"
 einleitung: |
   Diese Behauptung kommt – anders als die meisten geprüften – oft aus einer eher
   naturverbundenen, alternativ-orientierten Ecke. Genau deshalb eignet sie sich gut,

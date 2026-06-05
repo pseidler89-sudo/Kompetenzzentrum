@@ -6,8 +6,9 @@ urteil: "groesstenteils-falsch"
 themen: ["klima-energie"]
 techniken: ["fehlender-bezugswert", "cherry-picking"]
 zusammenfassung: "Was neue Atomkraft im Vergleich zu Wind und Sonne wirklich kostet, wie lange ihr Bau dauert – und warum „CO₂-arm“ nicht automatisch „billig und schnell“ bedeutet."
-status: "in-pruefung"
+status: "geprueft"
 veroeffentlicht: 2026-06-05
+aktualisiert: 2026-06-05
 mitwirkende: ["Kompetenzzentrum-Redaktion"]
 verwandt: ["strompreise-energiewende"]
 quellen:
