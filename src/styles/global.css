@@ -1,6 +1,7 @@
 :root {
   --max-width: 50rem;
   --max-width-wide: 72rem;
+  color-scheme: light;
 
   /* Schrift: Inter (per <link> geladen, mit robustem System-Fallback) für UI,
      ein klassischer Serif-Stack für den Lesefluss langer Artikeltexte. */
@@ -132,8 +133,34 @@
 
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.3);
     --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.4);
+    color-scheme: dark;
   }
 }
+
+/* Manueller Hell/Dunkel-Umschalter im Header. Sonne = aktuell dunkel (Klick → hell),
+   Mond = aktuell hell (Klick → dunkel). Die Icon-Sichtbarkeit folgt – analog zu den
+   Farb-Tokens – dem tatsächlich angezeigten Schema (Attribut ODER OS), damit das Icon
+   ohne JS immer stimmt (kein Flackern). */
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.3rem; height: 2.3rem; flex: none; cursor: pointer;
+  background: transparent; border: 1px solid var(--c-border); border-radius: 8px;
+  color: var(--c-text-soft); padding: 0;
+}
+.theme-toggle:hover { color: var(--c-text); background: var(--c-surface-2); border-color: var(--c-border-strong); }
+.theme-toggle svg { width: 1.15rem; height: 1.15rem; }
+.theme-toggle .ic-sun { display: none; }
+.theme-toggle .ic-moon { display: block; }
+:root[data-theme="dark"] .theme-toggle .ic-sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .ic-moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .ic-sun { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .ic-moon { display: none; }
+}
+/* Toggle + Burger rechts gruppieren. Auf Desktop schiebt die Navigation
+   (margin-left:auto) die Gruppe nach rechts; auf Mobil übernimmt das die Gruppe. */
+.header-actions { display: flex; align-items: center; gap: .5rem; }
+@media (max-width: 720px) { .header-actions { margin-left: auto; } }
 
 * { box-sizing: border-box; }
 
@@ -411,7 +438,7 @@ tbody tr:nth-child(even) { background: color-mix(in srgb, var(--c-surface-2) 45%
 
   /* Schmale Screens: Desktop-Leiste aus, Burger an. */
   .site-nav--desktop { display: none; }
-  .nav-burger { display: block; position: relative; margin-left: auto; }
+  .nav-burger { display: block; position: relative; }
   .nav-burger > summary {
     display: inline-flex; align-items: center; gap: .4rem; cursor: pointer;
     list-style: none; padding: .4rem .7rem; border-radius: var(--radius-sm);

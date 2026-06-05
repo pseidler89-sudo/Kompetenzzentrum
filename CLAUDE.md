@@ -35,6 +35,12 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
 - **Keine geraden Anführungszeichen in Frontmatter-Werten** → bricht YAML.
   `scripts/normalize-frontmatter.mjs` repariert sie automatisch im Build.
 - Drei Tiefen: `StufenSchalter.astro` + `data-stufe` + localStorage.
+- **Hell/Dunkel-Umschalter (07/2026):** Token-Set in `global.css` war vorbereitet
+  (`:root[data-theme="dark"]`, `[data-theme="light"]` erzwingt hell, sonst OS via
+  `prefers-color-scheme`). Ergänzt: Button im Header (`.theme-toggle` in `.header-actions`),
+  Inline-`<head>`-Script (Flackerschutz, setzt `data-theme` vor dem Paint), Wiring-Script
+  + Persistenz in `localStorage` (`kompetenz-theme`). Icon (Sonne/Mond) folgt rein per CSS
+  dem tatsächlich angezeigten Schema.
 - Maschen: `src/content/maschen/*.md`, Codes = `TECHNIKEN`-Enum. Kategorie
   `flicc` (genau 5 Kerntechniken) oder `rhetorik`. Labels in `src/lib/labels.ts`.
 - **Maschen-Icons (P3):** je Code ein Lucide-Icon via `MASCHE_ICON` (in `labels.ts`),
