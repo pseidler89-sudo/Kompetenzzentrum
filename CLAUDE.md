@@ -51,6 +51,9 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   Branch im Repo, sonst **Fork** → Datei → **PR** – ohne sichtbares GitHub. **Fallback** bei
   jedem Fehler: vorausgefüllter `/new/main`-Editor-Link + „Text kopieren" (kein Regress).
   ⚠️ OAuth/API-Happy-Path ist **nur live testbar** (kein Browser/Login im Build).
+  Enthält **integrierten Datengrafik-Builder** (Schritt 7): Charts inline bauen →
+  Live-Vorschau (dv-Styles aus Datenviz gespiegelt) → `daten:`-Block im Frontmatter.
+  Maschen-Auswahl mit ⓘ-Erklärung (TECHNIK_ERKLAERUNG). Standalone `grafik.html` bleibt als Fallback.
 - Faktencheck-Detailseite hat **Kopierbutton** (Fakt+Quelle+Link) = die
   „Diskussionshilfe“ (eigene Seite wurde entfernt).
 - **Datengrafiken (P1):** optionales `daten`-Frontmatter pro Faktencheck →

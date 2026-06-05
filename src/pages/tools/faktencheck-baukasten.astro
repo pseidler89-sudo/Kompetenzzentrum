@@ -107,7 +107,11 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
       <div id="f-quellen" class="fcb-quellen"></div>
       <button type="button" id="f-quelle-add" class="fcb-add">+ Quelle hinzufügen</button>
 
-      <p class="fcb-hint muted">Tipp: Für Datengrafiken den <a href={pfad("/tools/grafik.html")}>Grafik-Baukasten</a> nutzen.</p>
+      <p class="fcb-step">7 · Datengrafik (optional)</p>
+      <p class="fcb-help muted">Nur, wo eine Zahl/Beziehung etwas trägt – nie Deko, immer mit Quelle. Erscheint rechts live und im Block „Die Zahlen im Überblick". Meist reicht „Vergleich" oder „Kennzahl".</p>
+      <div id="f-charts" class="fcb-charts"></div>
+      <button type="button" id="f-chart-add" class="fcb-add">+ Grafik hinzufügen</button>
+      <p class="fcb-hint muted">Lieber separat/visuell? Der eigenständige <a href={pfad("/tools/grafik.html")}>Grafik-Baukasten</a> bleibt verfügbar.</p>
     </form>
 
     <!-- ============ LIVE-VORSCHAU ============ -->
@@ -173,6 +177,44 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
   .fcb-quelle .q-f { display: block; }
   .fcb-quelle .q-f > span { display: block; font-size: .76rem; font-weight: 600; color: var(--c-text-soft); margin-bottom: .2rem; }
   .fcb-quelle .q-bottom { align-items: end; }
+
+  /* Chart-Builder (Datengrafiken im Faktencheck-Baukasten) */
+  .fcb-charts { display: flex; flex-direction: column; gap: .7rem; }
+  .fcb-chart { border: 1px solid var(--c-border); border-radius: 9px; padding: .8rem; background: var(--c-surface); display: grid; gap: .5rem; }
+  .fcb-chart .c-row { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; }
+  @media (max-width: 560px) { .fcb-chart .c-row { grid-template-columns: 1fr; } }
+  .fcb-chart .c-werte { display: flex; flex-direction: column; gap: .35rem; }
+  .fcb-chart .c-wert { display: grid; grid-template-columns: 1fr 5rem 4rem auto; gap: .3rem; align-items: center; }
+  @media (max-width: 560px) { .fcb-chart .c-wert { grid-template-columns: 1fr 1fr; } }
+  .fcb-chart .c-wert .c-del { font: inherit; font-size: .75rem; color: var(--c-falsch); background: none; border: none; cursor: pointer; padding: 0; }
+  .fcb-chart .c-werte-add { font: inherit; font-size: .8rem; font-weight: 700; color: var(--c-accent); background: none; border: none; cursor: pointer; padding: 0; justify-self: start; }
+  .fcb-chart .del { justify-self: start; font: inherit; font-size: .8rem; color: var(--c-falsch); background: none; border: none; cursor: pointer; padding: 0; }
+  .fcb-chart .c-check { display: inline-flex; align-items: center; gap: .35rem; font-size: .85rem; }
+  .fcb-chart .c-check input { width: auto; }
+
+  /* Datenviz-Vorschau (gespiegelt aus Datenviz.astro) */
+  .fcb-preview .dv { margin: 0; padding: 1.25rem 1.4rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); box-shadow: var(--shadow); }
+  .fcb-preview .dv__title { font-size: .98rem; color: var(--c-text-soft); margin: 0 0 1rem; }
+  .fcb-preview .dv__title strong { color: var(--c-text); font-weight: 700; }
+  .fcb-preview .dv__hint { font-size: .85rem; color: var(--c-text-soft); font-style: italic; margin: -.5rem 0 1rem; }
+  .fcb-preview .dv__source { display: flex; align-items: center; gap: .4rem; margin-top: 1rem; padding-top: .75rem; border-top: 1px solid var(--c-border); font-size: .75rem; color: var(--c-text-soft); }
+  .fcb-preview .dv__bars { display:flex; flex-direction:column; gap:14px; }
+  .fcb-preview .dv__rw { display:grid; grid-template-columns:180px 1fr auto; gap:14px; align-items:center; }
+  .fcb-preview .dv__lab { font-size:.9rem; font-weight:600; } .fcb-preview .dv__lab small { display:block; font-weight:500; color:var(--c-text-soft); font-size:.78rem; }
+  .fcb-preview .dv__track { position:relative; height:30px; background:var(--c-surface-2); border-radius:6px; overflow:hidden; }
+  .fcb-preview .dv__fill { height:100%; border-radius:6px; min-width:4px; }
+  .fcb-preview .dv__val { font-weight:800; font-size:.9rem; font-variant-numeric:tabular-nums; min-width:3.4rem; text-align:right; }
+  .fcb-preview .dv__stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(11rem,1fr)); gap:14px; }
+  .fcb-preview .dv__stat { border:1px solid var(--c-border); border-left:4px solid var(--c-accent); border-radius:var(--radius-sm); padding:14px 16px; }
+  .fcb-preview .dv__num { font-size:2rem; font-weight:800; letter-spacing:-.02em; line-height:1; }
+  .fcb-preview .dv__cap { margin-top:6px; font-size:.88rem; color:var(--c-text-soft); }
+  .fcb-preview .dv__stack { display:flex; height:42px; border-radius:8px; overflow:hidden; border:1px solid var(--c-border); }
+  .fcb-preview .dv__seg { display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:.78rem; overflow:hidden; white-space:nowrap; }
+  .fcb-preview .dv__seg span { padding:0 .4rem; overflow:hidden; text-overflow:ellipsis; }
+  .fcb-preview .dv__legend { display:flex; flex-wrap:wrap; gap:14px; margin-top:12px; font-size:.82rem; color:var(--c-text-soft); }
+  .fcb-preview .dv__legend span { display:inline-flex; align-items:center; gap:.4rem; } .fcb-preview .dv__legend i { width:.8rem; height:.8rem; border-radius:3px; flex:none; }
+  .fcb-preview .dv-set { display:flex; flex-direction:column; gap:1.25rem; margin:1.25rem 0; }
+  @media (max-width:560px){ .fcb-preview .dv__rw { grid-template-columns:1fr auto; } .fcb-preview .dv__lab { grid-column:1/-1; } }
   .fcb-quelle { border: 1px solid var(--c-border); border-radius: 9px; padding: .7rem; background: var(--c-surface); display: grid; gap: .4rem; }
   .fcb-quelle .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; }
   @media (max-width: 560px) { .fcb-quelle .row2 { grid-template-columns: 1fr; } }
@@ -217,6 +259,9 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
   const state = {};
   const [UP_OWNER, UP_REPO] = repo.split("/");
   const AUTH_BASE = "https://sveltia-cms-auth.p-seidler.workers.dev";
+  const FARBEN = ["accent", "neutral", "falsch", "irrefuehrend", "kontext", "teils", "pruefen"];
+  const farbVar = (f) => ({ accent: "var(--c-accent)", falsch: "var(--c-falsch)", irrefuehrend: "var(--c-irrefuehrend)", kontext: "var(--c-kontext)", teils: "var(--c-teils)", pruefen: "var(--c-pruefen)", neutral: "var(--c-border-strong)" }[f] || "var(--c-border-strong)");
+  const CHART_TYPEN = [["vergleich", "Vergleich"], ["anteil", "Anteil"], ["zusammensetzung", "Zusammensetzung"], ["kennzahl", "Kennzahl"]];
 
   // --- mini-Markdown nur für die Vorschau (fett, Absätze, einfache Listen) ---
   function esc(s) { return (s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
@@ -266,6 +311,75 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
       url: d.querySelector(".q-url").value.trim(),
       art: d.querySelector(".q-art").value,
     })).filter((q) => q.titel || q.herausgeber);
+  }
+
+  // ---------- Datengrafik-Builder ----------
+  const chartsBox = $("f-charts");
+  function addWert(box, vals = {}) {
+    const row = document.createElement("div");
+    row.className = "c-wert";
+    row.innerHTML = `
+      <input type="text" class="w-label" placeholder="Label" value="${(vals.label||"").replace(/"/g,"&quot;")}" />
+      <input type="number" class="w-wert" step="any" placeholder="Zahl" value="${vals.wert ?? ""}" />
+      <input type="text" class="w-einheit" placeholder="%" value="${(vals.einheit||"").replace(/"/g,"&quot;")}" />
+      <select class="w-farbe">${FARBEN.map((f) => `<option ${vals.farbe===f?"selected":""}>${f}</option>`).join("")}</select>
+      <button type="button" class="c-del" title="Wert entfernen">✕</button>`;
+    if (vals.farbe) row.querySelector(".w-farbe").value = vals.farbe;
+    row.querySelector(".c-del").addEventListener("click", () => { row.remove(); render(); });
+    row.querySelectorAll("input,select").forEach((el) => el.addEventListener("input", render));
+    box.appendChild(row);
+  }
+  function addChart(vals = {}) {
+    const card = document.createElement("div");
+    card.className = "fcb-chart";
+    card.innerHTML = `
+      <div class="c-row">
+        <label class="q-f"><span>Typ</span><select class="c-typ">${CHART_TYPEN.map(([v,l]) => `<option value="${v}" ${vals.typ===v?"selected":""}>${l}</option>`).join("")}</select></label>
+        <label class="q-f"><span>Quelle</span><input type="text" class="c-quelle" placeholder="z. B. Bundesnetzagentur" value="${(vals.quelle||"").replace(/"/g,"&quot;")}" /></label>
+      </div>
+      <label class="q-f"><span>Titel der Grafik (optional, <strong>…</strong> erlaubt)</span><input type="text" class="c-titel" value="${(vals.titel||"").replace(/"/g,"&quot;")}" /></label>
+      <label class="c-check"><input type="checkbox" class="c-primaer" ${vals.primaer?"checked":""} /> Primärquelle (amtlich)</label>
+      <div class="c-werte"></div>
+      <button type="button" class="c-werte-add">+ Wert</button>
+      <button type="button" class="del">Grafik entfernen</button>`;
+    if (vals.typ) card.querySelector(".c-typ").value = vals.typ;
+    const wbox = card.querySelector(".c-werte");
+    const init = vals.werte && vals.werte.length ? vals.werte : [{ farbe: "accent" }, { farbe: "neutral" }];
+    init.forEach((w) => addWert(wbox, w));
+    card.querySelector(".c-werte-add").addEventListener("click", () => { addWert(wbox); render(); });
+    card.querySelector(".del").addEventListener("click", () => { card.remove(); render(); });
+    card.querySelectorAll(".c-typ,.c-titel,.c-quelle,.c-primaer").forEach((el) => el.addEventListener("input", render));
+    chartsBox.appendChild(card);
+  }
+  $("f-chart-add").addEventListener("click", () => { addChart(); render(); });
+
+  function getCharts() {
+    return [...chartsBox.querySelectorAll(".fcb-chart")].map((c) => ({
+      typ: c.querySelector(".c-typ").value,
+      titel: c.querySelector(".c-titel").value.trim(),
+      quelle: c.querySelector(".c-quelle").value.trim(),
+      primaer: c.querySelector(".c-primaer").checked,
+      werte: [...c.querySelectorAll(".c-wert")].map((r) => ({
+        label: r.querySelector(".w-label").value.trim(),
+        wert: r.querySelector(".w-wert").value.trim(),
+        einheit: r.querySelector(".w-einheit").value.trim(),
+        farbe: r.querySelector(".w-farbe").value,
+      })).filter((w) => w.label || w.wert !== ""),
+    })).filter((c) => c.werte.length);
+  }
+  function chartHTML(c) {
+    const rich = (s) => esc(s).replace(/&lt;(\/?(?:strong|em))&gt;/g, "<$1>");
+    const allePct = c.werte.every((w) => (w.einheit || "%") === "%");
+    const max = allePct ? 100 : Math.max(...c.werte.map((w) => +w.wert || 0), 0.0001);
+    let inner = "";
+    if (c.typ === "kennzahl") {
+      inner = `<div class="dv__stats">${c.werte.map((w) => `<div class="dv__stat" style="border-left-color:${farbVar(w.farbe)}"><div class="dv__num" style="color:${farbVar(w.farbe)}">${esc(w.wert)}${esc(w.einheit||"")}</div>${w.label?`<div class="dv__cap">${esc(w.label)}</div>`:""}</div>`).join("")}</div>`;
+    } else if (c.typ === "zusammensetzung") {
+      inner = `<div class="dv__stack">${c.werte.map((w) => `<div class="dv__seg" style="width:${+w.wert||0}%;background:${farbVar(w.farbe)}"><span>${esc(w.label)} ${esc(w.wert)}${esc(w.einheit||"%")}</span></div>`).join("")}</div><div class="dv__legend">${c.werte.map((w) => `<span><i style="background:${farbVar(w.farbe)}"></i>${esc(w.label)}</span>`).join("")}</div>`;
+    } else {
+      inner = `<div class="dv__bars">${c.werte.map((w) => `<div class="dv__rw"><div class="dv__lab">${esc(w.label)}</div><div class="dv__track"><div class="dv__fill" style="width:${Math.max(1,((+w.wert||0)/max)*100)}%;background:${farbVar(w.farbe)}"></div></div><div class="dv__val">${esc(w.wert)}${esc(w.einheit||"%")}</div></div>`).join("")}</div>`;
+    }
+    return `<figure class="dv">${c.titel?`<figcaption class="dv__title">${rich(c.titel)}</figcaption>`:""}${inner}${c.quelle?`<div class="dv__source">${esc(c.quelle)}${c.primaer?`<span class="q-tag">Primärquelle</span>`:""}</div>`:""}</figure>`;
   }
 
   function checked(name) { return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map((c) => c.value); }
@@ -326,6 +440,10 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
       if (v.tTitel || v.tText) html += `<aside class="box box-technik"><p class="box-label"><strong>Technik erkannt: ${esc(v.tTitel)}</strong></p>${mdToHtml(v.tText)}</aside>`;
       if (v.pruefen) html += `<aside class="box box-pruefen"><p class="box-label"><strong>So prüfst du das selbst</strong></p>${mdToHtml(v.pruefen)}</aside>`;
       html += `</div>`;
+      const charts = getCharts();
+      if (charts.length) {
+        html += `<section style="margin-top:1.5rem;"><h2 style="margin:0 0 .5rem;">Die Zahlen im Überblick</h2><div class="dv-set">${charts.map(chartHTML).join("")}</div></section>`;
+      }
       if (quellen.length) {
         html += `<section class="quellen"><h2>Quellen</h2><ol>`;
         quellen.forEach((q) => {
@@ -371,6 +489,22 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
     fm += `technik_titel: ${qs(v.tTitel)}\n`;
     fm += `technik_text: ${block(v.tText)}\n`;
     fm += `pruefen: ${block(v.pruefen)}\n`;
+    const charts = getCharts();
+    if (charts.length) {
+      fm += `daten:\n`;
+      charts.forEach((c) => {
+        fm += `  - typ: ${c.typ}\n`;
+        if (c.titel) fm += `    titel: ${qs(c.titel)}\n`;
+        if (c.quelle) fm += `    quelle: ${qs(c.quelle)}\n`;
+        if (c.primaer) fm += `    primaer: true\n`;
+        fm += `    werte:\n`;
+        c.werte.forEach((w) => {
+          fm += `      - label: ${qs(w.label)}\n        wert: ${w.wert === "" ? 0 : w.wert}\n`;
+          if ((w.einheit || "%") !== "%") fm += `        einheit: ${qs(w.einheit)}\n`;
+          fm += `        farbe: ${w.farbe}\n`;
+        });
+      });
+    }
     fm += "---\n";
 
     $("f-raw").textContent = fm;
