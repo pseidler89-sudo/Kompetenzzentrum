@@ -46,8 +46,11 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   von „Mitmachen". Klick → fertiges `daten:`-YAML zum Kopieren.
 - **Faktencheck-Baukasten:** `src/pages/tools/faktencheck-baukasten.astro` – Formular
   **links**, echte **Live-Vorschau rechts** (nutzt globale Faktencheck-Stile), erzeugt
-  Frontmatter + „Auf GitHub anlegen"-Link (`/new/main?filename=…&value=…`) → öffnet den
-  vorausgefüllten Editor → PR. Umgeht die Sveltia-Grenzen (site-genaue Vorschau), Handy+Desktop.
+  Frontmatter. **„Absenden" = 1-Klick-Einreichung:** OAuth-Popup (Sveltia-Worker
+  `sveltia-cms-auth.p-seidler.workers.dev`, Netlify-Protokoll) → GitHub-API: bei Schreibrecht
+  Branch im Repo, sonst **Fork** → Datei → **PR** – ohne sichtbares GitHub. **Fallback** bei
+  jedem Fehler: vorausgefüllter `/new/main`-Editor-Link + „Text kopieren" (kein Regress).
+  ⚠️ OAuth/API-Happy-Path ist **nur live testbar** (kein Browser/Login im Build).
 - Faktencheck-Detailseite hat **Kopierbutton** (Fakt+Quelle+Link) = die
   „Diskussionshilfe“ (eigene Seite wurde entfernt).
 - **Datengrafiken (P1):** optionales `daten`-Frontmatter pro Faktencheck →
@@ -168,6 +171,8 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   Weitere Themen außerhalb Migration/Klima weiterhin wünschenswert.
 - **Gesundheits-Faktencheck abnehmen:** Quellen sind erreichbar + inhaltlich geprüft
   (IQWiG, WHO), aber Status `in-pruefung` – menschliches Gegenlesen fehlt für `geprueft`.
+- **1-Klick-Einreichung im Baukasten** ✅ gebaut (OAuth+API, Fork-Fallback, Editor-Fallback)
+  – **Happy-Path mit Nutzer am Live-Login testen** (Sandbox kann OAuth nicht prüfen).
 - **NÄCHSTER SCHRITT (Nutzer-Wunsch): Doku schön aufbereiten.** CONTRIBUTING.md,
   `docs/redaktionsstandards.md` & Co. als **grafisch aufbereitete Seiten auf der Site**
   (nicht roher Markdown auf GitHub mit `npm run`-Technik). Nicht-Techniker:innen sollen

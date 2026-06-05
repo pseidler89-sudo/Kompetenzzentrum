@@ -112,14 +112,17 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
       <div class="fcb-out">
         <p class="fcb-step">Fertig? Absenden – der Rest passiert automatisch</p>
         <div class="fcb-actions">
-          <a id="f-github" class="btn btn--primary" href="#" target="_blank" rel="noopener">Faktencheck absenden →</a>
+          <button type="button" id="f-submit" class="btn btn--primary">Faktencheck absenden →</button>
           <button type="button" id="f-copy" class="btn btn--ghost">Nur Text kopieren</button>
         </div>
+        <p id="f-status" class="fcb-status" hidden></p>
         <p class="muted" style="font-size:.85rem;margin:.6rem 0 0;">
           Beim ersten Mal meldest du dich kurz an (GitHub – Login auch per Google möglich).
-          Danach ein Klick auf <strong>„Propose changes“</strong> – fertig. Dein Faktencheck ist
-          als Vorschlag eingereicht, die Redaktion liest gegen und gibt ihn frei. Du musst nichts
-          mit Technik oder Dateien machen.
+          Danach wird dein Faktencheck automatisch als Vorschlag eingereicht – die Redaktion
+          liest gegen und gibt ihn frei. Du musst nichts mit Technik oder Dateien machen.
+        </p>
+        <p class="muted fcb-fallback" id="f-fallback-wrap" hidden style="font-size:.85rem;margin:.5rem 0 0;">
+          Klappt das Anmelden nicht? <a id="f-github" href="#" target="_blank" rel="noopener">Manuell über GitHub anlegen</a>.
         </p>
         <details class="fcb-raw">
           <summary>Text ansehen (für Neugierige)</summary>
@@ -180,6 +183,11 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
 
   .fcb-out { margin-top: 1.25rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 1.1rem 1.2rem; }
   .fcb-actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .fcb-status { margin: .7rem 0 0; padding: .6rem .85rem; border-radius: 8px; font-size: .9rem; font-weight: 600; }
+  .fcb-status.info { background: var(--c-accent-soft); color: var(--c-accent); }
+  .fcb-status.ok { background: color-mix(in srgb, var(--c-pruefen) 14%, var(--c-surface)); color: var(--c-pruefen); }
+  .fcb-status.err { background: var(--c-falsch-bg); color: var(--c-falsch); }
+  .fcb-status a { color: inherit; font-weight: 800; }
   .fcb-raw { margin-top: .8rem; }
   .fcb-raw pre { margin: .5rem 0 0; padding: .8rem; background: var(--c-surface-2); border-radius: 8px; font-family: var(--font-mono); font-size: .78rem; white-space: pre-wrap; max-height: 18rem; overflow: auto; }
   .fcb-hint { font-size: .85rem; margin-top: 1rem; }
@@ -187,6 +195,9 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
 
 <script define:vars={{ repo }}>
   const $ = (id) => document.getElementById(id);
+  const state = {};
+  const [UP_OWNER, UP_REPO] = repo.split("/");
+  const AUTH_BASE = "https://sveltia-cms-auth.p-seidler.workers.dev";
 
   // --- mini-Markdown nur für die Vorschau (fett, Absätze, einfache Listen) ---
   function esc(s) { return (s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
@@ -347,15 +358,118 @@ const repo = "pseidler89-sudo/Kompetenzzentrum";
 
     $("f-raw").textContent = fm;
 
-    // --- GitHub „neue Datei"-Link (öffnet Editor vorausgefüllt → PR) ---
+    // --- GitHub „neue Datei"-Link (Fallback: Editor vorausgefüllt → PR) ---
     const slug = slugify(v.titel || v.behauptung);
     const url = `https://github.com/${repo}/new/main?filename=src/content/faktenchecks/${slug}.md&value=${encodeURIComponent(fm)}`;
     $("f-github").setAttribute("href", url);
+
+    // Stand für „Absenden" merken
+    state.fm = fm; state.slug = slug; state.titel = v.titel || "Neuer Faktencheck";
+    state.behauptung = v.behauptung; state.kurzantwort = v.kurzantwort; state.quellenN = quellen.length;
+    state.fallbackUrl = url;
   }
 
   $("f-copy").addEventListener("click", async () => {
     try { await navigator.clipboard.writeText($("f-raw").textContent); const b = $("f-copy"); const t = b.textContent; b.textContent = "Kopiert ✓"; setTimeout(() => (b.textContent = t), 1600); } catch {}
   });
+
+  // ---------- ABSENDEN: OAuth-Login + GitHub-API (PR im Hintergrund) ----------
+  function status(msg, kind) {
+    const el = $("f-status");
+    el.className = "fcb-status " + (kind || "info");
+    el.innerHTML = msg;
+    el.hidden = false;
+  }
+
+  // OAuth-Popup nach dem Netlify/Sveltia-Protokoll (Handshake → Token).
+  function login() {
+    return new Promise((resolve, reject) => {
+      const w = 640, h = 720, left = (screen.width - w) / 2, top = (screen.height - h) / 2;
+      const popup = window.open(
+        `${AUTH_BASE}/auth?provider=github&scope=public_repo&site_id=${encodeURIComponent(location.hostname)}`,
+        "kompetenz-oauth", `width=${w},height=${h},left=${left},top=${top}`,
+      );
+      if (!popup) { reject(new Error("Popup blockiert – bitte erlauben")); return; }
+      let done = false;
+      function onMsg(e) {
+        if (typeof e.data !== "string") return;
+        if (e.data === "authorizing:github") { popup.postMessage("authorizing:github", "*"); return; }
+        const m = e.data.match(/^authorization:github:(success|error):(.*)$/);
+        if (!m) return;
+        done = true; window.removeEventListener("message", onMsg);
+        try { popup.close(); } catch {}
+        if (m[1] === "success") { try { resolve(JSON.parse(m[2]).token); } catch { reject(new Error("Token unlesbar")); } }
+        else reject(new Error("Login fehlgeschlagen"));
+      }
+      window.addEventListener("message", onMsg);
+      const iv = setInterval(() => { if (popup.closed && !done) { clearInterval(iv); window.removeEventListener("message", onMsg); reject(new Error("Login-Fenster geschlossen")); } }, 700);
+    });
+  }
+
+  async function gh(token, path, opts = {}) {
+    const r = await fetch("https://api.github.com" + path, {
+      ...opts,
+      headers: { Authorization: "token " + token, Accept: "application/vnd.github+json", "Content-Type": "application/json", ...(opts.headers || {}) },
+    });
+    if (!r.ok) throw new Error("GitHub " + r.status + ": " + (await r.text()).slice(0, 120));
+    return r.status === 204 ? {} : r.json();
+  }
+  const b64 = (s) => btoa(unescape(encodeURIComponent(s)));
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  async function einreichen() {
+    const fehlt = [];
+    if (!state.titel || state.titel === "Neuer Faktencheck") fehlt.push("Titel");
+    if (!state.behauptung) fehlt.push("Behauptung");
+    if (!state.kurzantwort) fehlt.push("Kurzantwort");
+    if (!state.quellenN) fehlt.push("mindestens eine Quelle");
+    if (fehlt.length) { status("Bitte noch ausfüllen: " + fehlt.join(", ") + ".", "err"); return; }
+
+    const btn = $("f-submit");
+    btn.disabled = true;
+    try {
+      status("Anmelden … bitte im Fenster bestätigen.", "info");
+      const token = await login();
+      status("Faktencheck wird eingereicht …", "info");
+
+      const me = await gh(token, "/user");
+      const branch = `faktencheck-${state.slug}-${Date.now().toString(36)}`;
+
+      let canPush = false;
+      try {
+        const p = await gh(token, `/repos/${UP_OWNER}/${UP_REPO}/collaborators/${me.login}/permission`);
+        canPush = ["admin", "write", "maintain"].includes(p.permission);
+      } catch { canPush = false; }
+
+      let owner, repoName, prHead;
+      if (canPush) {
+        owner = UP_OWNER; repoName = UP_REPO; prHead = branch;
+      } else {
+        const fork = await gh(token, `/repos/${UP_OWNER}/${UP_REPO}/forks`, { method: "POST" });
+        owner = me.login; repoName = fork.name; prHead = `${me.login}:${branch}`;
+        for (let i = 0; i < 12; i++) { try { await gh(token, `/repos/${owner}/${repoName}/git/ref/heads/main`); break; } catch { await sleep(1500); } }
+      }
+
+      const baseRef = await gh(token, `/repos/${owner}/${repoName}/git/ref/heads/main`);
+      await gh(token, `/repos/${owner}/${repoName}/git/refs`, { method: "POST", body: JSON.stringify({ ref: `refs/heads/${branch}`, sha: baseRef.object.sha }) });
+      await gh(token, `/repos/${owner}/${repoName}/contents/src/content/faktenchecks/${state.slug}.md`, {
+        method: "PUT",
+        body: JSON.stringify({ message: `Neuer Faktencheck: ${state.titel}`, content: b64(state.fm), branch }),
+      });
+      const pr = await gh(token, `/repos/${UP_OWNER}/${UP_REPO}/pulls`, {
+        method: "POST",
+        body: JSON.stringify({ title: `Neuer Faktencheck: ${state.titel}`, head: prHead, base: "main", body: "Eingereicht über den Faktencheck-Baukasten. Bitte gegenlesen; Status auf „geprueft“ setzen, sobald die Quellen abgenommen sind." }),
+      });
+
+      status(`✓ Eingereicht – danke! Dein Vorschlag liegt als <a href="${pr.html_url}" target="_blank" rel="noopener">Pull Request #${pr.number}</a> bereit. Die Redaktion liest gegen und gibt ihn frei.`, "ok");
+      btn.textContent = "Eingereicht ✓";
+    } catch (err) {
+      $("f-fallback-wrap").hidden = false;
+      status("Automatisches Absenden hat nicht geklappt (" + (err && err.message ? err.message : err) + "). Kein Problem: nimm den Link „Manuell über GitHub anlegen“ unten oder „Nur Text kopieren“.", "err");
+      btn.disabled = false;
+    }
+  }
+  $("f-submit").addEventListener("click", einreichen);
 
   document.getElementById("fcb-form").addEventListener("input", render);
   addQuelle(); // eine leere Quelle vorbereiten
