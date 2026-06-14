@@ -53,3 +53,45 @@ dokumentierte Invariante (Technik-Enum an vier Stellen) war nicht maschinell gep
 - Ausgangs-Typstand vor Fix: 0 errors / 0 warnings / 6 hints → Entfernen von `|| true` bricht CI **nicht**, schärft sie nur.
 
 **End-to-end:** `npm run validate` ✅ · `npm run build` ✅ (49 Seiten) · `npx astro check` ✅ (0 errors).
+
+---
+
+## Loop 2 — Korrektheit & Kohärenz  (2026-06-14)
+
+**Ziel:** Mit dem neuen Verifier reale Drifts/Robustheitslücken jagen — und die
+Outputs von Loop 1 selbstkritisch prüfen.
+
+### CI-Hotfix (während Loop 2, unblockte PR #45)
+- **Toter Quellen-Link:** UBA-„Texte 32/2020"-PDF lieferte **404** (UBA-Ablage umgebaut)
+  → CI-Job `quellen-links` rot. Ersetzt durch die stabile Publikations-Landingpage
+  `umweltbundesamt.de/publikationen/entwicklungsperspektiven-der-oekologischen`.
+  **Verifikation:** Ziel-URL per WebFetch geprüft → 200, korrekte Publikation, stützt
+  die Aussage („gut, aber nicht in jeder Einzelkennzahl überlegen"). Die zwei `[UNKLAR]`-
+  Timeouts (lobbypedia, nhmrc) sind transient → nur Warnung, kein CI-Bruch.
+
+### Findings
+
+| ID | Finding | Severity | Confidence | Status |
+|---|---|---|---|---|
+| M2.1 | `normalize-frontmatter.mjs` heilte `maschen` nicht (nur faktenchecks+methodik) → Self-Healing-Garantie inkonsistent | mittel | hoch | ✅ behoben |
+| M2.2 | Straight-Quote-Frühwarnung lief nur über faktenchecks | niedrig | hoch | ✅ behoben |
+| M2.3 | **Selbstkritik Loop 1:** `check-consistency` prüfte nur TECHNIKEN, nicht THEMEN/URTEILE/STATUS | mittel | hoch | ✅ behoben (Guard) |
+| M2.4 | `zusammensetzung`-Grafiken ohne Summe-≈100-Prüfung (Invariante „ehrliche Skalierung") | niedrig | mittel | ✅ behoben |
+
+### Angewandte Änderungen
+- `normalize-frontmatter.mjs`: `src/content/maschen` in `ORDNER` (M2.1).
+- `validate-content.mjs`: Quote-Check als Helper, zusätzlich `quotesScan` über maschen+methodik (M2.2);
+  neuer Summe-≈100-Check für `zusammensetzung`-Grafiken (M2.4, harter Fehler bei |Σ−100|>1).
+- `check-consistency.mjs`: THEMEN ↔ THEMA_LABEL/THEMA_REIHENFOLGE, URTEILE ↔ URTEIL_LABEL,
+  STATUS ↔ STATUS_LABEL (M2.3). Aktueller Stand verifiziert grün → reiner Regression-Guard.
+
+### Verifikation (echt ausgeführt, failing baseline → restauriert)
+- **M2.4:** `zusammensetzung`-Wert 40→50 (Σ=110) → `validate-content` `exit 1`. ✅
+- **M2.1:** gerades `"` in Masche-`titel` injiziert → `normalize` heilt es zu „…" (vorher gar nicht erfasst). ✅
+- **M2.3:** `gesundheit` aus `THEMA_LABEL` entfernt → `check-consistency` `exit 1` („THEMEN ↔ THEMA_LABEL: fehlt [gesundheit]"). ✅
+- Restauriert → `npm run validate` ✅, `npm run build` ✅ (49 Seiten), Arbeitsbaum sauber.
+
+### Beobachtungen (kein Handlungsbedarf jetzt)
+- ClaimReview-`URTEIL_RATING` (1–3 auf 1–5-Skala) konsistent & schema-konform.
+- „Masche der Woche"-Rotation deterministisch (nach `reihenfolge` sortiert, Jahres-Wochen-Modulo).
+- `quellen-links`-Log mischt stderr/stdout → Gruppierung im CI-Log wirkt irreführend (Summary „Tot:1" ist maßgeblich). Kosmetisch, ggf. Loop 4/5.

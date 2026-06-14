@@ -143,6 +143,47 @@ if (flicc.length === 5 && JSON.stringify(fliccReih) !== JSON.stringify([1, 2, 3,
   fehler.push(`FLICC: reihenfolge der Kerntechniken ist ${JSON.stringify(fliccReih)}, erwartet [1,2,3,4,5].`);
 }
 
+// --- 5. THEMEN / URTEILE / STATUS == labels-Maps ---------------------------
+// Dieselbe Multi-Stellen-Drift-Gefahr wie bei TECHNIKEN: ein Enum-Wert ohne
+// Label erscheint im Frontend als nackter Slug.
+function labelKeys(mapName) {
+  const block = labels.match(new RegExp(`${mapName}: Record<string, string> = \\{([\\s\\S]*?)\\n\\};`));
+  return block ? [...block[1].matchAll(/^\s*"?([\w-]+)"?:/gm)].map((m) => m[1]) : null;
+}
+function arrayWerte(name) {
+  const block = labels.match(new RegExp(`${name} = \\[([\\s\\S]*?)\\] as const`));
+  return block ? [...block[1].matchAll(/"([\w-]+)"/g)].map((m) => m[1]) : null;
+}
+function setGleich(name, soll, ist) {
+  if (!ist) {
+    fehler.push(`${name}: Liste/Map in labels.ts nicht gefunden.`);
+    return;
+  }
+  const sollSet = new Set(soll);
+  const fehlend = soll.filter((x) => !ist.includes(x));
+  const extra = ist.filter((x) => !sollSet.has(x));
+  if (fehlend.length) fehler.push(`${name}: fehlt ${JSON.stringify(fehlend)}`);
+  if (extra.length) fehler.push(`${name}: zu viel ${JSON.stringify(extra)}`);
+}
+
+const enumWerte = (name) => {
+  const b = cfg.match(new RegExp(`${name} = \\[([\\s\\S]*?)\\] as const`));
+  return b ? [...b[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]) : null;
+};
+
+const THEMEN = enumWerte("THEMEN");
+const URTEILE = enumWerte("URTEILE");
+// STATUS steht inline im Faktencheck-Schema (status: z.enum([...])).
+const statusMatch = cfg.match(/status:\s*z\.enum\(\[([^\]]*)\]/);
+const STATUS = statusMatch ? [...statusMatch[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]) : null;
+
+if (THEMEN) {
+  setGleich("THEMEN ↔ THEMA_LABEL", THEMEN, labelKeys("THEMA_LABEL"));
+  setGleich("THEMEN ↔ THEMA_REIHENFOLGE", THEMEN, arrayWerte("THEMA_REIHENFOLGE"));
+}
+if (URTEILE) setGleich("URTEILE ↔ URTEIL_LABEL", URTEILE, labelKeys("URTEIL_LABEL"));
+if (STATUS) setGleich("STATUS ↔ STATUS_LABEL", STATUS, labelKeys("STATUS_LABEL"));
+
 // --- Ergebnis --------------------------------------------------------------
 if (fehler.length) {
   console.error("\n❌ Struktur-Konsistenz fehlgeschlagen:");
@@ -154,4 +195,7 @@ if (fehler.length) {
   process.exit(1);
 }
 
-console.log(`✅ Struktur-Konsistenz ok: ${TECH.length} Techniken an allen Stellen deckungsgleich, FLICC=5.`);
+console.log(
+  `✅ Struktur-Konsistenz ok: ${TECH.length} Techniken deckungsgleich, FLICC=5, ` +
+    `THEMEN/URTEILE/STATUS ↔ Labels stimmig.`,
+);

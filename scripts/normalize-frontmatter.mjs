@@ -16,7 +16,11 @@
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-const ORDNER = ["src/content/faktenchecks", "src/content/methodik"];
+const ORDNER = [
+  "src/content/faktenchecks",
+  "src/content/methodik",
+  "src/content/maschen",
+];
 
 let dateienGeaendert = 0;
 let werteRepariert = 0;
