@@ -7,11 +7,11 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "node scripts/normalize-frontmatter.mjs && node scripts/validate-content.mjs && astro build",
+    "build": "node scripts/normalize-frontmatter.mjs && node scripts/validate-content.mjs && node scripts/check-consistency.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "fix": "node scripts/normalize-frontmatter.mjs",
-    "validate": "node scripts/normalize-frontmatter.mjs && node scripts/validate-content.mjs",
+    "validate": "node scripts/normalize-frontmatter.mjs && node scripts/validate-content.mjs && node scripts/check-consistency.mjs",
     "check:links": "node scripts/check-links.mjs"
   },
   "dependencies": {
@@ -22,7 +22,9 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "@iconify-json/lucide": "^1.2.111",
-    "astro-icon": "^1.1.5"
+    "astro-icon": "^1.1.5",
+    "typescript": "^5.9.3"
   }
 }

@@ -1,7 +1,7 @@
 ---
 titel: "Falsche Ursache-Wirkung"
 code: "falsche-kausalitaet"
-kategorie: "flicc"
+kategorie: "rhetorik"
 kurz: "Weil zwei Dinge zusammen auftreten, wird behauptet, das eine verursache das andere – obwohl es nur ein zeitlicher oder zufälliger Zusammenhang ist."
 reihenfolge: 6
 so_funktionierts: |
