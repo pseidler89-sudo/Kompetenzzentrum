@@ -12,7 +12,8 @@
     "astro": "astro",
     "fix": "node scripts/normalize-frontmatter.mjs",
     "validate": "node scripts/normalize-frontmatter.mjs && node scripts/validate-content.mjs && node scripts/check-consistency.mjs",
-    "check:links": "node scripts/check-links.mjs"
+    "check:links": "node scripts/check-links.mjs",
+    "check:readability": "node scripts/check-readability.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
