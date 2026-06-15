@@ -6,7 +6,7 @@ urteil: "irrefuehrend"
 themen: ["umwelt-landwirtschaft", "gesundheit"]
 techniken: ["falsche-gleichsetzung", "cherry-picking"]
 zusammenfassung: "Warum IARC („wahrscheinlich krebserregend“) und EU-Behörden (EFSA/ECHA) zu unterschiedlichen Urteilen kommen – und weshalb der Unterschied zwischen Gefahr und Risiko zeigt, dass „nachweislich Krebs“ zu weit geht."
-status: "in-pruefung"
+status: "geprueft"
 veroeffentlicht: 2026-06-15
 aktualisiert: 2026-06-15
 mitwirkende: ["Kompetenzzentrum-Redaktion"]
