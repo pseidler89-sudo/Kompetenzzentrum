@@ -284,3 +284,14 @@ Einstieg-Modus weiter entschlacken.
   CSS-Regel `[data-stufe-aktiv=einstieg] .fc-einleitung{display:none}` im Bundle (auf
   Einstieg **gegated**, ohne JS bleibt die Einleitung sichtbar → PE intakt);
   Build ✅, `validate` ✅, `astro check` ✅ (0 errors).
+
+## Loop U3++ — Einstieg-Modus weiter entschlackt  (2026-06-15)
+- **„Erkannte Maschen"-Zeile** erscheint erst ab „Vertiefung" (`.fc-techniken`, CSS auf
+  Einstieg gegated – ohne JS sichtbar).
+- **„Technik erkannt"-Box** ist jetzt ein `<details>`: im Einstieg eingeklappt, ab
+  „Vertiefung" aufgeklappt. `<details open>` per Default (ohne JS offen → kein
+  Informationsverlust); der Tiefen-Umschalter setzt `details.open = stufe !== "einstieg"`.
+  Eigenes Chevron, das beim Aufklappen rotiert.
+- **Verifikation:** gerendert als `<details class="box box-technik" … open>` + `<summary>`;
+  Bundle enthält `[data-stufe-aktiv=einstieg] .fc-einleitung,…  .fc-techniken{display:none}`.
+  Build ✅, `validate` ✅, `astro check` ✅ (0 errors).

@@ -99,6 +99,10 @@
     document.querySelectorAll<HTMLButtonElement>("[data-set-stufe]").forEach((b) => {
       b.setAttribute("aria-pressed", String(b.dataset.setStufe === stufe));
     });
+    // Einstieg entschlacken: die „Technik erkannt“-Box dort eingeklappt zeigen,
+    // ab Vertiefung aufgeklappt. (Ohne JS bleibt sie offen → nichts geht verloren.)
+    const technik = document.querySelector<HTMLDetailsElement>("details[data-technik]");
+    if (technik) technik.open = stufe !== "einstieg";
   }
 
   // Kompakt-Modus aktivieren, sobald die sticky Leiste oben „klebt“ (spart Platz).
