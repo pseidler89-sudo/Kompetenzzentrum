@@ -33,23 +33,20 @@ einleitung: |
   als die **politischen** Fragen nach Patenten, Marktmacht oder Umweltfolgen. Hier geht
   es nur um die erste – und um das Wort **„nachweislich".**
 einstieg: |
-  In der EU darf ein gentechnisch verändertes Lebensmittel **nicht einfach** verkauft
-  werden. Vor der Zulassung steht eine **umfangreiche Sicherheitsprüfung** – unter
-  anderem auf giftige oder allergene Wirkungen und auf die Nährstoffzusammensetzung.
+  In der EU darf ein **gentechnisch verändertes Lebensmittel** nicht einfach verkauft
+  werden. Vorher muss es eine **strenge Sicherheitsprüfung** bestehen – zum Beispiel auf
+  giftige Stoffe, auf Allergie-Risiken und auf die Nährstoffe.
 
   Was sagen die zuständigen Behörden?
 
-  - Das **BfR** (Deutschland): Eine Zulassung erfolgt nur, wenn gezeigt wurde, dass die
-    Produkte **gesundheitlich ebenso unbedenklich** sind wie vergleichbare
-    konventionelle.
-  - Die **WHO**: Alle international auf dem Markt verfügbaren GV-Lebensmittel haben eine
-    Risikoprüfung durchlaufen und bringen **wahrscheinlich keine größeren Risiken** mit
-    sich als ihre herkömmlichen Gegenstücke.
+  - Das **BfR** (Deutschland): Zugelassen wird nur, was **genauso unbedenklich** ist wie
+    ein normales Lebensmittel.
+  - Die **WHO**: Alle weltweit erhältlichen Gentechnik-Lebensmittel wurden geprüft. Sie
+    bringen **wahrscheinlich keine größeren Risiken** mit als herkömmliche.
 
-  Ein **Nachweis**, dass zugelassene GV-Lebensmittel krank machen, existiert also nicht.
-  Das heißt nicht „100 % Risiko null für alle Zeit" – ein Restrisiko lässt sich nie ganz
-  ausschließen –, aber „nachweislich gesundheitsschädlich" ist die Faktenlage auf den
-  Kopf gestellt.
+  Einen **Beweis**, dass zugelassene Gentechnik-Lebensmittel krank machen, gibt es also
+  nicht. Ein Restrisiko lässt sich nie ganz ausschließen – aber „nachweislich
+  gesundheitsschädlich" stellt die Faktenlage auf den Kopf.
 vertiefung: |
   **Wie geprüft wird.** Die EFSA-Leitlinie schreibt vor, was Antragsteller liefern
   müssen, bevor ein Produkt überhaupt bewertet wird: molekulare Charakterisierung,

@@ -23,18 +23,19 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
 
 <BaseLayout titel="Kompetenzzentrum" breit>
   <section class="hero">
-    <p class="hero__kicker">Falschbehauptungen prüfen lernen</p>
-    <h1>Weniger Empörung. Mehr Zahlen, Fakten und Nachvollziehbarkeit.</h1>
+    <p class="hero__kicker">Stimmt das wirklich?</p>
+    <h1>Weniger Empörung. Mehr Zahlen, Fakten – und alles zum Nachprüfen.</h1>
     <p class="lead">
-      Ein offenes Nachschlagewerk gegen Desinformation. Jede Behauptung wird mit
-      Quellen geprüft und <strong>je nach deinem Vorwissen</strong> aufbereitet:
-      vom schnellen Einstieg bis zur wissenschaftlichen Tiefe. Du entscheidest
-      selbst, wie tief du gehst – und lernst nebenbei, Manipulation zu durchschauen.
+      Hier prüfen wir Behauptungen aus Politik und Netz – mit echten Quellen,
+      so einfach wie möglich erklärt. <strong>Du wählst selbst, wie tief du gehst</strong>:
+      vom schnellen Einstieg bis zur wissenschaftlichen Tiefe. Und du lernst nebenbei,
+      Manipulation zu durchschauen.
     </p>
     <div class="hero__cta">
       <a class="btn btn--primary" href={pfad("/faktenchecks")}>Faktenchecks ansehen</a>
       <a class="btn btn--ghost" href={pfad("/maschen")}>Maschen erkennen lernen</a>
     </div>
+    <p class="hero__hint">Neu hier? Fang einfach mit den <a href={pfad("/faktenchecks")}>Faktenchecks</a> an – such ein Thema, das dich interessiert.</p>
   </section>
 
   <section class="zwecke container-wide" aria-label="Wofür diese Plattform da ist">
@@ -184,6 +185,7 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
   .hero h1 { margin: .75rem auto 1rem; max-width: 18ch; }
   .hero .lead { max-width: 42rem; margin: 0 auto; }
   .hero__cta { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; margin-top: 1.75rem; }
+  .hero__hint { margin: 1.1rem auto 0; font-size: .92rem; color: var(--c-text-soft); }
 
   .zwecke { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.25rem; margin-top: 3.5rem; }
   .zweck { align-items: flex-start; }

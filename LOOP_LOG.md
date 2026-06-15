@@ -223,3 +223,31 @@ als weitere Loops poliert):
 - `quellen-links`-Reporter: stderr/stdout-Interleaving im CI-Log entwirren (kosmetisch).
 - Legacy `public/tools/grafik.html` ganz entfernen (nirgends verlinkt).
 - Inhaltliche Themen-Balance weiter ausbauen (Glyphosat braucht 2. Nicht-Bayer-Primärquelle).
+
+---
+
+# Usability-Loops (U1–U3) — Fokus: Einfachheit & Verständnis für politisch wenig vorgebildete Menschen
+
+## Loop U1 — Verständlichkeit messbar machen  (2026-06-15)
+**Verifier-first:** neues `scripts/check-readability.mjs` (`npm run check:readability`, zero-dep)
+misst je `einstieg`-Feld die **Wiener Sachtextformel** + Ø Satzlänge, Lange-/Mehrsilbige-Wort-Quote,
+Nominalisierungsdichte und kuratierte **Jargon**-Begriffe.
+- **Baseline:** Ø WSTF 8.2; 2 Einstiege > Schwelle 10 (buergergeld 10.7, gentechnik 10.6); Jargon: novelliert, Stromgestehungskosten.
+- **Metrik gegengeprüft:** einfacher Satz → −2.9, bürokratischer Satz → 21.4 (diskriminiert sauber).
+- Bewusst Report-Modus (kein Build-Gate); `--strict` optional.
+
+## Loop U2 — Klartext & Orientierung  (2026-06-15)
+**Angewandt (Nutzer-Abnahme: Nav-Variante „Selbst prüfen/Wie wir arbeiten", Batch A–E):**
+- **A Hero:** Kicker „Stimmt das wirklich?", Lead in Alltagssprache (kein „Nachschlagewerk gegen Desinformation"),
+  H1 „… alles zum Nachprüfen" (statt „Nachvollziehbarkeit").
+- **B Nav umbenannt:** Werkzeugkasten → **Selbst prüfen**, Methodik → **Wie wir arbeiten**
+  (inkl. Seitenüberschriften/`titel`). „Maschen"/„Faktenchecks" bleiben.
+- **C Urteils-Klartext:** neue `URTEIL_KLARTEXT`-Map (Halbsatz je Urteil; Anzeige in U3).
+- **D Einstiege vereinfacht** (Fakten/Quellen unverändert): buergergeld + gentechnik sprachlich entzerrt;
+  Jargon-Swaps „novelliert"→„neu gefasst", „Stromgestehungskosten"→Klartext.
+- **E Orientierung:** „Neu hier?"-Zeile auf der Startseite mit einer klaren Hauptaktion.
+
+**Verifikation (echt ausgeführt, U1-Verifier als Messlatte):**
+- `check-readability` **vorher→nachher:** buergergeld 10.7→7.2 · gentechnik 10.6→9.6 ·
+  heizungsgesetz Jargon weg · atomkraft Jargon weg · **0 über Schwelle (vorher 2), 0 Jargon (vorher 2)**, Ø 8.2→7.9.
+- Build ✅ (49 Seiten), `validate` ✅, `astro check` ✅ (0 errors); neue Nav-Labels im `dist/` bestätigt.

@@ -34,8 +34,8 @@ einleitung: |
   Wörtern **„billigste"** und **„schnellste"** – und die lassen sich an Zahlen prüfen.
 einstieg: |
   Was kostet eine Kilowattstunde Strom aus einer **neu gebauten** Anlage? Das
-  Fraunhofer ISE rechnet das regelmäßig aus (Stromgestehungskosten über die gesamte
-  Lebensdauer):
+  Fraunhofer ISE rechnet das regelmäßig aus – über die gesamte Lebensdauer einer
+  Anlage gerechnet:
 
   - **Neues Atomkraftwerk:** rund **13–49 ct/kWh**
   - **Wind an Land:** rund **4–9 ct/kWh**

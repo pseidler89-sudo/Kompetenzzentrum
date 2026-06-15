@@ -26,14 +26,14 @@ quellen:
 einleitung: |
   Wer arbeitet, hat in aller Regel mehr im Geldbeutel als wer Bürgergeld bezieht – das ist sogar gesetzlich so angelegt. Der Eindruck, „Arbeit lohne sich nicht“, entsteht, wenn man nur den Regelsatz nennt und alles weglässt, was Erwerbstätige zusätzlich bekommen.
 einstieg: |
-  Das Bürgergeld sichert das **Existenzminimum** – das Minimum, das das Grundgesetz jedem garantiert. Ein alleinstehender Erwachsener erhält dafür einen festen Regelsatz plus die angemessenen Kosten für Wohnung und Heizung.
+  Das Bürgergeld sichert das **Existenzminimum** – also das, was laut Grundgesetz jedem zum Leben zusteht. Ein alleinstehender Erwachsener bekommt dafür einen festen Betrag plus Miete und Heizkosten in angemessener Höhe.
 
-  Der Vergleich „Bürgergeld gegen Arbeit“ wird fast immer falsch gerechnet, weil zwei Dinge vergessen werden:
+  Der Vergleich „Bürgergeld gegen Arbeit“ wird fast immer falsch gerechnet. Zwei Dinge werden meist vergessen:
 
-  - Wer arbeitet, darf **einen Teil des Lohns behalten**, ohne dass er aufs Bürgergeld angerechnet wird (Freibeträge).
-  - Geringverdiener-Haushalte haben oft zusätzlich Anspruch auf **Wohngeld** und **Kinderzuschlag** – Leistungen, die das Einkommen weiter aufstocken.
+  - Wer arbeitet, **darf einen Teil des Lohns behalten**. Er wird nicht voll aufs Bürgergeld angerechnet.
+  - Wer wenig verdient, bekommt oft noch **Wohngeld** und **Kinderzuschlag** dazu. Das hebt das Einkommen weiter an.
 
-  Rechnet man das ein, hat der arbeitende Haushalt am Monatsende fast immer **spürbar mehr** als ein reiner Bürgergeld-Haushalt.
+  Rechnet man das mit, hat der arbeitende Haushalt am Monatsende fast immer **deutlich mehr** Geld als ein reiner Bürgergeld-Haushalt.
 vertiefung: |
   Der entscheidende Begriff ist der **Lohnabstand**: der Unterschied zwischen dem verfügbaren Einkommen mit Arbeit und dem mit Bürgergeld. Wirtschaftsinstitute wie das ifo Institut und das IW Köln haben das durchgerechnet – Ergebnis: In der überwiegenden Mehrheit der Konstellationen besteht ein klarer positiver Lohnabstand.
 
