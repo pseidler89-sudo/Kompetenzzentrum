@@ -5,7 +5,7 @@ import StufenSchalter from "../../components/StufenSchalter.astro";
 import UrteilBadge from "../../components/UrteilBadge.astro";
 import Quellen from "../../components/Quellen.astro";
 import Datenviz from "../../components/Datenviz.astro";
-import { THEMA_LABEL, TECHNIK_LABEL, STATUS_LABEL, URTEIL_LABEL, datumFormat, pfad } from "../../lib/labels";
+import { THEMA_LABEL, TECHNIK_LABEL, STATUS_LABEL, URTEIL_LABEL, URTEIL_KLARTEXT, datumFormat, pfad } from "../../lib/labels";
 import { md } from "../../lib/markdown";
 
 export async function getStaticPaths() {
@@ -77,6 +77,8 @@ const claimReview = {
       {data.themen.map((t) => <span class="badge">{THEMA_LABEL[t] ?? t}</span>)}
       {data.status !== "geprueft" && <span class="badge" title="Redaktioneller Status">{STATUS_LABEL[data.status]}</span>}
     </div>
+
+    {URTEIL_KLARTEXT[data.urteil] && <p class="urteil-klartext">{URTEIL_KLARTEXT[data.urteil]}</p>}
 
     <h1 style="margin-top:.75rem;">{data.titel}</h1>
 
@@ -168,6 +170,9 @@ const claimReview = {
 </BaseLayout>
 
 <style>
+  .urteil-klartext {
+    margin: .6rem 0 0; font-size: 1.02rem; font-weight: 600; color: var(--c-text-soft);
+  }
   .behauptung-box, .kurzantwort-box {
     margin: 1.5rem 0; padding: 1.1rem 1.3rem; border-radius: var(--radius);
     border: 1px solid var(--c-border); border-left-width: 4px;

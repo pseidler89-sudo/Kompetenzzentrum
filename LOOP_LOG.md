@@ -251,3 +251,24 @@ Nominalisierungsdichte und kuratierte **Jargon**-Begriffe.
 - `check-readability` **vorher→nachher:** buergergeld 10.7→7.2 · gentechnik 10.6→9.6 ·
   heizungsgesetz Jargon weg · atomkraft Jargon weg · **0 über Schwelle (vorher 2), 0 Jargon (vorher 2)**, Ø 8.2→7.9.
 - Build ✅ (49 Seiten), `validate` ✅, `astro check` ✅ (0 errors); neue Nav-Labels im `dist/` bestätigt.
+
+## Loop U3 — UI für Einfachheit  (2026-06-15)
+**Angewandt:**
+- **Urteils-Klartext sichtbar:** Auf jeder Faktencheck-Detailseite steht jetzt unter dem
+  Urteils-Badge ein Klartext-Halbsatz (z.B. „Irreführend" → „Einzelne Fakten stimmen, das
+  Gesamtbild täuscht."). `UrteilBadge` trägt den Klartext zusätzlich als `title` – greift
+  auch auf den Karten (Hover/Screenreader).
+- **Tiefen-Umschalter:** Label „Informationstiefe" → **„Wie ausführlich?"**, Hinweis
+  alltagsnäher („Du kannst jederzeit wechseln …").
+
+**Verifikation (echt ausgeführt):**
+- Gerendertes `migration-kriminalstatistik` (urteil=irrefuehrend) zeigt im `dist/` die
+  Klartext-Zeile; Wording „Wie ausführlich?" im HTML bestätigt.
+- Build ✅ (49 Seiten), `validate` ✅, `astro check` ✅ (0 errors).
+
+### Abschluss Usability-Loops
+„Einfach genug für Laien?" ist jetzt **messbar** (U1-Verifier) und an konkreten Stellen
+**spürbar verbessert** (Hero/Nav/Einstiege/Urteils-Klartext). Offen/Backlog: echtes
+Nutzer-Testing (nur mit realen Menschen möglich – Proxys ersetzen das nicht); Urteils-
+Klartext auch auf den Karten sichtbar statt nur im `title`; ggf. Detailseite im
+Einstieg-Modus weiter entschlacken.
