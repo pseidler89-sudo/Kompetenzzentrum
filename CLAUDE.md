@@ -128,9 +128,11 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   Wahrnehmung): Homöopathie wirkt (NHMRC + EASAC 2017; Cochrane raus = Paywall, Ullman/Cureus
   abgelehnt = Lobby), Atomkraft billigste Lösung (Fraunhofer ISE 2024 verbatim + IPCC + WNISR),
   Regional immer klimafreundlich (ifeu-PM), Gentechnik macht krank (BfR/WHO/EFSA).
-  **Glyphosat bewusst weggelassen** (Bayer-Quelle gestrichen → nur
-  1 verifizierte Quelle blieb, zu dünn). Wenn ein neuer Quell-Link CI rot macht: URL beim
-  Herausgeber auf neuen Pfad aktualisieren.
+  **Glyphosat-Check ergänzt (06/2026, PR #46, Status `in-pruefung`):** Urteil
+  *irreführend*, neutral – Kern ist **Gefahr (IARC 2A) vs. Risiko (EFSA 2023/ECHA RAC 2022)**;
+  drei Nicht-Bayer-Primärquellen (IARC, EFSA, ECHA). Damit ist die alte „zu dünn"-Lücke
+  geschlossen. Noch offen: menschliches Gegenlesen der Originale → dann auf `geprueft`.
+  Wenn ein neuer Quell-Link CI rot macht: URL beim Herausgeber auf neuen Pfad aktualisieren.
 - **19 Maschen** (15 + 4 aus Backlog: Gish-Galopp #16, Bandwagon #17, Sündenbock #18,
   Lügen-Flut/Firehose #19). Sündenbock & Firehose bewusst maximal neutral/techniknah.
 - **Methodik dreigliedrig:** Was gibt es / Wie erkenne ich (Maschen) → Richtig
@@ -224,8 +226,8 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   **Noch offen aus dem Review (bewusst nicht in PR #35):**
   - ~~**Themen-Balance (HOCH)**~~ ✅ teils umgesetzt: 4 „grün/links" konnotierte Checks
     ergänzt (Homöopathie, Atomkraft, Regional, Gentechnik) → entlastet die Schlagseite.
-    Noch offen: Glyphosat (braucht 2. verifizierte Nicht-Bayer-Primärquelle, z.B. EFSA/IARC);
-    weitere Kandidaten möglich (vegane Ernährung pauschal, 100% Ökolandbau ohne Importe).
+    Glyphosat ✅ ergänzt (PR #46, IARC+EFSA+ECHA als Nicht-Bayer-Primärquellen; `in-pruefung`).
+    Weitere Kandidaten möglich (vegane Ernährung pauschal, 100% Ökolandbau ohne Importe).
   - ~~**5 `in-pruefung`-Checks auf `geprueft`**~~ ✅ 06/2026 erledigt (Wikipedia→Primärquellen).
   - ~~**4 neue Balance-Checks auf `geprueft`**~~ ✅ 06/2026 erledigt – Nutzer hat die Originale
     gegengelesen/Belege beschafft (NHMRC+EASAC, ISE 2024, ifeu, BfR/WHO/EFSA). **Alle 17
