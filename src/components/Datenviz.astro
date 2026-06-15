@@ -46,6 +46,21 @@ const farbVar = (f?: Farbe) => ({
   neutral: "var(--c-border-strong)",
 }[f ?? "neutral"]);
 
+// Feste, dunkle Segment-Palette NUR für den gestapelten Balken: dort steht
+// weißer Text DIREKT auf der Füllung. Die Theme-Tokens (farbVar) sind
+// kontextabhängig hell/dunkel und kippen im Dunkelmodus auf helle Werte –
+// weiß darauf wäre unlesbar (WCAG-Fail). Diese fixen Werte halten weißen Text
+// in BEIDEN Themes ≥ 4.5:1, identisch in Balken-Segment und Legende.
+const segFarbe = (f?: Farbe) => ({
+  accent: "#1c5fc4",
+  falsch: "#b71c1c",
+  irrefuehrend: "#9a4d00",
+  kontext: "#6b5400",
+  teils: "#4a5560",
+  pruefen: "#1b6b3a",
+  neutral: "#5b6472",
+}[f ?? "neutral"]);
+
 // Achsen-Maximum: bei reinen Prozentwerten ehrlich auf 100 % skalieren,
 // sonst auf den größten Wert. So wird visuell nichts aufgeblasen.
 const achse = (c: Chart) =>
@@ -91,13 +106,13 @@ const achse = (c: Chart) =>
             <>
               <div class="dv__stack" role="img" aria-label={c.titel}>
                 {c.werte.map((w) => (
-                  <div class="dv__seg" style={`width:${w.wert}%;background:${farbVar(w.farbe)}`}>
+                  <div class="dv__seg" style={`width:${w.wert}%;background:${segFarbe(w.farbe)}`}>
                     <span>{w.label} {w.wert}{w.einheit ?? "%"}</span>
                   </div>
                 ))}
               </div>
               <div class="dv__legend">
-                {c.werte.map((w) => (<span><i style={`background:${farbVar(w.farbe)}`}></i>{w.label}</span>))}
+                {c.werte.map((w) => (<span><i style={`background:${segFarbe(w.farbe)}`}></i>{w.label}</span>))}
               </div>
             </>
           )}

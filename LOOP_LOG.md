@@ -174,3 +174,52 @@ Datenschutz, konkrete Review-Punkte) und Loop 5 (UX/Barrierefreiheit).
 OAuth-Scope `public_repo` bleibt. Verengen würde den funktionierenden Fork-/PR-Flow gefährden
 und ist in der Sandbox nicht testbar (kein Live-OAuth). Positiv: Das Token wird **nicht persistiert**
 (nur transient im Login-Flow). Empfehlung: Scope nur zusammen mit einem Live-Login-Test verengen.
+
+---
+
+## Loop 5 — UX & Barrierefreiheit  (2026-06-15)
+
+**Verifier:** Code-Review der a11y-Fläche + Kontrast-Rechnung (WCAG) + Build/astro check.
+
+### Befund: a11y-Grundstand bereits sehr gut
+`<html lang="de">`, Skip-Link, `:focus-visible`-Outline, `@media (prefers-reduced-motion)`,
+`aria-pressed` an den Stufen-Buttons, `aria-label` an Nav/Toggle/Burger, `aria-hidden` an
+Icons, korrektes **No-JS-Fallback** der Tiefen (`[data-stufe-aktiv]`-Selektor greift erst mit JS) —
+alles vorhanden. **Nur ein echter Bug.**
+
+### Findings
+
+| ID | Finding | Severity | Confidence | Status |
+|---|---|---|---|---|
+| U5.1 | Datenviz `zusammensetzung`: `color:#fff` auf **theme-abhängigen** Segment-Füllungen → Kontrast-Fail bei `neutral` (Hellmodus) **und** flächendeckend im Dunkelmodus (Tokens kippen auf hell) | mittel | hoch | ✅ behoben |
+| U5.2 | `theme-toggle` ohne `aria-pressed` | niedrig | niedrig | ✅ ergänzt |
+
+### Angewandte Änderungen
+- **U5.1:** neue **feste, dunkle Segment-Palette** `segFarbe()` nur für den gestapelten Balken
+  (und seine Legende). Theme-unabhängig → weißer Text bleibt in **beiden** Themes lesbar.
+- **U5.2:** `theme-toggle` setzt nun `aria-pressed` = „Dunkelmodus aktiv" (zusätzlich zum aria-label).
+
+### Verifikation (echt ausgeführt)
+- **U5.1:** Gerendertes `strompreise`-HTML – Segmente jetzt `#1c5fc4` / `#4a5560` / `#5b6472`
+  (vorher u.a. `var(--c-border-strong)` = hellgrau). Kontrast weiß-auf-Füllung berechnet:
+  `#5b6472` ≈ **6,0:1**, `#4a5560` ≈ 7,5:1, `#1c5fc4` ≈ 5,9:1 → alle ≥ WCAG AA (4,5:1),
+  in Hell- UND Dunkelmodus (Werte sind jetzt fix, kippen nicht mehr).
+- **U5.2:** `aria-pressed` im Toggle-Skript gesetzt (Build + astro check 0 errors).
+- Build ✅ (49 Seiten), `validate` ✅, `astro check` ✅.
+
+---
+
+## Abschluss & Stop-Regel
+
+**5 Loops abgeschlossen.** Der Verifier wurde von „kaum vorhanden" (Schema-Build + toter
+`astro check`) zu einem **realen, mehrschichtigen Gate** ausgebaut:
+`normalize → validate-content → check-consistency → astro build → astro check` (+ `check:links` in CI).
+
+Substanz-Ertrag pro Loop sank klar (L1/L2 strukturell stark, L4 zwei echte Sicherheits-/
+Datenschutz-Fixe, L3/L5 je **ein** echter Befund + Guards). **Empfehlung: hier vom
+„Spezifizieren/Verifizieren" auf „Bauen/Liefern" wechseln.** Offenes Backlog (bewusst NICHT
+als weitere Loops poliert):
+- OAuth-Scope `public_repo` verengen — **nur mit Live-Login-Test** (Sandbox kann den Fork-Flow nicht prüfen).
+- `quellen-links`-Reporter: stderr/stdout-Interleaving im CI-Log entwirren (kosmetisch).
+- Legacy `public/tools/grafik.html` ganz entfernen (nirgends verlinkt).
+- Inhaltliche Themen-Balance weiter ausbauen (Glyphosat braucht 2. Nicht-Bayer-Primärquelle).

@@ -128,6 +128,8 @@ const vollerTitel = titel === "Kompetenzzentrum" ? titel : `${titel} · Kompeten
           const dunkel = aktiv() === "dark";
           btn.setAttribute("aria-label", dunkel ? "Zu hellem Design wechseln" : "Zu dunklem Design wechseln");
           btn.setAttribute("title", dunkel ? "Zu hellem Design wechseln" : "Zu dunklem Design wechseln");
+          // aria-pressed = „Dunkelmodus aktiv" (idiomatischer Toggle-Status).
+          btn.setAttribute("aria-pressed", String(dunkel));
         };
         beschriften();
         btn.addEventListener("click", () => {
