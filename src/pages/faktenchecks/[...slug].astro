@@ -5,7 +5,7 @@ import StufenSchalter from "../../components/StufenSchalter.astro";
 import UrteilBadge from "../../components/UrteilBadge.astro";
 import Quellen from "../../components/Quellen.astro";
 import Datenviz from "../../components/Datenviz.astro";
-import { THEMA_LABEL, TECHNIK_LABEL, STATUS_LABEL, URTEIL_LABEL, datumFormat, pfad } from "../../lib/labels";
+import { THEMA_LABEL, TECHNIK_LABEL, STATUS_LABEL, URTEIL_LABEL, URTEIL_KLARTEXT, datumFormat, pfad } from "../../lib/labels";
 import { md } from "../../lib/markdown";
 
 export async function getStaticPaths() {
@@ -69,7 +69,7 @@ const claimReview = {
 <script type="application/ld+json" is:inline set:html={JSON.stringify(claimReview)} />
 
 <BaseLayout titel={data.titel} beschreibung={data.zusammenfassung} seitentyp="article" bild={`/og/${eintrag.id}.png`}>
-  <article>
+  <article data-faktencheck-body>
     <a href={pfad("/faktenchecks")} class="muted" style="text-decoration:none;">← Alle Faktenchecks</a>
 
     <div class="card__meta" style="margin-top:1rem;">
@@ -77,6 +77,8 @@ const claimReview = {
       {data.themen.map((t) => <span class="badge">{THEMA_LABEL[t] ?? t}</span>)}
       {data.status !== "geprueft" && <span class="badge" title="Redaktioneller Status">{STATUS_LABEL[data.status]}</span>}
     </div>
+
+    {URTEIL_KLARTEXT[data.urteil] && <p class="urteil-klartext">{URTEIL_KLARTEXT[data.urteil]}</p>}
 
     <h1 style="margin-top:.75rem;">{data.titel}</h1>
 
@@ -97,7 +99,7 @@ const claimReview = {
     </div>
 
     {data.techniken.length > 0 && (
-      <div class="tag-list" style="margin:1.25rem 0;">
+      <div class="tag-list fc-techniken" style="margin:1.25rem 0;">
         <span class="muted" style="font-size:.85rem;align-self:center;">Erkannte Maschen:</span>
         {data.techniken.map((t) => (
           <a class="badge badge--technik" href={pfad(`/maschen/${t}`)}>{TECHNIK_LABEL[t] ?? t} →</a>
@@ -111,7 +113,7 @@ const claimReview = {
 
     <StufenSchalter />
 
-    <div class="prose" data-faktencheck-body>
+    <div class="prose">
       {stufen.map((s) => (
         <div class={`stufe stufe-${s.key}`} data-stufe={s.key}>
           <p class="stufe-heading">{s.label}</p>
@@ -120,10 +122,10 @@ const claimReview = {
       ))}
 
       {data.technik_titel && (
-        <aside class="box box-technik" data-technik={data.technik_titel}>
-          <p class="box-label"><strong>Technik erkannt: {data.technik_titel}</strong></p>
+        <details class="box box-technik" data-technik={data.technik_titel} open>
+          <summary class="box-label"><strong>Technik erkannt: {data.technik_titel}</strong></summary>
           <div set:html={md(data.technik_text)} />
-        </aside>
+        </details>
       )}
 
       {data.pruefen && (
@@ -168,6 +170,9 @@ const claimReview = {
 </BaseLayout>
 
 <style>
+  .urteil-klartext {
+    margin: .6rem 0 0; font-size: 1.02rem; font-weight: 600; color: var(--c-text-soft);
+  }
   .behauptung-box, .kurzantwort-box {
     margin: 1.5rem 0; padding: 1.1rem 1.3rem; border-radius: var(--radius);
     border: 1px solid var(--c-border); border-left-width: 4px;

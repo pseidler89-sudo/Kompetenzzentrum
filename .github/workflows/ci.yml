@@ -20,7 +20,7 @@ jobs:
       - name: Build (prüft Schema & Quellen-Pflicht)
         run: npm run build
       - name: Astro check (Typen)
-        run: npx astro check || true
+        run: npx astro check
 
   # Eigener Job: prüft die Erreichbarkeit aller Quellen-URLs im offenen
   # Internet von GitHub (anders als die lokale, abgeschottete Build-Umgebung).

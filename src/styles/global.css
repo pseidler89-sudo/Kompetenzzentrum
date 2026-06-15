@@ -402,6 +402,25 @@ a.card:hover h3 { color: var(--c-accent); }
 [data-stufe-aktiv="vertiefung"] .stufe-einstieg,
 [data-stufe-aktiv="vertiefung"] .stufe-vertiefung,
 [data-stufe-aktiv="wissenschaftlich"] .stufe { display: block; }
+/* Einstieg entschlacken: längere Einleitung und die „Erkannte Maschen“-Zeile
+   erst ab „Vertiefung“ zeigen. Ohne JS (kein data-stufe-aktiv) bleibt alles sichtbar. */
+[data-stufe-aktiv="einstieg"] .fc-einleitung,
+[data-stufe-aktiv="einstieg"] .fc-techniken { display: none; }
+
+/* „Technik erkannt“-Box als aufklappbares <details> (im Einstieg eingeklappt). */
+details.box-technik > summary {
+  cursor: pointer; list-style: none; margin-bottom: 0;
+}
+details.box-technik[open] > summary { margin-bottom: .5rem; }
+details.box-technik > summary::-webkit-details-marker { display: none; }
+details.box-technik > summary::after {
+  content: ""; margin-left: auto; width: 1.05rem; height: 1.05rem; flex: none;
+  background: currentColor; transition: transform .15s ease;
+  --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  -webkit-mask: var(--chevron) center / contain no-repeat;
+  mask: var(--chevron) center / contain no-repeat;
+}
+details.box-technik[open] > summary::after { transform: rotate(180deg); }
 
 /* ---------- Tabellen ---------- */
 table { border-collapse: collapse; width: 100%; margin: 1.75rem 0; font-size: .95rem; font-family: var(--font-sans); }

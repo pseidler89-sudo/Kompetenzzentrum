@@ -11,8 +11,8 @@
 
 <div class="stufen-schalter" role="group" aria-label="Informationstiefe wählen">
   <div class="stufen-schalter__head">
-    <span class="stufen-schalter__label">Informationstiefe</span>
-    <span class="stufen-schalter__hint">Deine Auswahl bleibt gespeichert</span>
+    <span class="stufen-schalter__label">Wie ausführlich?</span>
+    <span class="stufen-schalter__hint">Du kannst jederzeit wechseln – deine Wahl bleibt gespeichert</span>
   </div>
   <div class="stufen-schalter__buttons">
     <button type="button" data-set-stufe="einstieg" aria-pressed="false">
@@ -99,6 +99,10 @@
     document.querySelectorAll<HTMLButtonElement>("[data-set-stufe]").forEach((b) => {
       b.setAttribute("aria-pressed", String(b.dataset.setStufe === stufe));
     });
+    // Einstieg entschlacken: die „Technik erkannt“-Box dort eingeklappt zeigen,
+    // ab Vertiefung aufgeklappt. (Ohne JS bleibt sie offen → nichts geht verloren.)
+    const technik = document.querySelector<HTMLDetailsElement>("details[data-technik]");
+    if (technik) technik.open = stufe !== "einstieg";
   }
 
   // Kompakt-Modus aktivieren, sobald die sticky Leiste oben „klebt“ (spart Platz).

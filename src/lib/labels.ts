@@ -29,6 +29,15 @@ export const URTEIL_LABEL: Record<string, string> = {
   "teils-richtig": "Teils richtig, teils falsch",
 };
 
+/** Ein Klartext-Halbsatz je Urteil – für Laien sofort verständlich. */
+export const URTEIL_KLARTEXT: Record<string, string> = {
+  falsch: "Die Behauptung stimmt nicht.",
+  "groesstenteils-falsch": "Der Kern der Behauptung stimmt nicht.",
+  irrefuehrend: "Einzelne Fakten stimmen, das Gesamtbild täuscht.",
+  "fehlender-kontext": "Ohne den Zusammenhang entsteht ein falscher Eindruck.",
+  "teils-richtig": "Ein Teil stimmt, ein Teil nicht.",
+};
+
 export const TECHNIK_LABEL: Record<string, string> = {
   "fake-experten": "Schein-Expert:innen",
   "logischer-fehlschluss": "Logischer Fehlschluss",

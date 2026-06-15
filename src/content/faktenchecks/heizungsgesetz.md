@@ -26,7 +26,7 @@ quellen:
 einleitung: |
   Eine funktionierende Heizung darf weiterlaufen, darf repariert werden – und niemand muss sie wegen des Gesetzes herausreißen. Die Pflicht, überwiegend erneuerbar zu heizen, greift im Kern erst bei *neu eingebauten* Heizungen und ist eng mit der Wärmeplanung der Gemeinde verzahnt.
 einstieg: |
-  Das „Heizungsgesetz“ ist das **Gebäudeenergiegesetz (GEG)**, novelliert zum 1. Januar 2024. Die wichtigsten Punkte gegen den Mythos:
+  Das „Heizungsgesetz“ ist das **Gebäudeenergiegesetz (GEG)**, zum 1. Januar 2024 neu gefasst. Die wichtigsten Punkte gegen den Mythos:
 
   - **Bestehende Heizungen dürfen bleiben.** Wer eine Gas- oder Ölheizung hat, darf sie weiter betreiben und reparieren lassen. Es gibt **keine Pflicht zum Rausreißen**.
   - **Kein pauschales Gasheizungs-Verbot.** Auch neue Gasheizungen sind unter Bedingungen weiter erlaubt – sie müssen mit der Zeit anteilig erneuerbares Gas nutzen.

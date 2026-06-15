@@ -186,8 +186,11 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
 - **Nur Feature-Branch pushen.** Lokal kann man versehentlich auf `main` landen –
   danach wieder `git checkout claude/factcheck-...` und prüfen, dass `main` ==
   `origin/main` (kein versehentlicher main-Push).
-- **`reihenfolge` der Maschen:** flicc 1–6, rhetorik 7–19. Neue rhetorik-Maschen
-  fortlaufend ≥20, damit „Die 5 Kerntechniken“ (= flicc) stimmt.
+- **`reihenfolge` der Maschen:** flicc 1–5 (= die kanonischen FLICC-Kerntechniken
+  nach Cook 2020: fake-experten, logischer-fehlschluss, unerfuellbare-erwartung,
+  cherry-picking, verschwoerung), rhetorik 6–19. Neue rhetorik-Maschen fortlaufend
+  ≥20, damit „Die 5 Kerntechniken“ (= flicc) stimmt. **Maschinell geprüft** durch
+  `scripts/check-consistency.mjs` (Teil von `npm run validate`/`build`).
 - **CMS-Techniken an ZWEI Stellen** in `public/admin/config.yml` pflegen
   (faktenchecks `techniken` + maschen `code`).
 - **Frontmatter:** keine geraden `"` in Werten (normalize-Script fängt’s, aber

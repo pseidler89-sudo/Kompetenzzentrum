@@ -18,7 +18,7 @@ quellen:
     art: "primaer"
   - titel: "Entwicklungsperspektiven der ökologischen Landwirtschaft in Deutschland (Texte 32/2020)"
     herausgeber: "Umweltbundesamt (UBA)"
-    url: "https://www.umweltbundesamt.de/sites/default/files/medien/1410/publikationen/2020-03-17_texte_32-2020_oekologische-landwirtschaft.pdf"
+    url: "https://www.umweltbundesamt.de/publikationen/entwicklungsperspektiven-der-oekologischen"
     datum: "2020"
     art: "primaer"
   - titel: "Ökologische Fußabdrücke von Lebensmitteln und Gerichten in Deutschland (Pressemitteilung zur Studie)"

@@ -1,5 +1,5 @@
 ---
-import { THEMA_LABEL, STATUS_LABEL, pfad } from "../lib/labels";
+import { THEMA_LABEL, STATUS_LABEL, URTEIL_KLARTEXT, pfad } from "../lib/labels";
 import UrteilBadge from "./UrteilBadge.astro";
 
 interface Props {
@@ -24,6 +24,7 @@ const { slug, data } = Astro.props;
     )}
     {data.themen.slice(0, 2).map((t) => <span class="badge">{THEMA_LABEL[t] ?? t}</span>)}
   </div>
+  {URTEIL_KLARTEXT[data.urteil] && <p class="fc-card__urteil">{URTEIL_KLARTEXT[data.urteil]}</p>}
   <h3>{data.titel}</h3>
   <p class="fc-card__claim">„{data.behauptung}“</p>
   <p>{data.kurzantwort}</p>
@@ -39,6 +40,9 @@ const { slug, data } = Astro.props;
   .fc-card--irrefuehrend::before { background: var(--c-irrefuehrend); }
   .fc-card--fehlender-kontext::before { background: var(--c-kontext); }
   .fc-card--teils-richtig::before { background: var(--c-teils); }
+  .fc-card__urteil {
+    margin: .55rem 0 0; font-size: .9rem; font-weight: 600; color: var(--c-text-soft);
+  }
   .fc-card__claim {
     font-style: italic; color: var(--c-text-soft);
     padding-left: .75rem; border-left: 2px solid var(--c-border-strong);

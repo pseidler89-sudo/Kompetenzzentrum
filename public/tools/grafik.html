@@ -4,9 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Grafik-Baukasten — Kompetenzzentrum</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Datenschutz: kein Google-Fonts-CDN. Inter selbst gehostet (variabler Font),
+     sonst System-Schrift als Fallback. -->
+<link rel="preload" as="font" type="font/woff2" href="../fonts/InterVariable.woff2" crossorigin>
+<style>@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("../fonts/InterVariable.woff2") format("woff2");}</style>
 <!-- Eigenständig: Tokens aus global.css inline gespiegelt (statische Datei, kein Build). -->
 <style>
   :root {
