@@ -129,3 +129,48 @@ Konkretheit) prüfen und – wo sinnvoll – maschinell verankern.
 Loop 3 war inhaltlich dünn (1 echte Fundstelle + Guards) → bestätigt: der Grenznutzen
 weiterer Verifier-Loops sinkt. Auf Nutzer-Wunsch folgen dennoch Loop 4 (Sicherheit/
 Datenschutz, konkrete Review-Punkte) und Loop 5 (UX/Barrierefreiheit).
+
+---
+
+## Loop 4 — Sicherheit & Datenschutz  (2026-06-15)
+
+**Verifier:** manueller Sicherheits-Review der bestehenden Angriffsfläche
+(Fonts/Tracking, set:html-Render-Pfade, OAuth, Baukasten-Vorschau) + Build/astro check.
+
+### Findings
+
+| ID | Finding | Severity | Confidence | Status |
+|---|---|---|---|---|
+| S4.1 | Google-Fonts-CDN (`fonts.googleapis/gstatic`) lädt Inter → Besucher-IP an Google (vs. „trackingfrei") | mittel | hoch | ✅ behoben |
+| S4.2 | Inhaltsfelder via `md()`/marked **ohne** Sanitisierung gerendert → Stored-XSS-Vektor (eingereichte Inhalte) | mittel | mittel | ✅ behoben |
+| S4.3 | `Datenviz` `set:html` für `daten`-Titel/Hinweis roh | niedrig | mittel | ✅ behoben |
+| S4.4 | OAuth-Scope `public_repo` breit | niedrig | hoch | 📝 dokumentiert (nicht geändert – braucht Live-OAuth-Test) |
+| S4.5 | Self-XSS in Baukasten-Live-Vorschau | niedrig | niedrig | ✅ Verifikation: bereits sicher (esc-first), keine Änderung nötig |
+
+### Angewandte Änderungen
+- **S4.1 Fonts selbst gehostet:** `public/fonts/InterVariable.woff2` (variabler Font, 100–900,
+  ~344 KB, von rsms.me, `wOF2`-verifiziert). `BaseLayout` lädt jetzt per `@font-face` + `preload`
+  (basepfad-korrekt via `pfad()`); Google-`<link>`/`preconnect` entfernt. Auch in der Legacy-Datei
+  `public/tools/grafik.html` den Google-Fonts-Block entfernt (relativer `../fonts/`-Pfad).
+  **Ergebnis:** keine einzige `googleapis`/`gstatic`-Referenz mehr im gesamten `dist/`.
+- **S4.2 marked gehärtet:** eigene `Marked`-Instanz mit `html`-Renderer, der Roh-HTML **escaped**
+  (sichtbar, inert) statt durchzureichen. Markdown-Formatierung bleibt voll erhalten.
+- **S4.3 Allowlist:** neue `sicherInline()` (nur `<strong>`/`<em>`, Rest escaped) für die zwei
+  `set:html`-Stellen in `Datenviz` (titel, hinweis).
+
+### Verifikation (echt ausgeführt)
+- **S4.1:** `dist/`-Grep nach `googleapis|gstatic` → **0 Treffer** (vorher in BaseLayout + grafik.html).
+  woff2 magic-bytes `wOF2`, 352 240 B. Build referenziert `…/fonts/InterVariable.woff2`.
+- **S4.2:** `md("… <img src=x onerror=alert(1)> <script>alert(2)</script> **fett**")` →
+  `&lt;img…onerror…&gt;`, `&lt;script&gt;` (escaped, **kein** ausführbares Tag), `**fett**`→`<strong>` erhalten.
+  Gegen die identische Renderer-Logik direkt ausgeführt.
+- **S4.3:** Datenviz-`<strong>` im gerenderten `strompreise`-HTML erhalten; `sicherInline("… <img onerror=y> <em>z</em>")`
+  → `&lt;img onerror=y&gt;` escaped, `<em>` erhalten.
+- **S4.5:** Code-Review der Vorschau: jedes Feld via `esc()` bzw. `inline()` (= `esc` zuerst, nur `**bold**`
+  re-aktiviert) → bereits XSS-sicher; keine Änderung (eine wäre redundant).
+- Build ✅ (49 Seiten), `astro check` ✅ (0 errors), `validate` ✅.
+
+### S4.4 – bewusst NICHT geändert
+OAuth-Scope `public_repo` bleibt. Verengen würde den funktionierenden Fork-/PR-Flow gefährden
+und ist in der Sandbox nicht testbar (kein Live-OAuth). Positiv: Das Token wird **nicht persistiert**
+(nur transient im Login-Flow). Empfehlung: Scope nur zusammen mit einem Live-Login-Test verengen.

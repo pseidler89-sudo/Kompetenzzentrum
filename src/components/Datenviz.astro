@@ -12,6 +12,8 @@
  * Datenquelle: das optionale `daten`-Frontmatter-Feld der Faktenchecks
  * (siehe content-config-snippet.ts). Beispiel in beispiel-frontmatter.md.
  */
+import { sicherInline } from "../lib/markdown";
+
 type Farbe = "accent" | "neutral" | "falsch" | "irrefuehrend" | "kontext" | "teils" | "pruefen";
 
 interface Wert {
@@ -57,8 +59,8 @@ const achse = (c: Chart) =>
       const max = achse(c);
       return (
         <figure class="dv">
-          {c.titel && <figcaption class="dv__title" set:html={c.titel} />}
-          {c.hinweis && <p class="dv__hint" set:html={c.hinweis} />}
+          {c.titel && <figcaption class="dv__title" set:html={sicherInline(c.titel)} />}
+          {c.hinweis && <p class="dv__hint" set:html={sicherInline(c.hinweis)} />}
 
           {c.typ === "kennzahl" && (
             <div class="dv__stats">
