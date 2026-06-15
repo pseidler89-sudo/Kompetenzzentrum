@@ -115,6 +115,15 @@ for (const datei of maschenDateien) {
   codeZuDatei.set(code, datei);
   if (!TECH_SET.has(code)) fehler.push(`maschen/${datei}: code "${code}" nicht in TECHNIKEN.`);
   if (kat === "flicc") flicc.push({ code, reih, datei });
+
+  // Konkretheit + Belegpflicht: jede Masche braucht ein belegtes Beispiel.
+  const hatBeispiel = /^beispiel:\s*\|/m.test(text) || /^beispiel:\s*"?\S/m.test(text);
+  const quelleBlock = text.match(/^beispiel_quelle:\s*\n([\s\S]*?)(?=\n[A-Za-z_])/m);
+  const hatQuelleUrl = quelleBlock && /url:\s*"?https?:\/\//.test(quelleBlock[1]);
+  if (!hatBeispiel) fehler.push(`maschen/${datei}: kein „beispiel" (jede Masche braucht ein konkretes Beispiel).`);
+  if (!hatQuelleUrl) {
+    fehler.push(`maschen/${datei}: „beispiel_quelle" ohne erreichbare url (Belegpflicht für das Beispiel).`);
+  }
 }
 for (const t of TECH) {
   if (!codeZuDatei.has(t)) fehler.push(`maschen: Technik "${t}" hat keine Masche-Datei (1:1 verletzt).`);

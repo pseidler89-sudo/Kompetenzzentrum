@@ -123,6 +123,18 @@ for (const datei of dateien) {
     pruefe();
   }
 
+  // Invariante „sichtbar primär/amtlich/akademisch belegen": ein geprüfter
+  // Faktencheck soll nicht allein auf Sekundärquellen (z.B. Medien-Faktenchecks)
+  // ruhen. Warnung statt Fehler – ob eine Quelle als primär zählt, bleibt
+  // redaktionelle Einordnung.
+  const status = (fm.match(/^status:\s*"?([\w-]+)"?/m) || [])[1];
+  if (status === "geprueft" && !/art:\s*"?primaer"?/.test(fm)) {
+    warnungen.push(
+      `${datei}: Status „geprueft", aber keine als „primaer" getaggte Quelle. ` +
+        `Sichtbar primär/amtlich/akademisch belegen (Medien-Faktenchecks nicht als alleiniger Anker).`,
+    );
+  }
+
   // verwandt: prüfen
   const verwandtBlock = fm.match(/verwandt:\s*\[([^\]]*)\]/);
   if (verwandtBlock) {

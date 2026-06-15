@@ -95,3 +95,37 @@ Outputs von Loop 1 selbstkritisch prüfen.
 - ClaimReview-`URTEIL_RATING` (1–3 auf 1–5-Skala) konsistent & schema-konform.
 - „Masche der Woche"-Rotation deterministisch (nach `reihenfolge` sortiert, Jahres-Wochen-Modulo).
 - `quellen-links`-Log mischt stderr/stdout → Gruppierung im CI-Log wirkt irreführend (Summary „Tot:1" ist maßgeblich). Kosmetisch, ggf. Loop 4/5.
+
+---
+
+## Loop 3 — Invarianten-Treue (Pfad A / Quellen)  (2026-06-15)
+
+**Ziel:** Die inhaltlichen Kern-Garantien (Neutralität, Primärquellen-Sichtbarkeit,
+Konkretheit) prüfen und – wo sinnvoll – maschinell verankern.
+
+### Findings
+
+| ID | Finding | Severity | Confidence | Status |
+|---|---|---|---|---|
+| L3.1 | `regional-immer-klimafreundlich` (`geprueft`) ruhte auf einer einzigen `sekundaer`-Quelle (ifeu-PM) → kein sichtbarer Primär-/amtlich-Anker | mittel | hoch | ✅ behoben (Nutzer-Entscheid) |
+| L3.2 | „`geprueft` ⇒ ≥1 Primärquelle" war nicht geprüft | niedrig | mittel | ✅ als Warnung verankert |
+| L3.3 | Konkretheit/Beleg der Maschen (`beispiel` + `beispiel_quelle.url`) nicht geprüft | niedrig | hoch | ✅ als Guard verankert |
+| Neutralität | Red-flag-Scan (`gegen rechts`/Personen) | — | hoch | ✅ geprüft, compliant – keine Änderung |
+
+### Angewandte Änderungen
+- `regional-immer-klimafreundlich.md`: ifeu-Quelle `art` sekundaer → **primaer**
+  (ifeu = forschende Institution, PM zur eigenen Studie; Nutzer-Entscheid).
+- `validate-content.mjs`: **Warnung**, wenn ein `geprueft`-Check keine `primaer`-Quelle trägt (L3.2).
+- `check-consistency.mjs`: **Guard** – jede Masche braucht `beispiel` + `beispiel_quelle.url` (L3.3).
+
+### Verifikation (echt ausgeführt)
+- **L3.2:** regional temporär zurück auf `sekundaer` → Warnung erscheint; mit `primaer` weg. ✅
+- **L3.3:** `beispiel_quelle.url` aus einer Masche entfernt → `check-consistency` `exit 1`. ✅
+- **Neutralität:** 2 Red-flag-Treffer manuell geprüft – beide zitieren die amtliche
+  Verfassungsschutz-Einordnung einer *Erzählung* (nicht Personen, kein „gegen rechts") → compliant.
+- Restauriert → `validate` ✅, `build` ✅ (49 Seiten), Baum sauber.
+
+### Stop-Regel-Notiz
+Loop 3 war inhaltlich dünn (1 echte Fundstelle + Guards) → bestätigt: der Grenznutzen
+weiterer Verifier-Loops sinkt. Auf Nutzer-Wunsch folgen dennoch Loop 4 (Sicherheit/
+Datenschutz, konkrete Review-Punkte) und Loop 5 (UX/Barrierefreiheit).

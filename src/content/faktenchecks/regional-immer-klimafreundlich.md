@@ -16,7 +16,7 @@ quellen:
     herausgeber: "ifeu – Institut für Energie- und Umweltforschung Heidelberg"
     url: "https://www.ifeu.de/fileadmin/uploads/Pressemitteilungen/200525_ifeu_PM_Oekologischer_Fussabdruck_Lebensmittel_FINAL.pdf"
     datum: "2020"
-    art: "sekundaer"
+    art: "primaer"
 einleitung: |
   Diese Behauptung kommt aus einer umwelt- und heimatbewussten Ecke – und sie hat einen
   starken wahren Kern: Regional **und saisonal** einkaufen ist oft eine gute Wahl, fürs
