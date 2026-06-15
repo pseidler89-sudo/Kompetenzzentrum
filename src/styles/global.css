@@ -402,6 +402,9 @@ a.card:hover h3 { color: var(--c-accent); }
 [data-stufe-aktiv="vertiefung"] .stufe-einstieg,
 [data-stufe-aktiv="vertiefung"] .stufe-vertiefung,
 [data-stufe-aktiv="wissenschaftlich"] .stufe { display: block; }
+/* Einstieg entschlacken: die längere Einleitung erst ab „Vertiefung“ zeigen.
+   Ohne JS (kein data-stufe-aktiv) bleibt sie sichtbar. */
+[data-stufe-aktiv="einstieg"] .fc-einleitung { display: none; }
 
 /* ---------- Tabellen ---------- */
 table { border-collapse: collapse; width: 100%; margin: 1.75rem 0; font-size: .95rem; font-family: var(--font-sans); }

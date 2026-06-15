@@ -272,3 +272,15 @@ Nominalisierungsdichte und kuratierte **Jargon**-Begriffe.
 Nutzer-Testing (nur mit realen Menschen möglich – Proxys ersetzen das nicht); Urteils-
 Klartext auch auf den Karten sichtbar statt nur im `title`; ggf. Detailseite im
 Einstieg-Modus weiter entschlacken.
+
+## Loop U3+ — Backlog abgearbeitet (Karten-Klartext + Einstieg-Entschlackung)  (2026-06-15)
+- **Urteils-Klartext auf den Faktencheck-Karten:** `FaktencheckCard` zeigt den Halbsatz
+  (`URTEIL_KLARTEXT`) jetzt sichtbar unter dem Badge – nicht nur im `title`.
+- **Detailseite im Einstieg-Modus entschlackt:** Die längere `einleitung` wird in der
+  Einstieg-Stufe ausgeblendet (erscheint ab „Vertiefung"). Umsetzung sauber über das
+  bestehende Tiefen-Mechanik: `data-faktencheck-body` (und damit `data-stufe-aktiv`) liegt
+  jetzt am `<article>`, sodass auch Elemente außerhalb des Prosa-Blocks tiefenabhängig sind.
+- **Verifikation:** Karten-Klartext im gerenderten `dist/faktenchecks/index.html`;
+  CSS-Regel `[data-stufe-aktiv=einstieg] .fc-einleitung{display:none}` im Bundle (auf
+  Einstieg **gegated**, ohne JS bleibt die Einleitung sichtbar → PE intakt);
+  Build ✅, `validate` ✅, `astro check` ✅ (0 errors).
