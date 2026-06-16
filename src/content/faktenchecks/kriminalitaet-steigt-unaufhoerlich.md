@@ -6,7 +6,7 @@ urteil: "irrefuehrend"
 themen: ["kriminalitaet-sicherheit"]
 techniken: ["fehlender-bezugswert", "cherry-picking"]
 zusammenfassung: "Was die Polizeiliche Kriminalstatistik wirklich zeigt: 2024 leicht gesunken, Gewalt aber gestiegen – und warum angezeigte Fälle nicht dasselbe sind wie die tatsächliche Sicherheitslage."
-status: "in-pruefung"
+status: "geprueft"
 veroeffentlicht: 2026-06-16
 aktualisiert: 2026-06-16
 mitwirkende: ["Kompetenzzentrum-Redaktion"]
