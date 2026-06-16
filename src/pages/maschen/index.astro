@@ -37,6 +37,13 @@ function karte(m: (typeof maschen)[number]) {
     </p>
   </header>
 
+  <aside class="quiz-banner">
+    <div>
+      <strong>Schon geübt?</strong> Teste im Quiz, ob du die Maschen an echten Beispielen erkennst.
+    </div>
+    <a class="btn btn--primary" href={pfad("/quiz")}>Quiz: Erkennst du die Masche? →</a>
+  </aside>
+
   <div class="masche-suchzeile">
     <input type="search" id="masche-suche" class="masche-suche" placeholder="Masche suchen (z.B. Sündenbock, Cherry Picking, Angst) …" aria-label="Maschen durchsuchen" />
     <div class="masche-kat" role="group" aria-label="Nach Kategorie filtern">
@@ -137,6 +144,8 @@ function karte(m: (typeof maschen)[number]) {
   .maschen-cta { padding: 1.75rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
   .maschen-cta h2 { margin-top: 0; }
 
+  .quiz-banner { display: flex; gap: 1rem; align-items: center; justify-content: space-between; flex-wrap: wrap; margin: 0 0 1.5rem; padding: 1rem 1.25rem; background: color-mix(in srgb, var(--c-technik) 8%, var(--c-surface)); border: 1px solid var(--c-border); border-radius: var(--radius); }
+  .quiz-banner .btn { flex: none; }
   .masche-suchzeile { display: flex; gap: .75rem; align-items: center; margin: 0 0 1rem; flex-wrap: wrap; }
   .masche-suche { flex: 1; min-width: 14rem; padding: .8rem 1rem; font-size: 1rem; font-family: inherit; border: 1px solid var(--c-border); border-radius: var(--radius-sm); background: var(--c-surface); color: var(--c-text); }
   .masche-kat { display: flex; gap: .5rem; flex-wrap: wrap; }

@@ -1,0 +1,268 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { pfad } from "../lib/labels";
+
+// Quiz-Material aus den Maschen: jede Masche mit konkretem Beispiel wird zu einer
+// Frage „Welche Masche steckt dahinter?". Daten build-time serialisiert; die
+// Auswahl/Reihenfolge/Antwortlogik passiert clientseitig (kein Server, kein Dep).
+const maschen = (await getCollection("maschen"))
+  .filter((m) => (m.data.beispiel ?? "").trim().length > 0)
+  .map((m) => ({
+    titel: m.data.titel,
+    beispiel: m.data.beispiel,
+    slug: m.id,
+  }));
+
+const datenJson = JSON.stringify(maschen).replace(/</g, "\\u003c");
+---
+
+<BaseLayout
+  titel="Quiz: Erkennst du die Masche?"
+  beschreibung="Trainiere dein Gespür für Desinformation: Lies ein echtes Beispiel und erkenne die Manipulationstechnik dahinter. Spielerisches Prebunking."
+>
+  <header class="quiz-hero">
+    <p class="eyebrow">Spielerisch üben</p>
+    <h1>Erkennst du die Masche?</h1>
+    <p class="lead">
+      Hier liest du ein kurzes Beispiel – und rätst, welche <a href={pfad("/maschen")}>Manipulationstechnik</a>
+      dahintersteckt. Das ist wie ein Trainingslauf fürs Erkennen: Wer die Muster
+      ein paarmal aktiv abruft, durchschaut sie später im Alltag schneller.
+    </p>
+  </header>
+
+  <div class="quiz" id="quiz" data-stand="start">
+    <!-- Start -->
+    <section class="quiz-karte" data-screen="start">
+      <h2>Bereit?</h2>
+      <p class="muted">
+        Acht zufällige Beispiele, vier Antwortmöglichkeiten je Frage. Nach jeder
+        Antwort siehst du sofort, ob es stimmt – und kannst zur Masche springen.
+      </p>
+      <button type="button" class="btn btn--primary" id="quiz-start">Quiz starten</button>
+    </section>
+
+    <!-- Frage -->
+    <section class="quiz-karte" data-screen="frage" hidden>
+      <div class="quiz-kopf">
+        <span class="quiz-fortschritt" id="quiz-fortschritt">Frage 1 / 8</span>
+        <span class="quiz-punkte" id="quiz-punkte">0 richtig</span>
+      </div>
+      <p class="quiz-frage-label">Welche Masche steckt hier dahinter?</p>
+      <blockquote class="quiz-beispiel" id="quiz-beispiel"></blockquote>
+      <div class="quiz-optionen" id="quiz-optionen" role="group" aria-label="Antwortmöglichkeiten"></div>
+      <p class="quiz-feedback" id="quiz-feedback" aria-live="polite" hidden></p>
+      <button type="button" class="btn btn--primary" id="quiz-weiter" hidden>Weiter</button>
+    </section>
+
+    <!-- Ergebnis -->
+    <section class="quiz-karte" data-screen="ende" hidden>
+      <h2 id="quiz-ergebnis-titel">Geschafft!</h2>
+      <p class="quiz-ergebnis-zahl" id="quiz-ergebnis"></p>
+      <p class="muted" id="quiz-ergebnis-text"></p>
+      <div class="quiz-ende-aktionen">
+        <button type="button" class="btn btn--primary" id="quiz-nochmal">Nochmal</button>
+        <a class="btn btn--ghost" href={pfad("/maschen")}>Alle Maschen ansehen</a>
+      </div>
+    </section>
+  </div>
+
+  <noscript>
+    <p class="muted">
+      Das Quiz braucht JavaScript. Alle Maschen mit Beispielen findest du auch
+      ohne Quiz auf der <a href={pfad("/maschen")}>Maschen-Seite</a>.
+    </p>
+  </noscript>
+
+  <script type="application/json" id="quiz-daten" set:html={datenJson}></script>
+</BaseLayout>
+
+<style>
+  .quiz-hero { max-width: 44rem; margin: 1rem 0 2rem; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .06em; font-weight: 800; color: var(--c-technik); font-size: .8rem; margin: 0 0 .4rem; }
+
+  .quiz-karte {
+    background: var(--c-surface); border: 1px solid var(--c-border);
+    border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow);
+    max-width: 44rem;
+  }
+  .quiz-karte h2 { margin-top: 0; }
+
+  .quiz-kopf { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem; font-size: .85rem; font-weight: 700; }
+  .quiz-fortschritt { color: var(--c-text-soft); }
+  .quiz-punkte { color: var(--c-accent); }
+
+  .quiz-frage-label { font-weight: 700; margin: 0 0 .5rem; }
+  .quiz-beispiel {
+    margin: 0 0 1.25rem; padding: .9rem 1.1rem; font-size: 1.05rem; line-height: 1.55;
+    border-left: 3px solid var(--c-technik);
+    background: color-mix(in srgb, var(--c-technik) 7%, var(--c-surface));
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .quiz-optionen { display: grid; gap: .6rem; }
+  .quiz-option {
+    text-align: left; font-family: inherit; font-size: .98rem; font-weight: 600;
+    padding: .8rem 1rem; border-radius: var(--radius-sm); cursor: pointer;
+    border: 1px solid var(--c-border); background: var(--c-surface); color: var(--c-text);
+    transition: border-color .12s ease, background .12s ease;
+  }
+  .quiz-option:hover:not(:disabled) { border-color: var(--c-accent); }
+  .quiz-option:disabled { cursor: default; }
+  .quiz-option.richtig { border-color: #2e7d32; background: color-mix(in srgb, #2e7d32 14%, var(--c-surface)); color: var(--c-text); }
+  .quiz-option.falsch { border-color: #c62828; background: color-mix(in srgb, #c62828 12%, var(--c-surface)); color: var(--c-text); }
+
+  .quiz-feedback { margin: 1.1rem 0 .5rem; font-weight: 600; }
+  .quiz-feedback a { font-weight: 700; }
+  .quiz-weiter { margin-top: .5rem; }
+
+  .quiz-ergebnis-zahl { font-size: 2rem; font-weight: 800; margin: .25rem 0; color: var(--c-accent); }
+  .quiz-ende-aktionen { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.25rem; }
+</style>
+
+<script>
+  type Masche = { titel: string; beispiel: string; slug: string };
+  type Frage = { beispiel: string; richtig: Masche; optionen: Masche[] };
+
+  const ANZAHL = 8;
+  const OPTIONEN = 4;
+  const BASE = import.meta.env.BASE_URL;
+  const pfad = (p: string) => `${BASE}${p}`.replace(/\/{2,}/g, "/");
+
+  function mischen<T>(arr: T[]): T[] {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function init() {
+    const wurzel = document.getElementById("quiz");
+    const datenEl = document.getElementById("quiz-daten");
+    if (!wurzel || !datenEl) return;
+
+    let alle: Masche[] = [];
+    try {
+      alle = JSON.parse(datenEl.textContent || "[]");
+    } catch {
+      return;
+    }
+    if (alle.length < OPTIONEN) return;
+
+    const screen = (name: string) =>
+      wurzel.querySelector<HTMLElement>(`[data-screen="${name}"]`);
+    const elFortschritt = document.getElementById("quiz-fortschritt");
+    const elPunkte = document.getElementById("quiz-punkte");
+    const elBeispiel = document.getElementById("quiz-beispiel");
+    const elOptionen = document.getElementById("quiz-optionen");
+    const elFeedback = document.getElementById("quiz-feedback");
+    const elWeiter = document.getElementById("quiz-weiter") as HTMLButtonElement | null;
+
+    let fragen: Frage[] = [];
+    let index = 0;
+    let punkte = 0;
+
+    function zeige(name: string) {
+      ["start", "frage", "ende"].forEach((s) => {
+        const el = screen(s);
+        if (el) el.hidden = s !== name;
+      });
+    }
+
+    function bauen(): Frage[] {
+      return mischen(alle)
+        .slice(0, ANZAHL)
+        .map((richtig) => {
+          const ablenker = mischen(alle.filter((m) => m.slug !== richtig.slug)).slice(0, OPTIONEN - 1);
+          return { beispiel: richtig.beispiel, richtig, optionen: mischen([richtig, ...ablenker]) };
+        });
+    }
+
+    function frageZeigen() {
+      const f = fragen[index];
+      if (elFortschritt) elFortschritt.textContent = `Frage ${index + 1} / ${fragen.length}`;
+      if (elPunkte) elPunkte.textContent = `${punkte} richtig`;
+      if (elBeispiel) elBeispiel.textContent = f.beispiel;
+      if (elFeedback) { elFeedback.hidden = true; elFeedback.textContent = ""; }
+      if (elWeiter) elWeiter.hidden = true;
+      if (!elOptionen) return;
+      elOptionen.innerHTML = "";
+      f.optionen.forEach((opt) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "quiz-option";
+        btn.textContent = opt.titel;
+        btn.addEventListener("click", () => antworten(btn, opt, f));
+        elOptionen.appendChild(btn);
+      });
+    }
+
+    function antworten(btn: HTMLButtonElement, gewaehlt: Masche, f: Frage) {
+      const buttons = elOptionen?.querySelectorAll<HTMLButtonElement>(".quiz-option");
+      buttons?.forEach((b) => (b.disabled = true));
+      const korrekt = gewaehlt.slug === f.richtig.slug;
+      if (korrekt) punkte++;
+      btn.classList.add(korrekt ? "richtig" : "falsch");
+      // Bei falscher Antwort zusätzlich die richtige Lösung markieren.
+      if (!korrekt) {
+        buttons?.forEach((b) => {
+          if (b.textContent === f.richtig.titel) b.classList.add("richtig");
+        });
+      }
+      if (elPunkte) elPunkte.textContent = `${punkte} richtig`;
+      if (elFeedback) {
+        const link = `<a href="${pfad(`/maschen/${f.richtig.slug}`)}">Mehr zur Masche „${f.richtig.titel}" →</a>`;
+        elFeedback.innerHTML = korrekt
+          ? `Richtig! ${link}`
+          : `Knapp daneben – es ist „${f.richtig.titel}". ${link}`;
+        elFeedback.hidden = false;
+      }
+      if (elWeiter) {
+        elWeiter.hidden = false;
+        elWeiter.textContent = index + 1 < fragen.length ? "Weiter" : "Ergebnis";
+        elWeiter.focus();
+      }
+    }
+
+    function weiter() {
+      index++;
+      if (index < fragen.length) {
+        frageZeigen();
+      } else {
+        ergebnisZeigen();
+      }
+    }
+
+    function ergebnisZeigen() {
+      const elErgebnis = document.getElementById("quiz-ergebnis");
+      const elText = document.getElementById("quiz-ergebnis-text");
+      if (elErgebnis) elErgebnis.textContent = `${punkte} von ${fragen.length} richtig`;
+      if (elText) {
+        const quote = punkte / fragen.length;
+        elText.textContent =
+          quote === 1 ? "Perfekt – du durchschaust die Maschen."
+          : quote >= 0.6 ? "Stark – dein Gespür sitzt schon gut."
+          : "Gut gemacht – mit jeder Runde erkennst du mehr.";
+      }
+      zeige("ende");
+    }
+
+    function starten() {
+      fragen = bauen();
+      index = 0;
+      punkte = 0;
+      zeige("frage");
+      frageZeigen();
+    }
+
+    document.getElementById("quiz-start")?.addEventListener("click", starten);
+    document.getElementById("quiz-nochmal")?.addEventListener("click", starten);
+    elWeiter?.addEventListener("click", weiter);
+    zeige("start");
+  }
+
+  init();
+  document.addEventListener("astro:page-load", init);
+</script>
