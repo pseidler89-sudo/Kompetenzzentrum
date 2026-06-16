@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { pfad } from "../lib/labels";
+
+// HINWEIS: Vor dem Live-Gang die mit [ ] markierten Platzhalter ersetzen.
+// Das Impressum braucht eine ladungsfähige Anschrift (echte Adresse, kein Postfach).
+---
+
+<BaseLayout titel="Impressum" beschreibung="Anbieterkennzeichnung gemäß § 5 DDG für das Kompetenzzentrum.">
+  <h1>Impressum</h1>
+
+  <p class="lead">
+    Dieses Projekt ist ein privates, nicht-kommerzielles Bildungsangebot. Es wird
+    in der Freizeit gepflegt, finanziert sich nicht über Werbung und sammelt keine
+    personenbezogenen Daten zu Werbezwecken.
+  </p>
+
+  <h2>Angaben gemäß § 5 DDG</h2>
+  <p>
+    [DEIN VOLLER NAME]<br />
+    [STRASSE UND HAUSNUMMER]<br />
+    [PLZ UND ORT]<br />
+    Deutschland
+  </p>
+
+  <h2>Kontakt</h2>
+  <p>
+    E-Mail: <a href="mailto:[DEINE-E-MAIL]">[DEINE-E-MAIL]</a>
+  </p>
+
+  <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+  <p>
+    [DEIN VOLLER NAME], Anschrift wie oben.
+  </p>
+
+  <h2>Haftung für Inhalte</h2>
+  <p>
+    Die Inhalte dieser Seiten wurden mit größter Sorgfalt und unter Angabe
+    nachprüfbarer Quellen erstellt. Für die Richtigkeit, Vollständigkeit und
+    Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden. Als
+    Diensteanbieter bin ich für eigene Inhalte nach den allgemeinen Gesetzen
+    verantwortlich, jedoch nicht verpflichtet, übermittelte oder gespeicherte
+    fremde Informationen zu überwachen. Hinweise auf mögliche Fehler nehme ich
+    gerne entgegen und korrigiere sie zeitnah.
+  </p>
+
+  <h2>Haftung für Links</h2>
+  <p>
+    Dieses Angebot verweist mit Quellenangaben auf zahlreiche externe Websites,
+    auf deren Inhalte ich keinen Einfluss habe. Für diese fremden Inhalte ist stets
+    der jeweilige Anbieter oder Betreiber verantwortlich. Die verlinkten Seiten
+    wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft;
+    rechtswidrige Inhalte waren nicht erkennbar. Bei Bekanntwerden von
+    Rechtsverletzungen entferne ich solche Links umgehend.
+  </p>
+
+  <h2>Urheberrecht</h2>
+  <p>
+    Die eigenen Inhalte dieses Projekts stehen unter der Lizenz
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" rel="noopener">CC BY-SA 4.0</a>;
+    der Quellcode steht unter der MIT-Lizenz. Zitate und Daten Dritter bleiben
+    Eigentum der jeweiligen Rechteinhaber und sind als Quelle gekennzeichnet.
+  </p>
+
+  <p class="muted" style="margin-top:2rem;">
+    Siehe auch unsere <a href={pfad("/datenschutz")}>Datenschutzerklärung</a>.
+  </p>
+</BaseLayout>

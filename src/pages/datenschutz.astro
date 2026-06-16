@@ -1,0 +1,94 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { pfad } from "../lib/labels";
+
+// HINWEIS: Vor dem Live-Gang die mit [ ] markierten Platzhalter ersetzen.
+---
+
+<BaseLayout titel="Datenschutzerklärung" beschreibung="Wie diese Website mit Daten umgeht: kein Tracking, keine Cookies, keine Werbung.">
+  <h1>Datenschutzerklärung</h1>
+
+  <p class="lead">
+    Kurz gesagt: Diese Website setzt <strong>keine Cookies</strong>, nutzt
+    <strong>kein Tracking</strong>, <strong>keine Analyse-Tools</strong> und
+    <strong>keine Werbung</strong>. Es gibt keinen Login und keine Newsletter.
+    Personenbezogene Daten werden nur insoweit verarbeitet, wie es der technische
+    Betrieb (Hosting) zwangsläufig mit sich bringt.
+  </p>
+
+  <h2>1. Verantwortlicher</h2>
+  <p>
+    Verantwortlich im Sinne der Datenschutz-Grundverordnung (DSGVO):<br />
+    [DEIN VOLLER NAME], [PLZ UND ORT] – Kontakt:
+    <a href="mailto:[DEINE-E-MAIL]">[DEINE-E-MAIL]</a>.
+    Vollständige Anbieterangaben im <a href={pfad("/impressum")}>Impressum</a>.
+  </p>
+
+  <h2>2. Hosting &amp; Server-Logs (GitHub Pages)</h2>
+  <p>
+    Diese Website wird als statische Seite über <strong>GitHub Pages</strong>
+    bereitgestellt (Anbieter: GitHub, Inc., 88 Colin P. Kelly Jr. Street, San
+    Francisco, CA 94107, USA). Beim Aufruf der Seite überträgt dein Browser
+    technisch notwendige Daten an die Server von GitHub, insbesondere die
+    <strong>IP-Adresse</strong>, Datum und Uhrzeit des Zugriffs, die aufgerufene
+    Adresse sowie Browser-/Geräteinformationen. Diese Verarbeitung erfolgt durch
+    GitHub als Hosting-Dienstleister und ist für die Auslieferung der Seite
+    erforderlich.
+  </p>
+  <p>
+    Rechtsgrundlage ist das berechtigte Interesse am sicheren und stabilen Betrieb
+    der Website (Art. 6 Abs. 1 lit. f DSGVO). Auf Art und Umfang der durch GitHub
+    erhobenen Server-Logs habe ich keinen Einfluss. Näheres in der
+    <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">Datenschutzerklärung von GitHub</a>.
+    Da GitHub Daten auch in den USA verarbeiten kann, weise ich auf das damit
+    verbundene Drittlandrisiko hin.
+  </p>
+
+  <h2>3. Keine Cookies, kein Tracking</h2>
+  <p>
+    Es werden keine Cookies zu Analyse- oder Werbezwecken gesetzt und keine
+    Reichweiten-/Tracking-Dienste eingesetzt. Lediglich deine persönlichen
+    Anzeige-Einstellungen (z.&nbsp;B. gewählte Lese-Tiefe und Hell-/Dunkel-Modus)
+    werden ausschließlich <strong>lokal in deinem Browser</strong>
+    (<code>localStorage</code>) gespeichert. Diese Daten verlassen dein Gerät
+    nicht und werden nicht an mich oder Dritte übertragen.
+  </p>
+
+  <h2>4. Schriftarten lokal eingebunden</h2>
+  <p>
+    Die verwendete Schrift wird vom eigenen Server ausgeliefert. Es findet
+    <strong>keine</strong> Verbindung zu Google Fonts oder anderen externen
+    Schrift-Anbietern statt – deine IP-Adresse wird dafür also nicht an Dritte
+    übertragen.
+  </p>
+
+  <h2>5. Externe Links</h2>
+  <p>
+    Faktenchecks verweisen mit Quellenangaben auf externe Websites. Beim Anklicken
+    solcher Links gelten die Datenschutzbestimmungen der jeweiligen Anbieter; auf
+    deren Datenverarbeitung habe ich keinen Einfluss.
+  </p>
+
+  <h2>6. Inhalte einreichen (optional)</h2>
+  <p>
+    Wer über den Faktencheck-Baukasten freiwillig einen Beitrag einreicht, meldet
+    sich dafür bei <strong>GitHub</strong> an; die Anmeldung und der eingereichte
+    Beitrag werden von GitHub verarbeitet und führen zu einem öffentlich
+    einsehbaren Vorschlag (Pull Request). Dieser Schritt ist vollkommen optional –
+    für die reine Nutzung der Website ist er nicht erforderlich. Es gelten
+    ergänzend die Datenschutzbestimmungen von GitHub.
+  </p>
+
+  <h2>7. Deine Rechte</h2>
+  <p>
+    Du hast im Rahmen der gesetzlichen Voraussetzungen das Recht auf Auskunft,
+    Berichtigung, Löschung und Einschränkung der Verarbeitung deiner
+    personenbezogenen Daten sowie das Recht auf Datenübertragbarkeit und Widerspruch.
+    Außerdem steht dir ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde
+    zu. Wende dich für Anliegen gerne an die oben genannte Kontaktadresse.
+  </p>
+
+  <p class="muted" style="margin-top:2rem;">
+    Stand: [MONAT JAHR]. Bei technischen Änderungen wird diese Erklärung angepasst.
+  </p>
+</BaseLayout>
