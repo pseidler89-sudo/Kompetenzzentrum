@@ -117,6 +117,7 @@ const vorhandeneTechniken = Object.keys(TECHNIK_LABEL).filter((t) =>
     const reset = document.getElementById("fc-reset");
     const reset2 = document.getElementById("fc-reset-2");
 
+    const KATEGORIEN = ["thema", "urteil", "technik"] as const;
     // Aktiver Filter je Kategorie ("alle" = kein Filter).
     const aktiv: Record<string, string> = { thema: "alle", urteil: "alle", technik: "alle" };
 
@@ -140,31 +141,70 @@ const vorhandeneTechniken = Object.keys(TECHNIK_LABEL).filter((t) =>
       if (reset) reset.hidden = aktivCount === 0;
     }
 
+    // Buttons passend zum `aktiv`-Zustand markieren (eine Auswahl je Gruppe).
+    function buttonsSpiegeln() {
+      btns.forEach((b) =>
+        b.setAttribute("aria-pressed", String((aktiv[b.dataset.filter!] ?? "alle") === b.dataset.wert)),
+      );
+    }
+
+    // Aktuellen Zustand in die URL schreiben: teilbar, reload-stabil, Back-Button.
+    // push=true legt einen History-Eintrag an (Filter-Klick), push=false ersetzt
+    // nur (Tippen in der Suche – sonst ein History-Eintrag pro Tastendruck).
+    function urlSpiegeln(push: boolean) {
+      const params = new URLSearchParams();
+      KATEGORIEN.forEach((k) => { if (aktiv[k] !== "alle") params.set(k, aktiv[k]); });
+      const q = (suche?.value ?? "").trim();
+      if (q) params.set("q", q);
+      const qs = params.toString();
+      const neu = qs ? `${location.pathname}?${qs}` : location.pathname;
+      if (neu === location.pathname + location.search) return;
+      if (push) history.pushState(null, "", neu);
+      else history.replaceState(null, "", neu);
+    }
+
+    // Zustand aus der URL lesen (Deep-Link, Reload, Back/Forward). Unbekannte
+    // Werte fallen auf "alle" zurück, damit ein veralteter Link nicht ins Leere führt.
+    function ausUrlLesen() {
+      const p = new URLSearchParams(location.search);
+      KATEGORIEN.forEach((k) => {
+        const wert = p.get(k) ?? "alle";
+        const gibtes = wert === "alle" ||
+          Array.from(btns).some((b) => b.dataset.filter === k && b.dataset.wert === wert);
+        aktiv[k] = gibtes ? wert : "alle";
+      });
+      if (suche) suche.value = p.get("q") ?? "";
+      buttonsSpiegeln();
+      anwenden();
+    }
+
     btns.forEach((btn) => {
       btn.addEventListener("click", () => {
         const kat = btn.dataset.filter!;
         aktiv[kat] = btn.dataset.wert!;
-        // In derselben Gruppe nur einen Button aktiv lassen.
-        document.querySelectorAll<HTMLButtonElement>(`.filter-btn[data-filter="${kat}"]`)
-          .forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+        buttonsSpiegeln();
         anwenden();
+        urlSpiegeln(true);
       });
     });
-    suche?.addEventListener("input", anwenden);
+    suche?.addEventListener("input", () => { anwenden(); urlSpiegeln(false); });
 
     function alleZuruecksetzen() {
       aktiv.thema = aktiv.urteil = aktiv.technik = "alle";
       if (suche) suche.value = "";
-      btns.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.wert === "alle")));
+      buttonsSpiegeln();
       anwenden();
+      urlSpiegeln(true);
     }
     reset?.addEventListener("click", alleZuruecksetzen);
     reset2?.addEventListener("click", alleZuruecksetzen);
 
-    // Stichwort aus der Startseiten-Suche (?q=…) übernehmen und anwenden.
-    const q0 = new URLSearchParams(location.search).get("q");
-    if (q0 && suche) suche.value = q0;
-    anwenden();
+    // Back/Forward im Browser → Zustand aus der URL wiederherstellen.
+    window.addEventListener("popstate", ausUrlLesen);
+
+    // Initialzustand aus der URL (?thema=…&urteil=…&technik=…&q=…).
+    // Deckt auch die Startseiten-Suche (?q=…) und Deep-Links von Maschen ab.
+    ausUrlLesen();
   }
   init();
   document.addEventListener("astro:page-load", init);
