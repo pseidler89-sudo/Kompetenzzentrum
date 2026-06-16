@@ -112,6 +112,20 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   Alt-Branch `sharp-euler-KJ9Wu` war ein Duplikat und wurde entfernt.
 
 ## Stand (zuletzt)
+- **„Liefern"-Loop (06/2026, PRs #48–#51):** Nach den Verifizier-Loops (L1–L5, U1–U3)
+  auf Bauen/Liefern umgestellt – drei Phasen, alle live:
+  - **UI:** Faktencheck-Liste spiegelt Filter/Suche in die URL (`?thema=&urteil=&technik=&q=`,
+    teilbar, Back-Button, Deep-Links; PR #48). Maschen-Liste hat jetzt **Suche + Kategorie-
+    Filter** (vorher 19 Maschen ungefiltert; PR #49).
+  - **Erweiterungen:** **Quiz** `/quiz` („Erkennst du die Masche?", build-time-Daten aus den
+    Maschen, clientseitige Logik, kein Dep) – verlinkt von Maschen-Seite + Werkzeugkasten.
+    **RSS-Feed** `/rss.xml` (RSS 2.0, XML von Hand, kein `@astrojs/rss`, im `<head>` als
+    alternate; PR #50).
+  - **Inhalt:** 2 neue Checks in dünnen Themen (PR #51, Status `in-pruefung`, Gegenlesen offen):
+    **Wahlbetrug/Briefwahl** (demokratie-medien, *falsch*; Bundeswahlleiterin+bpb) und
+    **Deutschland EU-Zahlmeister** (wirtschaft-soziales, *fehlender-kontext*; bpb+EU-Kommission).
+    Beide rechts/euroskeptisch konnotiert → balancieren den grün-konnotierten Glyphosat-Check.
+  - **Faktenchecks jetzt: 20** (18 `geprueft` + 2 `in-pruefung`). Details im `LOOP_LOG.md`.
 - **v1.0 LIVE (06/2026):** Design-Handoff P1 (Datengrafiken) + P3 (Maschen-Icons) +
   Grafik-Baukasten eingebaut, Startseiten-Tiefen-Demo springt nicht mehr. Seite
   läuft gestylt inkl. Desktop-Header-Navigation (Faktenchecks · Maschen ·
