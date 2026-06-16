@@ -6,7 +6,7 @@ urteil: "fehlender-kontext"
 themen: ["wirtschaft-soziales"]
 techniken: ["fehlender-bezugswert", "aus-dem-kontext-gerissen"]
 zusammenfassung: "Ja, Deutschland ist der größte EU-Nettozahler – aber der Saldo ist nur eine Kassen-Rechnung. Warum er den Hauptnutzen (Binnenmarkt, Exporte) gar nicht erfasst."
-status: "in-pruefung"
+status: "geprueft"
 veroeffentlicht: 2026-06-16
 aktualisiert: 2026-06-16
 mitwirkende: ["Kompetenzzentrum-Redaktion"]

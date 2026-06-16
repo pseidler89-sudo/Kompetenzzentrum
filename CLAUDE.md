@@ -125,7 +125,8 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
     **Wahlbetrug/Briefwahl** (demokratie-medien, *falsch*; Bundeswahlleiterin+bpb) und
     **Deutschland EU-Zahlmeister** (wirtschaft-soziales, *fehlender-kontext*; bpb+EU-Kommission).
     Beide rechts/euroskeptisch konnotiert → balancieren den grün-konnotierten Glyphosat-Check.
-  - **Faktenchecks jetzt: 20** (18 `geprueft` + 2 `in-pruefung`). Details im `LOOP_LOG.md`.
+  - **Faktenchecks jetzt: 20, alle `geprueft`** (die 2 neuen am 06/2026 vom Nutzer
+    gegengelesen → geprueft). Details im `LOOP_LOG.md`.
 - **v1.0 LIVE (06/2026):** Design-Handoff P1 (Datengrafiken) + P3 (Maschen-Icons) +
   Grafik-Baukasten eingebaut, Startseiten-Tiefen-Demo springt nicht mehr. Seite
   läuft gestylt inkl. Desktop-Header-Navigation (Faktenchecks · Maschen ·
