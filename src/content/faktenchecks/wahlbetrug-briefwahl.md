@@ -6,7 +6,7 @@ urteil: "falsch"
 themen: ["demokratie-medien"]
 techniken: ["verschwoerung", "falsche-kausalitaet"]
 zusammenfassung: "Wie deutsche Wahlen kontrolliert werden, welche Sicherungen die Briefwahl hat – und warum unterschiedliche Ergebnisse von Brief- und Urnenwahl kein Hinweis auf Betrug sind."
-status: "in-pruefung"
+status: "geprueft"
 veroeffentlicht: 2026-06-16
 aktualisiert: 2026-06-16
 mitwirkende: ["Kompetenzzentrum-Redaktion"]
