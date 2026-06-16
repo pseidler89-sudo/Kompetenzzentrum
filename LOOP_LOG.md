@@ -295,3 +295,48 @@ Einstieg-Modus weiter entschlacken.
 - **Verifikation:** gerendert als `<details class="box box-technik" … open>` + `<summary>`;
   Bundle enthält `[data-stufe-aktiv=einstieg] .fc-einleitung,…  .fc-techniken{display:none}`.
   Build ✅, `validate` ✅, `astro check` ✅ (0 errors).
+
+---
+
+# Liefern-Loop (L-1 … L-3) — Fokus: Bauen/Liefern statt Spezifizieren/Verifizieren  (2026-06-16)
+
+Stop-Regel aus L5 umgesetzt: vom Verifizieren auf **Bauen/Liefern** gewechselt.
+Pro Iteration: höchstwertiges Backlog-Item → Feature-Branch → echte Verifikation
+(`validate`/`build`/`astro check`/`check:readability` + Render-Check im `dist/`) →
+PR → CI grün → Merge → **Live-Check** (200 + Inhalt im HTML). Kein neues Runtime-Dep.
+
+## L-1 — UI  (PR #48, #49)
+- **#48 Faktencheck-Liste: Filter/Suche in der URL.** Vorher wurde nur `?q=` beim Laden
+  gelesen; Thema/Urteil/Masche waren nicht teilbar/bookmarkbar, Back-Button tot. Jetzt
+  `?thema=&urteil=&technik=&q=` (Filter-Klick=pushState, Tippen=replaceState, `popstate`
+  stellt wieder her, unbekannte Werte → `alle`, PE bleibt). **Verif.:** build/astro check
+  grün, Deep-Link `?technik=cherry-picking` live = 200.
+- **#49 Maschen-Liste: Suche + Kategorie-Filter.** 19 Maschen waren komplett ungefiltert.
+  Suchfeld (Titel/Kurz/Code) + Umschalter (Alle/Kerntechniken/Weitere), leere Sektionen
+  ausgeblendet, Empty-State, PE. **Verif.:** build/astro check grün, live.
+
+## L-2 — Erweiterungen  (PR #50)
+- **Quiz `/quiz`** „Erkennst du die Masche?": build-time-Daten aus Maschen mit `beispiel`,
+  clientseitige Logik (8 zufällige Fragen, 4 Optionen, Sofort-Feedback + Link zur Masche,
+  Score), verlinkt von Maschen-Seite (Banner) + Werkzeugkasten, `noscript`-Fallback.
+- **RSS `/rss.xml`**: RSS 2.0 der neuesten Faktenchecks, XML von Hand (kein `@astrojs/rss`),
+  absolute URLs via `site`+`pfad`, im `<head>` als `alternate`. **Verif.:** build 51 Seiten,
+  astro check 0 errors, live `/quiz`=200, `/rss.xml`=200 mit 18 Items.
+
+## L-3 — Inhalt: 2 neue Checks in dünnen Themen  (PR #51, Status `in-pruefung`)
+- **Wahlbetrug/Briefwahl** (demokratie-medien, *falsch*): dezentrale öffentliche Auszählung,
+  Papierbelege, Briefwahl-Sicherungen; falsche-kausalitaet „Brief≠Urne=Betrug". Quellen:
+  Bundeswahlleiterin (2×) + bpb (alle 200, primär).
+- **Deutschland EU-Zahlmeister** (wirtschaft-soziales, *fehlender-kontext*): konzediert
+  den wahren Teil (größter Nettozahler, 13,1 Mrd 2024), zeigt Saldo = reine Kassen-Rechnung
+  ohne Binnenmarkt-Nutzen. Quellen: bpb + EU-Kommission (200, primär).
+- Beide rechts/euroskeptisch konnotiert → **Balance** zum grün-konnotierten Glyphosat.
+- **Verif.:** validate 20 Checks, build 53 Seiten + OG, astro check 0 errors, readability
+  WSTF 7.2/4.6 (0 über Schwelle, 0 Jargon), Quell-URLs 200, beide Detailseiten live = 200.
+- **Offen (menschlich):** Gegenlesen der Originale → dann `geprueft`.
+
+### Abschluss Liefern-Loop
+Drei Phasen geliefert (UI · Erweiterungen · Inhalt), je echt verifiziert und live geprüft.
+Backlog für künftige Iterationen: Quiz-Verlinkung auch von der Startseite; Urteils-Filter
+auch in der Suche kombinierbar darstellen (Chips); weitere Checks in `kriminalitaet-sicherheit`
+(noch nur 1); Legacy `public/tools/grafik.html` entfernen.
