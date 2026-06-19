@@ -67,6 +67,10 @@ verwandt: []                   # optional: Slug(s) verwandter Faktenchecks
 - **Tonlage:** sachlich, kein Spott, kein „gegen Person Y". Schmähkritik macht angreifbar;
   ein belegtes, sachliches Urteil schützt.
 - **Truth-Sandwich:** `kurzantwort` beginnt mit dem Fakt, nicht mit der Falschbehauptung.
+- **Maschen verknüpfen:** Wo eine Manipulationstechnik erkennbar ist, `techniken` setzen –
+  die Detailseite zeigt sie als „Maschen in dieser Aussage" und verlinkt zu den Maschen
+  (Lerneffekt, Prebunking). Bei einem **reinen Faktenfehler ohne Technik** darf das Feld
+  leer bleiben – keine Masche erzwingen (Pfad-A-Fairness).
 - **Sichtbarkeit:** Die Unterseite `/o-ton` ist bereits in der Navigation und zeigt nur
   Nicht-Entwürfe (aktuell Empty-State, bis erste Einträge `in-pruefung`/`geprueft` sind).
 
@@ -177,12 +181,18 @@ verwandt: []                   # optional: Slug(s) verwandter Faktenchecks
   Embed `…/embed/ID?start=83`. **ÖR-Mediatheken haben keinen stabilen `?t=`** → Timecode
   als Text `[hh:mm:ss]` zitieren und YouTube-Mirror bevorzugen, wo vorhanden. In
   `quelle_url` immer mit Zeitstempel speichern, wenn die Plattform es kann.
-- **Backup gegen Link-Tod (dreifach):** (a) **Wayback**-Snapshot der Watch-/Mediathek-Seite
-  als „existierte"-Nachweis (sichert das Video NICHT, s. o.); (b) **eigene lokale Sicherung**
-  des Vollvideos + Untertitel (`yt-dlp "<URL>"`) ins Redaktionsarchiv; (c) Standbild/Clip der
-  konkreten Fundstelle. Zusätzlich ggf. seriöse Berichterstattung, die das Zitat
-  dokumentiert, als `sekundaer` in `quellen`. **ÖR-Talks (Lanz/Illner/Maischberger …) sofort
-  bei Fund sichern** – Verweildauer ~12 Monate.
+- **Backup gegen Link-Tod (Projekt-Entscheidung 06/2026: KEINE lokalen Video-Downloads/Clips –
+  das frisst Speicher ohne genug Mehrwert).** Der Beleg trägt sich anders:
+  - **(a) Plenar-Fälle** brauchen ohnehin kein Video-Backup – das **Protokoll-PDF ist der
+    permanente Wortlaut-Beleg** (Bundestag/Landtag halten es dauerhaft).
+  - **(b) Nicht-Plenar:** beim Anlegen einen **Wayback-Snapshot** der Videoseite anlegen
+    (als „existierte"-Nachweis; sichert das Video NICHT, aber die Seite) und den **relevanten
+    Wortlaut als Transkript-Auszug** im Eintrag festhalten; zusätzlich ggf. seriöse
+    Berichterstattung, die das Zitat dokumentiert, als `sekundaer` in `quellen`. Stirbt das
+    Video später, ist das verkraftbar – Zitat + Einordnung + Quellen bleiben.
+  - **(c) Quartalsweiser Link-Check** der `quelle_url`s; tote Mediathek-Links auf
+    YouTube-Mirror umhängen oder einen Wayback-Hinweis setzen. (Automatisierbar als
+    `/schedule`-Cloud-Agent.)
 
 ### Auswahl-Kriterien für gute O-Ton-Fälle
 
