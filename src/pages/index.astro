@@ -10,15 +10,12 @@ const eintraege = (await getCollection("faktenchecks")).sort(
 );
 const featured = eintraege.slice(0, 4);
 
-// „Masche der Woche“ – rotiert deterministisch nach Kalenderwoche (Build-Zeit,
-// kein Backend). Wiederholung wirkt dem Vergessens-Effekt der Inoculation entgegen.
+// Maschen-Übersicht auf der Startseite: die ersten sechs nach Reihenfolge
+// (die fünf FLICC-Kerntechniken + eine) – immer sichtbar, nicht nur eine rotierende.
 const maschen = (await getCollection("maschen")).sort(
   (a, b) => a.data.reihenfolge - b.data.reihenfolge,
 );
-const jetzt = new Date();
-const jahresStart = new Date(jetzt.getFullYear(), 0, 1);
-const woche = Math.floor((jetzt.getTime() - jahresStart.getTime()) / (7 * 24 * 3600 * 1000));
-const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
+const maschenTop = maschen.slice(0, 6);
 ---
 
 <BaseLayout titel="Kompetenzzentrum" breit>
@@ -117,9 +114,9 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
           <button type="button" class="tiefe__chip" data-stufe="wissenschaftlich" aria-pressed="false">Wissenschaftlich</button>
         </div>
         <div class="tiefe__demo-wrap">
-          <p class="tiefe__demo" data-stufe="einstieg" aria-hidden="false">Kurz gesagt: Das stimmt so nicht. Strom aus <strong>neuer Windkraft an Land ist günstiger</strong> als aus neuen Kohle- oder Gaskraftwerken.</p>
-          <p class="tiefe__demo" data-stufe="vertiefung" aria-hidden="true">Die Erzeugungskosten neuer Windkraft an Land liegen laut Fraunhofer ISE bei rund <strong>4–9 ct/kWh</strong>, neue Gaskraftwerke bei <strong>8–16 ct/kWh</strong>. Im Neubau ist Wind also im Schnitt die günstigere Option.</p>
-          <p class="tiefe__demo" data-stufe="wissenschaftlich" aria-hidden="true">Verglichen werden die <em>Stromgestehungskosten</em> (LCOE) über die gesamte Lebensdauer. Sauber wird der Vergleich, wenn man beides einrechnet: Integrationskosten für Netz/Speicher bei Wind &amp; Solar – und den CO₂-Preis bei fossilen. Die Fraunhofer-ISE-Studie (2024) tut das; Wind an Land bleibt die günstigste Neubauoption.</p>
+          <p class="tiefe__demo" data-stufe="einstieg">Kurz gesagt: Das stimmt so nicht. Strom aus <strong>neuer Windkraft an Land ist günstiger</strong> als aus neuen Kohle- oder Gaskraftwerken.</p>
+          <p class="tiefe__demo" data-stufe="vertiefung" hidden>Die Erzeugungskosten neuer Windkraft an Land liegen laut Fraunhofer ISE bei rund <strong>4–9 ct/kWh</strong>, neue Gaskraftwerke bei <strong>8–16 ct/kWh</strong>. Im Neubau ist Wind also im Schnitt die günstigere Option.</p>
+          <p class="tiefe__demo" data-stufe="wissenschaftlich" hidden>Verglichen werden die <em>Stromgestehungskosten</em> (LCOE) über die gesamte Lebensdauer. Sauber wird der Vergleich, wenn man beides einrechnet: Integrationskosten für Netz/Speicher bei Wind &amp; Solar – und den CO₂-Preis bei fossilen. Die Fraunhofer-ISE-Studie (2024) tut das; Wind an Land bleibt die günstigste Neubauoption.</p>
         </div>
         <p class="tiefe__hint muted">↑ Tiefe umschalten – genau wie in jedem Faktencheck.</p>
       </div>
@@ -138,24 +135,27 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
     </section>
   )}
 
-  {macheDerWoche && (
+  {maschenTop.length > 0 && (
     <section class="container" style="margin-top:4rem;">
       <div class="abschnitt-kopf">
-        <h2 style="margin:0;" data-reveal>Masche der Woche</h2>
+        <h2 style="margin:0;" data-reveal>Maschen erkennen</h2>
         <a href={pfad("/maschen")} data-reveal>Alle Maschen →</a>
       </div>
-      <a class="masche-woche" href={pfad(`/maschen/${macheDerWoche.id}`)} data-reveal>
-        <span class="masche-woche__ic" aria-hidden="true">
-          <Icon name={MASCHE_ICON[macheDerWoche.data.code] ?? "lucide:shield-alert"} />
-        </span>
-        <span class="masche-woche__txt">
-          <span class="masche-woche__eyebrow">{macheDerWoche.data.kategorie === "flicc" ? "Kerntechnik" : "Häufiges Muster"}</span>
-          <strong>{macheDerWoche.data.titel}</strong>
-          <span class="muted">{macheDerWoche.data.kurz}</span>
-        </span>
-        <span class="masche-woche__pfeil" aria-hidden="true">→</span>
-      </a>
-      <p class="muted" style="font-size:.85rem;margin:.6rem 0 0;">Jede Woche eine neue Technik – kurz auffrischen hält das Auge geschult.</p>
+      <p class="muted" data-reveal style="margin:.5rem 0 0;max-width:48rem;">
+        Desinformation nutzt immer wieder dieselben Tricks. Wer sie einmal benennen kann,
+        durchschaut sie überall – egal bei welchem Thema.
+      </p>
+      <div class="maschen-grid">
+        {maschenTop.map((m) => (
+          <a class="masche-karte" href={pfad(`/maschen/${m.id}`)} data-reveal>
+            <span class="masche-karte__ic" aria-hidden="true">
+              <Icon name={MASCHE_ICON[m.data.code] ?? "lucide:shield-alert"} />
+            </span>
+            <strong>{m.data.titel}</strong>
+            <span class="muted">{m.data.kurz}</span>
+          </a>
+        ))}
+      </div>
     </section>
   )}
 
@@ -203,11 +203,14 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
   </section>
 
   <script>
-    // Tiefen-Demo
+    // Tiefen-Demo – nur der aktive Text ist sichtbar; die Box animiert ihre Höhe
+    // weich mit, statt zu springen. Bei reduzierter Bewegung: sofortiger Wechsel.
     const demo = document.getElementById("tiefe-demo");
     if (demo) {
       const chips = demo.querySelectorAll<HTMLButtonElement>(".tiefe__chip");
       const texte = demo.querySelectorAll<HTMLParagraphElement>(".tiefe__demo");
+      const wrap = demo.querySelector<HTMLElement>(".tiefe__demo-wrap");
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       chips.forEach((chip) => {
         chip.addEventListener("click", () => {
           const stufe = chip.dataset.stufe;
@@ -216,9 +219,15 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
             c.classList.toggle("tiefe__chip--aktiv", aktiv);
             c.setAttribute("aria-pressed", String(aktiv));
           });
-          texte.forEach((t) => {
-            t.setAttribute("aria-hidden", String(t.dataset.stufe !== stufe));
-          });
+          const von = wrap ? wrap.getBoundingClientRect().height : 0;
+          texte.forEach((t) => { t.hidden = t.dataset.stufe !== stufe; });
+          if (!wrap || reduce) return;
+          const bis = wrap.scrollHeight;
+          wrap.style.height = von + "px";
+          void wrap.offsetHeight; // Reflow erzwingen
+          wrap.style.height = bis + "px";
+          const fertig = () => { wrap.style.height = "auto"; wrap.removeEventListener("transitionend", fertig); };
+          wrap.addEventListener("transitionend", fertig);
         });
       });
     }
@@ -233,18 +242,19 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
       if (reduce || !("IntersectionObserver" in window)) return; // alles sichtbar lassen
       document.documentElement.classList.add("kz-reveal"); // versteckt erst jetzt
       fills.forEach((f) => (f.style.width = "0%"));
+      const zeigeBalken = () => fills.forEach((f) => (f.style.width = (f.dataset.w ?? "0") + "%"));
       const io = new IntersectionObserver((entries) => {
         entries.forEach((en) => {
           if (en.isIntersecting) {
             en.target.classList.add("in");
             io.unobserve(en.target);
-            if (en.target.classList.contains("zahl__fig")) {
-              fills.forEach((f) => (f.style.width = (f.dataset.w ?? "0") + "%"));
-            }
+            if (en.target.classList.contains("zahl__fig")) zeigeBalken();
           }
         });
       }, { rootMargin: "0px 0px -10% 0px", threshold: 0.12 });
       els.forEach((el) => io.observe(el));
+      // Sicherheitsnetz: nie dauerhaft versteckt bleiben (falls IO mal nicht greift).
+      window.setTimeout(() => { els.forEach((el) => el.classList.add("in")); zeigeBalken(); }, 4000);
     }
     initReveal();
     document.addEventListener("astro:page-load", initReveal);
@@ -324,31 +334,30 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
   .tiefe__chip:hover { background: var(--c-accent-soft); color: var(--c-accent); }
   .tiefe__chip--aktiv, .tiefe__chip--aktiv:hover { background: var(--c-accent); color: #fff; }
   .tiefe__chip:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
-  .tiefe__demo-wrap { display: grid; }
-  .tiefe__demo { grid-area: 1 / 1; margin: 1rem 0 0; font-size: 1.05rem; border-top: 1px solid var(--c-border); padding-top: 1rem; transition: opacity .15s ease; }
-  .tiefe__demo[aria-hidden="true"] { visibility: hidden; opacity: 0; }
+  .tiefe__demo-wrap { overflow: hidden; transition: height .25s ease; }
+  .tiefe__demo { margin: 1rem 0 0; font-size: 1.05rem; border-top: 1px solid var(--c-border); padding-top: 1rem; }
+  .tiefe__demo[hidden] { display: none; }
+  @media (prefers-reduced-motion: reduce) { .tiefe__demo-wrap { transition: none; } }
   .tiefe__hint { margin: .9rem 0 0; font-size: .8rem; }
 
   .abschnitt-kopf { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
   .abschnitt-kopf a { font-weight: 600; text-decoration: none; }
 
-  .masche-woche {
-    display: flex; align-items: center; gap: 1.1rem; margin-top: 1.25rem;
-    padding: 1.1rem 1.3rem; background: var(--c-surface); border: 1px solid var(--c-border);
-    border-left: 4px solid var(--c-technik); border-radius: var(--radius);
-    text-decoration: none; color: inherit; transition: border-color .15s, box-shadow .15s;
+  .maschen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+  .masche-karte {
+    display: flex; flex-direction: column; gap: .35rem; padding: 1.1rem 1.2rem;
+    background: var(--c-surface); border: 1px solid var(--c-border); border-top: 3px solid var(--c-technik);
+    border-radius: var(--radius-sm); box-shadow: var(--shadow); text-decoration: none; color: inherit;
+    transition: border-color .15s, transform .15s, box-shadow .15s;
   }
-  .masche-woche:hover { border-color: var(--c-technik); box-shadow: var(--shadow); }
-  .masche-woche__ic {
-    flex: none; width: 3rem; height: 3rem; border-radius: 12px; display: flex;
-    align-items: center; justify-content: center;
-    background: color-mix(in srgb, var(--c-technik) 12%, var(--c-surface)); color: var(--c-technik);
+  .masche-karte:hover { border-color: var(--c-technik); transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+  .masche-karte__ic {
+    width: 2.4rem; height: 2.4rem; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    background: color-mix(in srgb, var(--c-technik) 12%, var(--c-surface)); color: var(--c-technik); margin-bottom: .2rem;
   }
-  .masche-woche__ic svg { width: 1.6rem; height: 1.6rem; }
-  .masche-woche__txt { display: flex; flex-direction: column; gap: .1rem; }
-  .masche-woche__eyebrow { text-transform: uppercase; letter-spacing: .06em; font-weight: 800; font-size: .72rem; color: var(--c-technik); }
-  .masche-woche__txt strong { font-size: 1.1rem; }
-  .masche-woche__pfeil { margin-left: auto; font-size: 1.4rem; color: var(--c-technik); }
+  .masche-karte__ic svg { width: 1.3rem; height: 1.3rem; }
+  .masche-karte strong { font-size: 1.02rem; letter-spacing: -.01em; }
+  .masche-karte .muted { font-size: .9rem; line-height: 1.5; }
 
   /* ---- Für die Schule ---- */
   .schule { margin-top: 4rem; }
