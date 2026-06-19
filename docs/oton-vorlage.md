@@ -74,45 +74,115 @@ verwandt: []                   # optional: Slug(s) verwandter Faktenchecks
 
 ## Startliste: wo & wie wir O-Töne ziehen
 
-> **Status: Startpunkt, nicht final.** Diese Liste ist die Basis – die Research-Loop
-> (neue Session) soll sie verifizieren, priorisieren und erweitern (Reichweite,
-> Untertitel-Verfügbarkeit, Aufwand, Risiko).
+> **Status: verifiziert & priorisiert (Research-Loop 06/2026).** Quellen/URL-Muster
+> wurden per Recherche aufgerufen und bestätigt; einzelne durch Bot-Schutz nur über
+> Suchtreffer/Geschäftsordnung verifizierte sind als **(vor Veröffentlichung im Browser
+> gegenprüfen)** markiert. Reihenfolge = Empfehlung (Goldstandard zuerst).
 
-### Wo man O-Töne findet
+### Die wichtigste Erkenntnis zuerst (zwei Regeln, die alles steuern)
 
-**A) Primär & amtlich (am unverfänglichsten – oft mit wörtlichem Protokoll):**
-- **Deutscher Bundestag – Mediathek** (`bundestag.de/mediathek`) **+ Plenarprotokolle**
-  (`bundestag.de` → Dokumente): das amtliche **Wortprotokoll** ist exakt zitierfähig –
-  Goldstandard (Video als „dass gesagt" + Protokoll als Wortlaut-Beleg).
-- **Landtage** und **Europäisches Parlament** – eigene Mediatheken/Protokolle.
-- **phoenix** (ARD/ZDF-Ereigniskanal): Reden, Pressekonferenzen, Debatten im O-Ton.
+1. **Text-Beleg vom Video trennen.** Der exakte **Wortlaut** kommt – wo es ihn gibt –
+   aus dem **amtlichen Wortprotokoll** (Bundestag/Landtage/EP). Das Video belegt nur
+   *dass/wie* es gesagt wurde (Tonfall, Kontext). Untertitel/Auto-Captions sind **nie**
+   ein Wortlaut-Zitat, nur ein **Fundstellen-/Timecode-Anker** – Wortlaut **immer am
+   Audio gegenhören**.
+2. **Wayback rettet kein Video.** `web.archive.org` archiviert bei YouTube/ÖR-Mediatheken
+   nur die **HTML-Seite + Metadaten**, NICHT das DRM-/HLS-Streaming (Player zeigt im
+   Archiv „video unavailable"). Wayback taugt also als Beleg „existierte zu Zeitpunkt X
+   unter dieser URL", **nicht** als abspielbares Backup. Echtes Backup = **eigene lokale
+   Sicherung** (`yt-dlp` Vollvideo + Untertitel + Standbild der Fundstelle).
 
-**B) Talk-Shows & Interviews (ÖR-Mediatheken, häufig mit Untertiteln):**
-- ARD: *Maischberger*, *hart aber fair*, *Caren Miosga*, *Tagesthemen*-Interviews.
-- ZDF: *Markus Lanz*, *Maybrit Illner*, *heute journal*; *phoenix runde*.
-- *Jung & Naiv* (lange Original-Interviews, oft komplette O-Töne).
+### Wo man O-Töne findet — priorisiert
 
-**C) Originalquelle der Sprecher:innen:**
-- YouTube-/Social-Kanäle der **Parteien, Fraktionen und einzelnen Politiker:innen**
-  (die Aussage an der Quelle, ungeschnitten).
+**A) Primär & amtlich — GOLDSTANDARD (Text-Wortlaut + stabile URL):**
+
+1. **Deutscher Bundestag – Stenografischer Bericht / Plenarprotokoll.**
+   `dserver.bundestag.de/btp/{WP}/{WP}{Sitzung-3-stellig}.pdf`
+   (Beispiel: `dserver.bundestag.de/btp/18/18128.pdf`). Amtlicher Wortlaut **jeder**
+   Rede, Zwischenrufe namentlich. **Zitier-„Timecode" = Seitenzahl + Spalte A/B/C/D**
+   („PlenProt 18/128, S. 12425 (C)"). Vorläufige Fassung am Sitzungstag, endgültige am
+   Folgewerktag. Stabilität SEHR HOCH. Such-Einstieg: **DIP** `dip.bundestag.de`
+   (Volltextsuche, verlinkt aufs PDF). → **erste Wahl, wann immer die Aussage im Plenum fiel.**
+2. **Bundestag – Mediathek/Web-TV** (`bundestag.de/mediathek/video?videoid={ID}`,
+   Shortlink `dbtg.tv/cvid/{ID}`): Reden einzeln geschnitten = de-facto-Timecode, Seite
+   nennt die „Fundstelle im Plenarprotokoll". **Kein** frame-genauer `?t=`. Video ab WP 17
+   (2009). Mediathek wurde mehrfach umgebaut → Deeplink zusätzlich sichern. Als **Ton-/
+   Kontextbeleg neben dem Protokoll**.
+3. **Landtage** (Zitierbeleg = immer Protokoll-PDF + Seite). Am einfachsten **NRW**
+   (`landtag.nrw.de/portal/WWW/dokumentenarchiv/Dokument/MMP{WP}-{Nr}.pdf`, Auto-Fetch
+   braucht Browser-User-Agent, sonst 403) und **Sachsen**
+   (`landtag.sachsen.de/data/xml/sitzungskalender/Plenum_{WP}-{Nr}.pdf`); **Baden-Württemberg**
+   bietet einen **RSS-Feed der Plenarprotokolle** (`landtag-bw.de/de/rss-feed-plenarprotokolle-509986`,
+   ideal für den Research-Loop) + MP4-Download; **Bayern** nur über die Suche (Deeplinks
+   2017 gebrochen). *(URL-Muster vor Veröffentlichung im Browser gegenprüfen.)*
+4. **Europäisches Parlament – Verbatim (CRE):**
+   `europarl.europa.eu/doceo/document/CRE-{WP}-{YYYY-MM-DD}_DE.html`. **Wichtig:** jeder
+   Redebeitrag steht in der **Originalsprache** des Redners – die DE-Fassung ist nur die
+   Navigation, **fremdsprachige Reden sind NICHT übersetzt** (und die DE-Audiospur im
+   Multimedia Centre ist Verdolmetschung ≠ Wortlaut). Nur für **deutschsprachige** Reden
+   als Wortlaut-Beleg nutzen. *(im Browser gegenprüfen.)*
+
+**B) Talk-Shows & Interviews (wenn die Aussage NICHT im Parlament fiel):**
+
+- **Stabilste ÖR-Belege:** **Tagesthemen-Interviews** (ARD-Archiv quasi unbefristet,
+  YouTube-Mirror `@tagesschau` mit `&t=`-Deeplink) sowie **heute journal**-Clips
+  (`@ZDFheute`) und **phoenix runde** (`youtube.com/@phoenix` lädt **ganze** Sendungen).
+  → Wenn ein O-Ton dort vorkommt: **erste Wahl**, weil dauerhaft + klickbarer Timecode.
+- **Endliche Verweildauer (~12 Monate, Link-Tod real):** *Markus Lanz* / *Maybrit Illner*
+  (`zdf.de/video/talk/…`), *Maischberger* / *hart aber fair* / *Caren Miosga*
+  (`ardmediathek.de/sendung/…`). Kein zuverlässiger Timecode-Deeplink (Timecode als Text
+  `[hh:mm:ss]` zitieren). **Bei Fund SOFORT lokal sichern** (`yt-dlp` Video+UT), sonst
+  ist der Beleg in einem Jahr weg.
+- ***Jung & Naiv*** (`youtube.com/@JungNaiv`, Archiv `jungundnaiv.de`): lange,
+  **ungeschnittene** Originalinterviews (1,5–3 h) – unschlagbar gegen „aus-dem-Kontext"-
+  Vorwürfe, plus millisekundengenaue `&t=`-Sprünge. Aber meist nur **Auto-Untertitel**
+  → Wortlaut zwingend gegenhören.
+
+**C) Originalquelle der Sprecher:innen (ungeschnitten an der Quelle):**
+
+- **Neutralste Primärkanäle:** **Deutscher Bundestag** (`youtube.com/@bundestag`, alle
+  Plenardebatten live; **Untertitel manuell korrigiert** = zitierfähig) und
+  **Bundesregierung/BPA** (`youtube.com/bundesregierung`, lädt **komplette RegPKs/BPKs**
+  hoch).
+- **Fraktionskanäle** liefern mehr Ungeschnittenes als die Parteikanäle (PKs/Statements
+  oft in voller Länge): u. a. `@cducsu`, `spdfraktion`, `gruenebundestag`,
+  `@AfDFraktionimBundestag`, `@dielinkebt`. **Partei**kanäle (cdutv, @spdde, @fdp, @AfDTV,
+  @dielinke, BSW …) sind meist kuratierte Clips.
+- **Untertitel** außerhalb des Bundestags i. d. R. **automatisch** → pro Video in der
+  YT-Oberfläche prüfen, Wortlaut gegenhören.
+- **Pfad-A-Balance:** quer über das Spektrum streuen; für die neutralste Belegkette immer
+  Bundestag/Bundesregierung bevorzugen.
 
 **D) Nur zum FINDEN von Fällen (NICHT als Beleg):**
 - CORRECTIV, ARD-Faktenfinder, Volksverpetzer, Übermedien/Topf voll Gold,
-  Mediendienst Integration – um zu sehen, welche Aussagen gerade kursieren. Der
-  Beleg kommt dann immer aus A–C + primär/amtlichen Quellen.
+  Mediendienst Integration – um zu sehen, welche Aussagen kursieren. Der Beleg kommt
+  dann immer aus A–C + primär/amtlichen Quellen.
 
 ### Methoden: Wortlaut · Zeitstempel · Backup
 
-- **Wortlaut:** Wo es ein **amtliches Protokoll** gibt (Bundestag/Landtage), dieses für
-  den exakten Wortlaut nutzen. Sonst Untertitel der Mediathek/YouTube – aber
-  **Auto-Untertitel sind fehleranfällig → immer am Video gegenhören.**
-- **Untertitel/Transkript ziehen** (nur Untertitel, kein Video-Download):
-  `yt-dlp --write-auto-sub --write-sub --sub-lang de --skip-download <URL>`
-- **Zeitstempel-Deeplink:** YouTube `…&t=1234s`; viele Mediatheken haben eigene
-  Timecode-Links. In `quelle_url` immer mit Zeitstempel speichern.
-- **Backup gegen Link-Tod:** Snapshot der Videoseite via **web.archive.org** (Wayback)
-  anlegen, Datum notieren; zusätzlich ggf. seriöse Berichterstattung, die das Zitat
-  dokumentiert, als `sekundaer` in `quellen`.
+- **Wortlaut:** Wo es ein **amtliches Protokoll** gibt (Bundestag/Landtage/EP-CRE),
+  dieses für den exakten Wortlaut nutzen (Seite + Spalte als „Timecode"). Sonst
+  Untertitel als Anker, aber **Auto-Untertitel sind fehleranfällig (Eigennamen, Zahlen,
+  keine Satzzeichen) → immer am Audio gegenhören.**
+- **Untertitel/Transkript ziehen** (nur Untertitel, kein Video-Download; aktuelle
+  Plural-Flags – Singularformen `--write-sub` etc. sind veraltete Aliase):
+  ```bash
+  yt-dlp --list-subs "<URL>"                     # erst prüfen: manuell vs. automatisch
+  # manuell bevorzugen, sonst auf Auto zurückfallen, als SRT:
+  yt-dlp --skip-download --write-subs --write-auto-subs --sub-langs "de.*" --convert-subs srt "<URL>"
+  ```
+  (`de.*` fängt `de`, `de-DE`, `de-orig` ab.) Funktioniert für YouTube **und**
+  ARD-/ZDF-Mediathek (gepflegte yt-dlp-Extractoren).
+- **Zeitstempel-Deeplink:** YouTube `…watch?v=ID&t=83s`; Kurz-URL `youtu.be/ID?t=83`;
+  Embed `…/embed/ID?start=83`. **ÖR-Mediatheken haben keinen stabilen `?t=`** → Timecode
+  als Text `[hh:mm:ss]` zitieren und YouTube-Mirror bevorzugen, wo vorhanden. In
+  `quelle_url` immer mit Zeitstempel speichern, wenn die Plattform es kann.
+- **Backup gegen Link-Tod (dreifach):** (a) **Wayback**-Snapshot der Watch-/Mediathek-Seite
+  als „existierte"-Nachweis (sichert das Video NICHT, s. o.); (b) **eigene lokale Sicherung**
+  des Vollvideos + Untertitel (`yt-dlp "<URL>"`) ins Redaktionsarchiv; (c) Standbild/Clip der
+  konkreten Fundstelle. Zusätzlich ggf. seriöse Berichterstattung, die das Zitat
+  dokumentiert, als `sekundaer` in `quellen`. **ÖR-Talks (Lanz/Illner/Maischberger …) sofort
+  bei Fund sichern** – Verweildauer ~12 Monate.
 
 ### Auswahl-Kriterien für gute O-Ton-Fälle
 
@@ -125,6 +195,10 @@ verwandt: []                   # optional: Slug(s) verwandter Faktenchecks
 ### Rechtliches (kurz, keine Rechtsberatung)
 
 Ein **kurzes wörtliches Zitat** öffentlicher Personen zu Informations-/Bildungszweck
-**mit Quellenangabe** ist i. d. R. durch Zitatrecht und Meinungsfreiheit gedeckt –
-solange der **Wortlaut korrekt** ist und der **Kontext gewahrt** bleibt. Sachliches
-Urteil statt Schmähkritik. Im Zweifel den Fall lieber weglassen.
+**mit Quellenangabe** ist i. d. R. durch das **Zitatrecht (§ 51 UrhG, „Kleinzitat")**
+und die Meinungsfreiheit gedeckt – wenn das Zitat als **Beleg in eine eigene inhaltliche
+Auseinandersetzung** eingebettet ist (Zitatzweck – ein Faktencheck ist das klassisch),
+der **Umfang aufs Nötige beschränkt** ist (kein Abdruck ganzer Reden) und **Urheber +
+Quelle genau angegeben** sind. Zusätzlich das **Persönlichkeits-/Äußerungsrecht** wahren:
+**Wortlaut korrekt**, **Kontext nicht sinnentstellt**, sachliches Urteil statt
+Schmähkritik. Im Zweifel den Fall lieber weglassen. (Keine Rechtsberatung.)
