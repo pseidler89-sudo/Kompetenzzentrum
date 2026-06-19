@@ -67,5 +67,64 @@ verwandt: []                   # optional: Slug(s) verwandter Faktenchecks
 - **Tonlage:** sachlich, kein Spott, kein „gegen Person Y". Schmähkritik macht angreifbar;
   ein belegtes, sachliches Urteil schützt.
 - **Truth-Sandwich:** `kurzantwort` beginnt mit dem Fakt, nicht mit der Falschbehauptung.
-- **Sichtbarkeit:** Die Unterseite `/o-ton` zeigt nur Nicht-Entwürfe. In die Navigation
-  wird sie erst aufgenommen, wenn 1–2 Einträge stehen.
+- **Sichtbarkeit:** Die Unterseite `/o-ton` ist bereits in der Navigation und zeigt nur
+  Nicht-Entwürfe (aktuell Empty-State, bis erste Einträge `in-pruefung`/`geprueft` sind).
+
+---
+
+## Startliste: wo & wie wir O-Töne ziehen
+
+> **Status: Startpunkt, nicht final.** Diese Liste ist die Basis – die Research-Loop
+> (neue Session) soll sie verifizieren, priorisieren und erweitern (Reichweite,
+> Untertitel-Verfügbarkeit, Aufwand, Risiko).
+
+### Wo man O-Töne findet
+
+**A) Primär & amtlich (am unverfänglichsten – oft mit wörtlichem Protokoll):**
+- **Deutscher Bundestag – Mediathek** (`bundestag.de/mediathek`) **+ Plenarprotokolle**
+  (`bundestag.de` → Dokumente): das amtliche **Wortprotokoll** ist exakt zitierfähig –
+  Goldstandard (Video als „dass gesagt" + Protokoll als Wortlaut-Beleg).
+- **Landtage** und **Europäisches Parlament** – eigene Mediatheken/Protokolle.
+- **phoenix** (ARD/ZDF-Ereigniskanal): Reden, Pressekonferenzen, Debatten im O-Ton.
+
+**B) Talk-Shows & Interviews (ÖR-Mediatheken, häufig mit Untertiteln):**
+- ARD: *Maischberger*, *hart aber fair*, *Caren Miosga*, *Tagesthemen*-Interviews.
+- ZDF: *Markus Lanz*, *Maybrit Illner*, *heute journal*; *phoenix runde*.
+- *Jung & Naiv* (lange Original-Interviews, oft komplette O-Töne).
+
+**C) Originalquelle der Sprecher:innen:**
+- YouTube-/Social-Kanäle der **Parteien, Fraktionen und einzelnen Politiker:innen**
+  (die Aussage an der Quelle, ungeschnitten).
+
+**D) Nur zum FINDEN von Fällen (NICHT als Beleg):**
+- CORRECTIV, ARD-Faktenfinder, Volksverpetzer, Übermedien/Topf voll Gold,
+  Mediendienst Integration – um zu sehen, welche Aussagen gerade kursieren. Der
+  Beleg kommt dann immer aus A–C + primär/amtlichen Quellen.
+
+### Methoden: Wortlaut · Zeitstempel · Backup
+
+- **Wortlaut:** Wo es ein **amtliches Protokoll** gibt (Bundestag/Landtage), dieses für
+  den exakten Wortlaut nutzen. Sonst Untertitel der Mediathek/YouTube – aber
+  **Auto-Untertitel sind fehleranfällig → immer am Video gegenhören.**
+- **Untertitel/Transkript ziehen** (nur Untertitel, kein Video-Download):
+  `yt-dlp --write-auto-sub --write-sub --sub-lang de --skip-download <URL>`
+- **Zeitstempel-Deeplink:** YouTube `…&t=1234s`; viele Mediatheken haben eigene
+  Timecode-Links. In `quelle_url` immer mit Zeitstempel speichern.
+- **Backup gegen Link-Tod:** Snapshot der Videoseite via **web.archive.org** (Wayback)
+  anlegen, Datum notieren; zusätzlich ggf. seriöse Berichterstattung, die das Zitat
+  dokumentiert, als `sekundaer` in `quellen`.
+
+### Auswahl-Kriterien für gute O-Ton-Fälle
+
+- **Konkret & prüfbar** (Zahl/Tatsachenbehauptung), nicht reine Meinung/Wertung.
+- Es gibt eine **klar primär/amtlich belegbare Richtigstellung**.
+- **Pfad-A-Balance:** über das Parteienspektrum streuen, nicht einseitig; die *Aussage*
+  prüfen, nicht die Person.
+- **Relevanz:** die Aussage ist einflussreich / kursiert breit.
+
+### Rechtliches (kurz, keine Rechtsberatung)
+
+Ein **kurzes wörtliches Zitat** öffentlicher Personen zu Informations-/Bildungszweck
+**mit Quellenangabe** ist i. d. R. durch Zitatrecht und Meinungsfreiheit gedeckt –
+solange der **Wortlaut korrekt** ist und der **Kontext gewahrt** bleibt. Sachliches
+Urteil statt Schmähkritik. Im Zweifel den Fall lieber weglassen.
