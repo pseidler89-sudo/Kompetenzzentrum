@@ -46,11 +46,6 @@ function karte(m: (typeof maschen)[number]) {
 
   <div class="masche-suchzeile">
     <input type="search" id="masche-suche" class="masche-suche" placeholder="Masche suchen (z.B. Sündenbock, Cherry Picking, Angst) …" aria-label="Maschen durchsuchen" />
-    <div class="masche-kat" role="group" aria-label="Nach Kategorie filtern">
-      <button type="button" class="masche-kat-btn" data-kat="alle" aria-pressed="true">Alle</button>
-      <button type="button" class="masche-kat-btn" data-kat="flicc" aria-pressed="false">Kerntechniken</button>
-      <button type="button" class="masche-kat-btn" data-kat="rhetorik" aria-pressed="false">Weitere Muster</button>
-    </div>
   </div>
 
   <section class="js-sektion" data-sektion="flicc">
@@ -148,10 +143,6 @@ function karte(m: (typeof maschen)[number]) {
   .quiz-banner .btn { flex: none; }
   .masche-suchzeile { display: flex; gap: .75rem; align-items: center; margin: 0 0 1rem; flex-wrap: wrap; }
   .masche-suche { flex: 1; min-width: 14rem; padding: .8rem 1rem; font-size: 1rem; font-family: inherit; border: 1px solid var(--c-border); border-radius: var(--radius-sm); background: var(--c-surface); color: var(--c-text); }
-  .masche-kat { display: flex; gap: .5rem; flex-wrap: wrap; }
-  .masche-kat-btn { font-family: inherit; font-weight: 600; font-size: .88rem; padding: .4rem .85rem; border-radius: 999px; cursor: pointer; border: 1px solid var(--c-border); background: var(--c-surface); color: var(--c-text-soft); }
-  .masche-kat-btn:hover { border-color: var(--c-technik); }
-  .masche-kat-btn[aria-pressed="true"] { background: var(--c-technik); border-color: var(--c-technik); color: #fff; }
   .masche-item.versteckt { display: none; }
   .js-sektion[hidden] { display: none; }
   .linklike { background: none; border: none; color: var(--c-link); cursor: pointer; font: inherit; text-decoration: underline; padding: 0; }
@@ -160,46 +151,31 @@ function karte(m: (typeof maschen)[number]) {
 <script>
   function init() {
     const suche = document.getElementById("masche-suche") as HTMLInputElement | null;
-    const katBtns = document.querySelectorAll<HTMLButtonElement>(".masche-kat-btn");
     const items = document.querySelectorAll<HTMLElement>(".masche-item");
     const sektionen = document.querySelectorAll<HTMLElement>(".js-sektion");
     const leer = document.getElementById("masche-leer");
     const reset = document.getElementById("masche-reset");
     if (!suche) return;
 
-    let kat = "alle";
-
     function anwenden() {
       const q = (suche?.value ?? "").trim().toLowerCase();
-      let sichtbar = 0;
       items.forEach((it) => {
         const passt = (!q || (it.dataset.suchtext ?? "").includes(q));
         it.classList.toggle("versteckt", !passt);
-        if (passt) sichtbar++;
       });
-      // Eine Sektion ausblenden, wenn die Kategorie sie ausschließt oder kein
-      // Treffer darin sichtbar ist (sonst stünde eine Überschrift ohne Karten da).
+      // Eine Sektion ausblenden, wenn kein Treffer darin sichtbar ist (sonst
+      // stünde eine Überschrift ohne Karten da).
       sektionen.forEach((sek) => {
-        const passtKat = kat === "alle" || sek.dataset.sektion === kat;
         const hatTreffer = Array.from(sek.querySelectorAll<HTMLElement>(".masche-item"))
           .some((it) => !it.classList.contains("versteckt"));
-        sek.hidden = !(passtKat && hatTreffer);
+        sek.hidden = !hatTreffer;
       });
       if (leer) leer.hidden = !sektionen.length || Array.from(sektionen).some((s) => !s.hidden);
     }
 
-    katBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        kat = btn.dataset.kat ?? "alle";
-        katBtns.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
-        anwenden();
-      });
-    });
     suche.addEventListener("input", anwenden);
     reset?.addEventListener("click", () => {
       suche.value = "";
-      kat = "alle";
-      katBtns.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.kat === "alle")));
       anwenden();
     });
 
