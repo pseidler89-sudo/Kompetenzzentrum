@@ -4,7 +4,7 @@
 gegen Desinformation – mit geprüften Fakten und einem klaren Versprechen:
 **weniger Empörung, mehr Zahlen.** Du entscheidest selbst, wie tief du gehst.
 
-👉 **Zur Website: <https://pseidler89-sudo.github.io/Kompetenzzentrum/>**
+👉 **Zur Website: <https://kompetenz.partizip.online/>**
 
 ---
 
@@ -43,18 +43,18 @@ Dieses Projekt ist offen und lebt von vielen Augen und Quellen. Du musst kein:e
 Programmierer:in sein – du siehst von GitHub nichts außer einem kurzen Login.
 
 - **🧩 Faktencheck schreiben?** Am einfachsten im
-  [**Faktencheck-Baukasten**](https://pseidler89-sudo.github.io/Kompetenzzentrum/tools/faktencheck-baukasten):
+  [**Faktencheck-Baukasten**](https://kompetenz.partizip.online/tools/faktencheck-baukasten):
   Formular mit Live-Vorschau, in den drei Tiefen (Einstieg · Vertiefung ·
   Wissenschaftlich), und ein Klick zum Absenden. Kein Markdown, keine Technik.
 - **🛠️ Bestehendes pflegen?** Der
-  [Redaktions-Editor](https://pseidler89-sudo.github.io/Kompetenzzentrum/admin/)
+  [Redaktions-Editor](https://kompetenz.partizip.online/admin/)
   (`/admin`) öffnet Faktenchecks, Maschen und Methodik in Formularfeldern und
   verwaltet den Status (Entwurf · In Prüfung · Geprüft).
 - **✍️ Thema vorschlagen?** [Faktencheck anregen](../../issues/new?template=neuer-faktencheck.yml)
 - **🐛 Etwas stimmt nicht?** [Fehler melden](../../issues/new?template=fehler-melden.yml)
 
 Für alle Inhalte gelten unsere
-[**Redaktionsstandards**](https://pseidler89-sudo.github.io/Kompetenzzentrum/methodik/redaktionsstandards):
+[**Redaktionsstandards**](https://kompetenz.partizip.online/methodik/redaktionsstandards):
 Belegpflicht, Fairness, sachlicher Ton, offene Korrekturen. (Technische Fassung
 für Entwickler:innen: [docs/redaktionsstandards.md](docs/redaktionsstandards.md).)
 
