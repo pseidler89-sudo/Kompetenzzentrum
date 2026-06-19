@@ -214,19 +214,27 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   bewusst typografische „…“ schreiben).
 
 ## Offene / mögliche nächste Schritte
-- **IDEE (06/2026, unentschieden – Nutzer überlegt noch):** Aktuelle Politiker-Aussagen
-  per **O-Ton aus YouTube** einbinden (Transkript → konkrete Aussage prüfen → „hier wurde X
-  gesagt"). **Kern-Abwägung ist NICHT Technik, sondern Identität/Pfad A:** Risiko, von
-  „ruhigem Nachschlagewerk" zum **Politiker-Pranger** zu kippen und die Zielgruppe zu
-  vergraulen. Wenn überhaupt, dann **als „Aussagen-Check mit O-Ton-Beleg"** (Aussage im
-  Titel, Person nur als belegte Quelle, bestehende Urteile statt „garbage"). Skizze:
-  Stufe 1 = additives Schema-Feld `zitat` (text/sprecher/quelle_url mit `&t=`-Timestamp/datum)
-  + „Im O-Ton"-Block (build-time, reversibel, kein Worker); Stufe 2 = Transkript via
-  **Schwester-Cloudflare-Worker** (clientseitig unmöglich: CORS) → Baukasten-Vorbefüllung.
-  Risiken: Transkript-Genauigkeit (Auto-Captions → Zitat MUSS am Video gegengehört werden,
-  sonst üble Nachrede), eigener „aus-dem-Kontext"-Vorwurf (Timestamp+Kontext nötig),
-  Schmähkritik (sachliches Urteil ok, „garbage" nicht), **Pflege-Last** (aktuelle Inhalte
-  veralten / Video-Links sterben, anders als evergreen-Checks). Erst entscheiden, dann bauen.
+- **O-Ton (Aussagen-Check mit Beleg) — Stufe-1-Mechanik gebaut (06/2026, PR #67):**
+  Eigene Unterseite, bewusst vom Faktencheck-Schema **entkoppelt**, noch **leer und
+  NICHT in der Navigation verlinkt**. Tonlage **Pfad A**: die *Aussage* wird geprüft,
+  die Person ist belegte Quelle – kein Pranger, kein „garbage", Urteile aus dem festen Set.
+  - **Sammlung `oton`** (`src/content/oton/*.md`, Schema in `content.config.ts`):
+    `sprecher`, `funktion`, `zitat`, `quelle_url` (Video mit `&t=`-Zeitstempel), `plattform`,
+    `datum`, `urteil`, `kurzantwort`, `einordnung`, `techniken`, `quellen` (≥1), `status`,
+    `verwandt`. Seiten: `src/pages/o-ton/index.astro` (zeigt nur Nicht-Entwürfe) +
+    `src/pages/o-ton/[...slug].astro` („Im O-Ton"-Block + Urteil/Kurzantwort/Einordnung/Quellen).
+  - **Zwei Quell-Rollen (wichtig):** (1) `quelle_url` = Video = Nachweis, *dass* die Aussage
+    fiel (am Video gegenhören: Wortlaut **+** Kontext; Datum + möglichst Archiv-Link, da Videos
+    sterben). (2) `quellen` = Belege, *warum* es falsch/irreführend ist – **primär/amtlich/
+    akademisch wie bei Faktenchecks**, Medien-Faktenchecks nur als Ergänzung. **Keine
+    Digest-/Sekundärartikel als Hauptbeleg.** Vorlage + Leitfaden: `docs/oton-vorlage.md`.
+  - **Status-Workflow:** neue Einträge `in-pruefung` → erst nach menschlichem Gegenhören des
+    Videos auf `geprueft`. Unterseite erst verlinken, wenn 1–2 Einträge stehen.
+  - **Risiken (eingebaut adressiert):** Fehlzitat = üble Nachrede → Pflicht-Gegenhören;
+    „aus-dem-Kontext"-Vorwurf → Timestamp + Kontextsatz; Schmähkritik vermeiden → sachliches
+    Urteil; **Pflege-Last** (Video-Links sterben) → Datum/Archiv-Link.
+  - **Stufe 2 (offen, optional):** Transkript-Abruf via **Schwester-Cloudflare-Worker**
+    (clientseitig unmöglich: CORS) → Baukasten-Vorbefüllung. Erst wenn Stufe 1 sich bewährt.
 - ~~Whitelist verifizieren~~ ✅ erledigt (06/2026, siehe Stand oben).
 - ~~Gish-Galopp, Bandwagon, Sündenbock, Firehose~~ ✅ umgesetzt (Sündenbock & Firehose
   bewusst maximal neutral/techniknah, mit Nutzer abgestimmt). **Noch offen im Backlog:**
