@@ -98,6 +98,8 @@ const claimReview = {
       </div>
     </div>
 
+    <StufenSchalter />
+
     {data.techniken.length > 0 && (
       <div class="tag-list fc-techniken" style="margin:1.25rem 0;">
         <span class="muted" style="font-size:.85rem;align-self:center;">Erkannte Maschen:</span>
@@ -110,8 +112,6 @@ const claimReview = {
     {data.einleitung && (
       <div class="prose fc-einleitung" set:html={md(data.einleitung)} />
     )}
-
-    <StufenSchalter />
 
     <div class="prose">
       {stufen.map((s) => (
