@@ -177,6 +177,10 @@ const maschenTop = maschen.filter((m) => m.id !== macheDerWoche?.id).slice(0, 6)
           ))}
         </div>
       )}
+      <div class="maschen-quiz" data-reveal>
+        <span>Schon geübt? Teste dein Auge im Quiz.</span>
+        <a class="btn btn--ghost" href={pfad("/quiz")}>Erkennst du die Masche? →</a>
+      </div>
     </section>
   )}
 
@@ -383,6 +387,8 @@ const maschenTop = maschen.filter((m) => m.id !== macheDerWoche?.id).slice(0, 6)
   .masche-woche__pfeil { margin-left: auto; font-size: 1.4rem; color: var(--c-technik); }
 
   .maschen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr)); gap: 1rem; margin-top: 1rem; }
+  .maschen-quiz { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1rem; margin-top: 1.25rem; padding: 1rem 1.25rem; background: color-mix(in srgb, var(--c-technik) 7%, var(--c-surface)); border: 1px solid var(--c-border); border-radius: var(--radius); }
+  .maschen-quiz span { font-weight: 600; }
   .masche-karte {
     display: flex; flex-direction: column; gap: .35rem; padding: 1.1rem 1.2rem;
     background: var(--c-surface); border: 1px solid var(--c-border); border-top: 3px solid var(--c-technik);
