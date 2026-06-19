@@ -28,10 +28,10 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - name: Build (mit dynamischem Base-Path aus dem Repo-Namen)
+      - name: Build (Custom Domain – Auslieferung an der Wurzel)
         env:
-          SITE_URL: https://${{ github.repository_owner }}.github.io
-          BASE_PATH: /${{ github.event.repository.name }}
+          SITE_URL: https://kompetenz.partizip.online
+          BASE_PATH: /
         run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
