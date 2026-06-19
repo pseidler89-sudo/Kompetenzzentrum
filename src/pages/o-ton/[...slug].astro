@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import UrteilBadge from "../../components/UrteilBadge.astro";
 import Quellen from "../../components/Quellen.astro";
-import { URTEIL_LABEL, URTEIL_KLARTEXT, pfad } from "../../lib/labels";
+import { URTEIL_LABEL, URTEIL_KLARTEXT, TECHNIK_LABEL, pfad } from "../../lib/labels";
 import { md } from "../../lib/markdown";
 
 export async function getStaticPaths() {
@@ -47,6 +47,15 @@ const titel = data.titel || `${data.sprecher}: O-Ton geprüft`;
       <div class="prose oton-einordnung" set:html={md(data.einordnung)} />
     )}
 
+    {data.techniken.length > 0 && (
+      <div class="tag-list oton-techniken">
+        <span class="muted oton-techniken__label">Maschen in dieser Aussage:</span>
+        {data.techniken.map((t) => (
+          <a class="badge badge--technik" href={pfad(`/maschen/${t}`)}>{TECHNIK_LABEL[t] ?? t} →</a>
+        ))}
+      </div>
+    )}
+
     <Quellen quellen={data.quellen} />
   </article>
 </BaseLayout>
@@ -82,4 +91,6 @@ const titel = data.titel || `${data.sprecher}: O-Ton geprüft`;
   .kurzantwort-box__label { text-transform: uppercase; letter-spacing: .06em; font-weight: 800; font-size: .72rem; color: var(--c-accent); }
 
   .oton-einordnung { margin-bottom: 2rem; }
+  .oton-techniken { margin: 0 0 2rem; align-items: center; }
+  .oton-techniken__label { font-size: .85rem; align-self: center; }
 </style>

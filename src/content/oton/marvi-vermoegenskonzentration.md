@@ -25,7 +25,7 @@ einordnung: |
   geht es hier nicht um eine glatte Falschbehauptung, sondern um eine **überzeichnete Zahl**:
   Die Richtung stimmt, der genannte Wert liegt zu hoch. Der fehlende Kontext ist der genaue
   Bezugswert (rund 35 Prozent nach der höchsten Schätzung, je nach Methode weniger).
-techniken: []
+techniken: ["cherry-picking"]
 quellen:
   - titel: "Stenografischer Bericht, 63. Sitzung der 21. Wahlperiode (Wortlaut der Rede, S. 7610 A)"
     herausgeber: "Deutscher Bundestag"
