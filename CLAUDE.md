@@ -226,7 +226,17 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   Durchschnitts-/0,08 %-Werte ggf. BMAS-Drucksache als Primär-PDF nachziehen (steht
   derzeit über CORRECTIV als `sekundaer`). **Research-Loop hat `docs/oton-vorlage.md`
   verifiziert/priorisiert** (Goldstandard = amtl. Wortprotokoll; ASR nie als Zitat;
-  Wayback rettet kein Video → eigene Sicherung; aktuelle yt-dlp-Flags). **Backlog-Fälle
+  aktuelle yt-dlp-Flags). **Backup-Entscheidung (06/2026): KEINE lokalen Video-Downloads/
+  Clips** (frisst Speicher ohne genug Mehrwert) – Beleg trägt sich über Protokoll-PDF
+  (plenar, permanent) bzw. optionalen Transkript-Auszug + Wayback-`archiv_url` (nicht-plenar).
+  **Optionale Schema-Felder (PR #74): `transkript`** (klappbar „Wortlaut im Kontext") **+
+  `archiv_url`** (Wayback-Fallback). **`techniken` werden auf der O-Ton-Detailseite als
+  „Maschen in dieser Aussage" verlinkt** (PR #73; bei reinem Faktenfehler ohne Technik leer
+  lassen – Pfad-A-Fairness). **Link-Pflege MANUELL (bewusst kein Auto-Agent):** alle paar
+  Monate die `quelle_url`-Videos kurz öffnen und prüfen, ob sie noch *abspielen* (HTTP-200
+  reicht nicht – YouTube/Mediathek liefern auch bei gelöschtem Video 200); tote → Mirror oder
+  `archiv_url` setzen. Liste: `grep -h "quelle_url\|archiv_url" src/content/oton/*.md`.
+  **Backlog-Fälle
   (recherchiert, aber nicht geschrieben):** Habeck „über 350.000 offene Haftbefehle"
   (ZDF Klartext 13.02.2025; klar *falsch* vs. BKA ~171.000 / Drs. 21/925 ~148.000 Personen)
   — kein verbatim-Wortlaut beschafft (nur Paraphrase), daher zurückgestellt; Linnemann (CDU)

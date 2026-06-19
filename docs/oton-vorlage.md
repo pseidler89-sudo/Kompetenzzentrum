@@ -194,9 +194,12 @@ verwandt: []                   # optional: Slug(s) verwandter Faktenchecks
     Wortlaut als Transkript-Auszug** im Eintrag festhalten; zusätzlich ggf. seriöse
     Berichterstattung, die das Zitat dokumentiert, als `sekundaer` in `quellen`. Stirbt das
     Video später, ist das verkraftbar – Zitat + Einordnung + Quellen bleiben.
-  - **(c) Quartalsweiser Link-Check** der `quelle_url`s; tote Mediathek-Links auf
-    YouTube-Mirror umhängen oder einen Wayback-Hinweis setzen. (Automatisierbar als
-    `/schedule`-Cloud-Agent.)
+  - **(c) Link-Pflege – MANUELL, bewusst kein Auto-Agent.** Alle paar Monate die
+    `quelle_url`-Videos kurz öffnen und prüfen, ob sie noch **abspielen** – ein HTTP-200
+    reicht NICHT (YouTube/Mediathek liefern auch bei gelöschtem Video noch 200, der
+    CI-Link-Check merkt das also nicht). Tote Links: auf einen YouTube-Mirror umhängen
+    oder den `archiv_url` (Wayback) als Fallback eintragen. Schnelle Liste aller zu
+    prüfenden Links: `grep -h "quelle_url\|archiv_url" src/content/oton/*.md`
 
 ### Auswahl-Kriterien für gute O-Ton-Fälle
 
