@@ -1,0 +1,85 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import UrteilBadge from "../../components/UrteilBadge.astro";
+import Quellen from "../../components/Quellen.astro";
+import { URTEIL_LABEL, URTEIL_KLARTEXT, pfad } from "../../lib/labels";
+import { md } from "../../lib/markdown";
+
+export async function getStaticPaths() {
+  const eintraege = await getCollection("oton");
+  return eintraege.map((e) => ({ params: { slug: e.id }, props: { eintrag: e } }));
+}
+
+const { eintrag } = Astro.props;
+const data = eintrag.data;
+const titel = data.titel || `${data.sprecher}: O-Ton geprüft`;
+---
+
+<BaseLayout titel={titel} beschreibung={data.kurzantwort}>
+  <article class="oton">
+    <p class="zurueck"><a href={pfad("/o-ton")}>← Alle O-Töne</a></p>
+
+    <div class="oton-kopf">
+      <UrteilBadge urteil={data.urteil} />
+      <span class="muted oton-klartext">{URTEIL_KLARTEXT[data.urteil] ?? ""}</span>
+    </div>
+
+    <!-- Im O-Ton: das wörtliche Zitat mit Sprung zur Videostelle -->
+    <figure class="oton-zitat">
+      <span class="oton-zitat__label">Im O-Ton</span>
+      <blockquote>„{data.zitat}“</blockquote>
+      <figcaption>
+        <strong>{data.sprecher}</strong>{data.funktion && <span class="muted"> · {data.funktion}</span>}
+        {data.datum && <span class="muted"> · {data.datum}</span>}
+        <a class="oton-zitat__link" href={data.quelle_url} rel="noopener" target="_blank">
+          {data.plattform ? `Im Original (${data.plattform}) ansehen` : "Im Original-Video ansehen"} →
+        </a>
+      </figcaption>
+    </figure>
+
+    <div class="kurzantwort-box">
+      <span class="kurzantwort-box__label">Kurzantwort</span>
+      <p class="lead" style="color:var(--c-text);margin:.25rem 0 0;">{data.kurzantwort}</p>
+    </div>
+
+    {data.einordnung && (
+      <div class="prose oton-einordnung" set:html={md(data.einordnung)} />
+    )}
+
+    <Quellen quellen={data.quellen} />
+  </article>
+</BaseLayout>
+
+<style>
+  .oton { max-width: var(--max-width); margin: 0 auto; }
+  .zurueck { margin: .5rem 0 1.25rem; }
+  .zurueck a { text-decoration: none; font-weight: 600; }
+  .oton-kopf { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .oton-klartext { font-size: .95rem; }
+
+  .oton-zitat {
+    margin: 0 0 1.75rem; padding: 1.4rem 1.6rem; background: var(--c-surface);
+    border: 1px solid var(--c-border); border-left: 4px solid var(--c-accent);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+  }
+  .oton-zitat__label {
+    display: inline-block; text-transform: uppercase; letter-spacing: .06em;
+    font-weight: 800; font-size: .72rem; color: var(--c-accent); margin-bottom: .5rem;
+  }
+  .oton-zitat blockquote {
+    margin: 0; font-family: var(--font-serif); font-size: 1.4rem; line-height: 1.45;
+    font-style: italic; color: var(--c-text);
+  }
+  .oton-zitat figcaption { margin-top: 1rem; font-size: .95rem; }
+  .oton-zitat__link { display: inline-block; margin-top: .6rem; font-weight: 600; }
+
+  .kurzantwort-box {
+    background: var(--c-accent-soft); border: 1px solid var(--c-border);
+    border-left: 4px solid var(--c-accent); border-radius: var(--radius);
+    padding: 1.1rem 1.3rem; margin: 0 0 1.75rem;
+  }
+  .kurzantwort-box__label { text-transform: uppercase; letter-spacing: .06em; font-weight: 800; font-size: .72rem; color: var(--c-accent); }
+
+  .oton-einordnung { margin-bottom: 2rem; }
+</style>

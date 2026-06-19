@@ -1,0 +1,55 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import UrteilBadge from "../../components/UrteilBadge.astro";
+import { pfad } from "../../lib/labels";
+
+// Öffentlich nur, was nicht mehr Entwurf ist (in-pruefung + geprueft).
+const eintraege = (await getCollection("oton"))
+  .filter((e) => e.data.status !== "entwurf")
+  .sort((a, b) => b.data.veroeffentlicht.valueOf() - a.data.veroeffentlicht.valueOf());
+---
+
+<BaseLayout titel="O-Ton" beschreibung="Aussagen öffentlicher Personen im Wortlaut – geprüft, mit Beleg und Sprung zur Videostelle.">
+  <h1>O-Ton</h1>
+  <p class="lead">
+    Konkrete Aussagen im Wortlaut – geprüft, mit Quelle und Sprung an die
+    Videostelle. Wir prüfen die <strong>Aussage</strong>, nicht die Person.
+  </p>
+
+  {eintraege.length === 0 ? (
+    <p class="muted" style="margin-top:2rem;">
+      Hier entstehen die ersten O-Ton-Checks. Schau bald wieder vorbei.
+    </p>
+  ) : (
+    <div class="grid grid--2" style="margin-top:1.5rem;">
+      {eintraege.map((e) => (
+        <a class="oton-card" href={pfad(`/o-ton/${e.id}`)}>
+          <div class="oton-card__meta">
+            <UrteilBadge urteil={e.data.urteil} />
+          </div>
+          <blockquote class="oton-card__zitat">„{e.data.zitat}“</blockquote>
+          <div class="oton-card__sprecher">
+            <strong>{e.data.sprecher}</strong>
+            {e.data.funktion && <span class="muted"> · {e.data.funktion}</span>}
+          </div>
+        </a>
+      ))}
+    </div>
+  )}
+</BaseLayout>
+
+<style>
+  .oton-card {
+    display: flex; flex-direction: column; gap: .75rem; padding: 1.25rem 1.35rem;
+    background: var(--c-surface); border: 1px solid var(--c-border);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+    text-decoration: none; color: inherit; transition: border-color .15s, transform .15s, box-shadow .15s;
+  }
+  .oton-card:hover { border-color: var(--c-accent); transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+  .oton-card__zitat {
+    margin: 0; font-family: var(--font-serif); font-size: 1.12rem; line-height: 1.5;
+    font-style: italic; color: var(--c-text);
+  }
+  .oton-card__sprecher { font-size: .95rem; }
+</style>
