@@ -35,8 +35,20 @@ const titel = data.titel || `${data.sprecher}: O-Ton geprüft`;
         <a class="oton-zitat__link" href={data.quelle_url} rel="noopener" target="_blank">
           {data.plattform ? `Im Original (${data.plattform}) ansehen` : "Im Original-Video ansehen"} →
         </a>
+        {data.archiv_url && (
+          <a class="oton-zitat__link oton-zitat__archiv muted" href={data.archiv_url} rel="noopener" target="_blank">
+            Archiv-Kopie (falls das Original offline ist) →
+          </a>
+        )}
       </figcaption>
     </figure>
+
+    {data.transkript && (
+      <details class="oton-transkript">
+        <summary>Wortlaut im Kontext (Auszug)</summary>
+        <div class="prose" set:html={md(data.transkript)} />
+      </details>
+    )}
 
     <div class="kurzantwort-box">
       <span class="kurzantwort-box__label">Kurzantwort</span>
@@ -82,6 +94,17 @@ const titel = data.titel || `${data.sprecher}: O-Ton geprüft`;
   }
   .oton-zitat figcaption { margin-top: 1rem; font-size: .95rem; }
   .oton-zitat__link { display: inline-block; margin-top: .6rem; font-weight: 600; }
+  .oton-zitat__archiv { margin-left: 1rem; font-weight: 500; font-size: .9rem; }
+
+  .oton-transkript {
+    margin: 0 0 1.75rem; border: 1px solid var(--c-border);
+    border-radius: var(--radius); background: var(--c-surface);
+  }
+  .oton-transkript > summary {
+    cursor: pointer; padding: .8rem 1.1rem; font-weight: 600; font-size: .95rem;
+  }
+  .oton-transkript[open] > summary { border-bottom: 1px solid var(--c-border); }
+  .oton-transkript .prose { padding: 1rem 1.1rem; }
 
   .kurzantwort-box {
     background: var(--c-accent-soft); border: 1px solid var(--c-border);

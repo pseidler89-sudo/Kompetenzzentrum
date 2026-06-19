@@ -17,7 +17,11 @@ gebaut (sie liegt in `docs/`), sie ist nur Vorlage und Anleitung.
 sprecher: "Vorname Nachname"
 funktion: "z. B. MdB (Partei X) · oder: Talk-Gast, Moderator:in"
 zitat: "Wörtliches Zitat, möglichst exakt – so, wie es gefallen ist."
+transkript: |                   # optional: Wortlaut im Kontext (Sätze davor/danach)
+  …vorheriger Satz… „[das Zitat]“ …nachfolgender Satz… (zeigt, dass nichts aus
+  dem Kontext gerissen ist; wird klappbar als „Wortlaut im Kontext“ angezeigt).
 quelle_url: "https://www.youtube.com/watch?v=XXXX&t=1234s"   # MIT Zeitstempel
+archiv_url: "https://web.archive.org/web/2026.../https://www.youtube.com/watch?v=XXXX"  # optional: Wayback-Snapshot der Videoseite (Fallback, wenn das Original stirbt)
 plattform: "YouTube"            # oder ARD-Mediathek, Bundestag-TV, …
 datum: "10.06.2026"             # Datum der Aussage (Freitext)
 urteil: "irrefuehrend"          # falsch | groesstenteils-falsch | irrefuehrend | fehlender-kontext | teils-richtig
