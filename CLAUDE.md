@@ -215,8 +215,23 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
 
 ## Offene / mögliche nächste Schritte
 - **O-Ton (Aussagen-Check mit Beleg) — Stufe-1-Mechanik gebaut (06/2026, PR #67):**
-  Eigene Unterseite, bewusst vom Faktencheck-Schema **entkoppelt**, noch **leer und
-  NICHT in der Navigation verlinkt**. Tonlage **Pfad A**: die *Aussage* wird geprüft,
+  Eigene Unterseite, bewusst vom Faktencheck-Schema **entkoppelt**, in der Navigation
+  verlinkt. **Inhaltsstand (06/2026, PR #71): nicht mehr leer – 2 Einträge live, beide
+  `in-pruefung`** (menschliches Gegenhören durch Patrick offen), über das Spektrum
+  gestreut, beide mit **verbatim-Wortlaut aus dem amtlichen Plenarprotokoll**:
+  Springer (AfD), „bis zu 4.000 €" Bürgergeld Ukrainer → *irrefuehrend* (PlenProt 21/14
+  + Drs. 20/13346); Marvi (SPD), reichstes Prozent besitzt „rund 40 %" → *fehlender-kontext*
+  (PlenProt 21/63 + DIW 29/2020, ~35,3 %). **Vor `geprueft`:** Mediathek-Videos
+  gegenhören (Springer videoid=7633227, Marvi videoid=7649849); bei Springer für die
+  Durchschnitts-/0,08 %-Werte ggf. BMAS-Drucksache als Primär-PDF nachziehen (steht
+  derzeit über CORRECTIV als `sekundaer`). **Research-Loop hat `docs/oton-vorlage.md`
+  verifiziert/priorisiert** (Goldstandard = amtl. Wortprotokoll; ASR nie als Zitat;
+  Wayback rettet kein Video → eigene Sicherung; aktuelle yt-dlp-Flags). **Backlog-Fälle
+  (recherchiert, aber nicht geschrieben):** Habeck „über 350.000 offene Haftbefehle"
+  (ZDF Klartext 13.02.2025; klar *falsch* vs. BKA ~171.000 / Drs. 21/925 ~148.000 Personen)
+  — kein verbatim-Wortlaut beschafft (nur Paraphrase), daher zurückgestellt; Linnemann (CDU)
+  „weniger als die Hälfte in Arbeit" — nur Zeitungsinterview, **kein Video** → passt nicht
+  ins O-Ton-Schema. Tonlage **Pfad A**: die *Aussage* wird geprüft,
   die Person ist belegte Quelle – kein Pranger, kein „garbage", Urteile aus dem festen Set.
   - **Sammlung `oton`** (`src/content/oton/*.md`, Schema in `content.config.ts`):
     `sprecher`, `funktion`, `zitat`, `quelle_url` (Video mit `&t=`-Zeitstempel), `plattform`,
