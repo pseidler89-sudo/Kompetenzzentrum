@@ -23,37 +23,66 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
 
 <BaseLayout titel="Kompetenzzentrum" breit>
   <section class="hero">
-    <p class="hero__kicker">Stimmt das wirklich?</p>
-    <h1>Weniger Empörung. Mehr Zahlen, Fakten – und alles zum Nachprüfen.</h1>
-    <p class="lead">
+    <p class="hero__kicker" data-reveal>Stimmt das wirklich?</p>
+    <h1 data-reveal>So wirst du manipuliert — <span class="turn">und so durchschaust du es.</span></h1>
+    <p class="lead" data-reveal>
       Hier prüfen wir Behauptungen aus Politik und Netz – mit echten Quellen,
       so einfach wie möglich erklärt. <strong>Du wählst selbst, wie tief du gehst</strong>:
       vom schnellen Einstieg bis zur wissenschaftlichen Tiefe. Und du lernst nebenbei,
       Manipulation zu durchschauen.
     </p>
-    <div class="hero__cta">
+    <div class="hero__cta" data-reveal>
       <a class="btn btn--primary" href={pfad("/faktenchecks")}>Faktenchecks ansehen</a>
       <a class="btn btn--ghost" href={pfad("/maschen")}>Maschen erkennen lernen</a>
     </div>
-    <p class="hero__hint">Neu hier? Fang einfach mit den <a href={pfad("/faktenchecks")}>Faktenchecks</a> an – such ein Thema, das dich interessiert.</p>
+    <p class="hero__hint" data-reveal>Neu hier? Fang einfach mit den <a href={pfad("/faktenchecks")}>Faktenchecks</a> an – such ein Thema, das dich interessiert.</p>
+  </section>
+
+  <!-- Eine Zahl, die eine Behauptung kippt (belegte Daten: Fraunhofer ISE) -->
+  <section class="container zahl" aria-label="Eine Zahl, die eine Behauptung kippt">
+    <span class="sec-eyebrow" data-reveal>Eine Zahl, die die Behauptung kippt</span>
+    <h2 class="zahl__title" data-reveal>„Erneuerbare sind schuld an den hohen Strompreisen“ – wirklich?</h2>
+    <p class="zahl__lead" data-reveal>
+      Im Neubau erzeugt Windkraft an Land den Strom günstiger als ein neues Gaskraftwerk.
+      Die Behauptung verwechselt den Börsenpreis mit den Erzeugungskosten.
+    </p>
+    <figure class="zahl__fig" data-reveal>
+      <figcaption class="zahl__cap">Stromgestehungskosten im Neubau – <strong>je Kilowattstunde</strong></figcaption>
+      <div class="bars">
+        <div class="bar-row">
+          <div class="lab">Windkraft an Land <span>(neu)</span><small>Erzeugungskosten</small></div>
+          <div class="track"><div class="fill accent" data-w="56" style="width:56%"></div></div>
+          <div class="val val--accent">4–9 ct</div>
+        </div>
+        <div class="bar-row">
+          <div class="lab">Neues Gaskraftwerk<small>Erzeugungskosten</small></div>
+          <div class="track"><div class="fill soft" data-w="100" style="width:100%"></div></div>
+          <div class="val">8–16 ct</div>
+        </div>
+      </div>
+      <div class="zahl__src">
+        <span>Fraunhofer ISE, Stromgestehungskosten 2024 <span class="q-tag">Primärquelle</span></span>
+        <a href={pfad("/faktenchecks/strompreise-energiewende")}>Zum Faktencheck →</a>
+      </div>
+    </figure>
   </section>
 
   <section class="zwecke container-wide" aria-label="Wofür diese Plattform da ist">
-    <div class="zweck card">
+    <div class="zweck card" data-reveal>
       <span class="zweck__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
       </span>
       <h3>Für Neugierige</h3>
       <p>Du willst dir selbst ein Bild machen? Stöbere durch geprüfte Themen und stell deine eigene Tiefe ein.</p>
     </div>
-    <div class="zweck card">
+    <div class="zweck card" data-reveal>
       <span class="zweck__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
       </span>
       <h3>Für Diskussionen</h3>
       <p>Du brauchst belastbare Zahlen für ein Gespräch? Kurzantworten und Quellen, sofort griffbereit.</p>
     </div>
-    <div class="zweck card">
+    <div class="zweck card" data-reveal>
       <span class="zweck__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       </span>
@@ -65,22 +94,22 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
   <section class="container" style="margin-top:4rem;">
     <div class="tiefe">
       <div>
-        <h2 style="margin-top:0;">Ein Thema, drei Tiefen</h2>
-        <p>
+        <h2 style="margin-top:0;" data-reveal>Ein Thema, drei Tiefen</h2>
+        <p data-reveal>
           Information soll niemanden überfordern – und niemanden langweilen. Bei jedem
           Faktencheck wählst du selbst, wie tief es geht. Deine Auswahl bleibt gespeichert.
         </p>
-        <ul class="tiefe__liste">
+        <ul class="tiefe__liste" data-reveal>
           <li><strong>Einstieg</strong> – kurz und klar, ganz ohne Vorwissen.</li>
           <li><strong>Vertiefung</strong> – die Zahlen dahinter und die Zusammenhänge.</li>
           <li><strong>Wissenschaftlich</strong> – Primärquellen, Methodik und statistische Fallstricke.</li>
         </ul>
-        <p>
+        <p data-reveal>
           Dazu zeigt jeder Beitrag, <em>welche Manipulationstechnik</em> im Spiel ist und
           <em>wie du die Behauptung selbst überprüfst</em>. So wächst mit jedem Lesen die eigene Kompetenz.
         </p>
       </div>
-      <div class="tiefe__bsp" id="tiefe-demo">
+      <div class="tiefe__bsp" id="tiefe-demo" data-reveal>
         <p class="tiefe__frage">Beispiel-Behauptung: <em>„Windkraft ist viel zu teuer.“</em></p>
         <div class="tiefe__chips" role="group" aria-label="Tiefe wählen">
           <button type="button" class="tiefe__chip tiefe__chip--aktiv" data-stufe="einstieg" aria-pressed="true">Einstieg</button>
@@ -100,11 +129,11 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
   {featured.length > 0 && (
     <section class="container-wide" style="margin-top:4rem;">
       <div class="abschnitt-kopf">
-        <h2 style="margin:0;">Neueste Faktenchecks</h2>
-        <a href={pfad("/faktenchecks")}>Alle ansehen →</a>
+        <h2 style="margin:0;" data-reveal>Neueste Faktenchecks</h2>
+        <a href={pfad("/faktenchecks")} data-reveal>Alle ansehen →</a>
       </div>
       <div class="grid grid--2" style="margin-top:1.25rem;">
-        {featured.map((e) => <FaktencheckCard slug={e.id} data={e.data} />)}
+        {featured.map((e) => <div data-reveal><FaktencheckCard slug={e.id} data={e.data} /></div>)}
       </div>
     </section>
   )}
@@ -112,10 +141,10 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
   {macheDerWoche && (
     <section class="container" style="margin-top:4rem;">
       <div class="abschnitt-kopf">
-        <h2 style="margin:0;">Masche der Woche</h2>
-        <a href={pfad("/maschen")}>Alle Maschen →</a>
+        <h2 style="margin:0;" data-reveal>Masche der Woche</h2>
+        <a href={pfad("/maschen")} data-reveal>Alle Maschen →</a>
       </div>
-      <a class="masche-woche" href={pfad(`/maschen/${macheDerWoche.id}`)}>
+      <a class="masche-woche" href={pfad(`/maschen/${macheDerWoche.id}`)} data-reveal>
         <span class="masche-woche__ic" aria-hidden="true">
           <Icon name={MASCHE_ICON[macheDerWoche.data.code] ?? "lucide:shield-alert"} />
         </span>
@@ -130,20 +159,51 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
     </section>
   )}
 
+  <!-- Für die Schule (neu) – stützt die Lehr-/Bildungsausrichtung -->
+  <section class="container schule" id="schule" aria-label="Für die Schule">
+    <div class="schule__grid">
+      <div>
+        <span class="sec-eyebrow" data-reveal>Für Politik &amp; Geschichte</span>
+        <h2 style="margin:.4rem 0 0;" data-reveal>Für die Schule gemacht</h2>
+        <p data-reveal>
+          Material, das im Unterricht funktioniert und das du zitieren kannst:
+          quellenfest, neutral, nach Niveau gestaffelt.
+        </p>
+        <ul class="schule__pts">
+          <li data-reveal>Die <strong>Einstiegs-Tiefe</strong> für die Klasse, die wissenschaftliche für die Quellenarbeit – eine Seite, jedes Niveau.</li>
+          <li data-reveal>Die <strong>Maschen als Methodenkompetenz</strong> – anschlussfähig an Medien- und Politikunterricht.</li>
+          <li data-reveal>Jede Aussage mit <strong>Primärquelle</strong>, jede Grafik mit Beleg – frei nutzbar unter CC BY-SA.</li>
+        </ul>
+        <div class="hero__cta" style="justify-content:flex-start;margin-top:1.5rem;" data-reveal>
+          <a class="btn btn--primary" href={pfad("/faktenchecks")}>Faktenchecks für den Unterricht</a>
+          <a class="btn btn--ghost" href={pfad("/maschen")}>Die Maschen</a>
+        </div>
+      </div>
+      <div class="schule__card" data-reveal>
+        <div class="schule__num">3</div>
+        <div class="schule__cap">Lesarten pro Faktencheck – von „ohne Vorwissen“ bis „mit Primärquellen“.</div>
+        <hr class="schule__sep" />
+        <div class="schule__num">CC BY-SA</div>
+        <div class="schule__cap">Frei im Unterricht nutzbar, weitergeben und anpassen – mit Quellenangabe.</div>
+      </div>
+    </div>
+  </section>
+
   <section class="container mitmach-cta">
-    <h2>Mach mit – Wissen gehört allen</h2>
-    <p class="muted">
+    <h2 data-reveal>Mach mit – Wissen gehört allen</h2>
+    <p class="muted" data-reveal>
       Dieses Projekt lebt von vielen Augen und Quellen. Faktenchecks schreiben,
       Zahlen aktualisieren, Quellen prüfen, übersetzen, gestalten – jeder Beitrag zählt
       und ist öffentlich nachvollziehbar.
     </p>
-    <div class="hero__cta" style="justify-content:center;">
+    <div class="hero__cta" style="justify-content:center;" data-reveal>
       <a class="btn btn--primary" href={pfad("/mitmachen")}>So kannst du beitragen</a>
       <a class="btn btn--ghost" href="https://github.com/pseidler89-sudo/Kompetenzzentrum">Projekt auf GitHub</a>
     </div>
   </section>
 
   <script>
+    // Tiefen-Demo
     const demo = document.getElementById("tiefe-demo");
     if (demo) {
       const chips = demo.querySelectorAll<HTMLButtonElement>(".tiefe__chip");
@@ -162,18 +222,43 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
         });
       });
     }
+
+    // Scroll-Reveal + Balken-Animation. Sicht-Endzustand ist die Basis:
+    // ohne JS oder bei reduzierter Bewegung bleibt alles sichtbar (PE).
+    function initReveal() {
+      const els = document.querySelectorAll<HTMLElement>("[data-reveal]");
+      if (!els.length) return;
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const fills = document.querySelectorAll<HTMLElement>(".zahl .fill[data-w]");
+      if (reduce || !("IntersectionObserver" in window)) return; // alles sichtbar lassen
+      document.documentElement.classList.add("kz-reveal"); // versteckt erst jetzt
+      fills.forEach((f) => (f.style.width = "0%"));
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            en.target.classList.add("in");
+            io.unobserve(en.target);
+            if (en.target.classList.contains("zahl__fig")) {
+              fills.forEach((f) => (f.style.width = (f.dataset.w ?? "0") + "%"));
+            }
+          }
+        });
+      }, { rootMargin: "0px 0px -10% 0px", threshold: 0.12 });
+      els.forEach((el) => io.observe(el));
+    }
+    initReveal();
+    document.addEventListener("astro:page-load", initReveal);
   </script>
 </BaseLayout>
 
 <style>
   .hero {
-    max-width: 50rem; margin: 1rem auto; text-align: center; padding: 3rem 1rem 2.5rem;
+    max-width: 52rem; margin: 1rem auto; text-align: center; padding: 3.25rem 1rem 2.5rem;
     position: relative;
   }
   .hero::before {
     content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 24px;
-    background:
-      radial-gradient(60% 80% at 50% 0%, var(--c-accent-soft), transparent 70%);
+    background: radial-gradient(60% 80% at 50% 0%, var(--c-accent-soft), transparent 70%);
     opacity: .8;
   }
   .hero__kicker {
@@ -182,10 +267,39 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
     padding: .3rem .7rem; border-radius: 999px; background: var(--c-surface);
     border: 1px solid var(--c-border);
   }
-  .hero h1 { margin: .75rem auto 1rem; max-width: 18ch; }
+  .hero h1 {
+    margin: .85rem auto 1rem; max-width: 20ch;
+    font-size: clamp(2.3rem, 1.55rem + 3.1vw, 3.5rem); line-height: 1.07; letter-spacing: -0.03em;
+  }
+  .hero h1 .turn { color: var(--c-accent); }
   .hero .lead { max-width: 42rem; margin: 0 auto; }
   .hero__cta { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; margin-top: 1.75rem; }
   .hero__hint { margin: 1.1rem auto 0; font-size: .92rem; color: var(--c-text-soft); }
+
+  /* ---- Eyebrow (Abschnitts-Label) ---- */
+  .sec-eyebrow { display: block; font-size: .8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--c-accent); }
+
+  /* ---- „Entscheidende Zahl“-Panel ---- */
+  .zahl { margin-top: 3.5rem; }
+  .zahl__title { margin: .5rem 0 0; max-width: 24ch; }
+  .zahl__lead { margin: .75rem 0 0; max-width: 52ch; color: var(--c-text-soft); font-size: 1.08rem; }
+  .zahl__fig { margin: 1.75rem 0 0; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); box-shadow: var(--shadow); padding: clamp(1.2rem, 1rem + 1.5vw, 2rem); }
+  .zahl__cap { font-size: 1rem; color: var(--c-text-soft); margin: 0 0 1.4rem; }
+  .zahl__cap strong { color: var(--c-text); font-weight: 700; }
+  .bars { display: flex; flex-direction: column; gap: 1rem; }
+  .bar-row { display: grid; grid-template-columns: minmax(10rem, 13rem) 1fr auto; gap: 1rem; align-items: center; }
+  .bar-row .lab { font-size: .96rem; font-weight: 600; }
+  .bar-row .lab span { font-weight: 500; color: var(--c-text-soft); }
+  .bar-row .lab small { display: block; font-weight: 500; color: var(--c-text-soft); font-size: .8rem; }
+  .track { position: relative; height: 2.5rem; background: var(--c-surface-2); border-radius: 8px; overflow: hidden; }
+  .fill { height: 100%; border-radius: 8px; min-width: 6px; transition: width .9s cubic-bezier(.22,.61,.36,1); }
+  .fill.accent { background: var(--c-accent); }
+  .fill.soft { background: var(--c-border-strong); }
+  .val { font-weight: 800; font-size: 1.3rem; font-variant-numeric: tabular-nums; min-width: 4.5rem; text-align: right; letter-spacing: -.02em; }
+  .val--accent { color: var(--c-accent); }
+  .zahl__src { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; justify-content: space-between; margin-top: 1.4rem; padding-top: 1rem; border-top: 1px solid var(--c-border); font-size: .82rem; color: var(--c-text-soft); }
+  .zahl__src a { font-weight: 600; white-space: nowrap; }
+  .q-tag { font-size: .62rem; font-weight: 800; padding: .1rem .42rem; border-radius: 999px; background: var(--c-accent-soft); color: var(--c-accent); text-transform: uppercase; letter-spacing: .03em; }
 
   .zwecke { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.25rem; margin-top: 3.5rem; }
   .zweck { align-items: flex-start; }
@@ -210,8 +324,6 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
   .tiefe__chip:hover { background: var(--c-accent-soft); color: var(--c-accent); }
   .tiefe__chip--aktiv, .tiefe__chip--aktiv:hover { background: var(--c-accent); color: #fff; }
   .tiefe__chip:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
-  /* Alle drei Tiefen liegen in derselben Grid-Zelle gestapelt: die Box ist
-     immer so hoch wie der längste Text – Umschalten ändert die Höhe nicht (kein Springen). */
   .tiefe__demo-wrap { display: grid; }
   .tiefe__demo { grid-area: 1 / 1; margin: 1rem 0 0; font-size: 1.05rem; border-top: 1px solid var(--c-border); padding-top: 1rem; transition: opacity .15s ease; }
   .tiefe__demo[aria-hidden="true"] { visibility: hidden; opacity: 0; }
@@ -238,11 +350,37 @@ const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
   .masche-woche__txt strong { font-size: 1.1rem; }
   .masche-woche__pfeil { margin-left: auto; font-size: 1.4rem; color: var(--c-technik); }
 
+  /* ---- Für die Schule ---- */
+  .schule { margin-top: 4rem; }
+  .schule__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(1.5rem, 1rem + 3vw, 3.5rem); align-items: center; }
+  .schule__pts { list-style: none; margin: 1.4rem 0 0; padding: 0; display: flex; flex-direction: column; gap: .9rem; }
+  .schule__pts li { display: grid; grid-template-columns: 1.3rem 1fr; gap: .7rem; align-items: start; line-height: 1.5; }
+  .schule__pts li::before {
+    content: ""; margin-top: .2rem; width: 1.2rem; height: 1.2rem; flex: none; background: var(--c-pruefen);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  .schule__card { background: var(--c-surface); border: 1px solid var(--c-border); border-left: 4px solid var(--c-pruefen); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.6rem 1.7rem; }
+  .schule__num { font-size: 2.4rem; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: var(--c-pruefen); }
+  .schule__cap { color: var(--c-text-soft); margin-top: .5rem; font-size: .95rem; }
+  .schule__sep { border: none; border-top: 1px solid var(--c-border); margin: 1.2rem 0; }
+
   .mitmach-cta { text-align: center; margin-top: 4rem; padding: 2.5rem 1.5rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
   .mitmach-cta h2 { margin-top: 0; }
   .mitmach-cta p { max-width: 40rem; margin: .5rem auto 0; }
 
+  /* ---- Scroll-Reveal (nur aktiv, wenn html.kz-reveal per JS gesetzt wird;
+     ohne JS oder bei reduzierter Bewegung bleibt alles sichtbar) ---- */
+  :global(html.kz-reveal) [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1); }
+  :global(html.kz-reveal) [data-reveal].in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    :global(html.kz-reveal) [data-reveal] { opacity: 1; transform: none; transition: none; }
+  }
+
   @media (max-width: 760px) {
     .tiefe { grid-template-columns: 1fr; }
+    .schule__grid { grid-template-columns: 1fr; }
+    .bar-row { grid-template-columns: 1fr auto; }
+    .bar-row .lab { grid-column: 1 / -1; }
   }
 </style>
