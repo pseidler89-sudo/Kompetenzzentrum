@@ -167,8 +167,14 @@ const oton = defineCollection({
     funktion: z.string().default(""),
     // Wörtliches Zitat.
     zitat: z.string(),
+    // Optionaler Wortlaut-Auszug im Kontext (Sätze davor/danach), damit das Zitat
+    // nicht „aus dem Kontext“ wirkt. Markdown, wird klappbar gezeigt.
+    transkript: z.string().default(""),
     // Video-URL möglichst mit Zeitstempel (…&t=1234s) für den Direktsprung.
     quelle_url: z.string().url(),
+    // Optionaler Archiv-/Wayback-Snapshot der Videoseite – Fallback, falls das
+    // Original-Video stirbt (ersetzt das bewusst weggelassene lokale Video-Backup).
+    archiv_url: z.string().url().optional(),
     plattform: z.string().default(""),
     // Datum der Aussage (Freitext, z.B. „10.06.2026“).
     datum: z.string().default(""),
