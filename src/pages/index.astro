@@ -184,36 +184,6 @@ const maschenTop = maschen.filter((m) => m.id !== macheDerWoche?.id).slice(0, 6)
     </section>
   )}
 
-  <!-- Für die Schule (neu) – stützt die Lehr-/Bildungsausrichtung -->
-  <section class="container schule" id="schule" aria-label="Für die Schule">
-    <div class="schule__grid">
-      <div>
-        <span class="sec-eyebrow" data-reveal>Für Politik &amp; Geschichte</span>
-        <h2 style="margin:.4rem 0 0;" data-reveal>Für die Schule gemacht</h2>
-        <p data-reveal>
-          Material, das im Unterricht funktioniert und das du zitieren kannst:
-          quellenfest, neutral, nach Niveau gestaffelt.
-        </p>
-        <ul class="schule__pts">
-          <li data-reveal><span>Die <strong>Einstiegs-Tiefe</strong> für die Klasse, die wissenschaftliche für die Quellenarbeit – eine Seite, jedes Niveau.</span></li>
-          <li data-reveal><span>Die <strong>Maschen als Methodenkompetenz</strong> – anschlussfähig an Medien- und Politikunterricht.</span></li>
-          <li data-reveal><span>Jede Aussage mit <strong>Primärquelle</strong>, jede Grafik mit Beleg – frei nutzbar unter CC BY-SA.</span></li>
-        </ul>
-        <div class="hero__cta" style="justify-content:flex-start;margin-top:1.5rem;" data-reveal>
-          <a class="btn btn--primary" href={pfad("/faktenchecks")}>Faktenchecks für den Unterricht</a>
-          <a class="btn btn--ghost" href={pfad("/maschen")}>Die Maschen</a>
-        </div>
-      </div>
-      <div class="schule__card" data-reveal>
-        <div class="schule__num">3</div>
-        <div class="schule__cap">Lesarten pro Faktencheck – von „ohne Vorwissen“ bis „mit Primärquellen“.</div>
-        <hr class="schule__sep" />
-        <div class="schule__num">CC BY-SA</div>
-        <div class="schule__cap">Frei im Unterricht nutzbar, weitergeben und anpassen – mit Quellenangabe.</div>
-      </div>
-    </div>
-  </section>
-
   <section class="container mitmach-cta">
     <h2 data-reveal>Mach mit – Wissen gehört allen</h2>
     <p class="muted" data-reveal>
@@ -404,21 +374,6 @@ const maschenTop = maschen.filter((m) => m.id !== macheDerWoche?.id).slice(0, 6)
   .masche-karte strong { font-size: 1.02rem; letter-spacing: -.01em; }
   .masche-karte .muted { font-size: .9rem; line-height: 1.5; }
 
-  /* ---- Für die Schule ---- */
-  .schule { margin-top: 4rem; }
-  .schule__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(1.5rem, 1rem + 3vw, 3.5rem); align-items: center; }
-  .schule__pts { list-style: none; margin: 1.4rem 0 0; padding: 0; display: flex; flex-direction: column; gap: .9rem; }
-  .schule__pts li { display: grid; grid-template-columns: 1.3rem 1fr; gap: .7rem; align-items: start; line-height: 1.5; }
-  .schule__pts li::before {
-    content: ""; margin-top: .2rem; width: 1.2rem; height: 1.2rem; flex: none; background: var(--c-pruefen);
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat;
-  }
-  .schule__card { background: var(--c-surface); border: 1px solid var(--c-border); border-left: 4px solid var(--c-pruefen); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.6rem 1.7rem; }
-  .schule__num { font-size: 2.4rem; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: var(--c-pruefen); }
-  .schule__cap { color: var(--c-text-soft); margin-top: .5rem; font-size: .95rem; }
-  .schule__sep { border: none; border-top: 1px solid var(--c-border); margin: 1.2rem 0; }
-
   .mitmach-cta { text-align: center; margin-top: 4rem; padding: 2.5rem 1.5rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
   .mitmach-cta h2 { margin-top: 0; }
   .mitmach-cta p { max-width: 40rem; margin: .5rem auto 0; }
@@ -433,7 +388,6 @@ const maschenTop = maschen.filter((m) => m.id !== macheDerWoche?.id).slice(0, 6)
 
   @media (max-width: 760px) {
     .tiefe { grid-template-columns: 1fr; }
-    .schule__grid { grid-template-columns: 1fr; }
     .bar-row { grid-template-columns: 1fr auto; }
     .bar-row .lab { grid-column: 1 / -1; }
   }
