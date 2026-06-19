@@ -27,6 +27,7 @@ const DIRS = [
   "src/content/faktenchecks",
   "src/content/maschen",
   "src/content/methodik",
+  "src/content/oton",
 ];
 
 const UA =
