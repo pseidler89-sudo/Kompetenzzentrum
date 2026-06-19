@@ -10,12 +10,18 @@ const eintraege = (await getCollection("faktenchecks")).sort(
 );
 const featured = eintraege.slice(0, 4);
 
-// Maschen-Übersicht auf der Startseite: die ersten sechs nach Reihenfolge
-// (die fünf FLICC-Kerntechniken + eine) – immer sichtbar, nicht nur eine rotierende.
+// Maschen auf der Startseite: ein rotierendes „Masche der Woche“-Spotlight
+// (deterministisch nach Kalenderwoche, Build-Zeit, kein Backend – wirkt dem
+// Inoculation-Decay entgegen) + darunter ein Raster weiterer Maschen.
 const maschen = (await getCollection("maschen")).sort(
   (a, b) => a.data.reihenfolge - b.data.reihenfolge,
 );
-const maschenTop = maschen.slice(0, 6);
+const jetzt = new Date();
+const jahresStart = new Date(jetzt.getFullYear(), 0, 1);
+const woche = Math.floor((jetzt.getTime() - jahresStart.getTime()) / (7 * 24 * 3600 * 1000));
+const macheDerWoche = maschen.length ? maschen[woche % maschen.length] : null;
+// Raster: bis zu sechs weitere Maschen (ohne die im Spotlight gezeigte).
+const maschenTop = maschen.filter((m) => m.id !== macheDerWoche?.id).slice(0, 6);
 ---
 
 <BaseLayout titel="Kompetenzzentrum" breit>
@@ -135,7 +141,7 @@ const maschenTop = maschen.slice(0, 6);
     </section>
   )}
 
-  {maschenTop.length > 0 && (
+  {macheDerWoche && (
     <section class="container" style="margin-top:4rem;">
       <div class="abschnitt-kopf">
         <h2 style="margin:0;" data-reveal>Maschen erkennen</h2>
@@ -145,17 +151,32 @@ const maschenTop = maschen.slice(0, 6);
         Desinformation nutzt immer wieder dieselben Tricks. Wer sie einmal benennen kann,
         durchschaut sie überall – egal bei welchem Thema.
       </p>
-      <div class="maschen-grid">
-        {maschenTop.map((m) => (
-          <a class="masche-karte" href={pfad(`/maschen/${m.id}`)} data-reveal>
-            <span class="masche-karte__ic" aria-hidden="true">
-              <Icon name={MASCHE_ICON[m.data.code] ?? "lucide:shield-alert"} />
-            </span>
-            <strong>{m.data.titel}</strong>
-            <span class="muted">{m.data.kurz}</span>
-          </a>
-        ))}
-      </div>
+
+      <a class="masche-woche" href={pfad(`/maschen/${macheDerWoche.id}`)} data-reveal>
+        <span class="masche-woche__ic" aria-hidden="true">
+          <Icon name={MASCHE_ICON[macheDerWoche.data.code] ?? "lucide:shield-alert"} />
+        </span>
+        <span class="masche-woche__txt">
+          <span class="masche-woche__eyebrow">Masche der Woche · {macheDerWoche.data.kategorie === "flicc" ? "Kerntechnik" : "Häufiges Muster"}</span>
+          <strong>{macheDerWoche.data.titel}</strong>
+          <span class="muted">{macheDerWoche.data.kurz}</span>
+        </span>
+        <span class="masche-woche__pfeil" aria-hidden="true">→</span>
+      </a>
+
+      {maschenTop.length > 0 && (
+        <div class="maschen-grid">
+          {maschenTop.map((m) => (
+            <a class="masche-karte" href={pfad(`/maschen/${m.id}`)} data-reveal>
+              <span class="masche-karte__ic" aria-hidden="true">
+                <Icon name={MASCHE_ICON[m.data.code] ?? "lucide:shield-alert"} />
+              </span>
+              <strong>{m.data.titel}</strong>
+              <span class="muted">{m.data.kurz}</span>
+            </a>
+          ))}
+        </div>
+      )}
     </section>
   )}
 
@@ -343,7 +364,25 @@ const maschenTop = maschen.slice(0, 6);
   .abschnitt-kopf { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
   .abschnitt-kopf a { font-weight: 600; text-decoration: none; }
 
-  .maschen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+  .masche-woche {
+    display: flex; align-items: center; gap: 1.1rem; margin-top: 1.25rem;
+    padding: 1.1rem 1.3rem; background: var(--c-surface); border: 1px solid var(--c-border);
+    border-left: 4px solid var(--c-technik); border-radius: var(--radius);
+    text-decoration: none; color: inherit; transition: border-color .15s, box-shadow .15s;
+  }
+  .masche-woche:hover { border-color: var(--c-technik); box-shadow: var(--shadow-lift); }
+  .masche-woche__ic {
+    flex: none; width: 3rem; height: 3rem; border-radius: 12px; display: flex;
+    align-items: center; justify-content: center;
+    background: color-mix(in srgb, var(--c-technik) 12%, var(--c-surface)); color: var(--c-technik);
+  }
+  .masche-woche__ic svg { width: 1.6rem; height: 1.6rem; }
+  .masche-woche__txt { display: flex; flex-direction: column; gap: .1rem; }
+  .masche-woche__eyebrow { text-transform: uppercase; letter-spacing: .06em; font-weight: 800; font-size: .72rem; color: var(--c-technik); }
+  .masche-woche__txt strong { font-size: 1.1rem; }
+  .masche-woche__pfeil { margin-left: auto; font-size: 1.4rem; color: var(--c-technik); }
+
+  .maschen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr)); gap: 1rem; margin-top: 1rem; }
   .masche-karte {
     display: flex; flex-direction: column; gap: .35rem; padding: 1.1rem 1.2rem;
     background: var(--c-surface); border: 1px solid var(--c-border); border-top: 3px solid var(--c-technik);
