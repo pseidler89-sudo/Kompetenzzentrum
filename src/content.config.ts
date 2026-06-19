@@ -154,4 +154,36 @@ const maschen = defineCollection({
   }),
 });
 
-export const collections = { faktenchecks, methodik, maschen };
+// O-Ton: geprüfte Aussagen öffentlicher Personen im Wortlaut (eigene Unterseite,
+// bewusst vom Faktencheck-Schema entkoppelt). Pfad A: die Aussage wird geprüft,
+// die Person ist belegte Quelle – kein Pranger. Jedes Zitat MUSS am Video
+// gegengehört sein (Wortlaut + Kontext), bevor der Status auf „geprueft“ geht.
+const oton = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/oton" }),
+  schema: z.object({
+    // Optionaler kurzer Titel/Rahmen; sonst wird aus Sprecher + Zitat gebildet.
+    titel: z.string().default(""),
+    sprecher: z.string(),
+    funktion: z.string().default(""),
+    // Wörtliches Zitat.
+    zitat: z.string(),
+    // Video-URL möglichst mit Zeitstempel (…&t=1234s) für den Direktsprung.
+    quelle_url: z.string().url(),
+    plattform: z.string().default(""),
+    // Datum der Aussage (Freitext, z.B. „10.06.2026“).
+    datum: z.string().default(""),
+    urteil: z.enum(URTEILE),
+    kurzantwort: z.string(),
+    // Einordnung/Richtigstellung (Markdown).
+    einordnung: z.string().default(""),
+    techniken: z.array(z.enum(TECHNIKEN)).default([]),
+    quellen: z.array(quelle).min(1),
+    status: z.enum(["entwurf", "in-pruefung", "geprueft"]).default("entwurf"),
+    veroeffentlicht: z.coerce.date(),
+    aktualisiert: z.coerce.date().optional(),
+    // Optionaler Querverweis auf einen verwandten Faktencheck (Slug).
+    verwandt: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { faktenchecks, methodik, maschen, oton };
