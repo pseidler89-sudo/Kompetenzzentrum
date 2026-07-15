@@ -27,7 +27,7 @@ const maschenTop = maschen.filter((m) => m.id !== macheDerWoche?.id).slice(0, 6)
 <BaseLayout titel="Kompetenzzentrum" breit>
   <section class="hero">
     <p class="hero__kicker" data-reveal>Stimmt das wirklich?</p>
-    <h1 data-reveal>So wirst du manipuliert — <span class="turn">und so durchschaust du es.</span></h1>
+    <h1 data-reveal>Behauptungen prüfen — <span class="turn">mit Belegen statt Meinung.</span></h1>
     <p class="lead" data-reveal>
       Hier prüfen wir Behauptungen aus Politik und Netz – mit echten Quellen,
       so einfach wie möglich erklärt. <strong>Du wählst selbst, wie tief du gehst</strong>:
@@ -304,7 +304,7 @@ const maschenTop = maschen.filter((m) => m.id !== macheDerWoche?.id).slice(0, 6)
   .val--accent { color: var(--c-accent); }
   .zahl__src { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; justify-content: space-between; margin-top: 1.4rem; padding-top: 1rem; border-top: 1px solid var(--c-border); font-size: .82rem; color: var(--c-text-soft); }
   .zahl__src a { font-weight: 600; white-space: nowrap; }
-  .q-tag { font-size: .62rem; font-weight: 800; padding: .1rem .42rem; border-radius: 999px; background: var(--c-accent-soft); color: var(--c-accent); text-transform: uppercase; letter-spacing: .03em; }
+  /* .q-tag nutzt jetzt die globale Definition (global.css) – Duplikat entfernt. */
 
   .zwecke { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.25rem; margin-top: 3.5rem; }
   .zweck { align-items: flex-start; }

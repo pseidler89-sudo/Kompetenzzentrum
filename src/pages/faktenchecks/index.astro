@@ -99,8 +99,9 @@ const vorhandeneTechniken = Object.keys(TECHNIK_LABEL).filter((t) =>
     border: 1px solid var(--c-border); background: var(--c-surface); color: var(--c-text-soft);
   }
   .filter-btn:hover { border-color: var(--c-accent); }
-  .filter-btn[aria-pressed="true"] { background: var(--c-accent); border-color: var(--c-accent); color: #fff; }
-  .filter-btn--urteil[aria-pressed="true"] { background: var(--c-text); border-color: var(--c-text); }
+  .filter-btn[aria-pressed="true"] { background: var(--c-accent); border-color: var(--c-accent); color: var(--c-on-accent); }
+  .filter-btn--urteil[aria-pressed="true"] { background: var(--c-text); border-color: var(--c-text); color: var(--c-bg); }
+  @media (max-width: 720px) { .filter-btn { min-height: 44px; } }
 
   .treffer { margin: .5rem 0 1.25rem; font-weight: 600; }
   .fc-item.versteckt { display: none; }

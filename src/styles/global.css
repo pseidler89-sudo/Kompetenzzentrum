@@ -22,6 +22,10 @@
   --c-accent-strong: #16498f;
   --c-accent-soft: #e8f0fb;
   --c-link: #1450a8;
+  /* Vordergrundfarbe auf Akzent-Flächen (Buttons, aktive States). Im Light-Mode
+     ist der Akzent dunkel genug für Weiß; im Dark-Mode ist der Akzent hell →
+     dunkler Text (siehe Dark-Blöcke), sonst WCAG-Kontrast-Fail. */
+  --c-on-accent: #ffffff;
 
   /* Urteilsfarben – semantisch klar, AA-kontraststark auf hellen Tönten. */
   --c-falsch: #b71c1c;
@@ -84,6 +88,7 @@
   --c-accent-strong: #93bcff;
   --c-accent-soft: #182942;
   --c-link: #8db8ff;
+  --c-on-accent: #0b1a33;
 
   --c-falsch: #ff8a85;
   --c-falsch-bg: #38191a;
@@ -116,6 +121,7 @@
     --c-accent-strong: #93bcff;
     --c-accent-soft: #182942;
     --c-link: #8db8ff;
+    --c-on-accent: #0b1a33;
 
     /* Im Dark Mode sowohl Vordergrund als auch Hintergrund anpassen,
        damit das Urteil farbig UND kontraststark bleibt. */
@@ -252,9 +258,9 @@ blockquote {
 .site-nav a:hover { color: var(--c-text); background: var(--c-surface-2); }
 .site-nav a[aria-current="page"] { color: var(--c-accent); background: var(--c-accent-soft); }
 /* „Mitmachen" als hervorgehobene Aktion rechts in der Leiste. */
-.site-nav a.nav-cta { color: #fff; background: var(--c-accent); font-weight: 700; margin-left: .35rem; }
-.site-nav a.nav-cta:hover { color: #fff; background: var(--c-accent-strong); }
-.site-nav a.nav-cta[aria-current="page"] { color: #fff; background: var(--c-accent-strong); }
+.site-nav a.nav-cta { color: var(--c-on-accent); background: var(--c-accent); font-weight: 700; margin-left: .35rem; }
+.site-nav a.nav-cta:hover { color: var(--c-on-accent); background: var(--c-accent-strong); }
+.site-nav a.nav-cta[aria-current="page"] { color: var(--c-on-accent); background: var(--c-accent-strong); }
 
 .site-footer {
   border-top: 1px solid var(--c-border);
@@ -309,8 +315,8 @@ a.badge:hover { border-color: var(--c-border-strong); color: var(--c-text); }
   transition: transform .06s ease, background-color .12s ease, border-color .12s ease, box-shadow .12s ease;
 }
 .btn:active { transform: translateY(1px); }
-.btn--primary { background: var(--c-accent); color: #fff; box-shadow: 0 1px 2px rgba(16,24,40,.12); }
-.btn--primary:hover { background: var(--c-accent-strong); }
+.btn--primary { background: var(--c-accent); color: var(--c-on-accent); box-shadow: 0 1px 2px rgba(16,24,40,.12); }
+.btn--primary:hover { background: var(--c-accent-strong); color: var(--c-on-accent); }
 .btn--ghost { background: var(--c-surface); border-color: var(--c-border-strong); color: var(--c-text); }
 .btn--ghost:hover { border-color: var(--c-accent); color: var(--c-accent); }
 
@@ -474,7 +480,8 @@ tbody tr:nth-child(even) { background: color-mix(in srgb, var(--c-surface-2) 45%
     border: 1px solid var(--c-border); border-radius: var(--radius); box-shadow: var(--shadow-lift);
     z-index: 60;
   }
-  .nav-burger[open] > .site-nav--mobile a { padding: .6rem .8rem; font-size: 1rem; }
+  .nav-burger[open] > .site-nav--mobile a { padding: .7rem .8rem; font-size: 1rem; min-height: 44px; display: flex; align-items: center; }
+  .theme-toggle { width: 44px; height: 44px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
