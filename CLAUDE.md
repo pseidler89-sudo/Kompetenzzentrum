@@ -300,7 +300,7 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   - **Niedrig:** `astro check || true` in `ci.yml` schluckt Typfehler; `display:none`-Tiefen ggf.
     auf ARIA-Tab-Pattern (SEO ist aber ok, da statisch im DOM). (Inter-Font-Selbsthosting ist
     ✅ erledigt – `InterVariable.woff2` lokal in `public/fonts/`, kein Google-CDN mehr.)
-- **Design-Politur Runde 1 (07/2026, Branch `claude/design-politur-r1`, in Review, NICHT live):**
+- **Design-Politur Runde 1 (07/2026, PR #77, LIVE):**
   Owner-Auftrag „fertiges, zeitgeist-taugliches Produkt". 3 Eval-Agents (Design-Zeitgeist,
   IA/Code-Audit, A11y/Perf/SEO) → Befund: Fundament stark, „gebastelt"-Wirkung nur an den Nähten.
   Umgesetzt: **Dark-Mode-CTA-Kontrast-Fix** (neues Token `--c-on-accent`, dunkler Text auf hellem
@@ -310,6 +310,13 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   prüfen — mit Belegen statt Meinung." statt „So wirst du manipuliert"); **Emoji-Icons → Lucide**
   (mitmachen); `robots.txt` + Sitemap-Verweis; per-Seite `og:image:alt`; Mobile-Touch-Ziele 44px;
   `.q-tag`-Duplikat entfernt. **SEO-Canonical/BASE_PATH war KEIN Problem** (Deploy setzt korrekt).
-  Offen/Runde 2 (bewusst nicht gemacht, für Review): Spacing-Token-Skala, Masche-Card-Vereinheit-
-  lichung, `.kurzantwort-box` als geteilte Klasse, restliche Emojis (Kopier-/Selbsttest-Button),
-  optional Serif-Body / partei-neutrale Teal-Akzentfarbe (subjektiv → erst mit Nutzer).
+- **Design-Politur Runde 2 (07/2026, PR #78, LIVE):** nur sichere Konsolidierung, kein Look-Wechsel
+  (per Screenshots verifiziert identisch). `.kurzantwort-box` + `.btn--klein` zentral in global.css
+  (lokale Duplikate in Faktencheck-/O-Ton-Detail raus); Spacing-Token-Skala `--space-1..10` +
+  `--radius-lg` (additiv); restliche Emojis raus (📋 am Kopier-Button entfernt – JS setzt
+  textContent; 🧠 im Masche-Selbsttest → monochromes Lucide-Mask-Icon); weiterer Kontrast-Fix
+  `.btn--erfolg` → `--c-on-accent`.
+  **Design-Richtungsentscheidung (mit Nutzer):** bleibt bei **Blau-Akzent + System-Serif**.
+  Teal-Akzent- und self-hosted-Source-Serif-4-Mockups wurden gebaut/gezeigt und **verworfen**
+  (nicht erneut vorschlagen). **Bewusst NICHT gemacht (optional, würde Look minimal verschieben):**
+  Masche-Card-Vereinheitlichung (`.masche-karte` Startseite vs. `.masche-card` Liste).
