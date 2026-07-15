@@ -7,6 +7,7 @@ interface Props {
   beschreibung?: string;
   breit?: boolean;
   bild?: string;
+  bildAlt?: string;
   seitentyp?: "website" | "article";
 }
 const {
@@ -14,6 +15,7 @@ const {
   beschreibung = "Falschbehauptungen prüfen lernen – faktenbasiert, transparent, je nach Vorwissen aufbereitet.",
   breit = false,
   bild = "/og-default.png",
+  bildAlt = "Kompetenzzentrum – Falschbehauptungen prüfen lernen",
   seitentyp = "website",
 } = Astro.props;
 
@@ -25,7 +27,7 @@ const nav = [
   { href: "/faktenchecks", text: "Faktenchecks" },
   { href: "/maschen", text: "Maschen" },
   { href: "/o-ton", text: "O-Ton" },
-  { href: "/werkzeugkasten", text: "Selbst prüfen" },
+  { href: "/werkzeugkasten", text: "Werkzeugkasten" },
   { href: "/methodik", text: "Wie wir arbeiten" },
   { href: "/mitmachen", text: "Mitmachen", cta: true },
 ];
@@ -59,7 +61,7 @@ const vollerTitel = titel === "Kompetenzzentrum" ? titel : `${titel} · Kompeten
     <meta property="og:image" content={ogBild} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Kompetenzzentrum – Falschbehauptungen prüfen lernen" />
+    <meta property="og:image:alt" content={bildAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={vollerTitel} />
     <meta name="twitter:description" content={beschreibung} />
@@ -159,8 +161,10 @@ const vollerTitel = titel === "Kompetenzzentrum" ? titel : `${titel} · Kompeten
             <ul>
               <li><a href={pfad("/faktenchecks")}>Faktenchecks</a></li>
               <li><a href={pfad("/maschen")}>Maschen</a></li>
+              <li><a href={pfad("/o-ton")}>O-Ton</a></li>
               <li><a href={pfad("/werkzeugkasten")}>Werkzeugkasten</a></li>
-              <li><a href={pfad("/methodik")}>Methodik</a></li>
+              <li><a href={pfad("/quiz")}>Quiz</a></li>
+              <li><a href={pfad("/methodik")}>Wie wir arbeiten</a></li>
             </ul>
           </div>
           <div>

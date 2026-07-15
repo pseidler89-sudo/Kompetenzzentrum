@@ -66,10 +66,10 @@
   .stufen-schalter button span { font-size: .76rem; color: var(--c-text-soft); font-weight: 500; }
   .stufen-schalter button:hover { background: var(--c-surface); border-color: var(--c-border); }
   .stufen-schalter button[aria-pressed="true"] {
-    background: var(--c-accent); border-color: var(--c-accent); color: #fff;
+    background: var(--c-accent); border-color: var(--c-accent); color: var(--c-on-accent);
     box-shadow: 0 1px 3px rgba(16,24,40,.18);
   }
-  .stufen-schalter button[aria-pressed="true"] span { color: rgba(255,255,255,.88); }
+  .stufen-schalter button[aria-pressed="true"] span { color: color-mix(in srgb, var(--c-on-accent) 82%, transparent); }
 
   /* Kompakt-Modus: greift, sobald die Leiste beim Scrollen oben „klebt“.
      Spart Platz – nur noch die drei Buttons als schlanke Leiste. */

@@ -1,15 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
 import { pfad } from "../lib/labels";
 
 const repo = "https://github.com/pseidler89-sudo/Kompetenzzentrum";
 const wege = [
-  { icon: "🧩", titel: "Faktencheck-Baukasten (mit Live-Vorschau)", text: "Am einfachsten: Faktencheck im Formular zusammenstellen, rechts live sehen, wie er auf der Seite aussieht – und mit einem Klick als Pull Request auf GitHub anlegen. Kein Markdown, keine Technik.", link: pfad("/tools/faktencheck-baukasten"), linkText: "Baukasten öffnen" },
-  { icon: "🛠️", titel: "Redaktion: Bestehendes bearbeiten", text: "Zum Pflegen statt Neu-Anlegen: bestehende Faktenchecks – und auch Maschen & Methodik – im Formular-Editor (/admin) anpassen und den Status verwalten (Entwurf · In Prüfung · Geprüft). Mit GitHub-Login.", link: pfad("/admin/"), linkText: "Redaktion öffnen" },
-  { icon: "✍️", titel: "Faktencheck vorschlagen", text: "Lieber erst eine Idee einbringen? Schlag eine Behauptung vor, die geprüft werden soll.", link: `${repo}/issues/new?template=neuer-faktencheck.yml`, linkText: "Thema vorschlagen" },
-  { icon: "🔍", titel: "Quellen & Zahlen prüfen", text: "Sind alle Zahlen aktuell, alle Links gültig? Sorgfältiges Gegenlesen ist Gold wert.", link: `${repo}/issues`, linkText: "Offene Aufgaben ansehen" },
-  { icon: "🐛", titel: "Fehler melden", text: "Falsche Zahl, toter Link, missverständliche Formulierung? Sag uns Bescheid.", link: `${repo}/issues/new?template=fehler-melden.yml`, linkText: "Fehler melden" },
-  { icon: "💻", titel: "Technik & Design", text: "Astro, CSS, Barrierefreiheit, Übersetzung: Auch an der Plattform selbst kannst du mitbauen.", link: `${repo}`, linkText: "Repository öffnen" },
+  { icon: "lucide:blocks", titel: "Faktencheck-Baukasten (mit Live-Vorschau)", text: "Am einfachsten: Faktencheck im Formular zusammenstellen, rechts live sehen, wie er auf der Seite aussieht – und mit einem Klick als Pull Request auf GitHub anlegen. Kein Markdown, keine Technik.", link: pfad("/tools/faktencheck-baukasten"), linkText: "Baukasten öffnen" },
+  { icon: "lucide:pencil-ruler", titel: "Redaktion: Bestehendes bearbeiten", text: "Zum Pflegen statt Neu-Anlegen: bestehende Faktenchecks – und auch Maschen & Methodik – im Formular-Editor (/admin) anpassen und den Status verwalten (Entwurf · In Prüfung · Geprüft). Mit GitHub-Login.", link: pfad("/admin/"), linkText: "Redaktion öffnen" },
+  { icon: "lucide:lightbulb", titel: "Faktencheck vorschlagen", text: "Lieber erst eine Idee einbringen? Schlag eine Behauptung vor, die geprüft werden soll.", link: `${repo}/issues/new?template=neuer-faktencheck.yml`, linkText: "Thema vorschlagen" },
+  { icon: "lucide:search-check", titel: "Quellen & Zahlen prüfen", text: "Sind alle Zahlen aktuell, alle Links gültig? Sorgfältiges Gegenlesen ist Gold wert.", link: `${repo}/issues`, linkText: "Offene Aufgaben ansehen" },
+  { icon: "lucide:bug", titel: "Fehler melden", text: "Falsche Zahl, toter Link, missverständliche Formulierung? Sag uns Bescheid.", link: `${repo}/issues/new?template=fehler-melden.yml`, linkText: "Fehler melden" },
+  { icon: "lucide:code", titel: "Technik & Design", text: "Astro, CSS, Barrierefreiheit, Übersetzung: Auch an der Plattform selbst kannst du mitbauen.", link: `${repo}`, linkText: "Repository öffnen" },
 ];
 ---
 
@@ -24,7 +25,7 @@ const wege = [
   <div class="grid grid--2" style="margin-top:2rem;">
     {wege.map((w) => (
       <div class="card">
-        <h3 style="margin:0;">{w.icon} {w.titel}</h3>
+        <h3 class="weg-titel" style="margin:0;"><span class="weg-ic" aria-hidden="true"><Icon name={w.icon} /></span> {w.titel}</h3>
         <p style="margin:0;flex:1;">{w.text}</p>
         <a class="btn btn--ghost" href={w.link} rel="noopener">{w.linkText}</a>
       </div>
@@ -63,6 +64,14 @@ const wege = [
 
 <style>
   section { margin-top: 3rem; }
+  .weg-titel { display: flex; align-items: center; gap: .6rem; }
+  .weg-ic {
+    width: 2.1rem; height: 2.1rem; flex: none; border-radius: 9px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: color-mix(in srgb, var(--c-accent) 12%, var(--c-surface));
+    color: var(--c-accent);
+  }
+  .weg-ic svg { width: 1.2rem; height: 1.2rem; }
   .ablauf { display: grid; gap: .7rem; padding-left: 1.2rem; }
   .start-cta { text-align: center; padding: 2.5rem 1.5rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
   .start-cta .hero__cta { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem; }
