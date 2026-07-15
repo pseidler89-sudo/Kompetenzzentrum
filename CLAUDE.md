@@ -318,5 +318,10 @@ Zwei verzahnte Lernwege: **Faktenchecks** (konkrete Behauptungen) und **Maschen*
   `.btn--erfolg` → `--c-on-accent`.
   **Design-Richtungsentscheidung (mit Nutzer):** bleibt bei **Blau-Akzent + System-Serif**.
   Teal-Akzent- und self-hosted-Source-Serif-4-Mockups wurden gebaut/gezeigt und **verworfen**
-  (nicht erneut vorschlagen). **Bewusst NICHT gemacht (optional, würde Look minimal verschieben):**
-  Masche-Card-Vereinheitlichung (`.masche-karte` Startseite vs. `.masche-card` Liste).
+  (nicht erneut vorschlagen).
+- **Masche-Card-Vereinheitlichung (07/2026, PR #80, LIVE):** Startseite (`.masche-karte`) und
+  Maschen-Liste (`.masche-card`) nutzen jetzt EINE geteilte `.masche-card` in global.css. Bewusst
+  KEIN Astro-Component (sonst brechen die scoped Such-Filter-`.masche-item.versteckt`- und
+  Reveal-`:global(html.kz-reveal)`-Regeln). Startseiten-Karten haben jetzt den Listen-Look
+  (Icon-Badge, „Kerntechnik"-Tag bei FLICC, „Masche ansehen →"). Damit ist die Design-Politur
+  abgeschlossen.
