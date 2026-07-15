@@ -106,12 +106,8 @@ const titel = data.titel || `${data.sprecher}: O-Ton geprüft`;
   .oton-transkript[open] > summary { border-bottom: 1px solid var(--c-border); }
   .oton-transkript .prose { padding: 1rem 1.1rem; }
 
-  .kurzantwort-box {
-    background: var(--c-accent-soft); border: 1px solid var(--c-border);
-    border-left: 4px solid var(--c-accent); border-radius: var(--radius);
-    padding: 1.1rem 1.3rem; margin: 0 0 1.75rem;
-  }
-  .kurzantwort-box__label { text-transform: uppercase; letter-spacing: .06em; font-weight: 800; font-size: .72rem; color: var(--c-accent); }
+  /* .kurzantwort-box lebt jetzt global (global.css); hier nur der Abstand zum O-Ton-Rhythmus. */
+  .kurzantwort-box { margin: 0 0 1.75rem; }
 
   .oton-einordnung { margin-bottom: 2rem; }
   .oton-techniken { margin: 0 0 2rem; align-items: center; }

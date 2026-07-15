@@ -92,7 +92,7 @@ const claimReview = {
       <p class="lead" style="color:var(--c-text);margin:.25rem 0 0;">{data.kurzantwort}</p>
       <div class="teilen">
         <button type="button" class="btn btn--ghost btn--klein" data-teilen={teilenText}>
-          📋 Kurzantwort kopieren
+          Kurzantwort kopieren
         </button>
         <span class="teilen__hint muted">Fakt + Quelle + Link – griffbereit für Gespräche und Social Media.</span>
       </div>
@@ -173,22 +173,19 @@ const claimReview = {
   .urteil-klartext {
     margin: .6rem 0 0; font-size: 1.02rem; font-weight: 600; color: var(--c-text-soft);
   }
-  .behauptung-box, .kurzantwort-box {
+  /* .kurzantwort-box + .btn--klein leben jetzt global (global.css). */
+  .behauptung-box {
     margin: 1.5rem 0; padding: 1.1rem 1.3rem; border-radius: var(--radius);
-    border: 1px solid var(--c-border); border-left-width: 4px;
+    border: 1px solid var(--c-border); border-left: 4px solid var(--c-falsch);
+    background: var(--c-surface-2);
   }
-  .behauptung-box { background: var(--c-surface-2); border-left-color: var(--c-falsch); }
-  .kurzantwort-box { background: var(--c-accent-soft); border-left-color: var(--c-accent); }
-  .behauptung-box__label, .kurzantwort-box__label {
+  .behauptung-box__label {
     font-size: .76rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em;
+    color: var(--c-falsch);
   }
-  .behauptung-box__label { color: var(--c-falsch); }
-  .kurzantwort-box__label { color: var(--c-accent); }
   .behauptung-box p { margin: .3rem 0 0; font-size: 1.15rem; font-style: italic; color: var(--c-text); }
-  .kurzantwort-box .lead { font-size: 1.18rem; line-height: 1.5; }
   .teilen { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; margin-top: .9rem; }
-  .btn--klein { padding: .4rem .8rem; font-size: .85rem; }
-  .btn--erfolg { background: var(--c-accent); color: #fff; border-color: var(--c-accent); }
+  .btn--erfolg { background: var(--c-accent); color: var(--c-on-accent); border-color: var(--c-accent); }
   .teilen__hint { font-size: .82rem; }
   .fc-footer { margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border); font-size: .92rem; }
 </style>

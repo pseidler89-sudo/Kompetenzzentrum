@@ -126,7 +126,13 @@ const konter = TECHNIK_KONTER[data.code];
   }
   .selbsttest summary { cursor: pointer; font-weight: 700; list-style: none; }
   .selbsttest summary::-webkit-details-marker { display: none; }
-  .selbsttest summary::before { content: "🧠 "; }
+  .selbsttest summary::before {
+    content: ""; display: inline-block; width: 1.05rem; height: 1.05rem;
+    vertical-align: -0.16em; margin-right: .45rem;
+    background: var(--c-technik);
+    --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5'/%3E%3Cpath d='M9 18h6'/%3E%3Cpath d='M10 22h4'/%3E%3C/svg%3E");
+    -webkit-mask: var(--i) center / contain no-repeat; mask: var(--i) center / contain no-repeat;
+  }
   .selbsttest__q { display: block; }
   .selbsttest__hint { display: block; font-weight: 500; font-size: .82rem; margin-top: .2rem; }
   .selbsttest[open] summary { margin-bottom: .6rem; }
