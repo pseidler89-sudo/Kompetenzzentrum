@@ -167,12 +167,14 @@ const maschenTop = maschen.filter((m) => m.id !== macheDerWoche?.id).slice(0, 6)
       {maschenTop.length > 0 && (
         <div class="maschen-grid">
           {maschenTop.map((m) => (
-            <a class="masche-karte" href={pfad(`/maschen/${m.id}`)} data-reveal>
-              <span class="masche-karte__ic" aria-hidden="true">
-                <Icon name={MASCHE_ICON[m.data.code] ?? "lucide:shield-alert"} />
-              </span>
-              <strong>{m.data.titel}</strong>
-              <span class="muted">{m.data.kurz}</span>
+            <a class={`masche-card${m.data.kategorie === "flicc" ? "" : " masche-card--rhetorik"}`} href={pfad(`/maschen/${m.id}`)} data-reveal>
+              <div class="masche-card__top">
+                <span class="masche-ic" aria-hidden="true"><Icon name={MASCHE_ICON[m.data.code] ?? "lucide:shield-alert"} /></span>
+                {m.data.kategorie === "flicc" && <span class="masche-card__tag">Kerntechnik</span>}
+              </div>
+              <h3>{m.data.titel}</h3>
+              <p>{m.data.kurz}</p>
+              <span class="masche-card__more">Masche ansehen →</span>
             </a>
           ))}
         </div>
@@ -359,20 +361,7 @@ const maschenTop = maschen.filter((m) => m.id !== macheDerWoche?.id).slice(0, 6)
   .maschen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr)); gap: 1rem; margin-top: 1rem; }
   .maschen-quiz { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1rem; margin-top: 1.25rem; padding: 1rem 1.25rem; background: color-mix(in srgb, var(--c-technik) 7%, var(--c-surface)); border: 1px solid var(--c-border); border-radius: var(--radius); }
   .maschen-quiz span { font-weight: 600; }
-  .masche-karte {
-    display: flex; flex-direction: column; gap: .35rem; padding: 1.1rem 1.2rem;
-    background: var(--c-surface); border: 1px solid var(--c-border); border-top: 3px solid var(--c-technik);
-    border-radius: var(--radius-sm); box-shadow: var(--shadow); text-decoration: none; color: inherit;
-    transition: border-color .15s, transform .15s, box-shadow .15s;
-  }
-  .masche-karte:hover { border-color: var(--c-technik); transform: translateY(-2px); box-shadow: var(--shadow-lift); }
-  .masche-karte__ic {
-    width: 2.4rem; height: 2.4rem; border-radius: 10px; display: flex; align-items: center; justify-content: center;
-    background: color-mix(in srgb, var(--c-technik) 12%, var(--c-surface)); color: var(--c-technik); margin-bottom: .2rem;
-  }
-  .masche-karte__ic svg { width: 1.3rem; height: 1.3rem; }
-  .masche-karte strong { font-size: 1.02rem; letter-spacing: -.01em; }
-  .masche-karte .muted { font-size: .9rem; line-height: 1.5; }
+  /* .masche-karte → jetzt geteilte .masche-card in global.css. */
 
   .mitmach-cta { text-align: center; margin-top: 4rem; padding: 2.5rem 1.5rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); }
   .mitmach-cta h2 { margin-top: 0; }
